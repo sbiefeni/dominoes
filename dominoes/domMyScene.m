@@ -65,13 +65,13 @@
     }
     
     if (floorOn){
-        SKSpriteNode* floor = [SKSpriteNode spriteNodeWithColor:[UIColor redColor] size:CGSizeMake(size.width, bannerSizeY)];
+        SKSpriteNode* floor = [SKSpriteNode spriteNodeWithColor:[UIColor blueColor] size:CGSizeMake(size.width, bannerSizeY)];
         floor.position = CGPointMake(size.width/2, (bannerSizeY/2));
         [self addChild:floor];
         bannerCount +=1;
     }
     if (ceilingOn){
-        SKSpriteNode* ceiling = [SKSpriteNode spriteNodeWithColor:[UIColor redColor] size:CGSizeMake(size.width, bannerSizeY)];
+        SKSpriteNode* ceiling = [SKSpriteNode spriteNodeWithColor:[UIColor blueColor] size:CGSizeMake(size.width, bannerSizeY)];
         ceiling.position = CGPointMake(size.width/2, size.height-(bannerSizeY/2));
         [self addChild:ceiling];
         bannerCount +=1;
