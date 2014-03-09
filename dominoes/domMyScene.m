@@ -58,6 +58,7 @@
     
     [self addChild:backGround];
 }
+
 -(void) setUpDoors:(CGSize) size{
     
     topDoor = [SKSpriteNode spriteNodeWithImageNamed:@"dominoes-topDoor.png"];
@@ -81,9 +82,15 @@
     //grab the unscaled image, and resize using the scale factors scaleX and scaleY
     scaledSize = [self getScaledSizeForNode:leftDoor];
     leftDoor.size= scaledSize;
-    leftDoor.position = CGPointMake((82/scaleX) ,size.height/2 + (37/scaleY));
+    leftDoor.position = CGPointMake(82/scaleX ,size.height/2 + (37/scaleY));
     [self addChild:leftDoor];
 
+    rightDoor = [SKSpriteNode spriteNodeWithImageNamed:@"dominoes-rightDoor.png"];
+    //grab the unscaled image, and resize using the scale factors scaleX and scaleY
+    scaledSize = [self getScaledSizeForNode:rightDoor];
+    rightDoor.size= scaledSize;
+    rightDoor.position = CGPointMake(size.width - (84/scaleX),size.height/2 + (45/scaleY));
+    [self addChild:rightDoor];
     
 }
 -(CGSize) getScaledSizeForNode:(SKSpriteNode*)node{
