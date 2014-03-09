@@ -16,9 +16,11 @@
     SKSpriteNode* bottomDoor;
     SKSpriteNode* leftDoor;
     
+//to get the scale factor for the current screen (orig size / new size)
     float scaleX;
     float scaleY;
     
+//store the scaled size of the arena
     CGSize scaledSize;
     
 }
@@ -47,9 +49,9 @@
     
     backGround = [SKSpriteNode spriteNodeWithImageNamed:@"dominoes-arena.png"];
     
-    //get the scale amount, so we know how much to scale any other images
-    scaleX = backGround.size.width / size.width;
-    scaleY = backGround.size.height/size.height;
+//get the scale amount, so we know how much to scale any other images
+    scaleX = backGround.size.width  / size.width;
+    scaleY = backGround.size.height / size.height;
     
     backGround.size = size;
     backGround.position = CGPointMake(size.width/2, size.height/2);
@@ -59,16 +61,17 @@
 -(void) setUpDoors:(CGSize) size{
     
     topDoor = [SKSpriteNode spriteNodeWithImageNamed:@"dominoes-topDoor.png"];
-    
-        //after we grab an unscaled image, we can determine the scale factors
-        //we'll use this factor for the other images, we don't need to calculate it again
-    scaledSize = CGSizeMake(topDoor.size.width / scaleX, topDoor.size.height / scaleY );
+//grab the unscaled image, and determine the scale factors
+    scaledSize = [self getScaledSizeForNode:topDoor];
     
     topDoor.size= scaledSize;
     topDoor.position = CGPointMake(size.width /1.735 , size.height - scaledSize.height + (85 / scaleY));
     
     [self addChild:topDoor];
     
+}
+-(CGSize) getScaledSizeForNode:(SKSpriteNode*)node{
+    return CGSizeMake(node.size.width / scaleX, node.size.height / scaleY );
 }
 
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {

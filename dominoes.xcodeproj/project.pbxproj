@@ -18,7 +18,6 @@
 		55CB7E3818CBD181001EFA1C /* Main_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 55CB7E3618CBD181001EFA1C /* Main_iPad.storyboard */; };
 		55CB7E3B18CBD181001EFA1C /* domViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 55CB7E3A18CBD181001EFA1C /* domViewController.m */; };
 		55CB7E3E18CBD181001EFA1C /* domMyScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 55CB7E3D18CBD181001EFA1C /* domMyScene.m */; };
-		55CB7E4018CBD181001EFA1C /* Spaceship.png in Resources */ = {isa = PBXBuildFile; fileRef = 55CB7E3F18CBD181001EFA1C /* Spaceship.png */; };
 		55CB7E4218CBD181001EFA1C /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 55CB7E4118CBD181001EFA1C /* Images.xcassets */; };
 		55CB7E4918CBD181001EFA1C /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55CB7E4818CBD181001EFA1C /* XCTest.framework */; };
 		55CB7E4A18CBD181001EFA1C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55CB7E1F18CBD180001EFA1C /* Foundation.framework */; };
@@ -60,7 +59,6 @@
 		55CB7E3A18CBD181001EFA1C /* domViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = domViewController.m; sourceTree = "<group>"; };
 		55CB7E3C18CBD181001EFA1C /* domMyScene.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = domMyScene.h; sourceTree = "<group>"; };
 		55CB7E3D18CBD181001EFA1C /* domMyScene.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = domMyScene.m; sourceTree = "<group>"; };
-		55CB7E3F18CBD181001EFA1C /* Spaceship.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Spaceship.png; sourceTree = "<group>"; };
 		55CB7E4118CBD181001EFA1C /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		55CB7E4718CBD181001EFA1C /* dominoesTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = dominoesTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		55CB7E4818CBD181001EFA1C /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
@@ -141,7 +139,6 @@
 				55CB7E3A18CBD181001EFA1C /* domViewController.m */,
 				55CB7E3C18CBD181001EFA1C /* domMyScene.h */,
 				55CB7E3D18CBD181001EFA1C /* domMyScene.m */,
-				55CB7E3F18CBD181001EFA1C /* Spaceship.png */,
 				55CB7E4118CBD181001EFA1C /* Images.xcassets */,
 				55DDBD2B18CC29C70004EA4F /* images */,
 				55CB7E2818CBD180001EFA1C /* Supporting Files */,
@@ -268,7 +265,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				55DDBD3618CC3A8D0004EA4F /* dominoes-rightdoor.png in Resources */,
-				55CB7E4018CBD181001EFA1C /* Spaceship.png in Resources */,
 				55CB7E4218CBD181001EFA1C /* Images.xcassets in Resources */,
 				55DDBD3518CC3A8D0004EA4F /* dominoes-leftdoor.png in Resources */,
 				55CB7E3818CBD181001EFA1C /* Main_iPad.storyboard in Resources */,
