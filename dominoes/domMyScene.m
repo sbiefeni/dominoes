@@ -76,6 +76,13 @@
     bottomDoor.size= scaledSize;
     bottomDoor.position = CGPointMake(size.width /1.735 ,72/scaleY);
     [self addChild:bottomDoor];
+    
+    leftDoor = [SKSpriteNode spriteNodeWithImageNamed:@"dominoes-leftDoor.png"];
+    //grab the unscaled image, and resize using the scale factors scaleX and scaleY
+    scaledSize = [self getScaledSizeForNode:leftDoor];
+    leftDoor.size= scaledSize;
+    leftDoor.position = CGPointMake((82/scaleX) ,size.height/2 + (37/scaleY));
+    [self addChild:leftDoor];
 
     
 }
