@@ -20,6 +20,9 @@
     float scaleX;
     float scaleY;
     
+//banner height depends on the screen width, which can only be 320, or 768 (portrait mode)
+    int bannerSizeY;
+    
 //store the scaled size of the arena
     CGSize scaledSize;
     
@@ -39,6 +42,7 @@
         
         [self setUpDoors:size];
         
+        NSLog(@"Width: %f, Height: %f", size.width, size.height);
     }
     return self;
 }
@@ -47,19 +51,36 @@
 
 -(void) setUpBackGround:(CGSize)size{
     
-    backGround = [SKSpriteNode spriteNodeWithImageNamed:@"dominoes-arena.png"];
+    if (size.width == 320){
+        bannerSizeY = 50;
+    }else{
+        bannerSizeY = 66;
+    }
     
+    SKSpriteNode* floor = [SKSpriteNode spriteNodeWithColor:[UIColor redColor] size:CGSizeMake(size.width, bannerSizeY)];
+    floor.position = CGPointMake(size.width/2, (bannerSizeY/2));
+    [self addChild:floor];
+    
+    SKSpriteNode* ceiling = [SKSpriteNode spriteNodeWithColor:[UIColor redColor] size:CGSizeMake(size.width, bannerSizeY)];
+    ceiling.position = CGPointMake(size.width/2, size.height-(bannerSizeY/2));
+    [self addChild:ceiling];
+    
+    backGround = [SKSpriteNode spriteNodeWithImageNamed:@"dominoes-arena.png"];
 //get the scale factors, so we know how much to scale any other images
     scaleX = backGround.size.width  / size.width;
-    scaleY = backGround.size.height / size.height;
+    scaleY = backGround.size.height / (size.height -(bannerSizeY * 2) );
     
-    backGround.size = size;
+    backGround.size = CGSizeMake(size.width, size.height-(bannerSizeY * 2) );
+    
     backGround.position = CGPointMake(size.width/2, size.height/2);
+    backGround.zPosition = 5;
     
     [self addChild:backGround];
 }
 
 -(void) setUpDoors:(CGSize) size{
+    
+    int doorZPos = 5;
     
     topDoor = [SKSpriteNode spriteNodeWithImageNamed:@"dominoes-topDoor.png"];
 
@@ -67,7 +88,8 @@
     scaledSize = [self getScaledSizeForNode:topDoor];
     
     topDoor.size= scaledSize;
-    topDoor.position = CGPointMake(size.width /1.735 ,size.height - scaledSize.height + (85 / scaleY));
+    topDoor.position = CGPointMake(size.width /1.735 ,size.height - (scaledSize.height/2) - bannerSizeY);
+    topDoor.zPosition = doorZPos;
     
     [self addChild:topDoor];
     
@@ -75,7 +97,8 @@
     //grab the unscaled image, and resize using the scale factors scaleX and scaleY
     scaledSize = [self getScaledSizeForNode:bottomDoor];
     bottomDoor.size= scaledSize;
-    bottomDoor.position = CGPointMake(size.width /1.735 ,72/scaleY);
+    bottomDoor.position = CGPointMake(size.width /1.735 ,72/scaleY + bannerSizeY);
+    bottomDoor.zPosition = doorZPos;
     [self addChild:bottomDoor];
     
     leftDoor = [SKSpriteNode spriteNodeWithImageNamed:@"dominoes-leftDoor.png"];
@@ -83,6 +106,7 @@
     scaledSize = [self getScaledSizeForNode:leftDoor];
     leftDoor.size= scaledSize;
     leftDoor.position = CGPointMake(82/scaleX ,size.height/2 + (37/scaleY));
+    leftDoor.zPosition = doorZPos;
     [self addChild:leftDoor];
 
     rightDoor = [SKSpriteNode spriteNodeWithImageNamed:@"dominoes-rightDoor.png"];
@@ -90,6 +114,7 @@
     scaledSize = [self getScaledSizeForNode:rightDoor];
     rightDoor.size= scaledSize;
     rightDoor.position = CGPointMake(size.width - (84/scaleX),size.height/2 + (45/scaleY));
+    rightDoor.zPosition = doorZPos;
     [self addChild:rightDoor];
     
 }
