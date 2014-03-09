@@ -49,7 +49,7 @@
     
     backGround = [SKSpriteNode spriteNodeWithImageNamed:@"dominoes-arena.png"];
     
-//get the scale amount, so we know how much to scale any other images
+//get the scale factors, so we know how much to scale any other images
     scaleX = backGround.size.width  / size.width;
     scaleY = backGround.size.height / size.height;
     
@@ -61,13 +61,22 @@
 -(void) setUpDoors:(CGSize) size{
     
     topDoor = [SKSpriteNode spriteNodeWithImageNamed:@"dominoes-topDoor.png"];
-//grab the unscaled image, and determine the scale factors
+
+    //grab the unscaled image, and resize using the scale factors scaleX and scaleY
     scaledSize = [self getScaledSizeForNode:topDoor];
     
     topDoor.size= scaledSize;
-    topDoor.position = CGPointMake(size.width /1.735 , size.height - scaledSize.height + (85 / scaleY));
+    topDoor.position = CGPointMake(size.width /1.735 ,size.height - scaledSize.height + (85 / scaleY));
     
     [self addChild:topDoor];
+    
+    bottomDoor = [SKSpriteNode spriteNodeWithImageNamed:@"dominoes-bottomDoor.png"];
+    //grab the unscaled image, and resize using the scale factors scaleX and scaleY
+    scaledSize = [self getScaledSizeForNode:bottomDoor];
+    bottomDoor.size= scaledSize;
+    bottomDoor.position = CGPointMake(size.width /1.735 ,72/scaleY);
+    [self addChild:bottomDoor];
+
     
 }
 -(CGSize) getScaledSizeForNode:(SKSpriteNode*)node{
