@@ -26,6 +26,10 @@
 		55CB7E5318CBD181001EFA1C /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 55CB7E5118CBD181001EFA1C /* InfoPlist.strings */; };
 		55CB7E5518CBD181001EFA1C /* dominoesTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 55CB7E5418CBD181001EFA1C /* dominoesTests.m */; };
 		55DDBD2218CC1DFB0004EA4F /* dominoes-arena.png in Resources */ = {isa = PBXBuildFile; fileRef = 55DDBD2118CC1DFB0004EA4F /* dominoes-arena.png */; };
+		55DDBD3418CC3A8D0004EA4F /* dominoes-bottomdoor.png in Resources */ = {isa = PBXBuildFile; fileRef = 55DDBD3018CC3A8D0004EA4F /* dominoes-bottomdoor.png */; };
+		55DDBD3518CC3A8D0004EA4F /* dominoes-leftdoor.png in Resources */ = {isa = PBXBuildFile; fileRef = 55DDBD3118CC3A8D0004EA4F /* dominoes-leftdoor.png */; };
+		55DDBD3618CC3A8D0004EA4F /* dominoes-rightdoor.png in Resources */ = {isa = PBXBuildFile; fileRef = 55DDBD3218CC3A8D0004EA4F /* dominoes-rightdoor.png */; };
+		55DDBD3718CC3A8D0004EA4F /* dominoes-topdoor.png in Resources */ = {isa = PBXBuildFile; fileRef = 55DDBD3318CC3A8D0004EA4F /* dominoes-topdoor.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -64,6 +68,10 @@
 		55CB7E5218CBD181001EFA1C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		55CB7E5418CBD181001EFA1C /* dominoesTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = dominoesTests.m; sourceTree = "<group>"; };
 		55DDBD2118CC1DFB0004EA4F /* dominoes-arena.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "dominoes-arena.png"; sourceTree = "<group>"; };
+		55DDBD3018CC3A8D0004EA4F /* dominoes-bottomdoor.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "dominoes-bottomdoor.png"; sourceTree = "<group>"; };
+		55DDBD3118CC3A8D0004EA4F /* dominoes-leftdoor.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "dominoes-leftdoor.png"; sourceTree = "<group>"; };
+		55DDBD3218CC3A8D0004EA4F /* dominoes-rightdoor.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "dominoes-rightdoor.png"; sourceTree = "<group>"; };
+		55DDBD3318CC3A8D0004EA4F /* dominoes-topdoor.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "dominoes-topdoor.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -133,9 +141,9 @@
 				55CB7E3A18CBD181001EFA1C /* domViewController.m */,
 				55CB7E3C18CBD181001EFA1C /* domMyScene.h */,
 				55CB7E3D18CBD181001EFA1C /* domMyScene.m */,
-				55DDBD2118CC1DFB0004EA4F /* dominoes-arena.png */,
 				55CB7E3F18CBD181001EFA1C /* Spaceship.png */,
 				55CB7E4118CBD181001EFA1C /* Images.xcassets */,
+				55DDBD2B18CC29C70004EA4F /* images */,
 				55CB7E2818CBD180001EFA1C /* Supporting Files */,
 			);
 			path = dominoes;
@@ -168,6 +176,18 @@
 				55CB7E5118CBD181001EFA1C /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		55DDBD2B18CC29C70004EA4F /* images */ = {
+			isa = PBXGroup;
+			children = (
+				55DDBD3018CC3A8D0004EA4F /* dominoes-bottomdoor.png */,
+				55DDBD3118CC3A8D0004EA4F /* dominoes-leftdoor.png */,
+				55DDBD3218CC3A8D0004EA4F /* dominoes-rightdoor.png */,
+				55DDBD3318CC3A8D0004EA4F /* dominoes-topdoor.png */,
+				55DDBD2118CC1DFB0004EA4F /* dominoes-arena.png */,
+			);
+			name = images;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -247,12 +267,16 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				55DDBD3618CC3A8D0004EA4F /* dominoes-rightdoor.png in Resources */,
 				55CB7E4018CBD181001EFA1C /* Spaceship.png in Resources */,
 				55CB7E4218CBD181001EFA1C /* Images.xcassets in Resources */,
+				55DDBD3518CC3A8D0004EA4F /* dominoes-leftdoor.png in Resources */,
 				55CB7E3818CBD181001EFA1C /* Main_iPad.storyboard in Resources */,
+				55DDBD3718CC3A8D0004EA4F /* dominoes-topdoor.png in Resources */,
 				55DDBD2218CC1DFB0004EA4F /* dominoes-arena.png in Resources */,
 				55CB7E3518CBD181001EFA1C /* Main_iPhone.storyboard in Resources */,
 				55CB7E2C18CBD180001EFA1C /* InfoPlist.strings in Resources */,
+				55DDBD3418CC3A8D0004EA4F /* dominoes-bottomdoor.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

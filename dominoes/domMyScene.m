@@ -10,7 +10,14 @@
 
 @interface domMyScene (){
     
-    SKSpriteNode* background;
+    SKSpriteNode* backGround;
+    SKSpriteNode* topDoor;
+    SKSpriteNode* rightDoor;
+    SKSpriteNode* bottomDoor;
+    SKSpriteNode* leftDoor;
+    
+    float scaleX;
+    float scaleY;
     
 }
 
@@ -26,6 +33,8 @@
         
         [self setUpBackGround:size];
         
+        [self setUpDoors:size];
+        
     }
     return self;
 }
@@ -34,11 +43,33 @@
 
 -(void) setUpBackGround:(CGSize)size{
     
-    background = [SKSpriteNode spriteNodeWithImageNamed:@"dominoes-arena.png"];
-    background.size = size;
-    background.position = CGPointMake(size.width/2, size.height/2);
+    backGround = [SKSpriteNode spriteNodeWithImageNamed:@"dominoes-arena.png"];
+    scaleX = backGround.size.width / size.width;
+    scaleY = backGround.size.height/size.height;
     
-    [self addChild:background];
+    backGround.size = size;
+    backGround.position = CGPointMake(size.width/2, size.height/2);
+    
+    [self addChild:backGround];
+}
+-(void) setUpDoors:(CGSize) size{
+    
+    topDoor = [SKSpriteNode spriteNodeWithImageNamed:@"dominoes-topDoor.png"];
+    
+    CGSize newSize = CGSizeMake(topDoor.size.width / scaleX, topDoor.size.height / scaleY );
+    
+    NSLog(@"newSize.Width %f, newSize.Height %f", newSize.width, newSize.height);
+    
+
+    
+    topDoor.position = CGPointMake(size.width /1.740 , size.height - newSize.height);
+    
+    
+    
+    topDoor.size= newSize;
+    
+    [self addChild:topDoor];
+    
 }
 
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
