@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		389B9CF218CF9EF1004960E5 /* dominoH.png in Resources */ = {isa = PBXBuildFile; fileRef = 389B9CF018CF9EF1004960E5 /* dominoH.png */; };
+		389B9CF318CF9EF1004960E5 /* dominoV.png in Resources */ = {isa = PBXBuildFile; fileRef = 389B9CF118CF9EF1004960E5 /* dominoV.png */; };
 		55CB7E2018CBD180001EFA1C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55CB7E1F18CBD180001EFA1C /* Foundation.framework */; };
 		55CB7E2218CBD180001EFA1C /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55CB7E2118CBD180001EFA1C /* CoreGraphics.framework */; };
 		55CB7E2418CBD180001EFA1C /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55CB7E2318CBD180001EFA1C /* UIKit.framework */; };
@@ -42,6 +44,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		389B9CF018CF9EF1004960E5 /* dominoH.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = dominoH.png; sourceTree = "<group>"; };
+		389B9CF118CF9EF1004960E5 /* dominoV.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = dominoV.png; sourceTree = "<group>"; };
 		55CB7E1C18CBD180001EFA1C /* dominoes.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = dominoes.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		55CB7E1F18CBD180001EFA1C /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		55CB7E2118CBD180001EFA1C /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -178,6 +182,8 @@
 		55DDBD2B18CC29C70004EA4F /* images */ = {
 			isa = PBXGroup;
 			children = (
+				389B9CF018CF9EF1004960E5 /* dominoH.png */,
+				389B9CF118CF9EF1004960E5 /* dominoV.png */,
 				55DDBD3018CC3A8D0004EA4F /* dominoes-bottomdoor.png */,
 				55DDBD3118CC3A8D0004EA4F /* dominoes-leftdoor.png */,
 				55DDBD3218CC3A8D0004EA4F /* dominoes-rightdoor.png */,
@@ -269,7 +275,9 @@
 				55DDBD3518CC3A8D0004EA4F /* dominoes-leftdoor.png in Resources */,
 				55CB7E3818CBD181001EFA1C /* Main_iPad.storyboard in Resources */,
 				55DDBD3718CC3A8D0004EA4F /* dominoes-topdoor.png in Resources */,
+				389B9CF318CF9EF1004960E5 /* dominoV.png in Resources */,
 				55DDBD2218CC1DFB0004EA4F /* dominoes-arena.png in Resources */,
+				389B9CF218CF9EF1004960E5 /* dominoH.png in Resources */,
 				55CB7E3518CBD181001EFA1C /* Main_iPhone.storyboard in Resources */,
 				55CB7E2C18CBD180001EFA1C /* InfoPlist.strings in Resources */,
 				55DDBD3418CC3A8D0004EA4F /* dominoes-bottomdoor.png in Resources */,
