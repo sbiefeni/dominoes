@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		389B9CF218CF9EF1004960E5 /* dominoH.png in Resources */ = {isa = PBXBuildFile; fileRef = 389B9CF018CF9EF1004960E5 /* dominoH.png */; };
 		389B9CF318CF9EF1004960E5 /* dominoV.png in Resources */ = {isa = PBXBuildFile; fileRef = 389B9CF118CF9EF1004960E5 /* dominoV.png */; };
+		389B9CF618CFCDCF004960E5 /* domino.m in Sources */ = {isa = PBXBuildFile; fileRef = 389B9CF518CFCDCF004960E5 /* domino.m */; };
 		55CB7E2018CBD180001EFA1C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55CB7E1F18CBD180001EFA1C /* Foundation.framework */; };
 		55CB7E2218CBD180001EFA1C /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55CB7E2118CBD180001EFA1C /* CoreGraphics.framework */; };
 		55CB7E2418CBD180001EFA1C /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55CB7E2318CBD180001EFA1C /* UIKit.framework */; };
@@ -46,6 +47,8 @@
 /* Begin PBXFileReference section */
 		389B9CF018CF9EF1004960E5 /* dominoH.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = dominoH.png; sourceTree = "<group>"; };
 		389B9CF118CF9EF1004960E5 /* dominoV.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = dominoV.png; sourceTree = "<group>"; };
+		389B9CF418CFCDCF004960E5 /* domino.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = domino.h; sourceTree = "<group>"; };
+		389B9CF518CFCDCF004960E5 /* domino.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = domino.m; sourceTree = "<group>"; };
 		55CB7E1C18CBD180001EFA1C /* dominoes.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = dominoes.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		55CB7E1F18CBD180001EFA1C /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		55CB7E2118CBD180001EFA1C /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -143,6 +146,8 @@
 				55CB7E3A18CBD181001EFA1C /* domViewController.m */,
 				55CB7E3C18CBD181001EFA1C /* domMyScene.h */,
 				55CB7E3D18CBD181001EFA1C /* domMyScene.m */,
+				389B9CF418CFCDCF004960E5 /* domino.h */,
+				389B9CF518CFCDCF004960E5 /* domino.m */,
 				55CB7E4118CBD181001EFA1C /* Images.xcassets */,
 				55DDBD2B18CC29C70004EA4F /* images */,
 				55CB7E2818CBD180001EFA1C /* Supporting Files */,
@@ -302,6 +307,7 @@
 				55CB7E3B18CBD181001EFA1C /* domViewController.m in Sources */,
 				55CB7E2E18CBD180001EFA1C /* main.m in Sources */,
 				55CB7E3218CBD181001EFA1C /* domAppDelegate.m in Sources */,
+				389B9CF618CFCDCF004960E5 /* domino.m in Sources */,
 				55CB7E3E18CBD181001EFA1C /* domMyScene.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -9,8 +9,17 @@
 #import "domMyScene.h"
 
 //using 0 and 1 instead of BOOL so I can use these in calculations
-#define ceilingOn   1
+#define ceilingOn   0
 #define floorOn     0
+
+#define wallThickness   130
+
+#define doorZPos    5
+#define dominoZPos  6
+
+#define rows        30
+#define cols        24
+
 
 @interface domMyScene (){
     
@@ -19,6 +28,12 @@
     SKSpriteNode* rightDoor;
     SKSpriteNode* bottomDoor;
     SKSpriteNode* leftDoor;
+    
+    
+    //dominoes
+    SKSpriteNode* dominoH;
+    SKSpriteNode* dominoV;
+    
     
 //to get the scale factor for the current screen (orig size / new size)
     float scaleX;
@@ -31,7 +46,18 @@
 //store the scaled size of the arena
     CGSize scaledSize;
     
+//boolean 2D array, representing our playing grid
+//each value is true if there is a domino placed there
+    BOOL grid [rows][cols];
     
+//use these to store each movement, in sequence, for each player
+//max size is the total available grid squares, so we never run out
+//of room
+    int player [rows * cols];
+    int enemy [rows * cols];
+    
+
+
 }
 
 
@@ -48,16 +74,39 @@
         
         [self setUpDoors:size];
         
+        [self setUpDominoGrid:size];
         
         NSLog(@"Width: %f, Height: %f", size.width, size.height);
     }
     return self;
 }
 
+-(void) setUpDominoGrid: (CGSize)size{
+    dominoH  = [SKSpriteNode spriteNodeWithImageNamed:@"dominoH.png"];
+    dominoV  = [SKSpriteNode spriteNodeWithImageNamed:@"dominoV.png"];
+    
+    
+    //grab the unscaled image, and resize using the scale factors scaleX and scaleY
+    scaledSize = [self getScaledSizeForNode:dominoH];
+    dominoH.size= scaledSize;
+    
+    scaledSize = [self getScaledSizeForNode:dominoV];
+    dominoV.size = scaledSize;
+    
+    dominoV.position = CGPointMake(size.width /2 ,size.height/2);
+    dominoH.position = CGPointMake(size.width /1.735 ,size.height/2 );
+    dominoV.zPosition = dominoZPos;
+    dominoH.zPosition = dominoZPos;
+    
+    [self addChild:dominoH];
+    [self addChild:dominoV];
+    
+}
 
 -(void) setUpBackGround:(CGSize)size{
 
     int bannerCount =0;
+    
     
     //determine the banner size (according to iAD)
     bannerSizeY = (size.width == 320) ? 50 : 66;
@@ -97,8 +146,6 @@
 }
 
 -(void) setUpDoors:(CGSize) size{
-    
-    int doorZPos = 5;
     
     topDoor = [SKSpriteNode spriteNodeWithImageNamed:@"dominoes-topDoor.png"];
 
@@ -141,7 +188,17 @@
     return CGSizeMake(node.size.width / scaleX, node.size.height / scaleY );
 }
 
--(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
+//just to be able to log coords and see what they are
+    UITouch *touched = [[event allTouches] anyObject];
+    CGPoint location = [touched locationInView:touched.view];
+    location.x = location.x * scaleX;
+    location.y = location.y * scaleY;
+    NSLog(@"x=%.2f y=%.2f", location.x, location.y);
+}
+
+
+//-(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
     /* Called when a touch begins */
     
 //    for (UITouch *touch in touches) {
@@ -157,10 +214,11 @@
 //        
 //        [self addChild:sprite];
 //    }
-}
+//}
 
 -(void)update:(CFTimeInterval)currentTime {
     /* Called before each frame is rendered */
+    
 }
 
 @end
