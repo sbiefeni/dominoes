@@ -31,6 +31,7 @@
 //store the scaled size of the arena
     CGSize scaledSize;
     
+    
 }
 
 
@@ -47,11 +48,11 @@
         
         [self setUpDoors:size];
         
+        
         NSLog(@"Width: %f, Height: %f", size.width, size.height);
     }
     return self;
 }
-
 
 
 -(void) setUpBackGround:(CGSize)size{

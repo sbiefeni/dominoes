@@ -10,4 +10,12 @@
 
 @interface domMyScene : SKScene
 
+//store the last swipe action
+typedef enum  {
+    left,
+    right,
+    up,
+    down,
+} swipeDirection;
+
 @end
