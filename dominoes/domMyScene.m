@@ -30,7 +30,7 @@
 
 //scale up the domino size relative to the grid
 #define dominoScaleFactorX 1.25   // - 1.25
-#define dominoScaleFactorY 1.5    //
+#define dominoScaleFactorY 1.35    //
 
 @interface domMyScene (){
     
