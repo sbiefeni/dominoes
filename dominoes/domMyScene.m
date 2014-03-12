@@ -25,8 +25,8 @@
 #define dominoZPos  6
 
 //define rows and cols
-#define rows        30
-#define cols        24
+#define rows        36
+#define cols        22
 
 //scale up the domino size relative to the grid
 #define dominoScaleFactor 1.3   // - 1.3 looks best
@@ -63,6 +63,8 @@
     BOOL grid [rows][cols];
     float gridWidth;
     float gridHeight;
+
+    CGSize gridSize;
     CGSize dominoSize;
 
 
@@ -116,7 +118,8 @@
     gridWidth = maxX - minX;
     gridHeight = maxY - minY;
     
-//set the size of the dominoes
+//set the size of the grid and dominoes
+    gridSize = CGSizeMake(gridHeight/rows/scaleY, gridWidth/cols/scaleX);
     dominoSize = CGSizeMake((gridHeight/rows)/scaleY*dominoScaleFactor, (gridWidth/cols)/scaleX*dominoScaleFactor);
     
 }
@@ -222,9 +225,8 @@ if (!crashed) {
     int yPos;
     
     //minX = width of wall
-    //dominoSize = width/height of domino tile
-    xPos = minX/scaleX + (x * dominoSize.width/dominoScaleFactor);
-    yPos = minY/scaleY + (y * dominoSize.height/dominoScaleFactor);
+    xPos = minX/scaleX + (x * gridSize.width);
+    yPos = minY/scaleY + (y * gridSize.height);
 
      NSLog(@"Domino Placed: X-%i, Y-%i", xPos, yPos);
     
@@ -261,6 +263,7 @@ if (!crashed) {
     
     //determine the banner size (according to iAD)
     bannerSizeY = (arenaSize.width == 320) ? 50 : 66;
+    //if only one of the banners is on, then we need an adjuster to center things
     if (ceilingOn + floorOn ==1){
         bannerHeightAdjuster = (ceilingOn) ? -(bannerSizeY/2): +(bannerSizeY/2);
     }
@@ -291,7 +294,7 @@ if (!crashed) {
 
     
     backGround.position = CGPointMake(arenaSize.width/2, backGroundPos);
-    backGround.zPosition = 5;
+    backGround.zPosition = 1;
     
     [self addChild:backGround];
 }
