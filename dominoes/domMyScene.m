@@ -150,13 +150,28 @@
     }else {
         domino = [SKSpriteNode spriteNodeWithImageNamed:@"dominoV.png"];
     }
-    scaledSize = [self getScaledSizeForNode:domino];
-    domino.size = scaledSize;
+
+    domino.size = [self getScaledSizeForNode:domino];
     
-    //domino.position =
+    dominoSize = domino.size;
+    //[objectWithOurMethod methodName:int1 withArg2:int2];
+    
+    domino.position = [self calcDominoPosition:player1.curX withArg2:player1.curY];
     
 }
-
+//- (int)methodName:(int)arg1 withArg2:(int)arg2
+- (CGPoint) calcDominoPosition:(int)x withArg2:(int) y{
+    
+    int xPos;
+    int yPos;
+    
+    //minX = width of wall
+    //dominoSize = width/height of domino tile
+    xPos = minX + (x * dominoSize.width);
+    
+    
+    return CGPointMake(xPos, yPos);
+}
 
 
 //-(void) setUpDominoGrid: (CGSize)size{
