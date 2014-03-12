@@ -11,7 +11,7 @@
 #import "domino.h"
 
 //using 0 and 1 instead of BOOL so I can use these in calculations
-#define ceilingOn   1
+#define ceilingOn   0
 #define floorOn     0
 
 //define the min and max extents of the domino grid area
@@ -25,8 +25,11 @@
 #define dominoZPos  6
 
 //define rows and cols
-#define rows        20
-#define cols        16
+#define rows        30
+#define cols        24
+
+//scale up the domino size relative to the grid
+#define dominoScaleFactor 1.3   // - 1.3 looks best
 
 @interface domMyScene (){
     
@@ -61,6 +64,8 @@
     float gridWidth;
     float gridHeight;
     CGSize dominoSize;
+
+
     
 //use these to store each movement, in sequence, for each player
 //max size is the total available grid squares, so we never run out
@@ -112,32 +117,32 @@
     gridHeight = maxY - minY;
     
 //set the size of the dominoes
-    dominoSize = CGSizeMake((gridHeight/rows)/scaleY, (gridWidth/cols)/scaleX);
+    dominoSize = CGSizeMake((gridHeight/rows)/scaleY*dominoScaleFactor, (gridWidth/cols)/scaleX*dominoScaleFactor);
     
 }
 -(void) initializeGame{
 
     player1 = [[player alloc]init];
 
-    //set the start position and direction of player
+//set the start position and direction of player
     player1.curX = 7;
     player1.curY = 6;
     player1.curDirection = up;
     
-    //set initial player1 direction
+//set initial player1 direction - ***HACK? - NSUserDefaults lets us easily communicate variables between classes.
     NSUserDefaults *standardUserDefaults = [NSUserDefaults standardUserDefaults];
-
     if (standardUserDefaults) {
         [standardUserDefaults setObject:[NSNumber numberWithInt:3] forKey:@"playerDirection"];
         [standardUserDefaults synchronize];
     }
 
-    //start the timer that runs the game!
-    [self runAction:[SKAction repeatActionForever:[SKAction sequence:@[[SKAction performSelector:@selector(drawNextSet) onTarget:self],[SKAction waitForDuration:gameSpeed]]]]];
+//start the timer that runs the game!
+    [self runAction:[SKAction repeatActionForever:[SKAction sequence:@[[SKAction performSelector:@selector(gameRunner) onTarget:self],[SKAction waitForDuration:gameSpeed]]]]];
 
 }
--(void) drawNextSet {
+-(void) gameRunner {
     SKSpriteNode* domino =[[SKSpriteNode alloc]init];
+    BOOL crashed = false;
 
     //get player direction
     NSUserDefaults *standardUserDefaults = [NSUserDefaults standardUserDefaults];
@@ -149,21 +154,42 @@
 
     switch (player1.curDirection) {
         case left:
-            player1.curX --;
+            if (player1.curX > 0) {
+                player1.curX --;
+            }else{
+                //NSLog(@"CRASH!!!");
+                crashed = true;
+            }
             break;
         case right:
-            player1.curX ++;
+            if (player1.curX < cols){
+                player1.curX ++;
+            }else{
+                //NSLog(@"CRASH!!!");
+                crashed = true;
+            }
             break;
         case up:
-            player1.curY ++;
+            if (player1.curY < rows){
+                player1.curY ++;
+            }else{
+                //NSLog(@"CRASH!!!");
+                crashed = true;
+            }
             break;
         case down:
-            player1.curY --;
+            if (player1.curY > 0){
+                player1.curY --;
+            }else{
+                //NSLog(@"CRASH!!!");
+                crashed = true;
+            }
             break;
         default:
             break;
     }
-    
+
+if (!crashed) {
 //draw a domino
     if (player1.curDirection == up || player1.curDirection == down) {
         domino = [SKSpriteNode spriteNodeWithImageNamed:@"dominoH.png"];
@@ -177,8 +203,10 @@
     //[objectWithOurMethod methodName:int1 withArg2:int2];
     domino.position = [self calcDominoPosition:player1.curX withArg2:player1.curY];
 
-    [self addChild:domino];
+    //NSLog(@"Domino Placed: X-%i, Y-%i", player1.curX, player1.curY);
 
+    [self addChild:domino];
+}
     
 }
 -(void) updatePlayerDirection:(swipeDirection)direction{
@@ -195,9 +223,10 @@
     
     //minX = width of wall
     //dominoSize = width/height of domino tile
-    xPos = minX/scaleX + (x * dominoSize.width);
-    yPos = minY/scaleY + (y * dominoSize.height);
-    
+    xPos = minX/scaleX + (x * dominoSize.width/dominoScaleFactor);
+    yPos = minY/scaleY + (y * dominoSize.height/dominoScaleFactor);
+
+     NSLog(@"Domino Placed: X-%i, Y-%i", xPos, yPos);
     
     return CGPointMake(xPos, yPos);
 }
