@@ -8,6 +8,7 @@
 
 #import "domViewController.h"
 #import "domMyScene.h"
+#import "player.h"
 
 @implementation domViewController
 
@@ -45,27 +46,41 @@
 }
 
 -(void) swipeRecognized: (UISwipeGestureRecognizer*) swipe{
+
+    int tmpDirection=0;
     
 switch (swipe.direction) {
     case UISwipeGestureRecognizerDirectionLeft:
         NSLog(@"swiped Left");
+        tmpDirection = left;
         break;
 
     case UISwipeGestureRecognizerDirectionRight:
+        tmpDirection = right;
         NSLog(@"swipe right");
         break;
         
     case UISwipeGestureRecognizerDirectionUp:
+        tmpDirection = up;
         NSLog(@"swiped Up");
         break;
         
     case UISwipeGestureRecognizerDirectionDown:
+        tmpDirection = down;
         NSLog(@"swiped Down");
         break;
         
         defaut:
         break;
     };
+
+    NSUserDefaults *standardUserDefaults = [NSUserDefaults standardUserDefaults];
+
+    if (standardUserDefaults) {
+        [standardUserDefaults setObject:[NSNumber numberWithInt:tmpDirection] forKey:@"playerDirection"];
+        [standardUserDefaults synchronize];
+    }
+
 }
 - (BOOL)shouldAutorotate
 {

@@ -25,9 +25,8 @@
 #define dominoZPos  6
 
 //define rows and cols
-#define rows        30
-#define cols        24
-
+#define rows        20
+#define cols        16
 
 @interface domMyScene (){
     
@@ -46,7 +45,9 @@
 //to get the scale factor for the current screen (orig size / new size)
     float scaleX;
     float scaleY;
-    
+
+//to store the arena unscaled size
+    CGSize arenaSize;
 //store the scaled size of the arena
     CGSize scaledSize;
     
@@ -67,7 +68,10 @@
     int playerA [rows * cols];
     int enemyA [rows * cols];
     
-    player *player1;
+    player* player1;
+
+// set game speed
+    float gameSpeed;
     
     
     
@@ -84,12 +88,15 @@
 -(id)initWithSize:(CGSize)size {
     if (self = [super initWithSize:size]) {
         /* Setup your scene here */
+
+        arenaSize = size;
+        gameSpeed = 1.5;
         
-        [self setUpBackGround:size];
+        [self setUpBackGround];
         
         [self setUpDoors:size];
         
-        [self setUpDominoGrid:size];
+        [self setUpDominoGrid];
         
         [self initializeGame];
         
@@ -98,31 +105,104 @@
     return self;
 }
 
--(void) setUpDominoGrid: (CGSize)size{
+-(void) setUpDominoGrid{
     
 //set the width and height of the grid
     gridWidth = maxX - minX;
     gridHeight = maxY - minY;
     
 //set the size of the dominoes
-    CGSize dominoSize = CGSizeMake((gridHeight/rows), (gridWidth/cols));
+    dominoSize = CGSizeMake((gridHeight/rows)/scaleY, (gridWidth/cols)/scaleX);
     
 }
 -(void) initializeGame{
-    
+
+    player1 = [[player alloc]init];
+
     //set the start position and direction of player
-    player1.curX = 10;
-    player1.curY = 15;
+    player1.curX = 7;
+    player1.curY = 6;
     player1.curDirection = up;
     
-    //clear the grid.. eventually
+    //set initial player1 direction
+    NSUserDefaults *standardUserDefaults = [NSUserDefaults standardUserDefaults];
+
+    if (standardUserDefaults) {
+        [standardUserDefaults setObject:[NSNumber numberWithInt:3] forKey:@"playerDirection"];
+        [standardUserDefaults synchronize];
+    }
+
+    //start the timer that runs the game!
+    [self runAction:[SKAction repeatActionForever:[SKAction sequence:@[[SKAction performSelector:@selector(drawNextSet) onTarget:self],[SKAction waitForDuration:gameSpeed]]]]];
+
+}
+-(void) drawNextSet {
+    SKSpriteNode* domino =[[SKSpriteNode alloc]init];
+
+    //get player direction
+    NSUserDefaults *standardUserDefaults = [NSUserDefaults standardUserDefaults];
+    NSNumber *tmpValue;
+    if (standardUserDefaults) {
+        tmpValue = [standardUserDefaults objectForKey:@"playerDirection"];
+    }
+    player1.curDirection = [tmpValue intValue];
+
+    switch (player1.curDirection) {
+        case left:
+            player1.curX --;
+            break;
+        case right:
+            player1.curX ++;
+            break;
+        case up:
+            player1.curY ++;
+            break;
+        case down:
+            player1.curY --;
+            break;
+        default:
+            break;
+    }
     
-    //draw the starting domino
-    
-    
-    
+//draw a domino
+    if (player1.curDirection == up || player1.curDirection == down) {
+        domino = [SKSpriteNode spriteNodeWithImageNamed:@"dominoH.png"];
+    }else {
+        domino = [SKSpriteNode spriteNodeWithImageNamed:@"dominoV.png"];
+    }
+
+    domino.size = dominoSize;
+    domino.zPosition = dominoZPos;
+
+    //[objectWithOurMethod methodName:int1 withArg2:int2];
+    domino.position = [self calcDominoPosition:player1.curX withArg2:player1.curY];
+
+    [self addChild:domino];
+
     
 }
+-(void) updatePlayerDirection:(swipeDirection)direction{
+
+    player1.curDirection = direction;
+
+}
+
+//- (int)methodName:(int)arg1 withArg2:(int)arg2
+- (CGPoint) calcDominoPosition:(int)x withArg2:(int) y{
+    
+    int xPos;
+    int yPos;
+    
+    //minX = width of wall
+    //dominoSize = width/height of domino tile
+    xPos = minX/scaleX + (x * dominoSize.width);
+    yPos = minY/scaleY + (y * dominoSize.height);
+    
+    
+    return CGPointMake(xPos, yPos);
+}
+
+
 //-(void) setUpDominoGrid: (CGSize)size{
 //    dominoH  = [SKSpriteNode spriteNodeWithImageNamed:@"dominoH.png"];
 //    dominoV  = [SKSpriteNode spriteNodeWithImageNamed:@"dominoV.png"];
@@ -145,26 +225,26 @@
 //    
 //}
 
--(void) setUpBackGround:(CGSize)size{
+-(void) setUpBackGround{
 
     int bannerCount =0;
     
     
     //determine the banner size (according to iAD)
-    bannerSizeY = (size.width == 320) ? 50 : 66;
+    bannerSizeY = (arenaSize.width == 320) ? 50 : 66;
     if (ceilingOn + floorOn ==1){
         bannerHeightAdjuster = (ceilingOn) ? -(bannerSizeY/2): +(bannerSizeY/2);
     }
     
     if (floorOn){
-        SKSpriteNode* floor = [SKSpriteNode spriteNodeWithColor:[UIColor blueColor] size:CGSizeMake(size.width, bannerSizeY)];
-        floor.position = CGPointMake(size.width/2, (bannerSizeY/2));
+        SKSpriteNode* floor = [SKSpriteNode spriteNodeWithColor:[UIColor blueColor] size:CGSizeMake(arenaSize.width, bannerSizeY)];
+        floor.position = CGPointMake(arenaSize.width/2, (bannerSizeY/2));
         [self addChild:floor];
         bannerCount +=1;
     }
     if (ceilingOn){
-        SKSpriteNode* ceiling = [SKSpriteNode spriteNodeWithColor:[UIColor blueColor] size:CGSizeMake(size.width, bannerSizeY)];
-        ceiling.position = CGPointMake(size.width/2, size.height-(bannerSizeY/2));
+        SKSpriteNode* ceiling = [SKSpriteNode spriteNodeWithColor:[UIColor blueColor] size:CGSizeMake(arenaSize.width, bannerSizeY)];
+        ceiling.position = CGPointMake(arenaSize.width/2, arenaSize.height-(bannerSizeY/2));
         [self addChild:ceiling];
         bannerCount +=1;
     }
@@ -173,15 +253,15 @@
     
     backGround = [SKSpriteNode spriteNodeWithImageNamed:@"dominoes-arena.png"];
 //get the scale factors, so we know how much to scale any other images
-    scaleX = backGround.size.width  / size.width;
-    scaleY = backGround.size.height / (size.height -(bannerSizeY * bannerCount) );
+    scaleX = backGround.size.width  / arenaSize.width;
+    scaleY = backGround.size.height / (arenaSize.height -(bannerSizeY * bannerCount) );
     
-    backGround.size = CGSizeMake(size.width, size.height-(bannerSizeY * bannerCount) );
+    backGround.size = CGSizeMake(arenaSize.width, arenaSize.height-(bannerSizeY * bannerCount) );
     
-    float backGroundPos = size.height/2 + bannerHeightAdjuster ;
+    float backGroundPos = arenaSize.height/2 + bannerHeightAdjuster ;
 
     
-    backGround.position = CGPointMake(size.width/2, backGroundPos);
+    backGround.position = CGPointMake(arenaSize.width/2, backGroundPos);
     backGround.zPosition = 5;
     
     [self addChild:backGround];
