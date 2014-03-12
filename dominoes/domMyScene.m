@@ -394,14 +394,14 @@ if (!crashed) {
 
     //[scene runAction:[SKAction scaleTo:0.5 duration:0]];
 
-    SKAction *zoom =       [SKAction scaleTo:2.0 duration:0.25];
-    SKAction *wait =       [SKAction waitForDuration: 0.5];
-    SKAction *fadeAway =   [SKAction fadeOutWithDuration:0.25];
-    SKAction *removeNode = [SKAction removeFromParent];
+//    SKAction *zoom =       [SKAction scaleTo:2.0 duration:0.25];
+//    SKAction *wait =       [SKAction waitForDuration: 0.5];
+//    SKAction *fadeAway =   [SKAction fadeOutWithDuration:0.25];
+//    SKAction *removeNode = [SKAction removeFromParent];
+//
+//    SKAction *sequence = [SKAction sequence:@[moveUp, zoom, wait, fadeAway, removeNode]];
+//    [node runAction: sequence];
 
-    SKAction *sequence = [SKAction sequence:@[moveUp, zoom, wait, fadeAway, removeNode]];
-    [node runAction: sequence];
-    
 
 //just to be able to log coords and see what they are
 //    UITouch *touched = [[event allTouches] anyObject];
