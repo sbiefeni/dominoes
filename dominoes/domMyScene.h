@@ -12,10 +12,11 @@
 
 //store the last swipe action
 typedef enum  {
-    left,
-    right,
-    up,
-    down,
+    none=   0,
+    left=   1,
+    right=  2,
+    up=     3,
+    down=   4,
 } swipeDirection;
 
 @end

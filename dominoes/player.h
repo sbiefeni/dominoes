@@ -12,7 +12,10 @@
 @interface player : NSObject
 
 @property swipeDirection lastSwipe;
-@property swipeDirection    currentDirection;
+@property swipeDirection curDirection;
+
+@property int curX;
+@property int curY;
 
 
 @end
