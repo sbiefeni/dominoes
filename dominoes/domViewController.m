@@ -24,13 +24,21 @@
     SKScene * scene = [domMyScene sceneWithSize:skView.bounds.size];
     scene.scaleMode = SKSceneScaleModeAspectFill;
     
-    UISwipeGestureRecognizer* swipeLeft =[[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(swipeRecognized:)];
-    [swipeLeft setDirection:UISwipeGestureRecognizerDirectionLeft];
-    [self.view addGestureRecognizer:swipeLeft];
+    UISwipeGestureRecognizer* swipeGesture =[[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(swipeRecognized:)];
+    [swipeGesture setDirection:UISwipeGestureRecognizerDirectionLeft];
+    [self.view addGestureRecognizer:swipeGesture];
     
-    UISwipeGestureRecognizer* swipeRight =[[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(swipeRecognized:)];
-    [swipeLeft setDirection:UISwipeGestureRecognizerDirectionRight];
-    [self.view addGestureRecognizer:swipeRight];
+    swipeGesture =[[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(swipeRecognized:)];
+    [swipeGesture setDirection:UISwipeGestureRecognizerDirectionRight];
+    [self.view addGestureRecognizer:swipeGesture];
+    
+    swipeGesture =[[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(swipeRecognized:)];
+    [swipeGesture setDirection:UISwipeGestureRecognizerDirectionUp];
+    [self.view addGestureRecognizer:swipeGesture];    //[swipe release];
+    
+    swipeGesture =[[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(swipeRecognized:)];
+    [swipeGesture setDirection:UISwipeGestureRecognizerDirectionDown];
+    [self.view addGestureRecognizer:swipeGesture];
     
     // Present the scene.
     [skView presentScene:scene];
