@@ -90,7 +90,7 @@
         /* Setup your scene here */
 
         arenaSize = size;
-        gameSpeed = .25;
+        gameSpeed = 1.5;
         
         [self setUpBackGround];
         
@@ -124,7 +124,13 @@
     player1.curY = 6;
     player1.curDirection = up;
     
-    //clear the grid.. eventually
+    //set initial player1 direction
+    NSUserDefaults *standardUserDefaults = [NSUserDefaults standardUserDefaults];
+
+    if (standardUserDefaults) {
+        [standardUserDefaults setObject:[NSNumber numberWithInt:3] forKey:@"playerDirection"];
+        [standardUserDefaults synchronize];
+    }
 
     //start the timer that runs the game!
     [self runAction:[SKAction repeatActionForever:[SKAction sequence:@[[SKAction performSelector:@selector(drawNextSet) onTarget:self],[SKAction waitForDuration:gameSpeed]]]]];
@@ -132,7 +138,15 @@
 }
 -(void) drawNextSet {
     SKSpriteNode* domino =[[SKSpriteNode alloc]init];
-    
+
+    //get player direction
+    NSUserDefaults *standardUserDefaults = [NSUserDefaults standardUserDefaults];
+    NSNumber *tmpValue;
+    if (standardUserDefaults) {
+        tmpValue = [standardUserDefaults objectForKey:@"playerDirection"];
+    }
+    player1.curDirection = [tmpValue intValue];
+
     switch (player1.curDirection) {
         case left:
             player1.curX --;
