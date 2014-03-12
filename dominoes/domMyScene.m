@@ -236,7 +236,7 @@ if (!crashed) {
                 //[killingEnemy removeFromParent];
                 //[_player removeFromParent];
                 //],
-                [SKAction waitForDuration:0.4],
+                [SKAction waitForDuration:0.35],
                 [SKAction runBlock:^{
                     explosion.particleBirthRate = 0;
                 }],
