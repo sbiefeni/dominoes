@@ -69,7 +69,10 @@
     int playerA [rows * cols];
     int enemyA [rows * cols];
     
-    player *player1;
+    player* player1;
+
+// set game speed
+    float gameSpeed;
     
     
     
@@ -86,7 +89,9 @@
 -(id)initWithSize:(CGSize)size {
     if (self = [super initWithSize:size]) {
         /* Setup your scene here */
+
         arenaSize = size;
+        gameSpeed = .25;
         
         [self setUpBackGround];
         
@@ -108,37 +113,39 @@
     gridHeight = maxY - minY;
     
 //set the size of the dominoes
-    dominoSize = CGSizeMake((gridHeight/rows), (gridWidth/cols));
+    dominoSize = CGSizeMake((gridHeight/rows)/scaleY, (gridWidth/cols)/scaleX);
     
 }
 -(void) initializeGame{
-    
+
+    player1 = [[player alloc]init];
+
     //set the start position and direction of player
     player1.curX = 10;
     player1.curY = 15;
     player1.curDirection = up;
     
     //clear the grid.. eventually
-    
+
     //start the timer that runs the game!
-    [self runAction:[SKAction repeatActionForever:[SKAction sequence:@[[SKAction performSelector:@selector(drawNextSet) onTarget:self],[SKAction waitForDuration:1]]]]];
+    [self runAction:[SKAction repeatActionForever:[SKAction sequence:@[[SKAction performSelector:@selector(drawNextSet) onTarget:self],[SKAction waitForDuration:gameSpeed]]]]];
 
 }
 -(void) drawNextSet {
-    SKSpriteNode* domino;
+    SKSpriteNode* domino =[[SKSpriteNode alloc]init];
     
     switch (player1.curDirection) {
         case left:
+            player1.curX --;
+            break;
+        case right:
             player1.curX ++;
             break;
         case up:
-            player1.curY --;
-            break;
-        case right:
-            player1.curX --;
+            player1.curY ++;
             break;
         case down:
-            player1.curY ++;
+            player1.curY --;
             break;
         default:
             break;
@@ -151,12 +158,14 @@
         domino = [SKSpriteNode spriteNodeWithImageNamed:@"dominoV.png"];
     }
 
-    domino.size = [self getScaledSizeForNode:domino];
-    
-    dominoSize = domino.size;
+    domino.size = dominoSize;
+    domino.zPosition = dominoZPos;
+
     //[objectWithOurMethod methodName:int1 withArg2:int2];
-    
     domino.position = [self calcDominoPosition:player1.curX withArg2:player1.curY];
+
+    [self addChild:domino];
+
     
 }
 //- (int)methodName:(int)arg1 withArg2:(int)arg2
@@ -167,7 +176,8 @@
     
     //minX = width of wall
     //dominoSize = width/height of domino tile
-    xPos = minX + (x * dominoSize.width);
+    xPos = minX/scaleX + (x * dominoSize.width);
+    yPos = minY/scaleY + (y * dominoSize.height);
     
     
     return CGPointMake(xPos, yPos);
