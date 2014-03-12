@@ -8,6 +8,7 @@
 
 #import "domViewController.h"
 #import "domMyScene.h"
+#import "player.h"
 
 @implementation domViewController
 
@@ -45,10 +46,12 @@
 }
 
 -(void) swipeRecognized: (UISwipeGestureRecognizer*) swipe{
+
     
 switch (swipe.direction) {
     case UISwipeGestureRecognizerDirectionLeft:
         NSLog(@"swiped Left");
+        //updatePlayerDirection
         break;
 
     case UISwipeGestureRecognizerDirectionRight:

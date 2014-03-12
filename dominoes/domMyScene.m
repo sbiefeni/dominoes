@@ -25,9 +25,8 @@
 #define dominoZPos  6
 
 //define rows and cols
-#define rows        30
-#define cols        24
-
+#define rows        20
+#define cols        16
 
 @interface domMyScene (){
     
@@ -121,8 +120,8 @@
     player1 = [[player alloc]init];
 
     //set the start position and direction of player
-    player1.curX = 10;
-    player1.curY = 15;
+    player1.curX = 7;
+    player1.curY = 6;
     player1.curDirection = up;
     
     //clear the grid.. eventually
@@ -168,6 +167,12 @@
 
     
 }
+-(void) updatePlayerDirection:(swipeDirection)direction{
+
+    player1.curDirection = direction;
+
+}
+
 //- (int)methodName:(int)arg1 withArg2:(int)arg2
 - (CGPoint) calcDominoPosition:(int)x withArg2:(int) y{
     

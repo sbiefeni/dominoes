@@ -8,6 +8,9 @@
 
 #import <SpriteKit/SpriteKit.h>
 
+
+
+
 @interface domMyScene : SKScene
 
 //store the last swipe action
@@ -19,4 +22,5 @@ typedef enum  {
     down=   4,
 } swipeDirection;
 
+-(void) updatePlayerDirection:(swipeDirection)direction;
 @end
