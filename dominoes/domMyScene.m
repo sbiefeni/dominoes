@@ -15,10 +15,10 @@
 #define floorOn     0
 
 //define the min and max extents of the domino grid area
-#define minX        130
-#define minY        130
-#define maxX        1420
-#define maxY        1940
+#define minX        145
+#define minY        135
+#define maxX        1400
+#define maxY        1900
 
 //define z positions for objects
 #define doorZPos    5
@@ -29,7 +29,8 @@
 #define cols        22
 
 //scale up the domino size relative to the grid
-#define dominoScaleFactor 1.3   // - 1.3 looks best
+#define dominoScaleFactorX 1.25   // - 1.25
+#define dominoScaleFactorY 1.5    //
 
 @interface domMyScene (){
     
@@ -97,7 +98,7 @@
         /* Setup your scene here */
 
         arenaSize = size;
-        gameSpeed = .5;
+        gameSpeed = .25;
         
         [self setUpBackGround];
         
@@ -119,8 +120,8 @@
     gridHeight = maxY - minY;
     
 //set the size of the grid and dominoes
-    gridSize = CGSizeMake(gridHeight/rows/scaleY, gridWidth/cols/scaleX);
-    dominoSize = CGSizeMake((gridHeight/rows)/scaleY*dominoScaleFactor, (gridWidth/cols)/scaleX*dominoScaleFactor);
+    gridSize = CGSizeMake(gridWidth/cols/scaleX, gridHeight/rows/scaleY);
+    dominoSize = CGSizeMake((gridWidth/cols)/scaleX*dominoScaleFactorX, (gridHeight/rows)/scaleY*dominoScaleFactorY);
     
 }
 -(void) initializeGame{
@@ -227,6 +228,10 @@ if (!crashed) {
     //minX = width of wall
     xPos = minX/scaleX + (x * gridSize.width);
     yPos = minY/scaleY + (y * gridSize.height);
+
+    if (floorOn) {
+        yPos += bannerSizeY;
+    }
 
      NSLog(@"Domino Placed: X-%i, Y-%i", xPos, yPos);
     
