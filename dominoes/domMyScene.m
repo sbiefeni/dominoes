@@ -11,7 +11,7 @@
 #import "domino.h"
 
 //using 0 and 1 instead of BOOL so I can use these in calculations
-#define ceilingOn   0
+#define ceilingOn   1
 #define floorOn     0
 
 //define the min and max extents of the domino grid area
@@ -90,7 +90,7 @@
         /* Setup your scene here */
 
         arenaSize = size;
-        gameSpeed = 1.5;
+        gameSpeed = .5;
         
         [self setUpBackGround];
         
