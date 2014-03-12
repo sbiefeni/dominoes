@@ -73,8 +73,8 @@
 //use these to store each movement, in sequence, for each player
 //max size is the total available grid squares, so we never run out
 //of room
-    NSMutableArray* playerA;
-    NSMutableArray* playerB;
+    NSMutableArray* playerDominos;
+    NSMutableArray* computerDominos;
     
     player* player1;
 
@@ -127,7 +127,9 @@
 -(void) initializeGame{
 
     player1 = [[player alloc]init];
-
+    playerDominos=[[NSMutableArray alloc] init];
+    computerDominos=[[NSMutableArray alloc] init];
+    
 //set the start position and direction of player
     player1.curX = cols/2 - 2;
     player1.curY = rows/2;
@@ -212,7 +214,7 @@ if (!crashed) {
 
     player1.crashed = false;
 
-    //[playerA addObject:domino];
+    [playerDominos addObject:domino];
 }else{
     if (!player1.crashed) {
         NSString *burstPath =
