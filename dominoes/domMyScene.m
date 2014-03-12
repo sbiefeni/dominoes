@@ -25,8 +25,8 @@
 #define dominoZPos  6
 
 //define rows and cols
-#define rows        36
-#define cols        22
+#define rows        30
+#define cols        16
 
 //scale up the domino size relative to the grid
 #define dominoScaleFactorX 1.25   // - 1.25
@@ -98,7 +98,7 @@
         /* Setup your scene here */
 
         arenaSize = size;
-        gameSpeed = .25;
+        gameSpeed = .20;
         
         [self setUpBackGround];
         
@@ -212,7 +212,7 @@ if (!crashed) {
 
     player1.crashed = false;
 
-    //[playerA addObject:domino];
+    [playerA addObject:domino];
 }else{
     if (!player1.crashed) {
         NSString *burstPath =
@@ -389,6 +389,18 @@ if (!crashed) {
 }
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
+
+    //[scene runAction:[SKAction scaleTo:0.5 duration:0]];
+
+    SKAction *zoom =       [SKAction scaleTo:2.0 duration:0.25];
+    SKAction *wait =       [SKAction waitForDuration: 0.5];
+    SKAction *fadeAway =   [SKAction fadeOutWithDuration:0.25];
+    SKAction *removeNode = [SKAction removeFromParent];
+
+    SKAction *sequence = [SKAction sequence:@[moveUp, zoom, wait, fadeAway, removeNode]];
+    [node runAction: sequence];
+    
+
 //just to be able to log coords and see what they are
 //    UITouch *touched = [[event allTouches] anyObject];
 //    CGPoint location = [touched locationInView:touched.view];
