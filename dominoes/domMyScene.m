@@ -7,16 +7,24 @@
 //
 
 #import "domMyScene.h"
+#import "player.h"
+#import "domino.h"
 
 //using 0 and 1 instead of BOOL so I can use these in calculations
 #define ceilingOn   0
 #define floorOn     0
 
-#define wallThickness   130
+//define the min and max extents of the domino grid area
+#define minX        130
+#define minY        130
+#define maxX        1420
+#define maxY        1940
 
+//define z positions for objects
 #define doorZPos    5
 #define dominoZPos  6
 
+//define rows and cols
 #define rows        30
 #define cols        24
 
@@ -39,22 +47,29 @@
     float scaleX;
     float scaleY;
     
+//store the scaled size of the arena
+    CGSize scaledSize;
+    
 //banner height depends on the screen width, which can only be 320, or 768 (portrait mode)
     int bannerSizeY;
     float bannerHeightAdjuster;
     
-//store the scaled size of the arena
-    CGSize scaledSize;
-    
 //boolean 2D array, representing our playing grid
 //each value is true if there is a domino placed there
     BOOL grid [rows][cols];
+    float gridWidth;
+    float gridHeight;
+    CGSize dominoSize;
     
 //use these to store each movement, in sequence, for each player
 //max size is the total available grid squares, so we never run out
 //of room
-    int player [rows * cols];
-    int enemy [rows * cols];
+    int playerA [rows * cols];
+    int enemyA [rows * cols];
+    
+    player *player1;
+    
+    
     
 
 
@@ -66,7 +81,7 @@
 @implementation domMyScene
 
 
--(id)initWithSize:(CGSize)size {    
+-(id)initWithSize:(CGSize)size {
     if (self = [super initWithSize:size]) {
         /* Setup your scene here */
         
@@ -76,32 +91,59 @@
         
         [self setUpDominoGrid:size];
         
+        [self initializeGame];
+        
         NSLog(@"Width: %f, Height: %f", size.width, size.height);
     }
     return self;
 }
 
 -(void) setUpDominoGrid: (CGSize)size{
-    dominoH  = [SKSpriteNode spriteNodeWithImageNamed:@"dominoH.png"];
-    dominoV  = [SKSpriteNode spriteNodeWithImageNamed:@"dominoV.png"];
     
+//set the width and height of the grid
+    gridWidth = maxX - minX;
+    gridHeight = maxY - minY;
     
-    //grab the unscaled image, and resize using the scale factors scaleX and scaleY
-    scaledSize = [self getScaledSizeForNode:dominoH];
-    dominoH.size= scaledSize;
-    
-    scaledSize = [self getScaledSizeForNode:dominoV];
-    dominoV.size = scaledSize;
-    
-    dominoV.position = CGPointMake(size.width /2 ,size.height/2);
-    dominoH.position = CGPointMake(size.width /1.735 ,size.height/2 );
-    dominoV.zPosition = dominoZPos;
-    dominoH.zPosition = dominoZPos;
-    
-    [self addChild:dominoH];
-    [self addChild:dominoV];
+//set the size of the dominoes
+    CGSize dominoSize = CGSizeMake((gridHeight/rows), (gridWidth/cols));
     
 }
+-(void) initializeGame{
+    
+    //set the start position and direction of player
+    player1.curX = 10;
+    player1.curY = 15;
+    player1.curDirection = up;
+    
+    //clear the grid.. eventually
+    
+    //draw the starting domino
+    
+    
+    
+    
+}
+//-(void) setUpDominoGrid: (CGSize)size{
+//    dominoH  = [SKSpriteNode spriteNodeWithImageNamed:@"dominoH.png"];
+//    dominoV  = [SKSpriteNode spriteNodeWithImageNamed:@"dominoV.png"];
+//    
+//    
+//    //grab the unscaled image, and resize using the scale factors scaleX and scaleY
+//    scaledSize = [self getScaledSizeForNode:dominoH];
+//    dominoH.size= scaledSize;
+//    
+//    scaledSize = [self getScaledSizeForNode:dominoV];
+//    dominoV.size = scaledSize;
+//    
+//    dominoV.position = CGPointMake(size.width /2 ,size.height/2);
+//    dominoH.position = CGPointMake(size.width /1.735 ,size.height/2 );
+//    dominoV.zPosition = dominoZPos;
+//    dominoH.zPosition = dominoZPos;
+//    
+//    [self addChild:dominoH];
+//    [self addChild:dominoV];
+//    
+//}
 
 -(void) setUpBackGround:(CGSize)size{
 
