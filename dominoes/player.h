@@ -13,7 +13,7 @@
 
 @property swipeDirection lastSwipe;
 @property swipeDirection curDirection;
-@property BOOL crashed;
+@property BOOL didExplosion;
 
 @property int curX;
 @property int curY;

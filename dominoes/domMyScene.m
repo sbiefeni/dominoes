@@ -212,11 +212,11 @@ if (!crashed) {
 
     [self addChild:domino];
 
-    player1.crashed = false;
+    player1.didExplosion = false;
 
     [playerDominos addObject:domino];
 }else{
-    if (!player1.crashed) {
+    if (!player1.didExplosion) {
         NSString *burstPath =
         [[NSBundle mainBundle]
         pathForResource:@"explosion" ofType:@"sks"];
@@ -228,7 +228,7 @@ if (!crashed) {
         explosion.zPosition = 10;
 
         [self addChild:explosion];
-        player1.crashed = true;
+        player1.didExplosion = true;
 
         [explosion runAction:[SKAction sequence:@[
                 //[SKAction playSoundFileNamed:@"Explosion.wav" waitForCompletion:NO],
