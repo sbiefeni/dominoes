@@ -73,8 +73,8 @@
 //use these to store each movement, in sequence, for each player
 //max size is the total available grid squares, so we never run out
 //of room
-    int playerA [rows * cols];
-    int enemyA [rows * cols];
+    NSMutableArray* playerA;
+    NSMutableArray* playerB;
     
     player* player1;
 
@@ -129,8 +129,8 @@
     player1 = [[player alloc]init];
 
 //set the start position and direction of player
-    player1.curX = 7;
-    player1.curY = 6;
+    player1.curX = cols/2 - 2;
+    player1.curY = rows/2;
     player1.curDirection = up;
     
 //set initial player1 direction - ***HACK? - NSUserDefaults lets us easily communicate variables between classes.
@@ -207,11 +207,52 @@ if (!crashed) {
     //[objectWithOurMethod methodName:int1 withArg2:int2];
     domino.position = [self calcDominoPosition:player1.curX withArg2:player1.curY];
 
-    //NSLog(@"Domino Placed: X-%i, Y-%i", player1.curX, player1.curY);
 
     [self addChild:domino];
-}
+
+    player1.crashed = false;
+
+    //[playerA addObject:domino];
+}else{
+    if (!player1.crashed) {
+        NSString *burstPath =
+        [[NSBundle mainBundle]
+        pathForResource:@"explosion" ofType:@"sks"];
+
+        SKEmitterNode *explosion =
+        [NSKeyedUnarchiver unarchiveObjectWithFile:burstPath];
+
+        explosion.position = [self calcDominoPosition:player1.curX withArg2:player1.curY];
+        explosion.zPosition = 10;
+
+        [self addChild:explosion];
+        player1.crashed = true;
+
+        [explosion runAction:[SKAction sequence:@[
+                //[SKAction playSoundFileNamed:@"Explosion.wav" waitForCompletion:NO],
+                //[SKAction waitForDuration:0.4]
+                //[SKAction runBlock:^{
+                // TODO: Remove these more nicely
+                //[killingEnemy removeFromParent];
+                //[_player removeFromParent];
+                //],
+                [SKAction waitForDuration:0.4],
+                [SKAction runBlock:^{
+                    explosion.particleBirthRate = 0;
+                }],
+                [SKAction waitForDuration:1.2],
+                [SKAction runBlock:^{
+                    [explosion removeFromParent];
+                }]
+                //[SKAction runBlock:^{
+                        //ORBMenuScene *menu = [[ORBMenuScene alloc] initWithSize:self.size];
+                          //[self.view presentScene:menu transition:[SKTransition doorsCloseHorizontalWithDuration:0.5]];
+
+        ]]];
+    } //end if (player1.crashed)
     
+}  //end if (!crashed)
+
 }
 -(void) updatePlayerDirection:(swipeDirection)direction{
 
@@ -233,7 +274,7 @@ if (!crashed) {
         yPos += bannerSizeY;
     }
 
-     NSLog(@"Domino Placed: X-%i, Y-%i", xPos, yPos);
+     //NSLog(@"Domino Placed: X-%i, Y-%i", xPos, yPos);
     
     return CGPointMake(xPos, yPos);
 }
@@ -349,11 +390,11 @@ if (!crashed) {
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
 //just to be able to log coords and see what they are
-    UITouch *touched = [[event allTouches] anyObject];
-    CGPoint location = [touched locationInView:touched.view];
-    location.x = location.x * scaleX;
-    location.y = location.y * scaleY;
-    NSLog(@"x=%.2f y=%.2f", location.x, location.y);
+//    UITouch *touched = [[event allTouches] anyObject];
+//    CGPoint location = [touched locationInView:touched.view];
+//    location.x = location.x * scaleX;
+//    location.y = location.y * scaleY;
+//    NSLog(@"x=%.2f y=%.2f", location.x, location.y);
 }
 
 
