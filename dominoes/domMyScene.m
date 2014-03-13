@@ -98,7 +98,7 @@
         /* Setup your scene here */
 
         arenaSize = size;
-        gameSpeed = .20;
+        gameSpeed = .40;
         
         [self setUpBackGround];
         
@@ -227,6 +227,11 @@ if (!crashed) {
 //add to the grid... for domino colision detection
     grid[player1.curX][player1.curY]=true;
 
+    //play a sound
+    //[SKAction playSoundFileNamed:@"/Users/Mauro/Downloads/misc119.mp3" waitForCompletion:false];
+    [self runAction: [SKAction playSoundFileNamed:@"tileclick.mp3" waitForCompletion:NO]];
+    //self.playMySound
+    gameSpeed+=.005;
 }else{
     if (!player1.didExplosion) {
         NSString *burstPath =
@@ -245,7 +250,7 @@ if (!crashed) {
         crashed = false;
 
         [explosion runAction:[SKAction sequence:@[
-                //[SKAction playSoundFileNamed:@"Explosion.wav" waitForCompletion:NO],
+                [SKAction playSoundFileNamed:@"explosion.wav" waitForCompletion:NO],
                 //[SKAction waitForDuration:0.4]
                 //[SKAction runBlock:^{
                 // TODO: Remove these more nicely
@@ -263,7 +268,7 @@ if (!crashed) {
         ]]];
 
     } //end if (player1.crashed)
-    
+    //[self runAction: [SKAction playSoundFileNamed:@"explosion.mp3" waitForCompletion:NO]];
 }  //end if (!crashed)
 
 }
