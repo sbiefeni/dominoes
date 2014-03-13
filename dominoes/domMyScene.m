@@ -249,16 +249,8 @@
 
         [self addChild:domino];
 
-    //play a sound
-    //[SKAction playSoundFileNamed:@"/Users/Mauro/Downloads/misc119.mp3" waitForCompletion:false];
-    [self runAction: [SKAction playSoundFileNamed:@"tileclick.mp3" waitForCompletion:NO]];
-    //self.playMySound
-    gameSpeed+=.005;
-}else{
-    if (!player1.didExplosion) {
-        NSString *burstPath =
-        [[NSBundle mainBundle]
-        pathForResource:@"explosion" ofType:@"sks"];
+        //reset explosion so it can happen again..
+        player1.didExplosion = false;
 
         //add to the array so we can track back later
         [playerDominos addObject:domino];
@@ -266,14 +258,28 @@
         //add to the grid... for domino colision detection
         grid[player1.curX][player1.curY]=true;
 
-    }else{
-        if (!player1.didExplosion) {
-            NSString *burstPath =
-            [[NSBundle mainBundle]
-             pathForResource:@"explosion" ofType:@"sks"];
+    //play a sound
+    [self runAction: [SKAction playSoundFileNamed:@"tileclick.mp3" waitForCompletion:NO]];
+    
+    //increment game speed
+    gameSpeed+=.005;
+        
+}else{
+    if (!player1.didExplosion) {
+        NSString *burstPath =
+        [[NSBundle mainBundle]
+        pathForResource:@"explosion" ofType:@"sks"];
 
             SKEmitterNode *explosion =
             [NSKeyedUnarchiver unarchiveObjectWithFile:burstPath];
+
+            explosion.position = [self calcDominoPosition:player1.curX withArg2:player1.curY];
+            explosion.zPosition = 10;
+
+            [self addChild:explosion];
+            player1.didExplosion = true;
+
+            crashed = false;
 
         [explosion runAction:[SKAction sequence:@[
                 [SKAction playSoundFileNamed:@"explosion.wav" waitForCompletion:NO],
@@ -291,34 +297,12 @@
                         //ORBMenuScene *menu = [[ORBMenuScene alloc] initWithSize:self.size];
                           //[self.view presentScene:menu transition:[SKTransition doorsCloseHorizontalWithDuration:0.5]];
 
-            [self addChild:explosion];
-            player1.didExplosion = true;
+        ]]];
 
     } //end if (player1.crashed)
-    //[self runAction: [SKAction playSoundFileNamed:@"explosion.mp3" waitForCompletion:NO]];
+    
 }  //end if (!crashed)
 
-            [explosion runAction:[SKAction sequence:@[
-                                                      //[SKAction playSoundFileNamed:@"Explosion.wav" waitForCompletion:NO],
-                                                      //[SKAction waitForDuration:0.4]
-                                                      //[SKAction runBlock:^{
-                                                      // TODO: Remove these more nicely
-                                                      //[killingEnemy removeFromParent];
-                                                      //[_player removeFromParent];
-                                                      //],
-                                                      [SKAction waitForDuration:0.35],
-                                                      [SKAction runBlock:^{ explosion.particleBirthRate = 0;} ],
-                                                      [SKAction waitForDuration:1.2],
-                                                      [SKAction runBlock:^{ [explosion removeFromParent]; } ]
-                                                      //[SKAction runBlock:^{
-                                                      //ORBMenuScene *menu = [[ORBMenuScene alloc] initWithSize:self.size];
-                                                      //[self.view presentScene:menu transition:[SKTransition doorsCloseHorizontalWithDuration:0.5]];
-                                                      
-                                                      ]]];
-            
-        } //end if (player1.crashed)
-        
-    }  //end if (!crashed)
 }
 
 -(void) updatePlayerDirection:(swipeDirection)direction{
