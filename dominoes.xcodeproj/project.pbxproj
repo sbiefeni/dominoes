@@ -7,8 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		34C0142218D17389007C37AB /* tileclick.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 34C0142118D17389007C37AB /* tileclick.mp3 */; };
-		34C0142418D178AF007C37AB /* explosion.wav in Resources */ = {isa = PBXBuildFile; fileRef = 34C0142318D178AF007C37AB /* explosion.wav */; };
+		34C0142718D17F01007C37AB /* explosion.wav in Resources */ = {isa = PBXBuildFile; fileRef = 34C0142518D17F01007C37AB /* explosion.wav */; };
+		34C0142818D17F01007C37AB /* tileclick.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 34C0142618D17F01007C37AB /* tileclick.mp3 */; };
 		380DC21B18D0ED9200545962 /* explosion.sks in Resources */ = {isa = PBXBuildFile; fileRef = 380DC21918D0ED9200545962 /* explosion.sks */; };
 		380DC21C18D0ED9200545962 /* spark.png in Resources */ = {isa = PBXBuildFile; fileRef = 380DC21A18D0ED9200545962 /* spark.png */; };
 		389B9CF218CF9EF1004960E5 /* dominoH.png in Resources */ = {isa = PBXBuildFile; fileRef = 389B9CF018CF9EF1004960E5 /* dominoH.png */; };
@@ -50,8 +50,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		34C0142118D17389007C37AB /* tileclick.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = tileclick.mp3; path = ../../../../Downloads/tileclick.mp3; sourceTree = "<group>"; };
-		34C0142318D178AF007C37AB /* explosion.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = explosion.wav; path = ../../../../Downloads/explosion.wav; sourceTree = "<group>"; };
+		34C0142518D17F01007C37AB /* explosion.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = explosion.wav; sourceTree = "<group>"; };
+		34C0142618D17F01007C37AB /* tileclick.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = tileclick.mp3; sourceTree = "<group>"; };
 		380DC21918D0ED9200545962 /* explosion.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = explosion.sks; sourceTree = "<group>"; };
 		380DC21A18D0ED9200545962 /* spark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = spark.png; sourceTree = "<group>"; };
 		389B9CF018CF9EF1004960E5 /* dominoH.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = dominoH.png; sourceTree = "<group>"; };
@@ -205,8 +205,8 @@
 		55CB7E2718CBD180001EFA1C /* dominoes */ = {
 			isa = PBXGroup;
 			children = (
-				34C0142318D178AF007C37AB /* explosion.wav */,
-				34C0142118D17389007C37AB /* tileclick.mp3 */,
+				34C0142518D17F01007C37AB /* explosion.wav */,
+				34C0142618D17F01007C37AB /* tileclick.mp3 */,
 				380DC21D18D0F02B00545962 /* particles */,
 				389B9CFC18CFD7EF004960E5 /* delegates */,
 				389B9CFD18CFD811004960E5 /* storyboards */,
@@ -340,9 +340,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				34C0142418D178AF007C37AB /* explosion.wav in Resources */,
 				55DDBD3618CC3A8D0004EA4F /* dominoes-rightdoor.png in Resources */,
-				34C0142218D17389007C37AB /* tileclick.mp3 in Resources */,
 				55CB7E4218CBD181001EFA1C /* Images.xcassets in Resources */,
 				55DDBD3518CC3A8D0004EA4F /* dominoes-leftdoor.png in Resources */,
 				55CB7E3818CBD181001EFA1C /* Main_iPad.storyboard in Resources */,
@@ -350,7 +348,9 @@
 				380DC21C18D0ED9200545962 /* spark.png in Resources */,
 				389B9CF318CF9EF1004960E5 /* dominoV.png in Resources */,
 				55DDBD2218CC1DFB0004EA4F /* dominoes-arena.png in Resources */,
+				34C0142718D17F01007C37AB /* explosion.wav in Resources */,
 				389B9CF218CF9EF1004960E5 /* dominoH.png in Resources */,
+				34C0142818D17F01007C37AB /* tileclick.mp3 in Resources */,
 				55CB7E3518CBD181001EFA1C /* Main_iPhone.storyboard in Resources */,
 				380DC21B18D0ED9200545962 /* explosion.sks in Resources */,
 				55CB7E2C18CBD180001EFA1C /* InfoPlist.strings in Resources */,
