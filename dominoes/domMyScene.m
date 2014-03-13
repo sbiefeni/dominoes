@@ -11,13 +11,13 @@
 #import "domino.h"
 
 //using 0 and 1 instead of BOOL so I can use these in calculations
-#define ceilingOn   1
-#define floorOn     0
+#define ceilingOn   0
+#define floorOn     1
 
 //define the min and max extents of the domino grid area
-#define minX        145
-#define minY        135
-#define maxX        1400
+#define minX        160
+#define minY        145
+#define maxX        1390
 #define maxY        1900
 
 //define z positions for objects
@@ -25,11 +25,11 @@
 #define dominoZPos  6
 
 //define rows and cols
-#define rows        30
-#define cols        16
+#define rows        24
+#define cols        12
 
 //scale up the domino size relative to the grid
-#define dominoScaleFactorX 1.25   // - 1.25
+#define dominoScaleFactorX 1.15   // - 1.25
 #define dominoScaleFactorY 1.35    //
 
 @interface domMyScene (){
@@ -168,10 +168,10 @@
     [self handlePlayerMove];
 
 //computer move, 1/2 of gameSpeed interval wait time to run it
-//    [self runAction:[SKAction sequence:@[
-//        [SKAction waitForDuration:gameSpeed/2],
-//        [SKAction performSelector:@selector(handleComputerMove) onTarget:self],
-//    ]]];
+    [self runAction:[SKAction sequence:@[
+        [SKAction waitForDuration:gameSpeed/2],
+        [SKAction performSelector:@selector(handleComputerMove) onTarget:self],
+    ]]];
 }
 
 -(void) handleComputerMove {
@@ -235,10 +235,59 @@
         //[objectWithOurMethod methodName:int1 withArg2:int2];
         domino.position = [self calcDominoPosition:player2.curX withArg2:player2.curY];
 
+        domino.color = [SKColor redColor];
+        domino.colorBlendFactor = .5;
 
 
         [self addChild:domino];
 
+        //reset explosion so it can happen again..
+        player2.didExplosion = false;
+
+        //add to the array so we can track back later
+        [computerDominos addObject:domino];
+
+        //add to the grid... for domino colision detection
+        grid[player2.curX][player2.curY]=true;
+
+        //play a sound
+        //[self runAction: [SKAction playSoundFileNamed:@"tileclick.mp3" waitForCompletion:NO]];
+    }else{
+        if (!player2.didExplosion) {
+            NSString *burstPath =
+            [[NSBundle mainBundle]
+             pathForResource:@"explosion" ofType:@"sks"];
+
+            SKEmitterNode *explosion =
+            [NSKeyedUnarchiver unarchiveObjectWithFile:burstPath];
+
+            explosion.position = [self calcDominoPosition:player2.curX withArg2:player2.curY];
+            explosion.zPosition = 10;
+
+            [self addChild:explosion];
+            player2.didExplosion = true;
+
+            crashed = false;
+
+            [explosion runAction:[SKAction sequence:@[
+                  //[SKAction playSoundFileNamed:@"explosion.wav" waitForCompletion:NO],
+                  //[SKAction waitForDuration:0.4]
+                  //[SKAction runBlock:^{
+                  // TODO: Remove these more nicely
+                  //[killingEnemy removeFromParent];
+                  //[_player removeFromParent];
+                  //],
+                  [SKAction waitForDuration:0.35],
+                  [SKAction runBlock:^{ explosion.particleBirthRate = 0;} ],
+                  [SKAction waitForDuration:1.2],
+                  [SKAction runBlock:^{ [explosion removeFromParent]; } ]
+                  //[SKAction runBlock:^{
+                  //ORBMenuScene *menu = [[ORBMenuScene alloc] initWithSize:self.size];
+                  //[self.view presentScene:menu transition:[SKTransition doorsCloseHorizontalWithDuration:0.5]];
+
+                                                      ]]];
+            
+        } //end if (player2.didExplosion)
     }
 
 }
@@ -322,7 +371,7 @@
     //play a sound
     //[self runAction: [SKAction playSoundFileNamed:@"tileclick.mp3" waitForCompletion:NO]];
         
-}else{
+}else{  //we crashed!
     if (!player1.didExplosion) {
         NSString *burstPath =
         [[NSBundle mainBundle]
@@ -357,7 +406,7 @@
 
         ]]];
 
-    } //end if (player1.crashed)
+    } //end if (player1.didExplosion)
     
 }  //end if (!crashed)
 
