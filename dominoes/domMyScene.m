@@ -61,7 +61,7 @@
     
 //boolean 2D array, representing our playing grid
 //each value is true if there is a domino placed there
-    BOOL grid [rows][cols];
+    BOOL grid [cols][rows];
     float gridWidth;
     float gridHeight;
 
@@ -122,7 +122,13 @@
 //set the size of the grid and dominoes
     gridSize = CGSizeMake(gridWidth/cols/scaleX, gridHeight/rows/scaleY);
     dominoSize = CGSizeMake((gridWidth/cols)/scaleX*dominoScaleFactorX, (gridHeight/rows)/scaleY*dominoScaleFactorY);
-    
+
+//initialize the grid BOOL
+    for (int i=0; i<(cols); i++) {
+        for (int ii=0; ii < (rows); ii++) {
+            grid[i][ii]=false;
+        }
+    }
 }
 -(void) initializeGame{
 
@@ -160,37 +166,37 @@
 
     switch (player1.curDirection) {
         case left:
-            if (player1.curX > 0) {
+            if (player1.curX > 0 && grid[player1.curX-1][player1.curY]==false) {
                 player1.curX --;
             }else{
                 //NSLog(@"CRASH!!!");
                 crashed = true;
             }
-            break;
+        break;
         case right:
-            if (player1.curX < cols){
+            if (player1.curX < cols && grid[player1.curX+1][player1.curY]==false){
                 player1.curX ++;
             }else{
                 //NSLog(@"CRASH!!!");
                 crashed = true;
             }
-            break;
+        break;
         case up:
-            if (player1.curY < rows){
+            if (player1.curY < rows && grid[player1.curX][player1.curY+1]==false){
                 player1.curY ++;
             }else{
                 //NSLog(@"CRASH!!!");
                 crashed = true;
             }
-            break;
+        break;
         case down:
-            if (player1.curY > 0){
+            if (player1.curY > 0 && grid[player1.curX][player1.curY-1]==false){
                 player1.curY --;
             }else{
                 //NSLog(@"CRASH!!!");
                 crashed = true;
             }
-            break;
+        break;
         default:
             break;
     }
@@ -215,6 +221,9 @@ if (!crashed) {
     player1.didExplosion = false;
 
     [playerDominos addObject:domino];
+
+    grid[player1.curX][player1.curY]=true;
+
 }else{
     if (!player1.didExplosion) {
         NSString *burstPath =
@@ -229,6 +238,8 @@ if (!crashed) {
 
         [self addChild:explosion];
         player1.didExplosion = true;
+
+        crashed = false;
 
         [explosion runAction:[SKAction sequence:@[
                 //[SKAction playSoundFileNamed:@"Explosion.wav" waitForCompletion:NO],
