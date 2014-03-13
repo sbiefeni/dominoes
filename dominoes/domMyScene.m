@@ -96,6 +96,7 @@
         /* Setup your scene here */
 
         arenaSize = size;
+        gameSpeed = .40;
         
         [self setUpBackGround];
         
@@ -146,7 +147,7 @@
     player2.curDirection = down;
 
 //set the speed interval between moves (time for both player and computer to complete one move)
-    gameSpeed = .20;
+    gameSpeed = .40;
     
 //set initial player1 direction - ***HACK? - NSUserDefaults lets us easily communicate variables between classes.
     NSUserDefaults *standardUserDefaults = [NSUserDefaults standardUserDefaults];
@@ -318,11 +319,14 @@
         //add to the grid... for domino colision detection
         grid[player1.curX][player1.curY]=true;
 
-    }else{
-        if (!player1.didExplosion) {
-            NSString *burstPath =
-            [[NSBundle mainBundle]
-             pathForResource:@"explosion" ofType:@"sks"];
+    //play a sound
+    [self runAction: [SKAction playSoundFileNamed:@"tileclick.mp3" waitForCompletion:NO]];
+        
+}else{
+    if (!player1.didExplosion) {
+        NSString *burstPath =
+        [[NSBundle mainBundle]
+        pathForResource:@"explosion" ofType:@"sks"];
 
             SKEmitterNode *explosion =
             [NSKeyedUnarchiver unarchiveObjectWithFile:burstPath];
@@ -335,27 +339,28 @@
 
             crashed = false;
 
-            [explosion runAction:[SKAction sequence:@[
-                                                      //[SKAction playSoundFileNamed:@"Explosion.wav" waitForCompletion:NO],
-                                                      //[SKAction waitForDuration:0.4]
-                                                      //[SKAction runBlock:^{
-                                                      // TODO: Remove these more nicely
-                                                      //[killingEnemy removeFromParent];
-                                                      //[_player removeFromParent];
-                                                      //],
-                                                      [SKAction waitForDuration:0.35],
-                                                      [SKAction runBlock:^{ explosion.particleBirthRate = 0;} ],
-                                                      [SKAction waitForDuration:1.2],
-                                                      [SKAction runBlock:^{ [explosion removeFromParent]; } ]
-                                                      //[SKAction runBlock:^{
-                                                      //ORBMenuScene *menu = [[ORBMenuScene alloc] initWithSize:self.size];
-                                                      //[self.view presentScene:menu transition:[SKTransition doorsCloseHorizontalWithDuration:0.5]];
-                                                      
-                                                      ]]];
-            
-        } //end if (player1.crashed)
-        
-    }  //end if (!crashed)
+        [explosion runAction:[SKAction sequence:@[
+                [SKAction playSoundFileNamed:@"explosion.wav" waitForCompletion:NO],
+                //[SKAction waitForDuration:0.4]
+                //[SKAction runBlock:^{
+                // TODO: Remove these more nicely
+                //[killingEnemy removeFromParent];
+                //[_player removeFromParent];
+                //],
+                [SKAction waitForDuration:0.35],
+                [SKAction runBlock:^{ explosion.particleBirthRate = 0;} ],
+                [SKAction waitForDuration:1.2],
+                [SKAction runBlock:^{ [explosion removeFromParent]; } ]
+                //[SKAction runBlock:^{
+                        //ORBMenuScene *menu = [[ORBMenuScene alloc] initWithSize:self.size];
+                          //[self.view presentScene:menu transition:[SKTransition doorsCloseHorizontalWithDuration:0.5]];
+
+        ]]];
+
+    } //end if (player1.crashed)
+    
+}  //end if (!crashed)
+
 }
 
 -(void) updatePlayerDirection:(swipeDirection)direction{
