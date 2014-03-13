@@ -320,7 +320,7 @@
         grid[player1.curX][player1.curY]=true;
 
     //play a sound
-    [self runAction: [SKAction playSoundFileNamed:@"tileclick.mp3" waitForCompletion:NO]];
+    //[self runAction: [SKAction playSoundFileNamed:@"tileclick.mp3" waitForCompletion:NO]];
         
 }else{
     if (!player1.didExplosion) {
@@ -340,7 +340,7 @@
             crashed = false;
 
         [explosion runAction:[SKAction sequence:@[
-                [SKAction playSoundFileNamed:@"explosion.wav" waitForCompletion:NO],
+                //[SKAction playSoundFileNamed:@"explosion.wav" waitForCompletion:NO],
                 //[SKAction waitForDuration:0.4]
                 //[SKAction runBlock:^{
                 // TODO: Remove these more nicely
