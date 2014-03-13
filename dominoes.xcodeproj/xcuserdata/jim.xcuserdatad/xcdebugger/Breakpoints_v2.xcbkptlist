@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "dominoes/domMyScene.m"
-            timestampString = "416379171.478911"
+            timestampString = "416379942.933022"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "416"
-            endingLineNumber = "416"
+            startingLineNumber = "428"
+            endingLineNumber = "428"
             landmarkName = "-touchesBegan:withEvent:"
             landmarkType = "5">
          </BreakpointContent>
@@ -26,11 +26,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "dominoes/domMyScene.m"
-            timestampString = "416379171.478911"
+            timestampString = "416379942.933022"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "162"
-            endingLineNumber = "162"
+            startingLineNumber = "172"
+            endingLineNumber = "172"
             landmarkName = "-gameRunner"
             landmarkType = "5">
          </BreakpointContent>
@@ -42,12 +42,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "dominoes/domMyScene.m"
-            timestampString = "416378685.459122"
+            timestampString = "416381702.980372"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "163"
-            endingLineNumber = "163"
-            landmarkName = "-gameRunner"
+            startingLineNumber = "181"
+            endingLineNumber = "181"
+            landmarkName = "-handleComputerMove"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

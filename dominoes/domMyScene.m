@@ -11,7 +11,7 @@
 #import "domino.h"
 
 //using 0 and 1 instead of BOOL so I can use these in calculations
-#define ceilingOn   0
+#define ceilingOn   1
 #define floorOn     0
 
 //define the min and max extents of the domino grid area
@@ -163,13 +163,14 @@
 //********* Game Runner - is called on interval time 'gameSpeed' from the repeat action above..
 -(void) gameRunner {
 
+//player move
     [self handlePlayerMove];
 
-    //[self handleComputerMove];
-    [self runAction:[SKAction sequence:@[
-        [SKAction waitForDuration:gameSpeed/2],
-        [SKAction performSelector:@selector(handleComputerMove) onTarget:self],
-    ]]];
+//computer move, 1/2 of gameSpeed interval wait time to run it
+//    [self runAction:[SKAction sequence:@[
+//        [SKAction waitForDuration:gameSpeed/2],
+//        [SKAction performSelector:@selector(handleComputerMove) onTarget:self],
+//    ]]];
 }
 
 -(void) handleComputerMove {
@@ -177,7 +178,67 @@
     SKSpriteNode* domino = [SKSpriteNode new];
     BOOL crashed = false;
 
+    BOOL ComputerBool=false;
 
+    //Computer direction should already be set.. default:down
+
+    switch (player2.curDirection) {
+        case left:
+            if (player2.curX > 0 && grid[player2.curX-1][player2.curY]==false) {
+                player2.curX --;
+            }else{
+                //NSLog(@"CRASH!!!");
+                crashed = true;
+            }
+            break;
+        case right:
+            if (player2.curX < cols && grid[player2.curX+1][player2.curY]==false){
+                player2.curX ++;
+            }else{
+                //NSLog(@"CRASH!!!");
+                crashed = true;
+            }
+            break;
+        case up:
+            if (player2.curY < rows && grid[player2.curX][player2.curY+1]==false){
+                player2.curY ++;
+            }else{
+                //NSLog(@"CRASH!!!");
+                crashed = true;
+            }
+            break;
+        case down:
+            if (player2.curY > 0 && grid[player2.curX][player2.curY-1]==false){
+                player2.curY --;
+            }else{
+                //NSLog(@"CRASH!!!");
+                crashed = true;
+            }
+            break;
+        default:
+            break;
+    }
+
+    if (!crashed) {
+        //draw computer domino
+        if(player2.curDirection == up || player2.curDirection==down)
+        {
+            domino = [SKSpriteNode spriteNodeWithImageNamed:@"dominoH.png"];
+        }else{
+            domino = [SKSpriteNode spriteNodeWithImageNamed:@"dominoV.png"];
+        }
+
+        domino.size = dominoSize;
+        domino.zPosition = dominoZPos;
+
+        //[objectWithOurMethod methodName:int1 withArg2:int2];
+        domino.position = [self calcDominoPosition:player2.curX withArg2:player2.curY];
+
+
+
+        [self addChild:domino];
+
+    }
 
 }
 
