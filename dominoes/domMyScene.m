@@ -139,12 +139,12 @@
     computerDominos=[NSMutableArray new];
     
 //set the start position and direction of players
-    player1.curX = cols/2 - 2;
-    player1.curY = rows/2;
+    player1.curX = cols/2 - 1;
+    player1.curY = rows/2 -1;
     player1.curDirection = up;
 
-    player2.curX = cols/2 + 2;
-    player2.curY = rows/2;
+    player2.curX = cols/2 +1;
+    player2.curY = rows/2 +1;
     player2.curDirection = down;
 
 //set the speed interval between moves (time for both player and computer to complete one move)
@@ -179,8 +179,6 @@
 
     SKSpriteNode* domino = [SKSpriteNode new];
     BOOL crashed = false;
-
-    BOOL ComputerBool=false;
 
     //Computer direction should already be set.. default:down
 
@@ -250,6 +248,11 @@
 
         //add to the grid... for domino colision detection
         grid[player2.curX][player2.curY]=true;
+
+        BOOL ComputerBrainNeededHere;
+        //add logic to test the next move, and change direction if
+        //that move is no good. Also should make some random function to
+        //change direction periodically for no reason
 
         //play a sound
         //[self runAction: [SKAction playSoundFileNamed:@"tileclick.mp3" waitForCompletion:NO]];
@@ -407,7 +410,7 @@
                 ]]];
 AudioServicesPlaySystemSound (kSystemSoundID_Vibrate);
 
-    } //end if (player1.didExplosion)
+    } //end if (player1.crashed)
     
 }  //end if (!crashed)
 
