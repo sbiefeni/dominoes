@@ -77,6 +77,7 @@
     NSMutableArray* computerDominos;
     
     player* player1;
+    player* player2;
 
 // set game speed
     float gameSpeed;
@@ -86,12 +87,9 @@
 
 
 }
-
-
 @end
 
 @implementation domMyScene
-
 
 -(id)initWithSize:(CGSize)size {
     if (self = [super initWithSize:size]) {
@@ -130,16 +128,26 @@
         }
     }
 }
+
 -(void) initializeGame{
 
-    player1 = [[player alloc]init];
-    playerDominos=[[NSMutableArray alloc] init];
-    computerDominos=[[NSMutableArray alloc] init];
+    player1 = [player new];
+    player2 = [player new];
+
+    playerDominos=[NSMutableArray new ];
+    computerDominos=[NSMutableArray new];
     
-//set the start position and direction of player
+//set the start position and direction of players
     player1.curX = cols/2 - 2;
     player1.curY = rows/2;
     player1.curDirection = up;
+
+    player2.curX = cols/2 + 2;
+    player2.curY = rows/2;
+    player2.curDirection = down;
+
+//set the speed interval between moves (time for both player and computer to complete one move)
+    gameSpeed = .20;
     
 //set initial player1 direction - ***HACK? - NSUserDefaults lets us easily communicate variables between classes.
     NSUserDefaults *standardUserDefaults = [NSUserDefaults standardUserDefaults];
@@ -152,8 +160,31 @@
     [self runAction:[SKAction repeatActionForever:[SKAction sequence:@[[SKAction performSelector:@selector(gameRunner) onTarget:self],[SKAction waitForDuration:gameSpeed]]]]];
 
 }
+
+//********* Game Runner - is called on interval time 'gameSpeed' from the repeat action above..
 -(void) gameRunner {
-    SKSpriteNode* domino =[[SKSpriteNode alloc]init];
+
+    [self handlePlayerMove];
+
+    //[self handleComputerMove];
+    [self runAction:[SKAction sequence:@[
+        [SKAction waitForDuration:gameSpeed/2],
+        [SKAction performSelector:@selector(handleComputerMove) onTarget:self],
+    ]]];
+}
+
+-(void) handleComputerMove {
+
+    SKSpriteNode* domino = [SKSpriteNode new];
+    BOOL crashed = false;
+
+
+
+}
+
+-(void) handlePlayerMove{
+
+    SKSpriteNode* domino =[SKSpriteNode new];
     BOOL crashed = false;
 
     //get player direction
@@ -172,7 +203,7 @@
                 //NSLog(@"CRASH!!!");
                 crashed = true;
             }
-        break;
+            break;
         case right:
             if (player1.curX < cols && grid[player1.curX+1][player1.curY]==false){
                 player1.curX ++;
@@ -180,7 +211,7 @@
                 //NSLog(@"CRASH!!!");
                 crashed = true;
             }
-        break;
+            break;
         case up:
             if (player1.curY < rows && grid[player1.curX][player1.curY+1]==false){
                 player1.curY ++;
@@ -188,7 +219,7 @@
                 //NSLog(@"CRASH!!!");
                 crashed = true;
             }
-        break;
+            break;
         case down:
             if (player1.curY > 0 && grid[player1.curX][player1.curY-1]==false){
                 player1.curY --;
@@ -196,36 +227,27 @@
                 //NSLog(@"CRASH!!!");
                 crashed = true;
             }
-        break;
+            break;
         default:
             break;
     }
 
-if (!crashed) {
-//draw a domino
-    if (player1.curDirection == up || player1.curDirection == down) {
-        domino = [SKSpriteNode spriteNodeWithImageNamed:@"dominoH.png"];
-    }else {
-        domino = [SKSpriteNode spriteNodeWithImageNamed:@"dominoV.png"];
-    }
+    if (!crashed) {
+        //draw a domino
+        if (player1.curDirection == up || player1.curDirection == down) {
+            domino = [SKSpriteNode spriteNodeWithImageNamed:@"dominoH.png"];
+        }else {
+            domino = [SKSpriteNode spriteNodeWithImageNamed:@"dominoV.png"];
+        }
 
-    domino.size = dominoSize;
-    domino.zPosition = dominoZPos;
+        domino.size = dominoSize;
+        domino.zPosition = dominoZPos;
 
-    //[objectWithOurMethod methodName:int1 withArg2:int2];
-    domino.position = [self calcDominoPosition:player1.curX withArg2:player1.curY];
+        //[objectWithOurMethod methodName:int1 withArg2:int2];
+        domino.position = [self calcDominoPosition:player1.curX withArg2:player1.curY];
 
 
-    [self addChild:domino];
-
-//reset explosion so it can happen again..
-    player1.didExplosion = false;
-
-//add to the array so we can track back later
-    [playerDominos addObject:domino];
-
-//add to the grid... for domino colision detection
-    grid[player1.curX][player1.curY]=true;
+        [self addChild:domino];
 
     //play a sound
     //[SKAction playSoundFileNamed:@"/Users/Mauro/Downloads/misc119.mp3" waitForCompletion:false];
@@ -238,16 +260,20 @@ if (!crashed) {
         [[NSBundle mainBundle]
         pathForResource:@"explosion" ofType:@"sks"];
 
-        SKEmitterNode *explosion =
-        [NSKeyedUnarchiver unarchiveObjectWithFile:burstPath];
+        //add to the array so we can track back later
+        [playerDominos addObject:domino];
 
-        explosion.position = [self calcDominoPosition:player1.curX withArg2:player1.curY];
-        explosion.zPosition = 10;
+        //add to the grid... for domino colision detection
+        grid[player1.curX][player1.curY]=true;
 
-        [self addChild:explosion];
-        player1.didExplosion = true;
+    }else{
+        if (!player1.didExplosion) {
+            NSString *burstPath =
+            [[NSBundle mainBundle]
+             pathForResource:@"explosion" ofType:@"sks"];
 
-        crashed = false;
+            SKEmitterNode *explosion =
+            [NSKeyedUnarchiver unarchiveObjectWithFile:burstPath];
 
         [explosion runAction:[SKAction sequence:@[
                 [SKAction playSoundFileNamed:@"explosion.wav" waitForCompletion:NO],
@@ -265,20 +291,42 @@ if (!crashed) {
                         //ORBMenuScene *menu = [[ORBMenuScene alloc] initWithSize:self.size];
                           //[self.view presentScene:menu transition:[SKTransition doorsCloseHorizontalWithDuration:0.5]];
 
-        ]]];
+            [self addChild:explosion];
+            player1.didExplosion = true;
 
     } //end if (player1.crashed)
     //[self runAction: [SKAction playSoundFileNamed:@"explosion.mp3" waitForCompletion:NO]];
 }  //end if (!crashed)
 
+            [explosion runAction:[SKAction sequence:@[
+                                                      //[SKAction playSoundFileNamed:@"Explosion.wav" waitForCompletion:NO],
+                                                      //[SKAction waitForDuration:0.4]
+                                                      //[SKAction runBlock:^{
+                                                      // TODO: Remove these more nicely
+                                                      //[killingEnemy removeFromParent];
+                                                      //[_player removeFromParent];
+                                                      //],
+                                                      [SKAction waitForDuration:0.35],
+                                                      [SKAction runBlock:^{ explosion.particleBirthRate = 0;} ],
+                                                      [SKAction waitForDuration:1.2],
+                                                      [SKAction runBlock:^{ [explosion removeFromParent]; } ]
+                                                      //[SKAction runBlock:^{
+                                                      //ORBMenuScene *menu = [[ORBMenuScene alloc] initWithSize:self.size];
+                                                      //[self.view presentScene:menu transition:[SKTransition doorsCloseHorizontalWithDuration:0.5]];
+                                                      
+                                                      ]]];
+            
+        } //end if (player1.crashed)
+        
+    }  //end if (!crashed)
 }
+
 -(void) updatePlayerDirection:(swipeDirection)direction{
 
     player1.curDirection = direction;
 
 }
 
-//- (int)methodName:(int)arg1 withArg2:(int)arg2
 - (CGPoint) calcDominoPosition:(int)x withArg2:(int) y{
     
     int xPos;
@@ -296,29 +344,6 @@ if (!crashed) {
     
     return CGPointMake(xPos, yPos);
 }
-
-
-//-(void) setUpDominoGrid: (CGSize)size{
-//    dominoH  = [SKSpriteNode spriteNodeWithImageNamed:@"dominoH.png"];
-//    dominoV  = [SKSpriteNode spriteNodeWithImageNamed:@"dominoV.png"];
-//    
-//    
-//    //grab the unscaled image, and resize using the scale factors scaleX and scaleY
-//    scaledSize = [self getScaledSizeForNode:dominoH];
-//    dominoH.size= scaledSize;
-//    
-//    scaledSize = [self getScaledSizeForNode:dominoV];
-//    dominoV.size = scaledSize;
-//    
-//    dominoV.position = CGPointMake(size.width /2 ,size.height/2);
-//    dominoH.position = CGPointMake(size.width /1.735 ,size.height/2 );
-//    dominoV.zPosition = dominoZPos;
-//    dominoH.zPosition = dominoZPos;
-//    
-//    [self addChild:dominoH];
-//    [self addChild:dominoV];
-//    
-//}
 
 -(void) setUpBackGround{
 
@@ -402,6 +427,7 @@ if (!crashed) {
     [self addChild:rightDoor];
     
 }
+
 -(CGSize) getScaledSizeForNode:(SKSpriteNode*)node{
     return CGSizeMake(node.size.width / scaleX, node.size.height / scaleY );
 }
@@ -426,25 +452,6 @@ if (!crashed) {
 //    location.y = location.y * scaleY;
 //    NSLog(@"x=%.2f y=%.2f", location.x, location.y);
 }
-
-
-//-(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
-    /* Called when a touch begins */
-    
-//    for (UITouch *touch in touches) {
-//        CGPoint location = [touch locationInNode:self];
-//        
-//        SKSpriteNode *sprite = [SKSpriteNode spriteNodeWithImageNamed:@"Spaceship"];
-//        
-//        sprite.position = location;
-//        
-//        SKAction *action = [SKAction rotateByAngle:M_PI duration:1];
-//        
-//        [sprite runAction:[SKAction repeatActionForever:action]];
-//        
-//        [self addChild:sprite];
-//    }
-//}
 
 -(void)update:(CFTimeInterval)currentTime {
     /* Called before each frame is rendered */
