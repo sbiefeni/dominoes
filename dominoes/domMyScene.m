@@ -13,7 +13,7 @@
 
 //using 0 and 1 instead of BOOL so I can use these in calculations
 #define ceilingOn   0
-#define floorOn     1
+#define floorOn     0
 
 //define the min and max extents of the domino grid area
 #define minX        160
@@ -26,7 +26,7 @@
 #define dominoZPos  6
 
 //define rows and cols
-#define rows        24
+#define rows        28
 #define cols        12
 
 //scale up the domino size relative to the grid
@@ -97,7 +97,6 @@
         /* Setup your scene here */
 
         arenaSize = size;
-        gameSpeed = .40;
         
         [self setUpBackGround];
         
@@ -148,7 +147,7 @@
     player2.curDirection = down;
 
 //set the speed interval between moves (time for both player and computer to complete one move)
-    gameSpeed = .40;
+    gameSpeed = .1;
     
 //set initial player1 direction - ***HACK? - NSUserDefaults lets us easily communicate variables between classes.
     NSUserDefaults *standardUserDefaults = [NSUserDefaults standardUserDefaults];
@@ -235,7 +234,7 @@
         domino.position = [self calcDominoPosition:player2.curX withArg2:player2.curY];
 
         domino.color = [SKColor redColor];
-        domino.colorBlendFactor = .5;
+        domino.colorBlendFactor = .6;
 
 
         [self addChild:domino];
@@ -253,6 +252,7 @@
         //add logic to test the next move, and change direction if
         //that move is no good. Also should make some random function to
         //change direction periodically for no reason
+        [self checkNextComputerMove];
 
         //play a sound
         //[self runAction: [SKAction playSoundFileNamed:@"tileclick.mp3" waitForCompletion:NO]];
@@ -293,6 +293,72 @@
             
         } //end if (player2.didExplosion)
     }
+
+}
+
+-(void) checkNextComputerMove{
+
+    NSMutableArray* directionChoices = [NSMutableArray new];
+    int X = player2.curX;
+    int Y = player2.curY;
+
+//pre generate random number 0 or 1 - all direction changes will have 2 possible choices
+    int rnd = arc4random() % 2;
+
+//if any of these conditions are true.. player2 is about to crash..
+    switch (player2.curDirection) {
+        case left:
+            if (X == 0 || grid[X-1][Y]==true) {
+                if (grid[X][Y-1] == false && Y > 0) {
+                    [directionChoices addObject:[NSNumber numberWithInt:down]];
+                }
+                if (grid[X][Y+1] == false && Y < rows) {
+                    [directionChoices addObject:[NSNumber numberWithInt:up]];
+                }
+            }
+            break;
+        case right:
+            if (X == cols || grid[X+1][Y]==true) {
+                if (grid[X][Y-1] == false && Y > 0) {
+                    [directionChoices addObject:[NSNumber numberWithInt:down]];
+                }
+                if (grid[X][Y+1] == false && Y < rows) {
+                    [directionChoices addObject:[NSNumber numberWithInt:up]];
+                }
+            }
+            break;
+        case up:
+            if (Y == rows || grid[X][Y+1]==true) {
+                if (grid[X-1][Y] == false && X > 0) {
+                    [directionChoices addObject:[NSNumber numberWithInt:left]];
+                }
+                if (grid[X+1][Y] == false && X < cols) {
+                    [directionChoices addObject:[NSNumber numberWithInt:right]];
+                }
+            }
+            break;
+        case down:
+            if (Y == 0 || grid[X][Y-1]==true) {
+                if (grid[X-1][Y] == false && X > 0) {
+                    [directionChoices addObject:[NSNumber numberWithInt:left]];
+                }
+                if (grid[X+1][Y] == false && X < cols) {
+                    [directionChoices addObject:[NSNumber numberWithInt:right]];
+                }
+            }
+
+            break;
+        default:
+            break;
+    }
+
+    //check how many choices we have, and change direction if we can
+    if ([directionChoices count] ==2) {
+        player2.curDirection = [[directionChoices objectAtIndex:rnd] intValue];
+    }else if([directionChoices count] == 1){
+        player2.curDirection = [[directionChoices objectAtIndex:0]intValue];
+    }
+
 
 }
 
@@ -359,6 +425,9 @@
 
         //[objectWithOurMethod methodName:int1 withArg2:int2];
         domino.position = [self calcDominoPosition:player1.curX withArg2:player1.curY];
+
+        domino.color = [SKColor greenColor];
+        domino.colorBlendFactor = .4;
 
 
         [self addChild:domino];
