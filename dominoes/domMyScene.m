@@ -218,10 +218,13 @@ if (!crashed) {
 
     [self addChild:domino];
 
+//reset explosion so it can happen again..
     player1.didExplosion = false;
 
+//add to the array so we can track back later
     [playerDominos addObject:domino];
 
+//add to the grid... for domino colision detection
     grid[player1.curX][player1.curY]=true;
 
 }else{
