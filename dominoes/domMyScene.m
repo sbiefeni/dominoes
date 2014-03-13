@@ -61,7 +61,7 @@
     
 //boolean 2D array, representing our playing grid
 //each value is true if there is a domino placed there
-    BOOL grid [cols][rows];
+    BOOL grid [cols+1][rows+1];
     float gridWidth;
     float gridHeight;
 
@@ -124,8 +124,8 @@
     dominoSize = CGSizeMake((gridWidth/cols)/scaleX*dominoScaleFactorX, (gridHeight/rows)/scaleY*dominoScaleFactorY);
 
 //initialize the grid BOOL
-    for (int i=0; i<(cols); i++) {
-        for (int ii=0; ii < (rows); ii++) {
+    for (int i=0; i<(cols+1); i++) {
+        for (int ii=0; ii < (rows+1); ii++) {
             grid[i][ii]=false;
         }
     }
