@@ -147,7 +147,7 @@
     player2.curDirection = down;
 
 //set the speed interval between moves (time for both player and computer to complete one move)
-    gameSpeed = .20;
+    gameSpeed = .40;
     
 //set initial player1 direction - ***HACK? - NSUserDefaults lets us easily communicate variables between classes.
     NSUserDefaults *standardUserDefaults = [NSUserDefaults standardUserDefaults];
@@ -260,9 +260,6 @@
 
     //play a sound
     [self runAction: [SKAction playSoundFileNamed:@"tileclick.mp3" waitForCompletion:NO]];
-    
-    //increment game speed
-    gameSpeed+=.005;
         
 }else{
     if (!player1.didExplosion) {
