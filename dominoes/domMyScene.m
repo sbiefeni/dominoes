@@ -253,18 +253,15 @@ if (!crashed) {
                 //[_player removeFromParent];
                 //],
                 [SKAction waitForDuration:0.35],
-                [SKAction runBlock:^{
-                    explosion.particleBirthRate = 0;
-                }],
+                [SKAction runBlock:^{ explosion.particleBirthRate = 0;} ],
                 [SKAction waitForDuration:1.2],
-                [SKAction runBlock:^{
-                    [explosion removeFromParent];
-                }]
+                [SKAction runBlock:^{ [explosion removeFromParent]; } ]
                 //[SKAction runBlock:^{
                         //ORBMenuScene *menu = [[ORBMenuScene alloc] initWithSize:self.size];
                           //[self.view presentScene:menu transition:[SKTransition doorsCloseHorizontalWithDuration:0.5]];
 
         ]]];
+
     } //end if (player1.crashed)
     
 }  //end if (!crashed)
