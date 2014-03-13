@@ -45,6 +45,10 @@
     [skView presentScene:scene];
 }
 
+//- (void)keyDown:(nse *)theEvent {
+//    [self interpretKeyEvents:[NSArray arrayWithObject:theEvent]];
+//}
+
 -(void) swipeRecognized: (UISwipeGestureRecognizer*) swipe{
 
     int tmpDirection=0;
