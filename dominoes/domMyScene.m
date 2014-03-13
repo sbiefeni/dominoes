@@ -9,6 +9,7 @@
 #import "domMyScene.h"
 #import "player.h"
 #import "domino.h"
+#import <AudioToolbox/AudioServices.h>
 
 //using 0 and 1 instead of BOOL so I can use these in calculations
 #define ceilingOn   0
@@ -112,7 +113,7 @@
 }
 
 -(void) setUpDominoGrid{
-    
+
 //set the width and height of the grid
     gridWidth = maxX - minX;
     gridHeight = maxY - minY;
@@ -257,7 +258,7 @@
 
         //add to the grid... for domino colision detection
         grid[player1.curX][player1.curY]=true;
-
+        
     //play a sound
     [self runAction: [SKAction playSoundFileNamed:@"tileclick.mp3" waitForCompletion:NO]];
         
@@ -293,8 +294,8 @@
                 //[SKAction runBlock:^{
                         //ORBMenuScene *menu = [[ORBMenuScene alloc] initWithSize:self.size];
                           //[self.view presentScene:menu transition:[SKTransition doorsCloseHorizontalWithDuration:0.5]];
-
-        ]]];
+                ]]];
+AudioServicesPlaySystemSound (kSystemSoundID_Vibrate);
 
     } //end if (player1.crashed)
     
