@@ -7,12 +7,15 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <SpriteKit/SpriteKit.h>
 
-@interface domino : NSObject
+@interface domino : SKSpriteNode
 
 //store the x and y which correspond to grid
 @property int X;
 @property int y;
+@property int direction;
+
 
 @property BOOL player;
 

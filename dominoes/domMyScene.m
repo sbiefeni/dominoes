@@ -26,12 +26,12 @@
 #define dominoZPos  6
 
 //define rows and cols
-#define rows        28
-#define cols        12
+#define rows        26
+#define cols        14
 
 //scale up the domino size relative to the grid
 #define dominoScaleFactorX 1.15   // - 1.25
-#define dominoScaleFactorY 1.35    //
+#define dominoScaleFactorY 1.1    //
 
 @interface domMyScene (){
     
@@ -78,7 +78,7 @@
     NSMutableArray* computerDominos;
     
     player* player1;
-    player* player2;
+    player* computer;
 
 // set game speed
     float gameSpeed;
@@ -132,7 +132,7 @@
 -(void) initializeGame{
 
     player1 = [player new];
-    player2 = [player new];
+    computer = [player new];
 
     playerDominos=[NSMutableArray new ];
     computerDominos=[NSMutableArray new];
@@ -142,12 +142,12 @@
     player1.curY = rows/2 -1;
     player1.curDirection = up;
 
-    player2.curX = cols/2 +1;
-    player2.curY = rows/2 +1;
-    player2.curDirection = down;
+    computer.curX = cols/2 +1;
+    computer.curY = rows/2 +1;
+    computer.curDirection = down;
 
 //set the speed interval between moves (time for both player and computer to complete one move)
-    gameSpeed = .1;
+    gameSpeed = .05;
     
 //set initial player1 direction - ***HACK? - NSUserDefaults lets us easily communicate variables between classes.
     NSUserDefaults *standardUserDefaults = [NSUserDefaults standardUserDefaults];
@@ -181,34 +181,34 @@
 
     //Computer direction should already be set.. default:down
 
-    switch (player2.curDirection) {
+    switch (computer.curDirection) {
         case left:
-            if (player2.curX > 0 && grid[player2.curX-1][player2.curY]==false) {
-                player2.curX --;
+            if (computer.curX > 0 && grid[computer.curX-1][computer.curY]==false) {
+                computer.curX --;
             }else{
                 //NSLog(@"CRASH!!!");
                 crashed = true;
             }
             break;
         case right:
-            if (player2.curX < cols && grid[player2.curX+1][player2.curY]==false){
-                player2.curX ++;
+            if (computer.curX < cols && grid[computer.curX+1][computer.curY]==false){
+                computer.curX ++;
             }else{
                 //NSLog(@"CRASH!!!");
                 crashed = true;
             }
             break;
         case up:
-            if (player2.curY < rows && grid[player2.curX][player2.curY+1]==false){
-                player2.curY ++;
+            if (computer.curY < rows && grid[computer.curX][computer.curY+1]==false){
+                computer.curY ++;
             }else{
                 //NSLog(@"CRASH!!!");
                 crashed = true;
             }
             break;
         case down:
-            if (player2.curY > 0 && grid[player2.curX][player2.curY-1]==false){
-                player2.curY --;
+            if (computer.curY > 0 && grid[computer.curX][computer.curY-1]==false){
+                computer.curY --;
             }else{
                 //NSLog(@"CRASH!!!");
                 crashed = true;
@@ -220,7 +220,7 @@
 
     if (!crashed) {
         //draw computer domino
-        if(player2.curDirection == up || player2.curDirection==down)
+        if(computer.curDirection == up || computer.curDirection==down)
         {
             domino = [SKSpriteNode spriteNodeWithImageNamed:@"dominoH.png"];
         }else{
@@ -231,7 +231,7 @@
         domino.zPosition = dominoZPos;
 
         //[objectWithOurMethod methodName:int1 withArg2:int2];
-        domino.position = [self calcDominoPosition:player2.curX withArg2:player2.curY];
+        domino.position = [self calcDominoPosition:computer.curX withArg2:computer.curY];
 
         domino.color = [SKColor redColor];
         domino.colorBlendFactor = .6;
@@ -240,13 +240,13 @@
         [self addChild:domino];
 
         //reset explosion so it can happen again..
-        player2.didExplosion = false;
+        computer.didExplosion = false;
 
         //add to the array so we can track back later
         [computerDominos addObject:domino];
 
         //add to the grid... for domino colision detection
-        grid[player2.curX][player2.curY]=true;
+        grid[computer.curX][computer.curY]=true;
 
         BOOL ComputerBrainNeededHere;
         //add logic to test the next move, and change direction if
@@ -257,7 +257,7 @@
         //play a sound
         //[self runAction: [SKAction playSoundFileNamed:@"tileclick.mp3" waitForCompletion:NO]];
     }else{
-        if (!player2.didExplosion) {
+        if (!computer.didExplosion) {
             NSString *burstPath =
             [[NSBundle mainBundle]
              pathForResource:@"explosion" ofType:@"sks"];
@@ -265,11 +265,11 @@
             SKEmitterNode *explosion =
             [NSKeyedUnarchiver unarchiveObjectWithFile:burstPath];
 
-            explosion.position = [self calcDominoPosition:player2.curX withArg2:player2.curY];
+            explosion.position = [self calcDominoPosition:computer.curX withArg2:computer.curY];
             explosion.zPosition = 10;
 
             [self addChild:explosion];
-            player2.didExplosion = true;
+            computer.didExplosion = true;
 
             crashed = false;
 
@@ -299,14 +299,14 @@
 -(void) checkNextComputerMove{
 
     NSMutableArray* directionChoices = [NSMutableArray new];
-    int X = player2.curX;
-    int Y = player2.curY;
+    int X = computer.curX;
+    int Y = computer.curY;
 
 //pre generate random number 0 or 1 - all direction changes will have 2 possible choices
     int rnd = arc4random() % 2;
 
 //if any of these conditions are true.. player2 is about to crash..
-    switch (player2.curDirection) {
+    switch (computer.curDirection) {
         case left:
             if (X == 0 || grid[X-1][Y]==true) {
                 if (grid[X][Y-1] == false && Y > 0) {
@@ -354,9 +354,9 @@
 
     //check how many choices we have, and change direction if we can
     if ([directionChoices count] ==2) {
-        player2.curDirection = [[directionChoices objectAtIndex:rnd] intValue];
+        computer.curDirection = [[directionChoices objectAtIndex:rnd] intValue];
     }else if([directionChoices count] == 1){
-        player2.curDirection = [[directionChoices objectAtIndex:0]intValue];
+        computer.curDirection = [[directionChoices objectAtIndex:0]intValue];
     }
 
 
