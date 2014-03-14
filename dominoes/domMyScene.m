@@ -148,7 +148,7 @@
     computer.curDirection = down;
 
 //set the speed interval between moves (time for both player and computer to complete one move)
-    gameSpeed = .25;
+    gameSpeed = .2;
     
 //set initial player1 direction - ***HACK? - NSUserDefaults lets us easily communicate variables between classes.
     NSUserDefaults *standardUserDefaults = [NSUserDefaults standardUserDefaults];
@@ -256,7 +256,7 @@
         [self checkNextComputerMove];
 
         //play a sound
-        //[self runAction: [SKAction playSoundFileNamed:@"tileclick.mp3" waitForCompletion:NO]];
+        [self runAction: [SKAction playSoundFileNamed:@"click.wav" waitForCompletion:NO]];
     }else{
         if (!computer.didExplosion) {
             NSString *burstPath =
@@ -308,7 +308,7 @@
     int Y = computer.curY;
 
 //pre generate random number 0 or 1 - all direction changes will have 2 possible choices
-    BOOL randChange = ( arc4random() % 50) == 25;
+    BOOL randChange = ( arc4random() % 26) == 25;
 
 //if any of these conditions are true.. player2 is about to crash..
     switch (computer.curDirection) {
@@ -456,7 +456,7 @@
         grid[player1.curX][player1.curY]=true;
         
     //play a sound
-    //[self runAction: [SKAction playSoundFileNamed:@"tileclick.mp3" waitForCompletion:NO]];
+    [self runAction: [SKAction playSoundFileNamed:@"click.wav" waitForCompletion:NO]];
         
 }else{  //we crashed!
     if (!player1.didExplosion) {

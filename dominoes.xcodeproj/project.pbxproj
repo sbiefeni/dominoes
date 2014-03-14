@@ -8,11 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		34C0142718D17F01007C37AB /* explosion.wav in Resources */ = {isa = PBXBuildFile; fileRef = 34C0142518D17F01007C37AB /* explosion.wav */; };
-		34C0142818D17F01007C37AB /* tileclick.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 34C0142618D17F01007C37AB /* tileclick.mp3 */; };
 		34C0142A18D183BF007C37AB /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 34C0142918D183BF007C37AB /* AudioToolbox.framework */; };
 		34C0142D18D2A4C8007C37AB /* iAd.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 34C0142C18D2A4C8007C37AB /* iAd.framework */; };
 		380DC21B18D0ED9200545962 /* explosion.sks in Resources */ = {isa = PBXBuildFile; fileRef = 380DC21918D0ED9200545962 /* explosion.sks */; };
 		380DC21C18D0ED9200545962 /* spark.png in Resources */ = {isa = PBXBuildFile; fileRef = 380DC21A18D0ED9200545962 /* spark.png */; };
+		387E6A7418D3B4C900108C2F /* click.wav in Resources */ = {isa = PBXBuildFile; fileRef = 387E6A7318D3B4C900108C2F /* click.wav */; };
 		389B9CF218CF9EF1004960E5 /* dominoH.png in Resources */ = {isa = PBXBuildFile; fileRef = 389B9CF018CF9EF1004960E5 /* dominoH.png */; };
 		389B9CF318CF9EF1004960E5 /* dominoV.png in Resources */ = {isa = PBXBuildFile; fileRef = 389B9CF118CF9EF1004960E5 /* dominoV.png */; };
 		389B9CF618CFCDCF004960E5 /* domino.m in Sources */ = {isa = PBXBuildFile; fileRef = 389B9CF518CFCDCF004960E5 /* domino.m */; };
@@ -53,11 +53,11 @@
 
 /* Begin PBXFileReference section */
 		34C0142518D17F01007C37AB /* explosion.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = explosion.wav; sourceTree = "<group>"; };
-		34C0142618D17F01007C37AB /* tileclick.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = tileclick.mp3; sourceTree = "<group>"; };
 		34C0142918D183BF007C37AB /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		34C0142C18D2A4C8007C37AB /* iAd.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = iAd.framework; path = System/Library/Frameworks/iAd.framework; sourceTree = SDKROOT; };
 		380DC21918D0ED9200545962 /* explosion.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = explosion.sks; sourceTree = "<group>"; };
 		380DC21A18D0ED9200545962 /* spark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = spark.png; sourceTree = "<group>"; };
+		387E6A7318D3B4C900108C2F /* click.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = click.wav; sourceTree = "<group>"; };
 		389B9CF018CF9EF1004960E5 /* dominoH.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = dominoH.png; sourceTree = "<group>"; };
 		389B9CF118CF9EF1004960E5 /* dominoV.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = dominoV.png; sourceTree = "<group>"; };
 		389B9CF418CFCDCF004960E5 /* domino.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = domino.h; sourceTree = "<group>"; };
@@ -213,8 +213,8 @@
 		55CB7E2718CBD180001EFA1C /* dominoes */ = {
 			isa = PBXGroup;
 			children = (
+				387E6A7318D3B4C900108C2F /* click.wav */,
 				34C0142518D17F01007C37AB /* explosion.wav */,
-				34C0142618D17F01007C37AB /* tileclick.mp3 */,
 				380DC21D18D0F02B00545962 /* particles */,
 				389B9CFC18CFD7EF004960E5 /* delegates */,
 				389B9CFD18CFD811004960E5 /* storyboards */,
@@ -358,10 +358,10 @@
 				55DDBD2218CC1DFB0004EA4F /* dominoes-arena.png in Resources */,
 				34C0142718D17F01007C37AB /* explosion.wav in Resources */,
 				389B9CF218CF9EF1004960E5 /* dominoH.png in Resources */,
-				34C0142818D17F01007C37AB /* tileclick.mp3 in Resources */,
 				55CB7E3518CBD181001EFA1C /* Main_iPhone.storyboard in Resources */,
 				380DC21B18D0ED9200545962 /* explosion.sks in Resources */,
 				55CB7E2C18CBD180001EFA1C /* InfoPlist.strings in Resources */,
+				387E6A7418D3B4C900108C2F /* click.wav in Resources */,
 				55DDBD3418CC3A8D0004EA4F /* dominoes-bottomdoor.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -521,6 +521,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				COMPRESS_PNG_FILES = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "dominoes/dominoes-Prefix.pch";
 				INFOPLIST_FILE = "dominoes/dominoes-Info.plist";
@@ -535,6 +536,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				COMPRESS_PNG_FILES = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "dominoes/dominoes-Prefix.pch";
 				INFOPLIST_FILE = "dominoes/dominoes-Info.plist";

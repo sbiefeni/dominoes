@@ -27,8 +27,8 @@
     // Configure the view.
     //SKView * skView = (SKView *)self.view;
     SKView * skView = (SKView*)self.originalContentView;
-    skView.showsFPS = NO;
-    skView.showsNodeCount = NO;
+    skView.showsFPS = YES;
+    skView.showsNodeCount = YES;
     
     //self.removeFromParentViewController;
     
