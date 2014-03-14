@@ -29,7 +29,7 @@
     skView.showsFPS = NO;
     skView.showsNodeCount = NO;
     
-    
+    self.removeFromParentViewController;
     
     // Create and configure the scene.
     SKScene * scene = [domMyScene sceneWithSize:skView.bounds.size];
@@ -53,6 +53,18 @@
     
     // Present the scene.
     [skView presentScene:scene];
+}
+
+//following function called by the iAds if user clicks the ad and ad pops up
+-(void)viewWillDisappear:(BOOL)animated
+{
+    // View is about to be obscured by an advert.
+    //Pause activities if necessary
+}
+
+-(void)viewWillAppear:(BOOL)animated
+{
+    // Advert has been dismissed. Resume paused activities
 }
 
 //- (void)keyDown:(nse *)theEvent {
