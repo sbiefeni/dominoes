@@ -1,6 +1,9 @@
-breakpoints_v2.xcbkptlist
+*.xcbkptlist
+
 *.xcuserstate
 
 *.xcsettings
 
-*.xcuserstate
+project.xcworkspace/
+
+xcuserdata/
