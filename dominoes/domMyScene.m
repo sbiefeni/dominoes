@@ -40,7 +40,7 @@
     SKSpriteNode* rightDoor;
     SKSpriteNode* bottomDoor;
     SKSpriteNode* leftDoor;
-    
+
     
     //dominoes
     SKSpriteNode* dominoH;
@@ -146,7 +146,7 @@
     computer.curDirection = down;
 
 //set the speed interval between moves (time for both player and computer to complete one move)
-    gameSpeed = .025;
+    gameSpeed = .001;
     
 //set initial player1 direction - ***HACK? - NSUserDefaults lets us easily communicate variables between classes.
     NSUserDefaults *standardUserDefaults = [NSUserDefaults standardUserDefaults];
