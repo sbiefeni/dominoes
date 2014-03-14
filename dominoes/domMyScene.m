@@ -13,7 +13,7 @@
 
 //using 0 and 1 instead of BOOL so I can use these in calculations
 #define ceilingOn   0
-#define floorOn     1
+#define floorOn     0
 
 //define the min and max extents of the domino grid area
 #define minX        160
@@ -30,8 +30,8 @@
 #define cols        12
 
 //scale up the domino size relative to the grid
-#define dominoScaleFactorX 1.15   // - 1.25
-#define dominoScaleFactorY 1.1    //
+#define dominoScaleFactorX 1   // - 1.25
+#define dominoScaleFactorY 1    //
 
 @interface domMyScene (){
     
@@ -521,15 +521,15 @@ AudioServicesPlaySystemSound (kSystemSoundID_Vibrate);
     }
     
     if (floorOn){
-        SKSpriteNode* floor = [SKSpriteNode spriteNodeWithColor:[UIColor blueColor] size:CGSizeMake(arenaSize.width, bannerSizeY)];
-        floor.position = CGPointMake(arenaSize.width/2, (bannerSizeY/2));
-        [self addChild:floor];
+//        SKSpriteNode* floor = [SKSpriteNode spriteNodeWithColor:[UIColor blueColor] size:CGSizeMake(arenaSize.width, bannerSizeY)];
+//        floor.position = CGPointMake(arenaSize.width/2, (bannerSizeY/2));
+//        [self addChild:floor];
         bannerCount +=1;
     }
     if (ceilingOn){
-        SKSpriteNode* ceiling = [SKSpriteNode spriteNodeWithColor:[UIColor blueColor] size:CGSizeMake(arenaSize.width, bannerSizeY)];
-        ceiling.position = CGPointMake(arenaSize.width/2, arenaSize.height-(bannerSizeY/2));
-        [self addChild:ceiling];
+//        SKSpriteNode* ceiling = [SKSpriteNode spriteNodeWithColor:[UIColor blueColor] size:CGSizeMake(arenaSize.width, bannerSizeY)];
+//        ceiling.position = CGPointMake(arenaSize.width/2, arenaSize.height-(bannerSizeY/2));
+//        [self addChild:ceiling];
         bannerCount +=1;
     }
     
