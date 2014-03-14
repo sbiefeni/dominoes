@@ -41,7 +41,7 @@
     SKSpriteNode* rightDoor;
     SKSpriteNode* bottomDoor;
     SKSpriteNode* leftDoor;
-    
+
     
     //dominoes
     SKSpriteNode* dominoH;

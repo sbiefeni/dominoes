@@ -16,6 +16,7 @@
 
 @implementation domViewController
 
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -50,7 +51,7 @@
     swipeGesture =[[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(swipeRecognized:)];
     [swipeGesture setDirection:UISwipeGestureRecognizerDirectionDown];
     [self.view addGestureRecognizer:swipeGesture];
-    
+
     // Present the scene.
     [skView presentScene:scene];
 }
@@ -60,6 +61,7 @@
 {
     // View is about to be obscured by an advert.
     //Pause activities if necessary
+    
 }
 
 -(void)viewWillAppear:(BOOL)animated

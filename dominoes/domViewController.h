@@ -10,6 +10,6 @@
 #import <SpriteKit/SpriteKit.h>
 #import <iAd/iAd.h>
 
-@interface domViewController : UIViewController
+@interface domViewController : UIViewController <ADBannerViewDelegate>
 
 @end
