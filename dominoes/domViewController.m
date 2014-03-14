@@ -10,16 +10,25 @@
 #import "domMyScene.h"
 #import "player.h"
 
+@interface domViewController ()
+
+@end
+
 @implementation domViewController
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
+    
+    self.canDisplayBannerAds=YES;
+    
     // Configure the view.
-    SKView * skView = (SKView *)self.view;
-    skView.showsFPS = YES;
-    skView.showsNodeCount = YES;
+    //SKView * skView = (SKView *)self.view;
+    SKView * skView = (SKView*)self.originalContentView;
+    skView.showsFPS = NO;
+    skView.showsNodeCount = NO;
+    
+    
     
     // Create and configure the scene.
     SKScene * scene = [domMyScene sceneWithSize:skView.bounds.size];

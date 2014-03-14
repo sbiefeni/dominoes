@@ -13,7 +13,7 @@
 
 //using 0 and 1 instead of BOOL so I can use these in calculations
 #define ceilingOn   0
-#define floorOn     0
+#define floorOn     1
 
 //define the min and max extents of the domino grid area
 #define minX        160
@@ -31,7 +31,7 @@
 
 //scale up the domino size relative to the grid
 #define dominoScaleFactorX 1.15   // - 1.25
-#define dominoScaleFactorY 1.35    //
+#define dominoScaleFactorY 1.1    //
 
 @interface domMyScene (){
     
@@ -82,10 +82,6 @@
 
 // set game speed
     float gameSpeed;
-    
-    
-    
-
 
 }
 @end
@@ -108,6 +104,9 @@
         
         NSLog(@"Width: %f, Height: %f", size.width, size.height);
     }
+    
+    
+    
     return self;
 }
 
@@ -147,7 +146,7 @@
     player2.curDirection = down;
 
 //set the speed interval between moves (time for both player and computer to complete one move)
-    gameSpeed = .1;
+    gameSpeed = .5;
     
 //set initial player1 direction - ***HACK? - NSUserDefaults lets us easily communicate variables between classes.
     NSUserDefaults *standardUserDefaults = [NSUserDefaults standardUserDefaults];
