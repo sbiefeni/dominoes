@@ -256,7 +256,7 @@
         [self checkNextComputerMove];
 
         //play a sound
-        [self runAction: [SKAction playSoundFileNamed:@"click.wav" waitForCompletion:NO]];
+        //[self runAction: [SKAction playSoundFileNamed:@"click.wav" waitForCompletion:NO]];
     }else{
         if (!computer.didExplosion) {
             NSString *burstPath =
@@ -456,7 +456,7 @@
         grid[player1.curX][player1.curY]=true;
         
     //play a sound
-    [self runAction: [SKAction playSoundFileNamed:@"click.wav" waitForCompletion:NO]];
+    //[self runAction: [SKAction playSoundFileNamed:@"click.wav" waitForCompletion:NO]];
         
 }else{  //we crashed!
     if (!player1.didExplosion) {
