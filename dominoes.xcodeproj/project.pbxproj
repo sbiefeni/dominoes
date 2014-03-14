@@ -13,6 +13,7 @@
 		34C0142D18D2A4C8007C37AB /* iAd.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 34C0142C18D2A4C8007C37AB /* iAd.framework */; };
 		380DC21B18D0ED9200545962 /* explosion.sks in Resources */ = {isa = PBXBuildFile; fileRef = 380DC21918D0ED9200545962 /* explosion.sks */; };
 		380DC21C18D0ED9200545962 /* spark.png in Resources */ = {isa = PBXBuildFile; fileRef = 380DC21A18D0ED9200545962 /* spark.png */; };
+		383F15E518D298BB00437401 /* domFunctions.m in Sources */ = {isa = PBXBuildFile; fileRef = 383F15E418D298BB00437401 /* domFunctions.m */; };
 		389B9CF218CF9EF1004960E5 /* dominoH.png in Resources */ = {isa = PBXBuildFile; fileRef = 389B9CF018CF9EF1004960E5 /* dominoH.png */; };
 		389B9CF318CF9EF1004960E5 /* dominoV.png in Resources */ = {isa = PBXBuildFile; fileRef = 389B9CF118CF9EF1004960E5 /* dominoV.png */; };
 		389B9CF618CFCDCF004960E5 /* domino.m in Sources */ = {isa = PBXBuildFile; fileRef = 389B9CF518CFCDCF004960E5 /* domino.m */; };
@@ -58,6 +59,8 @@
 		34C0142C18D2A4C8007C37AB /* iAd.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = iAd.framework; path = System/Library/Frameworks/iAd.framework; sourceTree = SDKROOT; };
 		380DC21918D0ED9200545962 /* explosion.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = explosion.sks; sourceTree = "<group>"; };
 		380DC21A18D0ED9200545962 /* spark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = spark.png; sourceTree = "<group>"; };
+		383F15E318D298BB00437401 /* domFunctions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = domFunctions.h; sourceTree = "<group>"; };
+		383F15E418D298BB00437401 /* domFunctions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = domFunctions.m; sourceTree = "<group>"; };
 		389B9CF018CF9EF1004960E5 /* dominoH.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = dominoH.png; sourceTree = "<group>"; };
 		389B9CF118CF9EF1004960E5 /* dominoV.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = dominoV.png; sourceTree = "<group>"; };
 		389B9CF418CFCDCF004960E5 /* domino.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = domino.h; sourceTree = "<group>"; };
@@ -137,6 +140,8 @@
 				389B9CF418CFCDCF004960E5 /* domino.h */,
 				389B9CF818CFD449004960E5 /* player.m */,
 				389B9CF718CFD449004960E5 /* player.h */,
+				383F15E318D298BB00437401 /* domFunctions.h */,
+				383F15E418D298BB00437401 /* domFunctions.m */,
 			);
 			name = helpers;
 			sourceTree = "<group>";
@@ -384,6 +389,7 @@
 				389B9CF918CFD449004960E5 /* player.m in Sources */,
 				55CB7E3B18CBD181001EFA1C /* domViewController.m in Sources */,
 				55CB7E2E18CBD180001EFA1C /* main.m in Sources */,
+				383F15E518D298BB00437401 /* domFunctions.m in Sources */,
 				55CB7E3218CBD181001EFA1C /* domAppDelegate.m in Sources */,
 				389B9CF618CFCDCF004960E5 /* domino.m in Sources */,
 				55CB7E3E18CBD181001EFA1C /* domMyScene.m in Sources */,
