@@ -20,7 +20,7 @@
 {
     [super viewDidLoad];
     
-    self.canDisplayBannerAds=NO;
+    self.canDisplayBannerAds=YES;
 
 
     // Configure the view.
@@ -29,7 +29,7 @@
     skView.showsFPS = NO;
     skView.showsNodeCount = NO;
     
-    self.removeFromParentViewController;
+    //self.removeFromParentViewController;
     
     // Create and configure the scene.
     SKScene * scene = [domMyScene sceneWithSize:skView.bounds.size];

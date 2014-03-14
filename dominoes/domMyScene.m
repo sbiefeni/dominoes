@@ -9,6 +9,7 @@
 #import "domMyScene.h"
 #import "player.h"
 #import "domino.h"
+//#import "domVariablesAndFunctions.h"
 #import <AudioToolbox/AudioServices.h>
 
 //using 0 and 1 instead of BOOL so I can use these in calculations
@@ -63,6 +64,7 @@
 //boolean 2D array, representing our playing grid
 //each value is true if there is a domino placed there
     BOOL grid [cols+1][rows+1];
+    BOOL testGrid [cols+1][rows+1];  //to record matches during recursive testing
     float gridWidth;
     float gridHeight;
 
@@ -146,7 +148,7 @@
     computer.curDirection = down;
 
 //set the speed interval between moves (time for both player and computer to complete one move)
-    gameSpeed = .025;
+    gameSpeed = .25;
     
 //set initial player1 direction - ***HACK? - NSUserDefaults lets us easily communicate variables between classes.
     NSUserDefaults *standardUserDefaults = [NSUserDefaults standardUserDefaults];
@@ -306,7 +308,7 @@
     int Y = computer.curY;
 
 //pre generate random number 0 or 1 - all direction changes will have 2 possible choices
-    BOOL randChange = ( arc4random() % 75) == 25;
+    BOOL randChange = ( arc4random() % 50) == 25;
 
 //if any of these conditions are true.. player2 is about to crash..
     switch (computer.curDirection) {
@@ -357,8 +359,16 @@
 
     //check how many choices we have, and change direction if we can
     if ([directionChoices count] ==2) {
-        int rnd = arc4random() % 2;
-        computer.curDirection = [[directionChoices objectAtIndex:rnd] intValue];
+        int C1; int C2;
+        //2 choices.. call a parser to see which is the best choice
+         C1 = [self checkPath:X  originY:Y direction:[[directionChoices objectAtIndex:0]intValue] ];
+         C2 = [self checkPath:X  originY:Y direction:[[directionChoices objectAtIndex:1]intValue]];
+
+        if (C1 > C2) {
+            computer.curDirection = [[directionChoices objectAtIndex:0] intValue];
+        }else{
+            computer.curDirection = [[directionChoices objectAtIndex:1] intValue];
+        }
     }else if([directionChoices count] == 1){
         computer.curDirection = [[directionChoices objectAtIndex:0]intValue];
     }
@@ -489,11 +499,11 @@ AudioServicesPlaySystemSound (kSystemSoundID_Vibrate);
 
 }
 
--(void) updatePlayerDirection:(swipeDirection)direction{
-
-    player1.curDirection = direction;
-
-}
+//-(void) updatePlayerDirection:(swipeDirection)direction{
+//
+//    player1.curDirection = direction;
+//
+//}
 
 - (CGPoint) calcDominoPosition:(int)x withArg2:(int) y{
     
@@ -600,6 +610,78 @@ AudioServicesPlaySystemSound (kSystemSoundID_Vibrate);
     return CGSizeMake(node.size.width / scaleX, node.size.height / scaleY );
 }
 
+
+//to clear the testgrid before calling this function..outside of this method
+//memset(testGrid,false, sizeof(testGrid[0][0]) * rows * cols);
+// countsquares needs to be initialized and zeroed before calling this method
+int countSquares;
+-(void)parse_quad_tree:(bycopy int)X  originY:(bycopy int)Y
+{
+//[self arrayToString:testGrid];
+
+
+    countSquares += 1; //count this square
+
+    testGrid[X][Y] = true;  //mark this grid point as checked
+
+    BOOL n = !grid[X][Y+1] && Y < rows ? true : false;
+    BOOL s = !grid[X][Y-1] && Y > 0 ? true : false;
+    BOOL e = !grid[X-1][Y] && X > 0  ? true : false;
+    BOOL w = !grid[X+1][Y] && X < cols ? true : false;
+
+    if(n  && !testGrid[X][Y+1])
+    {
+        [self parse_quad_tree:X originY:Y+1];
+    }
+    if(s && !testGrid[X][Y-1])
+    {
+        [self parse_quad_tree:X originY:Y-1 ];
+    }
+    if(e && !testGrid[X-1][Y])
+    {
+        [self parse_quad_tree:X-1 originY: Y];
+    }
+    if(w && !testGrid[X+1][Y])
+    {
+        [self parse_quad_tree:X+1 originY:Y];
+    }
+   // [self parse_quad_tree:X originY:Y];
+}
+
+-(int)checkPath:(bycopy int)X  originY:(bycopy int)Y direction:(int)D {
+    switch (D) {
+        case up:
+            Y += 1;
+            break;
+        case down:
+            Y-= 1;
+            break;
+        case left:
+            X-= 1;
+            break;
+        case right:
+            X+= 1;
+            break;
+
+        default:
+            break;
+    }
+    //initialize countSquares, zero the testGrid, and call the parser for X, Y
+    countSquares = 0;
+    //memset(testGrid,0, sizeof(testGrid[0][0]) * rows * cols);
+    //initialize the testGrid BOOL array
+    for (int i=0; i<(cols+1); i++) {
+        for (int ii=0; ii < (rows+1); ii++) {
+            testGrid[i][ii]=false;
+        }
+    }
+
+
+    [self parse_quad_tree:X originY:Y];
+    return countSquares;
+
+}
+
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
 
     //[scene runAction:[SKAction scaleTo:0.5 duration:0]];
@@ -624,6 +706,37 @@ AudioServicesPlaySystemSound (kSystemSoundID_Vibrate);
 -(void)update:(CFTimeInterval)currentTime {
     /* Called before each frame is rendered */
     
+}
+
+- (void)arrayToString:(bool [cols][rows])array
+{
+    NSString *arrayOutputString = [NSString stringWithFormat:@"\n["];
+
+    for (int y=rows;y>=0;y--) {
+        for (int x=0;x<=cols;x++) {
+            if (x<cols) {
+                if (array[x][y]==true) {
+                    arrayOutputString = [NSString stringWithFormat:@"%@%@-",arrayOutputString,@"X"];
+                }
+                else {
+                    arrayOutputString = [NSString stringWithFormat:@"%@%@-",arrayOutputString,@"0"];
+                }
+            }
+            else if (x==cols) {
+                if (array[x][y]==true) {
+                    arrayOutputString = [NSString stringWithFormat:@"%@%@]\n",arrayOutputString,@"X"];
+                }
+                else {
+                    arrayOutputString = [NSString stringWithFormat:@"%@%@]\n",arrayOutputString,@"0"];
+                }
+            }
+        }
+
+        if (y!=rows) {
+            arrayOutputString = [NSString stringWithFormat:@"%@[",arrayOutputString];
+        }
+    }
+    NSLog(@"%@",arrayOutputString);
 }
 
 @end
