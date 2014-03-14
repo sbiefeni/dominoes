@@ -28,8 +28,6 @@
     skView.showsFPS = NO;
     skView.showsNodeCount = NO;
     
-    self.removeFromParentViewController;
-    
     // Create and configure the scene.
     SKScene * scene = [domMyScene sceneWithSize:skView.bounds.size];
     scene.scaleMode = SKSceneScaleModeAspectFill;
