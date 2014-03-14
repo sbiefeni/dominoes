@@ -13,7 +13,7 @@
 
 //using 0 and 1 instead of BOOL so I can use these in calculations
 #define ceilingOn   0
-#define floorOn     0
+#define floorOn     1
 
 //define the min and max extents of the domino grid area
 #define minX        160
@@ -82,10 +82,6 @@
 
 // set game speed
     float gameSpeed;
-    
-    
-    
-
 
 }
 @end
@@ -108,6 +104,9 @@
         
         NSLog(@"Width: %f, Height: %f", size.width, size.height);
     }
+    
+    
+    
     return self;
 }
 
