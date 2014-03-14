@@ -7,7 +7,6 @@
 //
 
 #import "domFunctions.h"
-#import "domMyScene.m"
 
 @implementation domFunctions
 
@@ -39,11 +38,11 @@
 //    return removedNodes;
 //}
 // gets the
--(int)countGrids:(int)gridCount  originX:(int)X  originY:(int)Y  usingGrid:(BOOL[cols][rows+1])grid
-{
-    int countSquares;
-    countSquares = 1; //count the initial square
-
-    return countSquares;
-}
+//-(int)countGrids:(int)gridCount  originX:(int)X  originY:(int)Y  usingGrid:(BOOL[cols][rows+1])grid
+//{
+//    int countSquares;
+//    countSquares = 1; //count the initial square
+//
+//    return countSquares;
+//}
 @end

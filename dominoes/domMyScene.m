@@ -13,7 +13,7 @@
 
 //using 0 and 1 instead of BOOL so I can use these in calculations
 #define ceilingOn   0
-#define floorOn     1
+#define floorOn     0
 
 //define the min and max extents of the domino grid area
 #define minX        160
@@ -30,8 +30,8 @@
 #define cols        14
 
 //scale up the domino size relative to the grid
-#define dominoScaleFactorX 1.15   // - 1.25
-#define dominoScaleFactorY 1.1    //
+#define dominoScaleFactorX 1   // - 1.25
+#define dominoScaleFactorY 1   //
 
 @interface domMyScene (){
     
@@ -146,7 +146,7 @@
     computer.curDirection = down;
 
 //set the speed interval between moves (time for both player and computer to complete one move)
-    gameSpeed = .05;
+    gameSpeed = .025;
     
 //set initial player1 direction - ***HACK? - NSUserDefaults lets us easily communicate variables between classes.
     NSUserDefaults *standardUserDefaults = [NSUserDefaults standardUserDefaults];
@@ -297,17 +297,21 @@
 
 -(void) checkNextComputerMove{
 
+    //checks if the next move will cause the computer to crash
+    //avoid crash if possible
+    //also random/or/intelligent course changes to add personality
+
     NSMutableArray* directionChoices = [NSMutableArray new];
     int X = computer.curX;
     int Y = computer.curY;
 
 //pre generate random number 0 or 1 - all direction changes will have 2 possible choices
-    int rnd = arc4random() % 2;
+    BOOL randChange = ( arc4random() % 75) == 25;
 
 //if any of these conditions are true.. player2 is about to crash..
     switch (computer.curDirection) {
         case left:
-            if (X == 0 || grid[X-1][Y]==true) {
+            if (X == 0 || grid[X-1][Y]==true || randChange) {
                 if (grid[X][Y-1] == false && Y > 0) {
                     [directionChoices addObject:[NSNumber numberWithInt:down]];
                 }
@@ -317,7 +321,7 @@
             }
             break;
         case right:
-            if (X == cols || grid[X+1][Y]==true) {
+            if (X == cols || grid[X+1][Y]==true || randChange) {
                 if (grid[X][Y-1] == false && Y > 0) {
                     [directionChoices addObject:[NSNumber numberWithInt:down]];
                 }
@@ -327,7 +331,7 @@
             }
             break;
         case up:
-            if (Y == rows || grid[X][Y+1]==true) {
+            if (Y == rows || grid[X][Y+1]==true || randChange) {
                 if (grid[X-1][Y] == false && X > 0) {
                     [directionChoices addObject:[NSNumber numberWithInt:left]];
                 }
@@ -337,7 +341,7 @@
             }
             break;
         case down:
-            if (Y == 0 || grid[X][Y-1]==true) {
+            if (Y == 0 || grid[X][Y-1]==true || randChange) {
                 if (grid[X-1][Y] == false && X > 0) {
                     [directionChoices addObject:[NSNumber numberWithInt:left]];
                 }
@@ -353,6 +357,7 @@
 
     //check how many choices we have, and change direction if we can
     if ([directionChoices count] ==2) {
+        int rnd = arc4random() % 2;
         computer.curDirection = [[directionChoices objectAtIndex:rnd] intValue];
     }else if([directionChoices count] == 1){
         computer.curDirection = [[directionChoices objectAtIndex:0]intValue];
@@ -521,18 +526,18 @@ AudioServicesPlaySystemSound (kSystemSoundID_Vibrate);
     }
     
     if (floorOn){
-        SKSpriteNode* floor = [SKSpriteNode spriteNodeWithColor:[UIColor blueColor] size:CGSizeMake(arenaSize.width, bannerSizeY)];
-        floor.position = CGPointMake(arenaSize.width/2, (bannerSizeY/2));
-        [self addChild:floor];
+//        SKSpriteNode* floor = [SKSpriteNode spriteNodeWithColor:[UIColor blueColor] size:CGSizeMake(arenaSize.width, bannerSizeY)];
+//        floor.position = CGPointMake(arenaSize.width/2, (bannerSizeY/2));
+//        [self addChild:floor];
         bannerCount +=1;
     }
     if (ceilingOn){
-        SKSpriteNode* ceiling = [SKSpriteNode spriteNodeWithColor:[UIColor blueColor] size:CGSizeMake(arenaSize.width, bannerSizeY)];
-        ceiling.position = CGPointMake(arenaSize.width/2, arenaSize.height-(bannerSizeY/2));
-        [self addChild:ceiling];
+//        SKSpriteNode* ceiling = [SKSpriteNode spriteNodeWithColor:[UIColor blueColor] size:CGSizeMake(arenaSize.width, bannerSizeY)];
+//        ceiling.position = CGPointMake(arenaSize.width/2, arenaSize.height-(bannerSizeY/2));
+//        [self addChild:ceiling];
         bannerCount +=1;
     }
-    
+
     
     
     backGround = [SKSpriteNode spriteNodeWithImageNamed:@"dominoes-arena.png"];

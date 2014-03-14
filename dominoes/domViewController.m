@@ -20,8 +20,9 @@
 {
     [super viewDidLoad];
     
-    self.canDisplayBannerAds=YES;
-    
+    self.canDisplayBannerAds=NO;
+
+
     // Configure the view.
     //SKView * skView = (SKView *)self.view;
     SKView * skView = (SKView*)self.originalContentView;
