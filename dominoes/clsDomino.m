@@ -6,8 +6,8 @@
 //  Copyright (c) 2014 Abstractions. All rights reserved.
 //
 
-#import "domino.h"
+#import "clsDomino.h"
 
-@implementation domino
+@implementation clsDomino
 
 @end

@@ -8,9 +8,10 @@
 
 #import "domGameScene.h"
 #import "player.h"
-#import "domino.h"
+#import "clsDomino.h"
 //#import "domVariablesAndFunctions.h"
 #import <AudioToolbox/AudioServices.h>
+#import "domMenuScene.h"
 
 //using 0 and 1 instead of BOOL so I can use these in calculations
 #define ceilingOn   0
@@ -181,7 +182,7 @@
 
 -(void) handleComputerMove {
 
-    SKSpriteNode* domino = [SKSpriteNode new];
+    clsDomino* domino = [clsDomino new];
     BOOL crashed = false;
 
     //Computer direction should already be set.. default:down
@@ -227,10 +228,11 @@
         //draw computer domino
         if(computer.curDirection == up || computer.curDirection==down)
         {
-            domino = [SKSpriteNode spriteNodeWithImageNamed:@"dominoH.png"];
+            domino = [clsDomino spriteNodeWithImageNamed:@"dominoH.png"];
         }else{
-            domino = [SKSpriteNode spriteNodeWithImageNamed:@"dominoV.png"];
+            domino = [clsDomino spriteNodeWithImageNamed:@"dominoV.png"];
         }
+        domino.direction = computer.curDirection;
 
         domino.size = dominoSize;
         domino.zPosition = dominoZPos;
@@ -288,13 +290,16 @@
                   [SKAction waitForDuration:0.35],
                   [SKAction runBlock:^{ explosion.particleBirthRate = 0;} ],
                   [SKAction waitForDuration:1.2],
-                  [SKAction runBlock:^{ [explosion removeFromParent]; } ]
-                  //[SKAction runBlock:^{
-                  //ORBMenuScene *menu = [[ORBMenuScene alloc] initWithSize:self.size];
-                  //[self.view presentScene:menu transition:[SKTransition doorsCloseHorizontalWithDuration:0.5]];
+                  [SKAction runBlock:^{
+                        domMenuScene *menu = [[domMenuScene alloc] initWithSize:self.size];
+                        [self.view presentScene:menu transition:[SKTransition doorsCloseHorizontalWithDuration:1]];
+                    }],
+                  [SKAction waitForDuration:1.2],
+                  [SKAction runBlock:^{ [explosion removeFromParent]; } ],
+                ]]];
+//            domMenuScene *menu = [[domMenuScene alloc] initWithSize:self.size];
+//            [self.view presentScene:menu transition:[SKTransition doorsOpenHorizontalWithDuration:1.5]];
 
-                                                      ]]];
-            
         } //end if (player2.didExplosion)
     }
 

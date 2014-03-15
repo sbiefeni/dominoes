@@ -9,14 +9,12 @@
 #import <Foundation/Foundation.h>
 #import <SpriteKit/SpriteKit.h>
 
-@interface domino : SKSpriteNode
+@interface clsDomino : SKSpriteNode
 
 //store the x and y which correspond to grid
-@property int X;
-@property int y;
 @property int direction;
 
-
+//is this a player domino, or computer
 @property BOOL player;
 
 

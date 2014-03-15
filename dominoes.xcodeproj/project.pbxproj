@@ -18,7 +18,7 @@
 		387E6A7418D3B4C900108C2F /* click.wav in Resources */ = {isa = PBXBuildFile; fileRef = 387E6A7318D3B4C900108C2F /* click.wav */; };
 		389B9CF218CF9EF1004960E5 /* dominoH.png in Resources */ = {isa = PBXBuildFile; fileRef = 389B9CF018CF9EF1004960E5 /* dominoH.png */; };
 		389B9CF318CF9EF1004960E5 /* dominoV.png in Resources */ = {isa = PBXBuildFile; fileRef = 389B9CF118CF9EF1004960E5 /* dominoV.png */; };
-		389B9CF618CFCDCF004960E5 /* domino.m in Sources */ = {isa = PBXBuildFile; fileRef = 389B9CF518CFCDCF004960E5 /* domino.m */; };
+		389B9CF618CFCDCF004960E5 /* clsDomino.m in Sources */ = {isa = PBXBuildFile; fileRef = 389B9CF518CFCDCF004960E5 /* clsDomino.m */; };
 		389B9CF918CFD449004960E5 /* player.m in Sources */ = {isa = PBXBuildFile; fileRef = 389B9CF818CFD449004960E5 /* player.m */; };
 		55CB7E2018CBD180001EFA1C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55CB7E1F18CBD180001EFA1C /* Foundation.framework */; };
 		55CB7E2218CBD180001EFA1C /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55CB7E2118CBD180001EFA1C /* CoreGraphics.framework */; };
@@ -68,8 +68,8 @@
 		387E6A7318D3B4C900108C2F /* click.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = click.wav; sourceTree = "<group>"; };
 		389B9CF018CF9EF1004960E5 /* dominoH.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = dominoH.png; sourceTree = "<group>"; };
 		389B9CF118CF9EF1004960E5 /* dominoV.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = dominoV.png; sourceTree = "<group>"; };
-		389B9CF418CFCDCF004960E5 /* domino.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = domino.h; sourceTree = "<group>"; };
-		389B9CF518CFCDCF004960E5 /* domino.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = domino.m; sourceTree = "<group>"; };
+		389B9CF418CFCDCF004960E5 /* clsDomino.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = clsDomino.h; sourceTree = "<group>"; };
+		389B9CF518CFCDCF004960E5 /* clsDomino.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = clsDomino.m; sourceTree = "<group>"; };
 		389B9CF718CFD449004960E5 /* player.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = player.h; sourceTree = "<group>"; };
 		389B9CF818CFD449004960E5 /* player.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = player.m; sourceTree = "<group>"; };
 		55CB7E1C18CBD180001EFA1C /* dominoes.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = dominoes.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -141,8 +141,8 @@
 		389B9CFA18CFD776004960E5 /* helpers */ = {
 			isa = PBXGroup;
 			children = (
-				389B9CF518CFCDCF004960E5 /* domino.m */,
-				389B9CF418CFCDCF004960E5 /* domino.h */,
+				389B9CF518CFCDCF004960E5 /* clsDomino.m */,
+				389B9CF418CFCDCF004960E5 /* clsDomino.h */,
 				389B9CF818CFD449004960E5 /* player.m */,
 				389B9CF718CFD449004960E5 /* player.h */,
 			);
@@ -401,7 +401,7 @@
 				55CB7E2E18CBD180001EFA1C /* main.m in Sources */,
 				55CB7E3218CBD181001EFA1C /* domAppDelegate.m in Sources */,
 				344B5BC618D3FA9500E43D82 /* domMenuScene.m in Sources */,
-				389B9CF618CFCDCF004960E5 /* domino.m in Sources */,
+				389B9CF618CFCDCF004960E5 /* clsDomino.m in Sources */,
 				55CB7E3E18CBD181001EFA1C /* domGameScene.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
