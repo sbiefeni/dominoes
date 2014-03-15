@@ -13,7 +13,10 @@
 
 @interface domGameScene : SKScene
 @property (strong, nonatomic) SKAction *playMySound;
-//store the last swipe action
+
+@property float gameSpeed;
+
+//enum the last swipe action
 typedef enum  {
     none=   0,
     left=   1,

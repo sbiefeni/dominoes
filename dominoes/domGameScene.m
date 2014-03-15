@@ -90,7 +90,7 @@
     player* computer;
 
 // set game speed
-    float gameSpeed;
+   // float gameSpeed
 
 }
 @end
@@ -153,7 +153,9 @@
     computer.curDirection = down;
 
 //set the speed interval between moves (time for both player and computer to complete one move)
-    gameSpeed = .01;
+    if (_gameSpeed == 0 ) {
+        _gameSpeed = .15;
+    }
     
 //set initial player1 direction - ***HACK? - NSUserDefaults lets us easily communicate variables between classes.
     NSUserDefaults *standardUserDefaults = [NSUserDefaults standardUserDefaults];
@@ -163,7 +165,7 @@
     }
 
 //start the timer that runs the game!
-    [self runAction:[SKAction repeatActionForever:[SKAction sequence:@[[SKAction performSelector:@selector(gameRunner) onTarget:self],[SKAction waitForDuration:gameSpeed]]]]];
+    [self runAction:[SKAction repeatActionForever:[SKAction sequence:@[[SKAction performSelector:@selector(gameRunner) onTarget:self],[SKAction waitForDuration:_gameSpeed]]]]];
 
 }
 
@@ -175,7 +177,7 @@
 
 //computer move, 1/2 of gameSpeed interval wait time to run it
     [self runAction:[SKAction sequence:@[
-        [SKAction waitForDuration:gameSpeed/2],
+        [SKAction waitForDuration:_gameSpeed/2],
         [SKAction performSelector:@selector(handleComputerMove) onTarget:self],
     ]]];
 }
