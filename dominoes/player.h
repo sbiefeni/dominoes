@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "domMyScene.h"
+#import "domGameScene.h"
 
 @interface player : NSObject
 

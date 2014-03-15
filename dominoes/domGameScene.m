@@ -6,7 +6,7 @@
 //  Copyright (c) 2014 Abstractions. All rights reserved.
 //
 
-#import "domMyScene.h"
+#import "domGameScene.h"
 #import "player.h"
 #import "domino.h"
 //#import "domVariablesAndFunctions.h"
@@ -34,7 +34,7 @@
 #define dominoScaleFactorX 1   // - 1.25
 #define dominoScaleFactorY 1   //
 
-@interface domMyScene (){
+@interface domGameScene (){
     
     SKSpriteNode* backGround;
     SKSpriteNode* topDoor;
@@ -94,7 +94,7 @@
 }
 @end
 
-@implementation domMyScene
+@implementation domGameScene
 
 -(id)initWithSize:(CGSize)size {
     if (self = [super initWithSize:size]) {

@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		344B5BC618D3FA9500E43D82 /* domMenuScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 344B5BC518D3FA9500E43D82 /* domMenuScene.m */; };
+		344B5BCA18D4A4EF00E43D82 /* Background.sks in Resources */ = {isa = PBXBuildFile; fileRef = 344B5BC918D4A4EF00E43D82 /* Background.sks */; };
+		344B5BCD18D4A70300E43D82 /* SKEmitterNode+fromFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 344B5BCC18D4A70300E43D82 /* SKEmitterNode+fromFile.m */; };
 		34C0142718D17F01007C37AB /* explosion.wav in Resources */ = {isa = PBXBuildFile; fileRef = 34C0142518D17F01007C37AB /* explosion.wav */; };
 		34C0142A18D183BF007C37AB /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 34C0142918D183BF007C37AB /* AudioToolbox.framework */; };
 		34C0142D18D2A4C8007C37AB /* iAd.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 34C0142C18D2A4C8007C37AB /* iAd.framework */; };
@@ -27,7 +30,7 @@
 		55CB7E3518CBD181001EFA1C /* Main_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 55CB7E3318CBD181001EFA1C /* Main_iPhone.storyboard */; };
 		55CB7E3818CBD181001EFA1C /* Main_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 55CB7E3618CBD181001EFA1C /* Main_iPad.storyboard */; };
 		55CB7E3B18CBD181001EFA1C /* domViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 55CB7E3A18CBD181001EFA1C /* domViewController.m */; };
-		55CB7E3E18CBD181001EFA1C /* domMyScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 55CB7E3D18CBD181001EFA1C /* domMyScene.m */; };
+		55CB7E3E18CBD181001EFA1C /* domGameScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 55CB7E3D18CBD181001EFA1C /* domGameScene.m */; };
 		55CB7E4218CBD181001EFA1C /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 55CB7E4118CBD181001EFA1C /* Images.xcassets */; };
 		55CB7E4918CBD181001EFA1C /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55CB7E4818CBD181001EFA1C /* XCTest.framework */; };
 		55CB7E4A18CBD181001EFA1C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55CB7E1F18CBD180001EFA1C /* Foundation.framework */; };
@@ -52,6 +55,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		344B5BC418D3FA9500E43D82 /* domMenuScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = domMenuScene.h; sourceTree = "<group>"; };
+		344B5BC518D3FA9500E43D82 /* domMenuScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = domMenuScene.m; sourceTree = "<group>"; };
+		344B5BC918D4A4EF00E43D82 /* Background.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Background.sks; sourceTree = "<group>"; };
+		344B5BCB18D4A6DC00E43D82 /* SKEmitterNode+fromFile.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SKEmitterNode+fromFile.h"; sourceTree = "<group>"; };
+		344B5BCC18D4A70300E43D82 /* SKEmitterNode+fromFile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "SKEmitterNode+fromFile.m"; sourceTree = "<group>"; };
 		34C0142518D17F01007C37AB /* explosion.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = explosion.wav; sourceTree = "<group>"; };
 		34C0142918D183BF007C37AB /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		34C0142C18D2A4C8007C37AB /* iAd.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = iAd.framework; path = System/Library/Frameworks/iAd.framework; sourceTree = SDKROOT; };
@@ -79,8 +87,8 @@
 		55CB7E3718CBD181001EFA1C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPad.storyboard; sourceTree = "<group>"; };
 		55CB7E3918CBD181001EFA1C /* domViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = domViewController.h; sourceTree = "<group>"; };
 		55CB7E3A18CBD181001EFA1C /* domViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = domViewController.m; sourceTree = "<group>"; };
-		55CB7E3C18CBD181001EFA1C /* domMyScene.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = domMyScene.h; sourceTree = "<group>"; };
-		55CB7E3D18CBD181001EFA1C /* domMyScene.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = domMyScene.m; sourceTree = "<group>"; };
+		55CB7E3C18CBD181001EFA1C /* domGameScene.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = domGameScene.h; sourceTree = "<group>"; };
+		55CB7E3D18CBD181001EFA1C /* domGameScene.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = domGameScene.m; sourceTree = "<group>"; };
 		55CB7E4118CBD181001EFA1C /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		55CB7E4718CBD181001EFA1C /* dominoesTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = dominoesTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		55CB7E4818CBD181001EFA1C /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
@@ -144,8 +152,10 @@
 		389B9CFB18CFD7CE004960E5 /* scenes */ = {
 			isa = PBXGroup;
 			children = (
-				55CB7E3C18CBD181001EFA1C /* domMyScene.h */,
-				55CB7E3D18CBD181001EFA1C /* domMyScene.m */,
+				55CB7E3C18CBD181001EFA1C /* domGameScene.h */,
+				55CB7E3D18CBD181001EFA1C /* domGameScene.m */,
+				344B5BC418D3FA9500E43D82 /* domMenuScene.h */,
+				344B5BC518D3FA9500E43D82 /* domMenuScene.m */,
 			);
 			name = scenes;
 			sourceTree = "<group>";
@@ -213,8 +223,11 @@
 		55CB7E2718CBD180001EFA1C /* dominoes */ = {
 			isa = PBXGroup;
 			children = (
+				344B5BC918D4A4EF00E43D82 /* Background.sks */,
 				387E6A7318D3B4C900108C2F /* click.wav */,
 				34C0142518D17F01007C37AB /* explosion.wav */,
+				344B5BCB18D4A6DC00E43D82 /* SKEmitterNode+fromFile.h */,
+				344B5BCC18D4A70300E43D82 /* SKEmitterNode+fromFile.m */,
 				380DC21D18D0F02B00545962 /* particles */,
 				389B9CFC18CFD7EF004960E5 /* delegates */,
 				389B9CFD18CFD811004960E5 /* storyboards */,
@@ -361,6 +374,7 @@
 				55CB7E3518CBD181001EFA1C /* Main_iPhone.storyboard in Resources */,
 				380DC21B18D0ED9200545962 /* explosion.sks in Resources */,
 				55CB7E2C18CBD180001EFA1C /* InfoPlist.strings in Resources */,
+				344B5BCA18D4A4EF00E43D82 /* Background.sks in Resources */,
 				387E6A7418D3B4C900108C2F /* click.wav in Resources */,
 				55DDBD3418CC3A8D0004EA4F /* dominoes-bottomdoor.png in Resources */,
 			);
@@ -381,12 +395,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				344B5BCD18D4A70300E43D82 /* SKEmitterNode+fromFile.m in Sources */,
 				389B9CF918CFD449004960E5 /* player.m in Sources */,
 				55CB7E3B18CBD181001EFA1C /* domViewController.m in Sources */,
 				55CB7E2E18CBD180001EFA1C /* main.m in Sources */,
 				55CB7E3218CBD181001EFA1C /* domAppDelegate.m in Sources */,
+				344B5BC618D3FA9500E43D82 /* domMenuScene.m in Sources */,
 				389B9CF618CFCDCF004960E5 /* domino.m in Sources */,
-				55CB7E3E18CBD181001EFA1C /* domMyScene.m in Sources */,
+				55CB7E3E18CBD181001EFA1C /* domGameScene.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
