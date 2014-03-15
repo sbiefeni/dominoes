@@ -7,7 +7,7 @@
 //
 
 #import "domViewController.h"
-#import "domMyScene.h"
+#import "domMenuScene.h"
 #import "player.h"
 
 @interface domViewController ()
@@ -33,7 +33,7 @@
     //self.removeFromParentViewController;
     
     // Create and configure the scene.
-    SKScene * scene = [domMyScene sceneWithSize:skView.bounds.size];
+    SKScene * scene = [domMenuScene sceneWithSize:skView.bounds.size];
     scene.scaleMode = SKSceneScaleModeAspectFill;
     
     UISwipeGestureRecognizer* swipeGesture =[[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(swipeRecognized:)];
