@@ -222,7 +222,7 @@
 				389B9CFB18CFD7CE004960E5 /* scenes */,
 				389B9CFA18CFD776004960E5 /* helpers */,
 				55CB7E4118CBD181001EFA1C /* Images.xcassets */,
-				55DDBD2B18CC29C70004EA4F /* images */,
+				55DDBD2B18CC29C70004EA4F /* images.atlas */,
 				55CB7E2818CBD180001EFA1C /* Supporting Files */,
 			);
 			path = dominoes;
@@ -257,7 +257,7 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		55DDBD2B18CC29C70004EA4F /* images */ = {
+		55DDBD2B18CC29C70004EA4F /* images.atlas */ = {
 			isa = PBXGroup;
 			children = (
 				389B9CF018CF9EF1004960E5 /* dominoH.png */,
@@ -268,7 +268,7 @@
 				55DDBD3318CC3A8D0004EA4F /* dominoes-topdoor.png */,
 				55DDBD2118CC1DFB0004EA4F /* dominoes-arena.png */,
 			);
-			name = images;
+			name = images.atlas;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

@@ -22,5 +22,5 @@ typedef enum  {
     down=   4,
 } swipeDirection;
 
--(void) updatePlayerDirection:(swipeDirection)direction;
+//-(void) updatePlayerDirection:(swipeDirection)direction;
 @end

@@ -46,6 +46,12 @@
     //dominoes
     SKSpriteNode* dominoH;
     SKSpriteNode* dominoV;
+
+    //to hold animation arrays
+    NSArray *_DominoFallingLeft;
+    NSArray *_DominoFallingUp;
+    NSArray *_DominoFallingRight;
+    NSArray *_DominoFallingDown;
     
     
 //to get the scale factor for the current screen (orig size / new size)
@@ -106,9 +112,7 @@
         
         NSLog(@"Width: %f, Height: %f", size.width, size.height);
     }
-    
-    
-    
+
     return self;
 }
 
@@ -148,7 +152,7 @@
     computer.curDirection = down;
 
 //set the speed interval between moves (time for both player and computer to complete one move)
-    gameSpeed = .2;
+    gameSpeed = .01;
     
 //set initial player1 direction - ***HACK? - NSUserDefaults lets us easily communicate variables between classes.
     NSUserDefaults *standardUserDefaults = [NSUserDefaults standardUserDefaults];
@@ -249,8 +253,7 @@
         //add to the grid... for domino colision detection
         grid[computer.curX][computer.curY]=true;
 
-        BOOL ComputerBrainNeededHere;
-        //add logic to test the next move, and change direction if
+         //add logic to test the next move, and change direction if
         //that move is no good. Also should make some random function to
         //change direction periodically for no reason
         [self checkNextComputerMove];
