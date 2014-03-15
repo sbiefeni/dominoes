@@ -57,7 +57,7 @@
 -(void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {
     domGameScene *game = [[domGameScene alloc] initWithSize:self.size];
-    [self.view presentScene:game transition:[SKTransition moveInWithDirection:SKTransitionDirectionDown duration:0.5]];
+    [self.view presentScene:game transition:[SKTransition doorsOpenHorizontalWithDuration:0.5]];
 }
 
 @end
