@@ -154,7 +154,7 @@
 
 //set the speed interval between moves (time for both player and computer to complete one move)
     if (_gameSpeed == 0 ) {
-        _gameSpeed = .15;
+        _gameSpeed = .05;
     }
     
 //set initial player1 direction - ***HACK? - NSUserDefaults lets us easily communicate variables between classes.
