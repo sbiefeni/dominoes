@@ -109,7 +109,7 @@
         
         [self initializeGame];
         
-        NSLog(@"Width: %f, Height: %f", size.width, size.height);
+        //NSLog(@"Width: %f, Height: %f", size.width, size.height);
     }
 
     return self;
@@ -322,6 +322,7 @@
     //increase random chance when computer is close to a wall
     if ((D == left && X < 4) || (D == up && Y > maxY-4) || (D == right && X > maxX-4) || (D == down && Y < 4)){
         rndChance /=4;
+        NSLog(@"Random chance increased");
     }
 
 //pre generate random number 0 or 1 - all direction changes will have 2 possible choices
@@ -720,40 +721,40 @@ int countSquares;
 //    NSLog(@"x=%.2f y=%.2f", location.x, location.y);
 }
 
--(void)update:(CFTimeInterval)currentTime {
-    /* Called before each frame is rendered */
-    
-}
-
-- (void)arrayToString:(bool [cols][rows])array
-{
-    NSString *arrayOutputString = [NSString stringWithFormat:@"\n["];
-
-    for (int y=rows;y>=0;y--) {
-        for (int x=0;x<=cols;x++) {
-            if (x<cols) {
-                if (array[x][y]==true) {
-                    arrayOutputString = [NSString stringWithFormat:@"%@%@-",arrayOutputString,@"X"];
-                }
-                else {
-                    arrayOutputString = [NSString stringWithFormat:@"%@%@-",arrayOutputString,@"0"];
-                }
-            }
-            else if (x==cols) {
-                if (array[x][y]==true) {
-                    arrayOutputString = [NSString stringWithFormat:@"%@%@]\n",arrayOutputString,@"X"];
-                }
-                else {
-                    arrayOutputString = [NSString stringWithFormat:@"%@%@]\n",arrayOutputString,@"0"];
-                }
-            }
-        }
-
-        if (y!=rows) {
-            arrayOutputString = [NSString stringWithFormat:@"%@[",arrayOutputString];
-        }
-    }
-    NSLog(@"%@",arrayOutputString);
-}
+//-(void)update:(CFTimeInterval)currentTime {
+//    /* Called before each frame is rendered */
+//    
+//}
+//
+//- (void)arrayToString:(bool [cols][rows])array
+//{
+//    NSString *arrayOutputString = [NSString stringWithFormat:@"\n["];
+//
+//    for (int y=rows;y>=0;y--) {
+//        for (int x=0;x<=cols;x++) {
+//            if (x<cols) {
+//                if (array[x][y]==true) {
+//                    arrayOutputString = [NSString stringWithFormat:@"%@%@-",arrayOutputString,@"X"];
+//                }
+//                else {
+//                    arrayOutputString = [NSString stringWithFormat:@"%@%@-",arrayOutputString,@"0"];
+//                }
+//            }
+//            else if (x==cols) {
+//                if (array[x][y]==true) {
+//                    arrayOutputString = [NSString stringWithFormat:@"%@%@]\n",arrayOutputString,@"X"];
+//                }
+//                else {
+//                    arrayOutputString = [NSString stringWithFormat:@"%@%@]\n",arrayOutputString,@"0"];
+//                }
+//            }
+//        }
+//
+//        if (y!=rows) {
+//            arrayOutputString = [NSString stringWithFormat:@"%@[",arrayOutputString];
+//        }
+//    }
+//    NSLog(@"%@",arrayOutputString);
+//}
 
 @end
