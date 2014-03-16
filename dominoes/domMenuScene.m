@@ -22,7 +22,7 @@
         
         SKLabelNode *title = [SKLabelNode labelNodeWithFontNamed:@"Avenir-Black"];
         
-        title.text = @"Flappy\nBricks";
+        title.text = @"Flappy Bricks";
         title.fontSize = 48;
         title.position = CGPointMake(CGRectGetMidX(self.frame),
                                      CGRectGetMidY(self.frame));

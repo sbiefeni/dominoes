@@ -138,6 +138,15 @@
 			name = particles;
 			sourceTree = "<group>";
 		};
+		386EB9E618D5294D0040B560 /* Menus */ = {
+			isa = PBXGroup;
+			children = (
+				344B5BC418D3FA9500E43D82 /* domMenuScene.h */,
+				344B5BC518D3FA9500E43D82 /* domMenuScene.m */,
+			);
+			name = Menus;
+			sourceTree = "<group>";
+		};
 		389B9CFA18CFD776004960E5 /* helpers */ = {
 			isa = PBXGroup;
 			children = (
@@ -154,8 +163,7 @@
 			children = (
 				55CB7E3C18CBD181001EFA1C /* domGameScene.h */,
 				55CB7E3D18CBD181001EFA1C /* domGameScene.m */,
-				344B5BC418D3FA9500E43D82 /* domMenuScene.h */,
-				344B5BC518D3FA9500E43D82 /* domMenuScene.m */,
+				386EB9E618D5294D0040B560 /* Menus */,
 			);
 			name = scenes;
 			sourceTree = "<group>";

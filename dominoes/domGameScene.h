@@ -12,6 +12,7 @@
 
 
 @interface domGameScene : SKScene
+
 @property (strong, nonatomic) SKAction *playMySound;
 
 @property float gameSpeed;

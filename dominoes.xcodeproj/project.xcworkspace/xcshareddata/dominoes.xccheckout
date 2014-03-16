@@ -5,19 +5,19 @@
 	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
 	<false/>
 	<key>IDESourceControlProjectIdentifier</key>
-	<string>4E84C7C0-E900-4A8B-B713-9321F07FAE81</string>
+	<string>D1B0CA4C-EEB3-4697-93FC-A0D38A196A9A</string>
 	<key>IDESourceControlProjectName</key>
 	<string>dominoes</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
-		<key>6AD6AD78-932E-4687-BF2F-DA0545B0F5B3</key>
+		<key>4A60A2A9-FF07-411E-B499-39C659B4E50B</key>
 		<string>https://github.com/sbiefeni/dominoes.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
 	<string>dominoes.xcodeproj/project.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
-		<key>6AD6AD78-932E-4687-BF2F-DA0545B0F5B3</key>
+		<key>4A60A2A9-FF07-411E-B499-39C659B4E50B</key>
 		<string>../..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
@@ -25,14 +25,14 @@
 	<key>IDESourceControlProjectVersion</key>
 	<integer>110</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>6AD6AD78-932E-4687-BF2F-DA0545B0F5B3</string>
+	<string>4A60A2A9-FF07-411E-B499-39C659B4E50B</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>6AD6AD78-932E-4687-BF2F-DA0545B0F5B3</string>
+			<string>4A60A2A9-FF07-411E-B499-39C659B4E50B</string>
 			<key>IDESourceControlWCCName</key>
 			<string>dominoes</string>
 		</dict>

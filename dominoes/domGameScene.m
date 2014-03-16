@@ -43,17 +43,16 @@
     SKSpriteNode* bottomDoor;
     SKSpriteNode* leftDoor;
 
-    
-    //dominoes
-    SKSpriteNode* dominoH;
-    SKSpriteNode* dominoV;
-
     //to hold animation arrays
     NSArray *_DominoFallingLeft;
     NSArray *_DominoFallingUp;
     NSArray *_DominoFallingRight;
     NSArray *_DominoFallingDown;
-    
+
+    //dominoes
+    SKSpriteNode* dominoH;
+    SKSpriteNode* dominoV;
+
     
 //to get the scale factor for the current screen (orig size / new size)
     float scaleX;
@@ -77,7 +76,6 @@
 
     CGSize gridSize;
     CGSize dominoSize;
-
 
     
 //use these to store each movement, in sequence, for each player
@@ -316,12 +314,21 @@
     NSMutableArray* directionChoices = [NSMutableArray new];
     int X = computer.curX;
     int Y = computer.curY;
+    int D = computer.curDirection;
+
+    //1 in n chance of a random direction change at any time
+    int rndChance = 50;
+
+    //increase random chance when computer is close to a wall
+    if (D == left && X < 4 || D == up && Y > maxY-4 || D == right && X > maxX-4 || D == down && Y < 4){
+        rndChance /=4;
+    }
 
 //pre generate random number 0 or 1 - all direction changes will have 2 possible choices
-    BOOL randChange = ( arc4random() % 26) == 25;
+    BOOL randChange = ( arc4random() % rndChance) == 2;
 
 //if any of these conditions are true.. player2 is about to crash..
-    switch (computer.curDirection) {
+    switch (D) {
         case left:
             if (X == 0 || grid[X-1][Y]==true || randChange) {
                 if (grid[X][Y-1] == false && Y > 0) {
