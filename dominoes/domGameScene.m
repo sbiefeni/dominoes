@@ -585,7 +585,7 @@ AudioServicesPlaySystemSound (kSystemSoundID_Vibrate);
 
 -(void) setUpDoors:(CGSize) size{
     
-    topDoor = [SKSpriteNode spriteNodeWithImageNamed:@"dominoes-topDoor.png"];
+    topDoor = [SKSpriteNode spriteNodeWithImageNamed:@"dominoes-topdoor.png"];
 
     //grab the unscaled image, and resize using the scale factors scaleX and scaleY
     scaledSize = [self getScaledSizeForNode:topDoor];
@@ -596,7 +596,7 @@ AudioServicesPlaySystemSound (kSystemSoundID_Vibrate);
     
     [self addChild:topDoor];
     
-    bottomDoor = [SKSpriteNode spriteNodeWithImageNamed:@"dominoes-bottomDoor.png"];
+    bottomDoor = [SKSpriteNode spriteNodeWithImageNamed:@"dominoes-bottomdoor.png"];
     //grab the unscaled image, and resize using the scale factors scaleX and scaleY
     scaledSize = [self getScaledSizeForNode:bottomDoor];
     bottomDoor.size= scaledSize;
@@ -605,7 +605,7 @@ AudioServicesPlaySystemSound (kSystemSoundID_Vibrate);
     [self addChild:bottomDoor];
     
     
-    leftDoor = [SKSpriteNode spriteNodeWithImageNamed:@"dominoes-leftDoor.png"];
+    leftDoor = [SKSpriteNode spriteNodeWithImageNamed:@"dominoes-leftdoor.png"];
     //grab the unscaled image, and resize using the scale factors scaleX and scaleY
     scaledSize = [self getScaledSizeForNode:leftDoor];
     leftDoor.size= scaledSize;
@@ -613,7 +613,7 @@ AudioServicesPlaySystemSound (kSystemSoundID_Vibrate);
     leftDoor.zPosition = doorZPos;
     [self addChild:leftDoor];
 
-    rightDoor = [SKSpriteNode spriteNodeWithImageNamed:@"dominoes-rightDoor.png"];
+    rightDoor = [SKSpriteNode spriteNodeWithImageNamed:@"dominoes-rightdoor.png"];
     //grab the unscaled image, and resize using the scale factors scaleX and scaleY
     scaledSize = [self getScaledSizeForNode:rightDoor];
     rightDoor.size= scaledSize;
