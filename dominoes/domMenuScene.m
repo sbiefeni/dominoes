@@ -14,7 +14,7 @@
 -(instancetype)initWithSize:(CGSize)size
 {
     if(self = [super initWithSize:size]) {
-        SKEmitterNode *background = [SKEmitterNode dom_emitterNamed:@"Background"];
+        SKEmitterNode *background = [SKEmitterNode dom_emitterNamed:@"Background_Stars"];
         background.particlePositionRange = CGVectorMake(self.size.width*2, self.size.height*2);
         [background advanceSimulationTime:10];
         
