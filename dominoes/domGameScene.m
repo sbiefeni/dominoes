@@ -8,9 +8,10 @@
 
 #import "domGameScene.h"
 #import "player.h"
-#import "domino.h"
+#import "clsDomino.h"
 //#import "domVariablesAndFunctions.h"
 #import <AudioToolbox/AudioServices.h>
+#import "domMenuScene.h"
 
 //using 0 and 1 instead of BOOL so I can use these in calculations
 #define ceilingOn   0
@@ -42,11 +43,16 @@
     SKSpriteNode* bottomDoor;
     SKSpriteNode* leftDoor;
 
-    
+    //to hold animation arrays
+    NSArray *_DominoFallingLeft;
+    NSArray *_DominoFallingUp;
+    NSArray *_DominoFallingRight;
+    NSArray *_DominoFallingDown;
+
     //dominoes
     SKSpriteNode* dominoH;
     SKSpriteNode* dominoV;
-    
+
     
 //to get the scale factor for the current screen (orig size / new size)
     float scaleX;
@@ -71,7 +77,6 @@
     CGSize gridSize;
     CGSize dominoSize;
 
-
     
 //use these to store each movement, in sequence, for each player
 //max size is the total available grid squares, so we never run out
@@ -83,7 +88,7 @@
     player* computer;
 
 // set game speed
-    float gameSpeed;
+   // float gameSpeed
 
 }
 @end
@@ -106,9 +111,7 @@
         
         NSLog(@"Width: %f, Height: %f", size.width, size.height);
     }
-    
-    
-    
+
     return self;
 }
 
@@ -148,7 +151,9 @@
     computer.curDirection = down;
 
 //set the speed interval between moves (time for both player and computer to complete one move)
-    gameSpeed = .2;
+    if (_gameSpeed == 0 ) {
+        _gameSpeed = .05;
+    }
     
 //set initial player1 direction - ***HACK? - NSUserDefaults lets us easily communicate variables between classes.
     NSUserDefaults *standardUserDefaults = [NSUserDefaults standardUserDefaults];
@@ -158,7 +163,7 @@
     }
 
 //start the timer that runs the game!
-    [self runAction:[SKAction repeatActionForever:[SKAction sequence:@[[SKAction performSelector:@selector(gameRunner) onTarget:self],[SKAction waitForDuration:gameSpeed]]]]];
+    [self runAction:[SKAction repeatActionForever:[SKAction sequence:@[[SKAction performSelector:@selector(gameRunner) onTarget:self],[SKAction waitForDuration:_gameSpeed]]]]];
 
 }
 
@@ -170,14 +175,14 @@
 
 //computer move, 1/2 of gameSpeed interval wait time to run it
     [self runAction:[SKAction sequence:@[
-        [SKAction waitForDuration:gameSpeed/2],
+        [SKAction waitForDuration:_gameSpeed/2],
         [SKAction performSelector:@selector(handleComputerMove) onTarget:self],
     ]]];
 }
 
 -(void) handleComputerMove {
 
-    SKSpriteNode* domino = [SKSpriteNode new];
+    clsDomino* domino = [clsDomino new];
     BOOL crashed = false;
 
     //Computer direction should already be set.. default:down
@@ -223,10 +228,11 @@
         //draw computer domino
         if(computer.curDirection == up || computer.curDirection==down)
         {
-            domino = [SKSpriteNode spriteNodeWithImageNamed:@"dominoH.png"];
+            domino = [clsDomino spriteNodeWithImageNamed:@"dominoH.png"];
         }else{
-            domino = [SKSpriteNode spriteNodeWithImageNamed:@"dominoV.png"];
+            domino = [clsDomino spriteNodeWithImageNamed:@"dominoV.png"];
         }
+        domino.direction = computer.curDirection;
 
         domino.size = dominoSize;
         domino.zPosition = dominoZPos;
@@ -249,8 +255,7 @@
         //add to the grid... for domino colision detection
         grid[computer.curX][computer.curY]=true;
 
-        BOOL ComputerBrainNeededHere;
-        //add logic to test the next move, and change direction if
+         //add logic to test the next move, and change direction if
         //that move is no good. Also should make some random function to
         //change direction periodically for no reason
         [self checkNextComputerMove];
@@ -285,13 +290,16 @@
                   [SKAction waitForDuration:0.35],
                   [SKAction runBlock:^{ explosion.particleBirthRate = 0;} ],
                   [SKAction waitForDuration:1.2],
-                  [SKAction runBlock:^{ [explosion removeFromParent]; } ]
-                  //[SKAction runBlock:^{
-                  //ORBMenuScene *menu = [[ORBMenuScene alloc] initWithSize:self.size];
-                  //[self.view presentScene:menu transition:[SKTransition doorsCloseHorizontalWithDuration:0.5]];
+                  [SKAction runBlock:^{
+                        domMenuScene *menu = [[domMenuScene alloc] initWithSize:self.size];
+                        [self.view presentScene:menu transition:[SKTransition doorsCloseHorizontalWithDuration:1]];
+                    }],
+                  [SKAction waitForDuration:1.2],
+                  [SKAction runBlock:^{ [explosion removeFromParent]; } ],
+                ]]];
+//            domMenuScene *menu = [[domMenuScene alloc] initWithSize:self.size];
+//            [self.view presentScene:menu transition:[SKTransition doorsOpenHorizontalWithDuration:1.5]];
 
-                                                      ]]];
-            
         } //end if (player2.didExplosion)
     }
 
@@ -306,12 +314,21 @@
     NSMutableArray* directionChoices = [NSMutableArray new];
     int X = computer.curX;
     int Y = computer.curY;
+    int D = computer.curDirection;
+
+    //1 in n chance of a random direction change at any time
+    int rndChance = 50;
+
+    //increase random chance when computer is close to a wall
+    if ((D == left && X < 4) || (D == up && Y > maxY-4) || (D == right && X > maxX-4) || (D == down && Y < 4)){
+        rndChance /=4;
+    }
 
 //pre generate random number 0 or 1 - all direction changes will have 2 possible choices
-    BOOL randChange = ( arc4random() % 26) == 25;
+    BOOL randChange = ( arc4random() % rndChance) == 2;
 
 //if any of these conditions are true.. player2 is about to crash..
-    switch (computer.curDirection) {
+    switch (D) {
         case left:
             if (X == 0 || grid[X-1][Y]==true || randChange) {
                 if (grid[X][Y-1] == false && Y > 0) {

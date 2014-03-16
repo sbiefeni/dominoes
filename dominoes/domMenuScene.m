@@ -22,8 +22,8 @@
         
         SKLabelNode *title = [SKLabelNode labelNodeWithFontNamed:@"Avenir-Black"];
         
-        title.text = @"Blitz\nBricks";
-        title.fontSize = 60;
+        title.text = @"Flappy Bricks";
+        title.fontSize = 48;
         title.position = CGPointMake(CGRectGetMidX(self.frame),
                                      CGRectGetMidY(self.frame));
         title.fontColor = [SKColor colorWithHue:0 saturation:0 brightness:1 alpha:1.0];
