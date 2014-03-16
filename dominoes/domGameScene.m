@@ -320,7 +320,7 @@
     int rndChance = 50;
 
     //increase random chance when computer is close to a wall
-    if (D == left && X < 4 || D == up && Y > maxY-4 || D == right && X > maxX-4 || D == down && Y < 4){
+    if ((D == left && X < 4) || (D == up && Y > maxY-4) || (D == right && X > maxX-4) || (D == down && Y < 4)){
         rndChance /=4;
     }
 
