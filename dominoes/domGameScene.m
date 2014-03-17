@@ -29,11 +29,11 @@
 
 //define rows and cols
 #define rows        26
-#define cols        14
+#define cols        16
 
 //scale up the domino size relative to the grid
-#define dominoScaleFactorX 1   // - 1.25
-#define dominoScaleFactorY 1   //
+#define dominoScaleFactorX 1.1   // - 1.25
+#define dominoScaleFactorY 1.1 //
 
 @interface domGameScene (){
     
@@ -228,9 +228,9 @@
         //draw computer domino
         if(computer.curDirection == up || computer.curDirection==down)
         {
-            domino = [clsDomino spriteNodeWithImageNamed:@"dominoH.png"];
+            domino = [clsDomino spriteNodeWithImageNamed:@"dominoH"];
         }else{
-            domino = [clsDomino spriteNodeWithImageNamed:@"dominoV.png"];
+            domino = [clsDomino spriteNodeWithImageNamed:@"dominoV"];
         }
         domino.direction = computer.curDirection;
 
@@ -325,7 +325,7 @@
         NSLog(@"Random chance increased");
     }
 
-//pre generate random number 0 or 1 - all direction changes will have 2 possible choices
+//pre generate random BOOL - all direction changes will have 2 possible choices
     BOOL randChange = ( arc4random() % rndChance) == 2;
 
 //if any of these conditions are true.. player2 is about to crash..
@@ -384,8 +384,13 @@
 
         if (C1 > C2) {
             computer.curDirection = [[directionChoices objectAtIndex:0] intValue];
-        }else{
+        }else if (C2 > C1){
             computer.curDirection = [[directionChoices objectAtIndex:1] intValue];
+        }else{
+            //randomize this choice between index 0 or 1
+            int choice;
+            choice = ( arc4random() % 2);
+            computer.curDirection = [[directionChoices objectAtIndex:choice] intValue];
         }
     }else if([directionChoices count] == 1){
         computer.curDirection = [[directionChoices objectAtIndex:0]intValue];
@@ -447,9 +452,9 @@
     if (!crashed) {
         //draw a domino
         if (player1.curDirection == up || player1.curDirection == down) {
-            domino = [SKSpriteNode spriteNodeWithImageNamed:@"dominoH.png"];
+            domino = [SKSpriteNode spriteNodeWithImageNamed:@"dominoH"];
         }else {
-            domino = [SKSpriteNode spriteNodeWithImageNamed:@"dominoV.png"];
+            domino = [SKSpriteNode spriteNodeWithImageNamed:@"dominoV"];
         }
 
         domino.size = dominoSize;
@@ -568,7 +573,7 @@ AudioServicesPlaySystemSound (kSystemSoundID_Vibrate);
 
     
     
-    backGround = [SKSpriteNode spriteNodeWithImageNamed:@"dominoes-arena.png"];
+    backGround = [SKSpriteNode spriteNodeWithImageNamed:@"dominoes-arena"];
 //get the scale factors, so we know how much to scale any other images
     scaleX = backGround.size.width  / arenaSize.width;
     scaleY = backGround.size.height / (arenaSize.height -(bannerSizeY * bannerCount) );
@@ -586,7 +591,7 @@ AudioServicesPlaySystemSound (kSystemSoundID_Vibrate);
 
 -(void) setUpDoors:(CGSize) size{
     
-    topDoor = [SKSpriteNode spriteNodeWithImageNamed:@"dominoes-topdoor.png"];
+    topDoor = [SKSpriteNode spriteNodeWithImageNamed:@"dominoes-topdoor"];
 
     //grab the unscaled image, and resize using the scale factors scaleX and scaleY
     scaledSize = [self getScaledSizeForNode:topDoor];
@@ -597,7 +602,7 @@ AudioServicesPlaySystemSound (kSystemSoundID_Vibrate);
     
     [self addChild:topDoor];
     
-    bottomDoor = [SKSpriteNode spriteNodeWithImageNamed:@"dominoes-bottomdoor.png"];
+    bottomDoor = [SKSpriteNode spriteNodeWithImageNamed:@"dominoes-bottomdoor"];
     //grab the unscaled image, and resize using the scale factors scaleX and scaleY
     scaledSize = [self getScaledSizeForNode:bottomDoor];
     bottomDoor.size= scaledSize;
@@ -606,7 +611,7 @@ AudioServicesPlaySystemSound (kSystemSoundID_Vibrate);
     [self addChild:bottomDoor];
     
     
-    leftDoor = [SKSpriteNode spriteNodeWithImageNamed:@"dominoes-leftdoor.png"];
+    leftDoor = [SKSpriteNode spriteNodeWithImageNamed:@"dominoes-leftdoor"];
     //grab the unscaled image, and resize using the scale factors scaleX and scaleY
     scaledSize = [self getScaledSizeForNode:leftDoor];
     leftDoor.size= scaledSize;
@@ -614,7 +619,7 @@ AudioServicesPlaySystemSound (kSystemSoundID_Vibrate);
     leftDoor.zPosition = doorZPos;
     [self addChild:leftDoor];
 
-    rightDoor = [SKSpriteNode spriteNodeWithImageNamed:@"dominoes-rightdoor.png"];
+    rightDoor = [SKSpriteNode spriteNodeWithImageNamed:@"dominoes-rightdoor"];
     //grab the unscaled image, and resize using the scale factors scaleX and scaleY
     scaledSize = [self getScaledSizeForNode:rightDoor];
     rightDoor.size= scaledSize;

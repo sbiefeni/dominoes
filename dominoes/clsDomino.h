@@ -17,5 +17,9 @@
 //is this a player domino, or computer
 @property BOOL player;
 
+@property NSMutableArray* dominos;
+
+-(void) animateDomino;
+
 
 @end
