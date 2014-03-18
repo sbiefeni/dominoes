@@ -15,7 +15,7 @@
 
 //this is used like the VB isRunningInIde()
 //usage: isRunningInIde( <statement>; <statement>...)
-//apparently NSLog() stays in the app in production
+//apparently NSLog() also stays in the app in production
 #define isRunningInIde(x) if ([[[UIDevice currentDevice].model lowercaseString] rangeOfString:@"simulator"].location != NSNotFound){x;}
 
 //using 0 and 1 instead of BOOL so I can use these in calculations
