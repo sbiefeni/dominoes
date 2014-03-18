@@ -13,7 +13,13 @@
 #import <AudioToolbox/AudioServices.h>
 #import "domMenuScene.h"
 
+//this is used like the VB isRunningInIde()
+//usage: isRunningInIde( <statement>; <statement>...)
+//apparently NSLog() stays in the app in production
+#define isRunningInIde(x) if ([[[UIDevice currentDevice].model lowercaseString] rangeOfString:@"simulator"].location != NSNotFound){x;}
+
 //using 0 and 1 instead of BOOL so I can use these in calculations
+//not needed?
 #define ceilingOn   0
 #define floorOn     0
 
@@ -86,6 +92,7 @@
     player* player1;
     player* computer;
 
+    
 // set game speed
    // float gameSpeed
 
@@ -186,12 +193,14 @@
 
     clsDomino* domino = [clsDomino new];
     BOOL crashed = false;
+    int X = computer.curX;
+    int Y = computer.curY;
 
     //Computer direction should already be set.. default:down
 
     switch (computer.curDirection) {
         case left:
-            if (computer.curX > 0 && grid[computer.curX-1][computer.curY]==false) {
+            if (X > 0 && grid[X-1][Y]==false) {
                 computer.curX --;
             }else{
                 //NSLog(@"CRASH!!!");
@@ -199,7 +208,7 @@
             }
             break;
         case right:
-            if (computer.curX < cols && grid[computer.curX+1][computer.curY]==false){
+            if (X < cols && grid[X+1][Y]==false){
                 computer.curX ++;
             }else{
                 //NSLog(@"CRASH!!!");
@@ -207,7 +216,7 @@
             }
             break;
         case up:
-            if (computer.curY < rows && grid[computer.curX][computer.curY+1]==false){
+            if (Y < rows && grid[X][Y+1]==false){
                 computer.curY ++;
             }else{
                 //NSLog(@"CRASH!!!");
@@ -215,7 +224,7 @@
             }
             break;
         case down:
-            if (computer.curY > 0 && grid[computer.curX][computer.curY-1]==false){
+            if (Y > 0 && grid[X][Y-1]==false){
                 computer.curY --;
             }else{
                 //NSLog(@"CRASH!!!");
@@ -242,9 +251,13 @@
         //[objectWithOurMethod methodName:int1 withArg2:int2];
         domino.position = [self calcDominoPosition:computer.curX withArg2:computer.curY];
 
-//        domino.color = [SKColor redColor];
-//        domino.colorBlendFactor = .6;
-
+        //temp - highlight when computer is close to a wall
+        isRunningInIde(
+            if (Y==0  || Y==rows || X==0 || X==cols) {
+                domino.color = [SKColor redColor];
+                domino.colorBlendFactor = 5;
+            }
+        );
 
         [self addChild:domino];
 
@@ -258,7 +271,7 @@
         grid[computer.curX][computer.curY]=true;
 
          //add logic to test the next move, and change direction if
-        //that move is no good. Also should make some random function to
+        //required, or calculated. Also should make some random function to
         //change direction periodically for no reason
         [self checkNextComputerMove];
 
@@ -303,7 +316,7 @@
     }
 
 }
-
+int rndIncreases;
 -(void) checkNextComputerMove{
 
     //checks if the next move will cause the computer to crash
@@ -319,12 +332,13 @@
     int rndChance = 50;
 
     //increase random chance when computer is close to a wall
-    if ((D == left && X < 4) || (D == up && Y > maxY-4) || (D == right && X > maxX-4) || (D == down && Y < 4)){
-        rndChance /=4;
-        NSLog(@"Random chance increased");
+    if ((D == left && X < 4) || (D == up && Y > maxY-4) || (D == right && X > maxX-4) || (D == down && Y < 4) || Y==0  || Y==rows || X==0 || X==cols){
+        rndChance /=8;
+        rndIncreases++;
+        isRunningInIde( NSLog(@"Random chance increased %i times", rndIncreases) );
     }
 
-//pre generate random BOOL - all direction changes will have 2 possible choices
+//generate a random change BOOL - all direction changes will have 2 possible choices
     BOOL randChange = ( arc4random() % rndChance) == 2;
 
 //if any of these conditions are true.. player2 is about to crash..
@@ -517,12 +531,6 @@
 }  //end if (!crashed)
 
 }
-
-//-(void) updatePlayerDirection:(swipeDirection)direction{
-//
-//    player1.curDirection = direction;
-//
-//}
 
 - (CGPoint) calcDominoPosition:(int)x withArg2:(int) y{
     
@@ -730,7 +738,7 @@ int countSquares;
 //    /* Called before each frame is rendered */
 //    
 //}
-//
+// This was to visualize the grid array
 //- (void)arrayToString:(bool [cols][rows])array
 //{
 //    NSString *arrayOutputString = [NSString stringWithFormat:@"\n["];
