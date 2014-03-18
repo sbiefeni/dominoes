@@ -333,7 +333,7 @@ int rndIncreases;
 
     //increase random chance when computer is close to a wall
     if ((D == left && X < 4) || (D == up && Y > maxY-4) || (D == right && X > maxX-4) || (D == down && Y < 4) || Y==0  || Y==rows || X==0 || X==cols){
-        rndChance /=8;
+        rndChance /=6;
         rndIncreases++;
         isRunningInIde( NSLog(@"Random chance increased %i times", rndIncreases) );
     }
@@ -595,6 +595,8 @@ int rndIncreases;
 
     
     [self addChild:backGround];
+
+    
 }
 
 -(void) setUpDoors:(CGSize) size{

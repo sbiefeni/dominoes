@@ -17,6 +17,8 @@
         SKEmitterNode *background = [SKEmitterNode dom_emitterNamed:@"Background_Stars"];
         background.particlePositionRange = CGVectorMake(self.size.width*2, self.size.height*2);
         [background advanceSimulationTime:10];
+
+        self.backgroundColor = [SKColor blackColor];
         
         [self addChild:background];
         
