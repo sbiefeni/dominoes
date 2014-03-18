@@ -35,7 +35,8 @@
     // Create and configure the scene.
     SKScene * scene = [domMenuScene sceneWithSize:skView.bounds.size];
     scene.scaleMode = SKSceneScaleModeAspectFill;
-    
+
+    //add in the gesture recognizers
     UISwipeGestureRecognizer* swipeGesture =[[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(swipeRecognized:)];
     [swipeGesture setDirection:UISwipeGestureRecognizerDirectionLeft];
     [self.view addGestureRecognizer:swipeGesture];
@@ -52,7 +53,7 @@
     [swipeGesture setDirection:UISwipeGestureRecognizerDirectionDown];
     [self.view addGestureRecognizer:swipeGesture];
 
-    // Present the scene.
+    // Present the Menu scene
     [skView presentScene:scene];
 }
 
@@ -102,6 +103,7 @@ switch (swipe.direction) {
         break;
     };
 
+    //storing the swipe using the NSUserDefaults structure
     NSUserDefaults *standardUserDefaults = [NSUserDefaults standardUserDefaults];
 
     if (standardUserDefaults) {

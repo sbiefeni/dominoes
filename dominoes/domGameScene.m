@@ -29,14 +29,13 @@
 
 //define rows and cols
 #define rows        26
-#define cols        16
-
+#define cols        19
 //scale up the domino size relative to the grid
-#define dominoScaleFactorX 1.1   // - 1.25
-#define dominoScaleFactorY 1.1 //
+#define dominoScaleFactorX 1   // - 1.25
+#define dominoScaleFactorY 1 //
 
 @interface domGameScene (){
-    
+
     SKSpriteNode* backGround;
     SKSpriteNode* topDoor;
     SKSpriteNode* rightDoor;
@@ -99,6 +98,8 @@
     if (self = [super initWithSize:size]) {
         /* Setup your scene here */
 
+        //@autoreleasepool {
+
         arenaSize = size;
         
         [self setUpBackGround];
@@ -108,7 +109,8 @@
         [self setUpDominoGrid];
         
         [self initializeGame];
-        
+
+        //}
         //NSLog(@"Width: %f, Height: %f", size.width, size.height);
     }
 
@@ -228,9 +230,9 @@
         //draw computer domino
         if(computer.curDirection == up || computer.curDirection==down)
         {
-            domino = [clsDomino spriteNodeWithImageNamed:@"dominoH"];
+            domino = [clsDomino spriteNodeWithImageNamed:@"dominoHc"];
         }else{
-            domino = [clsDomino spriteNodeWithImageNamed:@"dominoV"];
+            domino = [clsDomino spriteNodeWithImageNamed:@"dominoVc"];
         }
         domino.direction = computer.curDirection;
 
@@ -240,8 +242,8 @@
         //[objectWithOurMethod methodName:int1 withArg2:int2];
         domino.position = [self calcDominoPosition:computer.curX withArg2:computer.curY];
 
-        domino.color = [SKColor redColor];
-        domino.colorBlendFactor = .6;
+//        domino.color = [SKColor redColor];
+//        domino.colorBlendFactor = .6;
 
 
         [self addChild:domino];
@@ -281,20 +283,17 @@
 
             [explosion runAction:[SKAction sequence:@[
                   //[SKAction playSoundFileNamed:@"explosion.wav" waitForCompletion:NO],
-                  //[SKAction waitForDuration:0.4]
-                  //[SKAction runBlock:^{
-                  // TODO: Remove these more nicely
-                  //[killingEnemy removeFromParent];
-                  //[_player removeFromParent];
-                  //],
-                  [SKAction waitForDuration:0.35],
+                  [SKAction runBlock:^{
+                        AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
+                   }],
+                  [SKAction waitForDuration:.6],
                   [SKAction runBlock:^{ explosion.particleBirthRate = 0;} ],
                   [SKAction waitForDuration:1.2],
                   [SKAction runBlock:^{
                         domMenuScene *menu = [[domMenuScene alloc] initWithSize:self.size];
                         [self.view presentScene:menu transition:[SKTransition doorsCloseHorizontalWithDuration:1]];
                     }],
-                  [SKAction waitForDuration:1.2],
+                  //[SKAction waitForDuration:1.2],
                   [SKAction runBlock:^{ [explosion removeFromParent]; } ],
                 ]]];
 //            domMenuScene *menu = [[domMenuScene alloc] initWithSize:self.size];
@@ -452,9 +451,9 @@
     if (!crashed) {
         //draw a domino
         if (player1.curDirection == up || player1.curDirection == down) {
-            domino = [SKSpriteNode spriteNodeWithImageNamed:@"dominoH"];
+            domino = [SKSpriteNode spriteNodeWithImageNamed:@"dominoH1"];
         }else {
-            domino = [SKSpriteNode spriteNodeWithImageNamed:@"dominoV"];
+            domino = [SKSpriteNode spriteNodeWithImageNamed:@"dominoV1"];
         }
 
         domino.size = dominoSize;
@@ -463,8 +462,8 @@
         //[objectWithOurMethod methodName:int1 withArg2:int2];
         domino.position = [self calcDominoPosition:player1.curX withArg2:player1.curY];
 
-        domino.color = [SKColor greenColor];
-        domino.colorBlendFactor = .4;
+//        domino.color = [SKColor greenColor];
+//        domino.colorBlendFactor = .4;
 
 
         [self addChild:domino];
@@ -500,13 +499,10 @@
 
         [explosion runAction:[SKAction sequence:@[
                 //[SKAction playSoundFileNamed:@"explosion.wav" waitForCompletion:NO],
-                //[SKAction waitForDuration:0.4]
-                //[SKAction runBlock:^{
-                // TODO: Remove these more nicely
-                //[killingEnemy removeFromParent];
-                //[_player removeFromParent];
-                //],
-                [SKAction waitForDuration:0.35],
+                [SKAction runBlock:^{
+                    AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
+                }],
+                [SKAction waitForDuration:0.6],
                 [SKAction runBlock:^{ explosion.particleBirthRate = 0;} ],
                 [SKAction waitForDuration:1.2],
                 [SKAction runBlock:^{ [explosion removeFromParent]; } ]
@@ -514,7 +510,7 @@
                         //ORBMenuScene *menu = [[ORBMenuScene alloc] initWithSize:self.size];
                           //[self.view presentScene:menu transition:[SKTransition doorsCloseHorizontalWithDuration:0.5]];
                 ]]];
-AudioServicesPlaySystemSound (kSystemSoundID_Vibrate);
+
 
     } //end if (player1.crashed)
     
@@ -573,7 +569,7 @@ AudioServicesPlaySystemSound (kSystemSoundID_Vibrate);
 
     
     
-    backGround = [SKSpriteNode spriteNodeWithImageNamed:@"dominoes-arena"];
+    backGround = [SKSpriteNode spriteNodeWithImageNamed:@"dominoes-arenab"];
 //get the scale factors, so we know how much to scale any other images
     scaleX = backGround.size.width  / arenaSize.width;
     scaleY = backGround.size.height / (arenaSize.height -(bannerSizeY * bannerCount) );
@@ -585,6 +581,10 @@ AudioServicesPlaySystemSound (kSystemSoundID_Vibrate);
     
     backGround.position = CGPointMake(arenaSize.width/2, backGroundPos);
     backGround.zPosition = 1;
+
+            backGround.color = [SKColor blackColor];
+            backGround.colorBlendFactor = .2;
+
     
     [self addChild:backGround];
 }
