@@ -55,8 +55,8 @@
     NSArray *_DominoFallingDown;
 
     //dominoes
-    SKSpriteNode* dominoH;
-    SKSpriteNode* dominoV;
+//    SKSpriteNode* dominoH;
+//    SKSpriteNode* dominoV;
 
     
 //to get the scale factor for the current screen (orig size / new size)
@@ -172,7 +172,8 @@
     }
 
 //start the timer that runs the game!
-    [self runAction:[SKAction repeatActionForever:[SKAction sequence:@[[SKAction performSelector:@selector(gameRunner) onTarget:self],[SKAction waitForDuration:_gameSpeed]]]]];
+    __weak typeof(self) weakSelf = self;
+    [self runAction:[SKAction repeatActionForever:[SKAction sequence:@[[SKAction performSelector:@selector(gameRunner) onTarget:weakSelf],[SKAction waitForDuration:_gameSpeed]]]]];
 
 }
 
@@ -183,15 +184,16 @@
     [self handlePlayerMove];
 
 //computer move, 1/2 of gameSpeed interval wait time to run it
+    __weak typeof(self) weakSelf = self;
     [self runAction:[SKAction sequence:@[
         [SKAction waitForDuration:_gameSpeed/2],
-        [SKAction performSelector:@selector(handleComputerMove) onTarget:self],
+        [SKAction performSelector:@selector(handleComputerMove) onTarget:weakSelf],
     ]]];
 }
 
 -(void) handleComputerMove {
 
-    clsDomino* domino = [clsDomino new];
+    clsDomino* domino; //= [clsDomino new];
     BOOL crashed = false;
     int X = computer.curX;
     int Y = computer.curY;
@@ -292,22 +294,33 @@
             [self addChild:explosion];
             computer.didExplosion = true;
 
-            crashed = false;
+            _fallingAnimationInterval = (NSTimeInterval)4/computerDominos.count;
 
-            [explosion runAction:[SKAction sequence:@[
+            crashed = false;
+            [self runAction:[SKAction sequence:@[
                   //[SKAction playSoundFileNamed:@"explosion.wav" waitForCompletion:NO],
-                  [SKAction runBlock:^{
-                        AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
-                   }],
+//                  [SKAction runBlock:^{
+//                        AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
+//                   }],
                   [SKAction waitForDuration:.6],
                   [SKAction runBlock:^{ explosion.particleBirthRate = 0;} ],
                   [SKAction waitForDuration:1.2],
+                  [SKAction runBlock:^{ [explosion removeFromParent]; } ],
+                  [SKAction runBlock:^{
+                    _fallingAnimationDelay = _fallingAnimationInterval;
+                    for (clsDomino* dom in [computerDominos reverseObjectEnumerator]) {
+                            //code to be executed on the main queue after delay
+                        _fallingAnimationDelay += _fallingAnimationInterval;
+                        [dom fallDown:_fallingAnimationDelay];
+                    };
+                  }],
+                  [SKAction waitForDuration:5],
                   [SKAction runBlock:^{
                         domMenuScene *menu = [[domMenuScene alloc] initWithSize:self.size];
                         [self.view presentScene:menu transition:[SKTransition doorsCloseHorizontalWithDuration:1]];
                     }],
                   //[SKAction waitForDuration:1.2],
-                  [SKAction runBlock:^{ [explosion removeFromParent]; } ],
+
                 ]]];
 //            domMenuScene *menu = [[domMenuScene alloc] initWithSize:self.size];
 //            [self.view presentScene:menu transition:[SKTransition doorsOpenHorizontalWithDuration:1.5]];
@@ -414,7 +427,7 @@ int rndIncreases;
 
 -(void) handlePlayerMove{
 
-    SKSpriteNode* domino =[SKSpriteNode new];
+    clsDomino* domino; // =[clsDomino new];
     BOOL crashed = false;
 
     //get player direction
@@ -465,9 +478,9 @@ int rndIncreases;
     if (!crashed) {
         //draw a domino
         if (player1.curDirection == up || player1.curDirection == down) {
-            domino = [SKSpriteNode spriteNodeWithImageNamed:@"dominoH1"];
+            domino = [clsDomino spriteNodeWithImageNamed:@"dominoH1"];
         }else {
-            domino = [SKSpriteNode spriteNodeWithImageNamed:@"dominoV1"];
+            domino = [clsDomino spriteNodeWithImageNamed:@"dominoV1"];
         }
 
         domino.size = dominoSize;
@@ -510,12 +523,12 @@ int rndIncreases;
             player1.didExplosion = true;
 
             crashed = false;
-
-        [explosion runAction:[SKAction sequence:@[
+        __weak typeof(self) weakSelf = self;
+        [weakSelf runAction:[SKAction sequence:@[
                 //[SKAction playSoundFileNamed:@"explosion.wav" waitForCompletion:NO],
-                [SKAction runBlock:^{
-                    AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
-                }],
+//                [SKAction runBlock:^{
+//                    AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
+//                }],
                 [SKAction waitForDuration:0.6],
                 [SKAction runBlock:^{ explosion.particleBirthRate = 0;} ],
                 [SKAction waitForDuration:1.2],
