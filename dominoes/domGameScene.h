@@ -18,6 +18,10 @@
 
 @property float gameSpeed;
 
+@property NSTimeInterval fallingAnimationInterval;
+@property NSTimeInterval fallingAnimationDelay;
+@property int sceneChangeDelay;
+
 //enum the last swipe action
 typedef enum  {
     none=   0,

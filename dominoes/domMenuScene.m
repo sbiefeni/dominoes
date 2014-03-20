@@ -14,6 +14,9 @@
 -(instancetype)initWithSize:(CGSize)size
 {
     if(self = [super initWithSize:size]) {
+
+        
+
         SKEmitterNode *background = [SKEmitterNode dom_emitterNamed:@"Background_Stars"];
         background.particlePositionRange = CGVectorMake(self.size.width*2, self.size.height*2);
         [background advanceSimulationTime:10];
@@ -21,6 +24,7 @@
         self.backgroundColor = [SKColor blackColor];
         
         [self addChild:background];
+
         
         SKLabelNode *title = [SKLabelNode labelNodeWithFontNamed:@"Avenir-Black"];
         
@@ -52,16 +56,33 @@
         //_modeButton.frame = CGRectMake(0, (self.size.height - tapToPlay.position.y) + 20, self.size.width, 60);
         //[self updateModeButton];
         //[_modeButton addTarget:self action:@selector(selectMode) forControlEvents:UIControlEventTouchUpInside];
+
+        [self runAction:[SKAction sequence:@[
+                                                  //[SKAction playSoundFileNamed:@"explosion.wav" waitForCompletion:NO],
+            [SKAction waitForDuration:2],
+            [SKAction runBlock:^{
+                domGameScene *game = [[domGameScene alloc] initWithSize:self.size];
+
+                [self.view presentScene:game transition:[SKTransition doorsOpenHorizontalWithDuration:1.5]];
+            }],
+            ]]];
+
+
     }
     return self;
 }
 
+
 -(void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {
+    @autoreleasepool {
+
     domGameScene *game = [[domGameScene alloc] initWithSize:self.size];
 
     [self.view presentScene:game transition:[SKTransition doorsOpenHorizontalWithDuration:1.5]];
     //game.gameSpeed = 5;
+
+    }
 }
 
 @end

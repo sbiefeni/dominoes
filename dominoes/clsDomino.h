@@ -19,7 +19,7 @@
 
 @property NSMutableArray* dominos;
 
--(void) animateDomino;
+-(void) fallDown:(double)delay;
 
 
 @end
