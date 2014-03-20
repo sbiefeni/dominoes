@@ -193,7 +193,7 @@
 
 -(void) handleComputerMove {
 
-    clsDomino* domino; //= [clsDomino new];
+    clsDomino* domino = [clsDomino new];
     BOOL crashed = false;
     int X = computer.curX;
     int Y = computer.curY;
@@ -241,9 +241,11 @@
         //draw computer domino
         if(computer.curDirection == up || computer.curDirection==down)
         {
-            domino = [clsDomino spriteNodeWithImageNamed:@"dominoHc"];
+            [domino setTexture:[SKTexture textureWithImageNamed:@"dominoHc"]];
+            //domino = [clsDomino spriteNodeWithImageNamed:@"dominoHc"];
         }else{
-            domino = [clsDomino spriteNodeWithImageNamed:@"dominoVc"];
+            [domino setTexture:[SKTexture textureWithImageNamed:@"dominoVc"]];
+            //domino = [clsDomino spriteNodeWithImageNamed:@"dominoVc"];
         }
         domino.direction = computer.curDirection;
 
@@ -254,12 +256,12 @@
         domino.position = [self calcDominoPosition:computer.curX withArg2:computer.curY];
 
         //temp - highlight when computer is close to a wall
-        isRunningInIde(
-            if (Y==0  || Y==rows || X==0 || X==cols) {
-                domino.color = [SKColor redColor];
-                domino.colorBlendFactor = 5;
-            }
-        );
+//        isRunningInIde(
+//            if (Y==0  || Y==rows || X==0 || X==cols) {
+//                domino.color = [SKColor redColor];
+//                domino.colorBlendFactor = 5;
+//            }
+//        );
 
         [self addChild:domino];
 
@@ -294,7 +296,8 @@
             [self addChild:explosion];
             computer.didExplosion = true;
 
-            _fallingAnimationInterval = (NSTimeInterval)4/computerDominos.count;
+            _sceneChangeDelay  = 6;
+            _fallingAnimationInterval = (NSTimeInterval)_sceneChangeDelay/computerDominos.count;
 
             crashed = false;
             [self runAction:[SKAction sequence:@[
@@ -314,7 +317,7 @@
                         [dom fallDown:_fallingAnimationDelay];
                     };
                   }],
-                  [SKAction waitForDuration:5],
+                  [SKAction waitForDuration:_sceneChangeDelay + 3],
                   [SKAction runBlock:^{
                         domMenuScene *menu = [[domMenuScene alloc] initWithSize:self.size];
                         [self.view presentScene:menu transition:[SKTransition doorsCloseHorizontalWithDuration:1]];
@@ -427,7 +430,7 @@ int rndIncreases;
 
 -(void) handlePlayerMove{
 
-    clsDomino* domino; // =[clsDomino new];
+    clsDomino* domino =[clsDomino new];
     BOOL crashed = false;
 
     //get player direction
@@ -478,9 +481,11 @@ int rndIncreases;
     if (!crashed) {
         //draw a domino
         if (player1.curDirection == up || player1.curDirection == down) {
-            domino = [clsDomino spriteNodeWithImageNamed:@"dominoH1"];
+            [domino setTexture:[SKTexture textureWithImageNamed:@"dominoH1"]];
+            //domino = [clsDomino spriteNodeWithImageNamed:@"dominoH1"];
         }else {
-            domino = [clsDomino spriteNodeWithImageNamed:@"dominoV1"];
+            [domino setTexture:[SKTexture textureWithImageNamed:@"dominoV1"]];
+            //domino = [clsDomino spriteNodeWithImageNamed:@"dominoV1"];
         }
 
         domino.size = dominoSize;
