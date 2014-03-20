@@ -57,7 +57,8 @@
     //dominoes
     SKSpriteNode* dominoH;
     SKSpriteNode* dominoV;
-
+    CFTimeInterval startTime;
+    //ADBannerView *adView;
     
 //to get the scale factor for the current screen (orig size / new size)
     float scaleX;
@@ -120,7 +121,8 @@
         //}
         //NSLog(@"Width: %f, Height: %f", size.width, size.height);
     }
-
+    //get starting time
+    startTime=CACurrentMediaTime();
     return self;
 }
 
@@ -161,7 +163,7 @@
 
 //set the speed interval between moves (time for both player and computer to complete one move)
     if (_gameSpeed == 0 ) {
-        _gameSpeed = .05;
+        _gameSpeed = .5;
     }
     
 //set initial player1 direction - ***HACK? - NSUserDefaults lets us easily communicate variables between classes.
@@ -416,8 +418,8 @@ int rndIncreases;
 
     SKSpriteNode* domino =[SKSpriteNode new];
     BOOL crashed = false;
-
-    //get player direction
+    
+        //get player direction
     NSUserDefaults *standardUserDefaults = [NSUserDefaults standardUserDefaults];
     NSNumber *tmpValue;
     if (standardUserDefaults) {
@@ -715,6 +717,8 @@ int countSquares;
 
 }
 
+
+
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
 
     //[scene runAction:[SKAction scaleTo:0.5 duration:0]];
@@ -738,8 +742,25 @@ int countSquares;
 
 //-(void)update:(CFTimeInterval)currentTime {
 //    /* Called before each frame is rendered */
+//    //get elapsed time
+//    CFTimeInterval elapsedTime=CACurrentMediaTime()-startTime;
 //    
+//    if(elapsedTime>5)
+//    {
+//        if(adView==NULL)
+//        {
+//            
+//            adView=[[ADBannerView alloc] initWithFrame];
+//           
+//            adView.autoresizingMask=UIViewAutoresizingFlexibleBottomMargin;
+//            [self.view addSubview:adView];
+//        }
+//        
+//    }
+//
 //}
+
+
 // This was to visualize the grid array
 //- (void)arrayToString:(bool [cols][rows])array
 //{

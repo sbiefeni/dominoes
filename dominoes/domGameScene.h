@@ -7,13 +7,14 @@
 //
 
 #import <SpriteKit/SpriteKit.h>
-
+#import <iAd/iAd.h>
 
 
 
 @interface domGameScene : SKScene
-
+<ADBannerViewDelegate>
 @property (strong, nonatomic) SKAction *playMySound;
+//@property (strong,nonatomic) ADBannerView *adView;
 
 @property float gameSpeed;
 
