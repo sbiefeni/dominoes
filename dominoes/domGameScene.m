@@ -296,7 +296,7 @@
             [self addChild:explosion];
             computer.didExplosion = true;
 
-            _sceneChangeDelay  = 6;
+            _sceneChangeDelay  = 3;
             _fallingAnimationInterval = (NSTimeInterval)_sceneChangeDelay/computerDominos.count;
 
             crashed = false;
@@ -351,7 +351,7 @@ int rndIncreases;
     if ((D == left && X < 4) || (D == up && Y > maxY-4) || (D == right && X > maxX-4) || (D == down && Y < 4) || Y==0  || Y==rows || X==0 || X==cols){
         rndChance /=6;
         rndIncreases++;
-        isRunningInIde( NSLog(@"Random chance increased %i times", rndIncreases) );
+        //isRunningInIde( NSLog(@"Random chance increased %i times", rndIncreases) );
     }
 
 //generate a random change BOOL - all direction changes will have 2 possible choices
