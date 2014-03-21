@@ -1,9 +1,23 @@
 {
   "images" : [
     {
+      "resizing" : {
+        "mode" : "9-part",
+        "center" : {
+          "mode" : "fill",
+          "width" : 656,
+          "height" : 1
+        },
+        "capInsets" : {
+          "bottom" : 1024,
+          "top" : 1023,
+          "right" : 768,
+          "left" : 112
+        }
+      },
       "idiom" : "universal",
-      "scale" : "1x",
-      "filename" : "dominoes-arena.png"
+      "filename" : "dominoes-arena.png",
+      "scale" : "1x"
     },
     {
       "idiom" : "universal",
