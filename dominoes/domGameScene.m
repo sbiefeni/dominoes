@@ -23,12 +23,6 @@
 #define ceilingOn   0
 #define floorOn     0
 
-//define the min and max extents of the domino grid area
-#define minX        160
-#define minY        145
-#define maxX        1390
-#define maxY        1900
-
 //define z positions for objects
 #define doorZPos    5
 #define dominoZPos  6
@@ -82,6 +76,11 @@
     CGSize gridSize;
     CGSize dominoSize;
 
+// min/max extents
+    double minX;
+    double minY;
+    double maxX;
+    double maxY;
     
 //use these to store each movement, in sequence, for each player
 //max size is the total available grid squares, so we never run out
@@ -134,7 +133,7 @@
     gridSize = CGSizeMake(gridWidth/cols/scaleX, gridHeight/rows/scaleY);
     dominoSize = CGSizeMake((gridWidth/cols)/scaleX*dominoScaleFactorX, (gridHeight/rows)/scaleY*dominoScaleFactorY);
 
-//initialize the grid BOOL
+//initialize the grid BOOL to false
     for (int i=0; i<(cols+1); i++) {
         for (int ii=0; ii < (rows+1); ii++) {
             grid[i][ii]=false;
@@ -142,6 +141,19 @@
     }
 }
 
+-(void) setUpMinMaxExtents:(CGSize)size{
+//    minX    =    160;  //based on 1536 = 10.42%
+//    minY    =    145;  //based on 2048 =  7.08%
+//    maxX    =    1376;
+//    maxY    =    1903;
+
+    //TODO figure out gridWidth, gridHeight FROM background image size
+    minX = round((size.width * 10.42) / 100);
+    minY = round((size.height * 7.08) / 100);
+    maxX = size.width - minX;
+    maxY = size.height - minY;
+
+}
 -(void) initializeGame{
 
     player1 = [player new];
@@ -581,21 +593,19 @@ int rndIncreases;
     }
     
     if (floorOn){
-//        SKSpriteNode* floor = [SKSpriteNode spriteNodeWithColor:[UIColor blueColor] size:CGSizeMake(arenaSize.width, bannerSizeY)];
-//        floor.position = CGPointMake(arenaSize.width/2, (bannerSizeY/2));
-//        [self addChild:floor];
         bannerCount +=1;
     }
     if (ceilingOn){
-//        SKSpriteNode* ceiling = [SKSpriteNode spriteNodeWithColor:[UIColor blueColor] size:CGSizeMake(arenaSize.width, bannerSizeY)];
-//        ceiling.position = CGPointMake(arenaSize.width/2, arenaSize.height-(bannerSizeY/2));
-//        [self addChild:ceiling];
         bannerCount +=1;
     }
 
     
     
     backGround = [SKSpriteNode spriteNodeWithImageNamed:@"dominoes-arenab"];
+
+    //calculate min and max extents, based on original background size
+    [self setUpMinMaxExtents:backGround.size];
+
 //get the scale factors, so we know how much to scale any other images
     scaleX = backGround.size.width  / arenaSize.width;
     scaleY = backGround.size.height / (arenaSize.height -(bannerSizeY * bannerCount) );

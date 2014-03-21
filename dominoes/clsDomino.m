@@ -20,19 +20,24 @@ NSMutableArray* dominoFrames;
 -(void) fallDown:(double)delay{
 
     SKTexture* txtr; //= [SKTexture textureWithImageNamed:@"dominoH"];
+    SKAction* moveAction;
 
     switch (_direction) {
     case 1:  //left
             txtr = [SKTexture textureWithImageNamed:@"dominosC-R"];
+            moveAction = [SKAction moveByX:5 y:0 duration:.3];
         break;
     case 2:  //right
             txtr = [SKTexture textureWithImageNamed:@"dominosC-L"];
+            moveAction = [SKAction moveByX:-5 y:0 duration:.3];
         break;
     case 3: //up
             txtr = [SKTexture textureWithImageNamed:@"dominosC-D"];
+            moveAction = [SKAction moveByX:0 y:-5 duration:.3];
         break;
     case 4: //down
             txtr = [SKTexture textureWithImageNamed:@"dominosC-U"];
+            moveAction = [SKAction moveByX:0 y:5 duration:.3];
         break;
     default: ;
 
@@ -42,7 +47,9 @@ NSMutableArray* dominoFrames;
         [SKAction waitForDuration:delay],
         [SKAction runBlock:^{
             [self setTexture: txtr];
-        }]
+        }],
+        [SKAction waitForDuration:.1],
+        moveAction
     ]]];
 }
 

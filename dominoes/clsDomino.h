@@ -17,7 +17,7 @@
 //is this a player domino, or computer
 @property BOOL player;
 
-@property NSMutableArray* dominos;
+//@property NSMutableArray* dominos;
 
 -(void) fallDown:(double)delay;
 
