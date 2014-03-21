@@ -137,10 +137,10 @@
 		389B9CFA18CFD776004960E5 /* helpers */ = {
 			isa = PBXGroup;
 			children = (
-				389B9CF518CFCDCF004960E5 /* clsDomino.m */,
 				389B9CF418CFCDCF004960E5 /* clsDomino.h */,
-				389B9CF818CFD449004960E5 /* player.m */,
+				389B9CF518CFCDCF004960E5 /* clsDomino.m */,
 				389B9CF718CFD449004960E5 /* player.h */,
+				389B9CF818CFD449004960E5 /* player.m */,
 			);
 			name = helpers;
 			sourceTree = "<group>";

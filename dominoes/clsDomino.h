@@ -19,7 +19,7 @@
 
 //@property NSMutableArray* dominos;
 
--(void) fallDown:(double)delay;
+-(void) fallDown:(double)delay isPlayer:(BOOL)bPlayer;
 
 
 @end

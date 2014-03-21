@@ -328,7 +328,7 @@
                     for (clsDomino* dom in [computerDominos reverseObjectEnumerator]) {
                             //code to be executed on the main queue after delay
                         _fallingAnimationDelay += _fallingAnimationInterval;
-                        [dom fallDown:_fallingAnimationDelay];
+                        [dom fallDown:_fallingAnimationDelay isPlayer:false];
                     };
                   }],
                   [SKAction waitForDuration:_sceneChangeDelay + 3],
@@ -507,7 +507,7 @@ int rndIncreases;
 
         //[objectWithOurMethod methodName:int1 withArg2:int2];
         domino.position = [self calcDominoPosition:player1.curX withArg2:player1.curY];
-
+        domino.direction=player1.curDirection;
 //        domino.color = [SKColor greenColor];
 //        domino.colorBlendFactor = .4;
 
@@ -540,7 +540,8 @@ int rndIncreases;
 
             [self addChild:explosion];
             player1.didExplosion = true;
-
+        _sceneChangeDelay  = 3;
+_fallingAnimationInterval = (NSTimeInterval)_sceneChangeDelay/computerDominos.count;
             crashed = false;
         __weak typeof(self) weakSelf = self;
         [weakSelf runAction:[SKAction sequence:@[
@@ -551,7 +552,16 @@ int rndIncreases;
                 [SKAction waitForDuration:0.6],
                 [SKAction runBlock:^{ explosion.particleBirthRate = 0;} ],
                 [SKAction waitForDuration:1.2],
-                [SKAction runBlock:^{ [explosion removeFromParent]; } ]
+                [SKAction runBlock:^{ [explosion removeFromParent]; } ],
+                [SKAction runBlock:^{
+                    _fallingAnimationDelay = _fallingAnimationInterval;
+                    for (clsDomino* dom in [playerDominos reverseObjectEnumerator]) {
+                            //code to be executed on the main queue after delay
+                        _fallingAnimationDelay += _fallingAnimationInterval;
+                        [dom fallDown:_fallingAnimationDelay isPlayer:true];
+                    };
+                }],
+
                 //[SKAction runBlock:^{
                         //ORBMenuScene *menu = [[ORBMenuScene alloc] initWithSize:self.size];
                           //[self.view presentScene:menu transition:[SKTransition doorsCloseHorizontalWithDuration:0.5]];

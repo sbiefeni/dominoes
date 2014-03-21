@@ -17,26 +17,25 @@
 NSMutableArray* dominoFrames;
 
 
--(void) fallDown:(double)delay{
+-(void) fallDown:(double)delay isPlayer:(BOOL)bPlayer{
 
     SKTexture* txtr; //= [SKTexture textureWithImageNamed:@"dominoH"];
     SKAction* moveAction;
-
+    NSString *whichPlayer=(bPlayer)?@"P":@"C";
     switch (_direction) {
     case 1:  //left
-            txtr = [SKTexture textureWithImageNamed:@"dominosC-R"];
+            txtr = [SKTexture textureWithImageNamed:[NSString stringWithFormat:@"%s%@%s","dominos",whichPlayer,"-R"]];
             moveAction = [SKAction moveByX:5 y:0 duration:.3];
         break;
     case 2:  //right
-            txtr = [SKTexture textureWithImageNamed:@"dominosC-L"];
+            txtr = [SKTexture textureWithImageNamed:[NSString stringWithFormat:@"%s%@%s","dominos",whichPlayer,"-L"]];
             moveAction = [SKAction moveByX:-5 y:0 duration:.3];
         break;
     case 3: //up
-            txtr = [SKTexture textureWithImageNamed:@"dominosC-D"];
-            moveAction = [SKAction moveByX:0 y:-5 duration:.3];
+            txtr = [SKTexture textureWithImageNamed:[NSString stringWithFormat:@"%s%@%s","dominos",whichPlayer,"-D"]];            moveAction = [SKAction moveByX:0 y:-5 duration:.3];
         break;
     case 4: //down
-            txtr = [SKTexture textureWithImageNamed:@"dominosC-U"];
+            txtr = [SKTexture textureWithImageNamed:[NSString stringWithFormat:@"%s%@%s","dominos",whichPlayer,"-U"]];
             moveAction = [SKAction moveByX:0 y:5 duration:.3];
         break;
     default: ;
