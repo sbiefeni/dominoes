@@ -3,11 +3,12 @@
     {
       "idiom" : "universal",
       "scale" : "1x",
-      "filename" : "dominosC-U.png"
+      "filename" : "dominosC-Ud2.png"
     },
     {
       "idiom" : "universal",
-      "scale" : "2x"
+      "scale" : "2x",
+      "filename" : "dominosC-U.png"
     }
   ],
   "info" : {

@@ -319,7 +319,7 @@
 //                   }],
                   [SKAction waitForDuration:.6],
                   [SKAction runBlock:^{ explosion.particleBirthRate = 0;} ],
-                  [SKAction waitForDuration:1.2],
+                  [SKAction waitForDuration:.3],
                   [SKAction runBlock:^{ [explosion removeFromParent]; } ],
                   [SKAction runBlock:^{
                     _fallingAnimationDelay = _fallingAnimationInterval;
