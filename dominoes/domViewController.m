@@ -62,12 +62,20 @@
 {
     // View is about to be obscured by an advert.
     //Pause activities if necessary
+    UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"Paused" message:@"Press the button to continue" delegate:self cancelButtonTitle:@"Resume" otherButtonTitles:nil];
+    [alert show];
+    
+}
+
+-(void)gameLoop
+{
     
 }
 
 -(void)viewWillAppear:(BOOL)animated
 {
     // Advert has been dismissed. Resume paused activities
+    
 }
 
 //- (void)keyDown:(nse *)theEvent {

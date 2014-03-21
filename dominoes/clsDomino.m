@@ -17,7 +17,7 @@
 NSMutableArray* dominoFrames;
 
 
--(void) fallDown:(double)delay{
+-(void) fallDown:(double)delay isPlayer:(BOOL)bPlayer{
 
     SKTexture* txtr = [SKTexture textureWithImageNamed:@"dominosC-U"];
     SKAction* moveAction;

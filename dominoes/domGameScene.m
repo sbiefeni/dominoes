@@ -49,9 +49,10 @@
     NSArray *_DominoFallingDown;
 
     //dominoes
-//    SKSpriteNode* dominoH;
-//    SKSpriteNode* dominoV;
-
+    SKSpriteNode* dominoH;
+    SKSpriteNode* dominoV;
+    CFTimeInterval startTime;
+    //ADBannerView *adView;
     
 //to get the scale factor for the current screen (orig size / new size)
     float scaleX;
@@ -119,7 +120,8 @@
         //}
         //NSLog(@"Width: %f, Height: %f", size.width, size.height);
     }
-
+    //get starting time
+    startTime=CACurrentMediaTime();
     return self;
 }
 
@@ -173,7 +175,7 @@
 
 //set the speed interval between moves (time for both player and computer to complete one move)
     if (_gameSpeed == 0 ) {
-        _gameSpeed = .05;
+        _gameSpeed = .5;
     }
     
 //set initial player1 direction - ***HACK? - NSUserDefaults lets us easily communicate variables between classes.
@@ -326,7 +328,7 @@
                     for (clsDomino* dom in [computerDominos reverseObjectEnumerator]) {
                             //code to be executed on the main queue after delay
                         _fallingAnimationDelay += _fallingAnimationInterval;
-                        [dom fallDown:_fallingAnimationDelay];
+                        [dom fallDown:_fallingAnimationDelay isPlayer:false];
                     };
                   }],
                   [SKAction waitForDuration:_sceneChangeDelay + 3],
@@ -444,8 +446,8 @@ int rndIncreases;
 
     clsDomino* domino =[clsDomino new];
     BOOL crashed = false;
-
-    //get player direction
+    
+        //get player direction
     NSUserDefaults *standardUserDefaults = [NSUserDefaults standardUserDefaults];
     NSNumber *tmpValue;
     if (standardUserDefaults) {
@@ -505,7 +507,7 @@ int rndIncreases;
 
         //[objectWithOurMethod methodName:int1 withArg2:int2];
         domino.position = [self calcDominoPosition:player1.curX withArg2:player1.curY];
-
+        domino.direction=player1.curDirection;
 //        domino.color = [SKColor greenColor];
 //        domino.colorBlendFactor = .4;
 
@@ -538,7 +540,8 @@ int rndIncreases;
 
             [self addChild:explosion];
             player1.didExplosion = true;
-
+        _sceneChangeDelay  = 3;
+_fallingAnimationInterval = (NSTimeInterval)_sceneChangeDelay/computerDominos.count;
             crashed = false;
         __weak typeof(self) weakSelf = self;
         [weakSelf runAction:[SKAction sequence:@[
@@ -549,7 +552,16 @@ int rndIncreases;
                 [SKAction waitForDuration:0.6],
                 [SKAction runBlock:^{ explosion.particleBirthRate = 0;} ],
                 [SKAction waitForDuration:1.2],
-                [SKAction runBlock:^{ [explosion removeFromParent]; } ]
+                [SKAction runBlock:^{ [explosion removeFromParent]; } ],
+                [SKAction runBlock:^{
+                    _fallingAnimationDelay = _fallingAnimationInterval;
+                    for (clsDomino* dom in [playerDominos reverseObjectEnumerator]) {
+                            //code to be executed on the main queue after delay
+                        _fallingAnimationDelay += _fallingAnimationInterval;
+                        [dom fallDown:_fallingAnimationDelay isPlayer:true];
+                    };
+                }],
+
                 //[SKAction runBlock:^{
                         //ORBMenuScene *menu = [[ORBMenuScene alloc] initWithSize:self.size];
                           //[self.view presentScene:menu transition:[SKTransition doorsCloseHorizontalWithDuration:0.5]];
@@ -743,6 +755,8 @@ int countSquares;
 
 }
 
+
+
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
 
     //[scene runAction:[SKAction scaleTo:0.5 duration:0]];
@@ -766,8 +780,25 @@ int countSquares;
 
 //-(void)update:(CFTimeInterval)currentTime {
 //    /* Called before each frame is rendered */
+//    //get elapsed time
+//    CFTimeInterval elapsedTime=CACurrentMediaTime()-startTime;
 //    
+//    if(elapsedTime>5)
+//    {
+//        if(adView==NULL)
+//        {
+//            
+//            adView=[[ADBannerView alloc] initWithFrame];
+//           
+//            adView.autoresizingMask=UIViewAutoresizingFlexibleBottomMargin;
+//            [self.view addSubview:adView];
+//        }
+//        
+//    }
+//
 //}
+
+
 // This was to visualize the grid array
 //- (void)arrayToString:(bool [cols][rows])array
 //{
