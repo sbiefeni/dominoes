@@ -43,14 +43,15 @@
     SKSpriteNode* leftDoor;
 
     //to hold animation arrays
-    NSArray *_DominoFallingLeft;
-    NSArray *_DominoFallingUp;
-    NSArray *_DominoFallingRight;
-    NSArray *_DominoFallingDown;
+//    NSArray *_DominoFallingLeft;
+//    NSArray *_DominoFallingUp;
+//    NSArray *_DominoFallingRight;
+//    NSArray *_DominoFallingDown;
 
     //dominoes
-    SKSpriteNode* dominoH;
-    SKSpriteNode* dominoV;
+//    SKSpriteNode* dominoH;
+//    SKSpriteNode* dominoV;
+    
     CFTimeInterval startTime;
     //ADBannerView *adView;
     
@@ -122,6 +123,7 @@
     }
     //get starting time
     startTime=CACurrentMediaTime();
+
     return self;
 }
 
@@ -175,7 +177,7 @@
 
 //set the speed interval between moves (time for both player and computer to complete one move)
     if (_gameSpeed == 0 ) {
-        _gameSpeed = .5;
+        _gameSpeed = .05;
     }
     
 //set initial player1 direction - ***HACK? - NSUserDefaults lets us easily communicate variables between classes.
@@ -187,7 +189,10 @@
 
 //start the timer that runs the game!
     __weak typeof(self) weakSelf = self;
-    [self runAction:[SKAction repeatActionForever:[SKAction sequence:@[[SKAction performSelector:@selector(gameRunner) onTarget:weakSelf],[SKAction waitForDuration:_gameSpeed]]]]];
+    [self runAction:[SKAction repeatActionForever:[SKAction sequence:@[
+                [SKAction performSelector:@selector(gameRunner) onTarget:weakSelf],
+                [SKAction waitForDuration:_gameSpeed]
+    ]]]];
 
 }
 
@@ -313,7 +318,7 @@
             _sceneChangeDelay  = 3;
             _fallingAnimationInterval = (NSTimeInterval)_sceneChangeDelay/computerDominos.count;
 
-            crashed = false;
+            //crashed = false;
             [self runAction:[SKAction sequence:@[
                   //[SKAction playSoundFileNamed:@"explosion.wav" waitForCompletion:NO],
 //                  [SKAction runBlock:^{
@@ -324,11 +329,12 @@
                   [SKAction waitForDuration:.3],
                   [SKAction runBlock:^{ [explosion removeFromParent]; } ],
                   [SKAction runBlock:^{
-                    _fallingAnimationDelay = _fallingAnimationInterval;
+                    _fallingAnimationDelay = 0;
                     for (clsDomino* dom in [computerDominos reverseObjectEnumerator]) {
                             //code to be executed on the main queue after delay
-                        _fallingAnimationDelay += _fallingAnimationInterval;
                         [dom fallDown:_fallingAnimationDelay isPlayer:false];
+                        _fallingAnimationDelay += _fallingAnimationInterval;
+
                     };
                   }],
                   [SKAction waitForDuration:_sceneChangeDelay + 3],
@@ -539,10 +545,13 @@ int rndIncreases;
             explosion.zPosition = 10;
 
             [self addChild:explosion];
+
             player1.didExplosion = true;
-        _sceneChangeDelay  = 3;
-_fallingAnimationInterval = (NSTimeInterval)_sceneChangeDelay/computerDominos.count;
-            crashed = false;
+            _sceneChangeDelay  = 3;
+            _fallingAnimationInterval = (NSTimeInterval)_sceneChangeDelay/playerDominos.count;
+            if (_fallingAnimationInterval > .05)
+                _fallingAnimationInterval = .05;
+            //crashed = false;
         __weak typeof(self) weakSelf = self;
         [weakSelf runAction:[SKAction sequence:@[
                 //[SKAction playSoundFileNamed:@"explosion.wav" waitForCompletion:NO],
@@ -554,11 +563,11 @@ _fallingAnimationInterval = (NSTimeInterval)_sceneChangeDelay/computerDominos.co
                 [SKAction waitForDuration:1.2],
                 [SKAction runBlock:^{ [explosion removeFromParent]; } ],
                 [SKAction runBlock:^{
-                    _fallingAnimationDelay = _fallingAnimationInterval;
+                    _fallingAnimationDelay = 0;
                     for (clsDomino* dom in [playerDominos reverseObjectEnumerator]) {
                             //code to be executed on the main queue after delay
-                        _fallingAnimationDelay += _fallingAnimationInterval;
                         [dom fallDown:_fallingAnimationDelay isPlayer:true];
+                        _fallingAnimationDelay += _fallingAnimationInterval;
                     };
                 }],
 
