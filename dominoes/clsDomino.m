@@ -28,22 +28,22 @@ NSMutableArray* dominoFrames;
     case 1:  //left
             txtr = [SKTexture textureWithImageNamed:[NSString stringWithFormat:@"%s%@","dominos",whichPlayer]];
             rotation = (M_PI / 180) * 90; // degrees to radians
-            moveAction = [SKAction moveByX:5 y:0 duration:.3];
+            moveAction = [SKAction moveByX:5 y:0 duration:.15];
         break;
     case 2:  //right
             txtr = [SKTexture textureWithImageNamed:[NSString stringWithFormat:@"%s%@","dominos",whichPlayer]];
             rotation = (M_PI / 180) * 270;
-            moveAction = [SKAction moveByX:-5 y:0 duration:.3];
+            moveAction = [SKAction moveByX:-5 y:0 duration:.15];
         break;
     case 3: //up
             txtr = [SKTexture textureWithImageNamed:[NSString stringWithFormat:@"%s%@","dominos",whichPlayer]];
             rotation = (M_PI / 180) * 180;
-            moveAction = [SKAction moveByX:0 y:-5 duration:.3];
+            moveAction = [SKAction moveByX:0 y:-5 duration:.15];
         break;
     case 4: //down
             txtr = [SKTexture textureWithImageNamed:[NSString stringWithFormat:@"%s%@","dominos",whichPlayer]];
             //rotation = 0;
-            moveAction = [SKAction moveByX:0 y:5 duration:.3];
+            moveAction = [SKAction moveByX:0 y:5 duration:.15];
         break;
     default: ;
 
