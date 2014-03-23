@@ -20,7 +20,7 @@ NSMutableArray* dominoFrames;
 -(void) fallDown:(NSTimeInterval)delay isPlayer:(BOOL)bPlayer{
 
     SKTexture* txtr; //= [SKTexture textureWithImageNamed:@"dominoH"];
-    SKAction* moveAction;
+    SKAction* moveAction = [SKAction new];
     NSString *whichPlayer=(bPlayer)?@"blue":@"green";
     //double rotation = 0;
 
@@ -58,7 +58,6 @@ NSMutableArray* dominoFrames;
         [SKAction waitForDuration:delay],
         [SKAction runBlock:^{
             [self setTexture: txtr];
-            //self.zRotation = rotation;
         }],
         [SKAction waitForDuration:.1],
         moveAction,

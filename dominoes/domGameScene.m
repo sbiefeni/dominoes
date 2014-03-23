@@ -122,7 +122,7 @@
         //NSLog(@"Width: %f, Height: %f", size.width, size.height);
     }
     //get starting time
-    startTime=CACurrentMediaTime();
+    //startTime=CACurrentMediaTime();
 
     return self;
 }
@@ -623,12 +623,16 @@ int rndIncreases;
         bannerCount +=1;
     }
 
+
     
-    
-    backGround = [SKSpriteNode spriteNodeWithImageNamed:@"dominoes-arenab"];
+    backGround = [SKSpriteNode spriteNodeWithImageNamed:@"new-arena"];
+
+    //CGSize backGroundSize = CGSizeMake(1536, 2048) ;
+
 
     //calculate min and max extents, based on original background size
     [self setUpMinMaxExtents:backGround.size];
+
 
 //get the scale factors, so we know how much to scale any other images
     scaleX = backGround.size.width  / arenaSize.width;
@@ -646,7 +650,7 @@ int rndIncreases;
             backGround.colorBlendFactor = .2;
 
     
-    //[self addChild:backGround];
+    [self addChild:backGround];
 
     
 }
