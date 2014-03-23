@@ -28,8 +28,8 @@
 #define dominoZPos  6
 
 //define rows and cols
-#define rows        26
-#define cols        19
+#define rows        28
+#define cols        21
 //scale up the domino size relative to the grid
 #define dominoScaleFactorX 1   // - 1.25
 #define dominoScaleFactorY 1 //
@@ -112,7 +112,7 @@
         
         [self setUpBackGround];
         
-        [self setUpDoors:size];
+        //[self setUpDoors:size];
         
         [self setUpDominoGrid];
         
@@ -133,7 +133,8 @@
     gridWidth = maxX - minX;
     gridHeight = maxY - minY;
     
-//set the size of the grid and dominoes
+//set the size of the grid and dominoe
+    //pre-scaled should be 64 x 68
     gridSize = CGSizeMake(gridWidth/cols/scaleX, gridHeight/rows/scaleY);
     dominoSize = CGSizeMake((gridWidth/cols)/scaleX*dominoScaleFactorX, (gridHeight/rows)/scaleY*dominoScaleFactorY);
 
@@ -146,16 +147,17 @@
 }
 
 -(void) setUpMinMaxExtents:(CGSize)size{
-//    minX    =    160;  //based on 1536 = 10.42%
-//    minY    =    145;  //based on 2048 =  7.08%
-//    maxX    =    1376;
-//    maxY    =    1903;
+    minX    =    96;
+    minY    =    77;
+    maxX    =    1440;
+    maxY    =    1971;
 
     //TODO figure out gridWidth, gridHeight FROM background image size
-    minX = round((size.width * 10.42) / 100);
-    minY = round((size.height * 7.08) / 100);
-    maxX = size.width - minX;
-    maxY = size.height - minY;
+    //was based on original arena..prob not valid
+//    minX = round((size.width * 10.42) / 100);//based on 1536 = 10.42%
+//    minY = round((size.height * 7.08) / 100);//based on 2048 =  7.08%
+//    maxX = size.width - minX;
+//    maxY = size.height - minY;
 
 }
 -(void) initializeGame{
@@ -212,7 +214,7 @@
 
 -(void) handleComputerMove {
 
-    clsDomino* domino = [clsDomino new];
+    clsDomino* domino; // = [clsDomino new];
     BOOL crashed = false;
     int X = computer.curX;
     int Y = computer.curY;
@@ -260,10 +262,10 @@
         //draw computer domino
         if(computer.curDirection == up || computer.curDirection==down)
         {
-            [domino setTexture:[SKTexture textureWithImageNamed:@"dominoHc"]];
+            domino =[clsDomino spriteNodeWithImageNamed:@"dom-green-horizontal.png"];
             //domino = [clsDomino spriteNodeWithImageNamed:@"dominoHc"];
         }else{
-            [domino setTexture:[SKTexture textureWithImageNamed:@"dominoVc"]];
+            domino =[clsDomino spriteNodeWithImageNamed:@"dom-green-vertical.png"];
             //domino = [clsDomino spriteNodeWithImageNamed:@"dominoVc"];
         }
         domino.direction = computer.curDirection;
@@ -315,7 +317,7 @@
             [self addChild:explosion];
             computer.didExplosion = true;
 
-            _sceneChangeDelay  = 3;
+            _sceneChangeDelay  = 5;
             _fallingAnimationInterval = (NSTimeInterval)_sceneChangeDelay/computerDominos.count;
 
             //crashed = false;
@@ -326,8 +328,7 @@
 //                   }],
                   [SKAction waitForDuration:.6],
                   [SKAction runBlock:^{ explosion.particleBirthRate = 0;} ],
-                  [SKAction waitForDuration:.3],
-                  [SKAction runBlock:^{ [explosion removeFromParent]; } ],
+
                   [SKAction runBlock:^{
                     _fallingAnimationDelay = 0;
                     for (clsDomino* dom in [computerDominos reverseObjectEnumerator]) {
@@ -337,6 +338,8 @@
 
                     };
                   }],
+                  [SKAction waitForDuration:.2],
+                  [SKAction runBlock:^{ [explosion removeFromParent]; } ],
                   [SKAction waitForDuration:_sceneChangeDelay + 3],
                   [SKAction runBlock:^{
                         domMenuScene *menu = [[domMenuScene alloc] initWithSize:self.size];
@@ -501,10 +504,10 @@ int rndIncreases;
     if (!crashed) {
         //draw a domino
         if (player1.curDirection == up || player1.curDirection == down) {
-            [domino setTexture:[SKTexture textureWithImageNamed:@"dominoH1"]];
+            [domino setTexture:[SKTexture textureWithImageNamed:@"dom-blue-horizontal"]];
             //domino = [clsDomino spriteNodeWithImageNamed:@"dominoH1"];
         }else {
-            [domino setTexture:[SKTexture textureWithImageNamed:@"dominoV1"]];
+            [domino setTexture:[SKTexture textureWithImageNamed:@"dom-blue-vertical"]];
             //domino = [clsDomino spriteNodeWithImageNamed:@"dominoV1"];
         }
 
@@ -558,9 +561,7 @@ int rndIncreases;
 //                [SKAction runBlock:^{
 //                    AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
 //                }],
-                [SKAction waitForDuration:0.6],
-                [SKAction runBlock:^{ explosion.particleBirthRate = 0;} ],
-                [SKAction waitForDuration:1.2],
+                                [SKAction waitForDuration:1.2],
                 [SKAction runBlock:^{ [explosion removeFromParent]; } ],
                 [SKAction runBlock:^{
                     _fallingAnimationDelay = 0;
@@ -570,6 +571,8 @@ int rndIncreases;
                         _fallingAnimationDelay += _fallingAnimationInterval;
                     };
                 }],
+                [SKAction waitForDuration:0.2],
+                [SKAction runBlock:^{ explosion.particleBirthRate = 0;} ],
 
                 //[SKAction runBlock:^{
                         //ORBMenuScene *menu = [[ORBMenuScene alloc] initWithSize:self.size];
@@ -643,7 +646,7 @@ int rndIncreases;
             backGround.colorBlendFactor = .2;
 
     
-    [self addChild:backGround];
+    //[self addChild:backGround];
 
     
 }

@@ -15,6 +15,7 @@
 		34C0142D18D2A4C8007C37AB /* iAd.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 34C0142C18D2A4C8007C37AB /* iAd.framework */; };
 		380DC21B18D0ED9200545962 /* explosion.sks in Resources */ = {isa = PBXBuildFile; fileRef = 380DC21918D0ED9200545962 /* explosion.sks */; };
 		380DC21C18D0ED9200545962 /* spark.png in Resources */ = {isa = PBXBuildFile; fileRef = 380DC21A18D0ED9200545962 /* spark.png */; };
+		389AA04C18DE3EC70089CA98 /* domino-green.atlasc in Resources */ = {isa = PBXBuildFile; fileRef = 389AA04B18DE3EC70089CA98 /* domino-green.atlasc */; };
 		389B9CF618CFCDCF004960E5 /* clsDomino.m in Sources */ = {isa = PBXBuildFile; fileRef = 389B9CF518CFCDCF004960E5 /* clsDomino.m */; };
 		389B9CF918CFD449004960E5 /* player.m in Sources */ = {isa = PBXBuildFile; fileRef = 389B9CF818CFD449004960E5 /* player.m */; };
 		38E4967F18D7CDD600D111E9 /* brick.png in Resources */ = {isa = PBXBuildFile; fileRef = 38E4967E18D7CDD600D111E9 /* brick.png */; };
@@ -58,6 +59,7 @@
 		34C0142C18D2A4C8007C37AB /* iAd.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = iAd.framework; path = System/Library/Frameworks/iAd.framework; sourceTree = SDKROOT; };
 		380DC21918D0ED9200545962 /* explosion.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = explosion.sks; sourceTree = "<group>"; };
 		380DC21A18D0ED9200545962 /* spark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = spark.png; sourceTree = "<group>"; };
+		389AA04B18DE3EC70089CA98 /* domino-green.atlasc */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "domino-green.atlasc"; sourceTree = "<group>"; };
 		389B9CF418CFCDCF004960E5 /* clsDomino.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = clsDomino.h; sourceTree = "<group>"; };
 		389B9CF518CFCDCF004960E5 /* clsDomino.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = clsDomino.m; sourceTree = "<group>"; };
 		389B9CF718CFD449004960E5 /* player.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = player.h; sourceTree = "<group>"; };
@@ -219,6 +221,7 @@
 			isa = PBXGroup;
 			children = (
 				344B5BC918D4A4EF00E43D82 /* Background_Stars.sks */,
+				389AA04B18DE3EC70089CA98 /* domino-green.atlasc */,
 				344B5BCE18D4AE7500E43D82 /* Background_Fire.sks */,
 				344B5BCB18D4A6DC00E43D82 /* SKEmitterNode+fromFile.h */,
 				344B5BCC18D4A70300E43D82 /* SKEmitterNode+fromFile.m */,
@@ -341,6 +344,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				55CB7E4218CBD181001EFA1C /* Images.xcassets in Resources */,
+				389AA04C18DE3EC70089CA98 /* domino-green.atlasc in Resources */,
 				55CB7E3818CBD181001EFA1C /* Main_iPad.storyboard in Resources */,
 				380DC21C18D0ED9200545962 /* spark.png in Resources */,
 				344B5BCF18D4AE7500E43D82 /* Background_Fire.sks in Resources */,
