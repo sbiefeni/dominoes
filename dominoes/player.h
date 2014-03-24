@@ -13,10 +13,11 @@
 
 @property swipeDirection lastSwipe;
 @property swipeDirection curDirection;
-@property BOOL didExplosion;
 
 @property int curX;
 @property int curY;
+
+@property BOOL didExplosion;
 
 
 @end

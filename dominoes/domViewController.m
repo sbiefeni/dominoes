@@ -21,7 +21,7 @@
 {
     [super viewDidLoad];
     
-    self.canDisplayBannerAds=NO;
+    self.canDisplayBannerAds=YES;
 
 
     // Configure the view.

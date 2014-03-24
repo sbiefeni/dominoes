@@ -10,7 +10,7 @@
 #import "player.h"
 #import "clsDomino.h"
 //#import "domVariablesAndFunctions.h"
-#import <AudioToolbox/AudioServices.h>
+//#import <AudioToolbox/AudioServices.h>
 #import "domMenuScene.h"
 
 //this is used like the VB isRunningInIde()
@@ -286,6 +286,8 @@
 
         [self addChild:domino];
 
+        [self runAction:[SKAction playSoundFileNamed:@"click.wav" waitForCompletion:NO]];
+
         //reset explosion so it can happen again..
         computer.didExplosion = false;
 
@@ -333,11 +335,14 @@
                     _fallingAnimationDelay = 0;
                     for (clsDomino* dom in [computerDominos reverseObjectEnumerator]) {
                             //code to be executed on the main queue after delay
-                        [dom fallDown:_fallingAnimationDelay isPlayer:false];
+                        [dom fallDown:_fallingAnimationDelay isPlayer:false isEnd:false];
                         _fallingAnimationDelay += _fallingAnimationInterval;
 
                     };
+                clsDomino* lastDom = [computerDominos objectAtIndex: 0];
+                [lastDom fallDown:_fallingAnimationDelay isPlayer:false isEnd:true ];
                   }],
+
                   [SKAction waitForDuration:.2],
                   [SKAction runBlock:^{ [explosion removeFromParent]; } ],
                   [SKAction waitForDuration:_sceneChangeDelay + 3],
@@ -567,9 +572,12 @@ int rndIncreases;
                     _fallingAnimationDelay = 0;
                     for (clsDomino* dom in [playerDominos reverseObjectEnumerator]) {
                             //code to be executed on the main queue after delay
-                        [dom fallDown:_fallingAnimationDelay isPlayer:true];
+                        [dom fallDown:_fallingAnimationDelay isPlayer:true isEnd:false ];
                         _fallingAnimationDelay += _fallingAnimationInterval;
                     };
+            clsDomino* lastDom = [playerDominos objectAtIndex: 0];
+            [lastDom fallDown:_fallingAnimationDelay isPlayer:true isEnd:true ];
+
                 }],
                 [SKAction waitForDuration:0.2],
                 [SKAction runBlock:^{ explosion.particleBirthRate = 0;} ],
@@ -646,8 +654,8 @@ int rndIncreases;
     backGround.position = CGPointMake(arenaSize.width/2, backGroundPos);
     backGround.zPosition = 1;
 
-            backGround.color = [SKColor blackColor];
-            backGround.colorBlendFactor = .2;
+           self.backgroundColor = [SKColor blackColor];
+            //backGround.colorBlendFactor = 1;
 
     
     [self addChild:backGround];

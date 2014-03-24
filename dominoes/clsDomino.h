@@ -19,6 +19,6 @@
 
 //@property NSMutableArray* dominos;
 
--(void) fallDown:(NSTimeInterval)delay isPlayer:(BOOL)bPlayer;
+-(void) fallDown:(NSTimeInterval)delay isPlayer:(BOOL)bPlayer isEnd:(BOOL)bIsEnd;
 
 @end

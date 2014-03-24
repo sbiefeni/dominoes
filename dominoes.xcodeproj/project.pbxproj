@@ -15,6 +15,7 @@
 		34C0142D18D2A4C8007C37AB /* iAd.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 34C0142C18D2A4C8007C37AB /* iAd.framework */; };
 		380DC21B18D0ED9200545962 /* explosion.sks in Resources */ = {isa = PBXBuildFile; fileRef = 380DC21918D0ED9200545962 /* explosion.sks */; };
 		380DC21C18D0ED9200545962 /* spark.png in Resources */ = {isa = PBXBuildFile; fileRef = 380DC21A18D0ED9200545962 /* spark.png */; };
+		387B05D218E0053A005C8D1F /* sounds in Resources */ = {isa = PBXBuildFile; fileRef = 387B05D118E0053A005C8D1F /* sounds */; };
 		389AA04C18DE3EC70089CA98 /* domino-green.atlasc in Resources */ = {isa = PBXBuildFile; fileRef = 389AA04B18DE3EC70089CA98 /* domino-green.atlasc */; };
 		389AA04E18DE67340089CA98 /* new-arena.png in Resources */ = {isa = PBXBuildFile; fileRef = 389AA04D18DE67340089CA98 /* new-arena.png */; };
 		389B9CF618CFCDCF004960E5 /* clsDomino.m in Sources */ = {isa = PBXBuildFile; fileRef = 389B9CF518CFCDCF004960E5 /* clsDomino.m */; };
@@ -60,6 +61,7 @@
 		34C0142C18D2A4C8007C37AB /* iAd.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = iAd.framework; path = System/Library/Frameworks/iAd.framework; sourceTree = SDKROOT; };
 		380DC21918D0ED9200545962 /* explosion.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = explosion.sks; sourceTree = "<group>"; };
 		380DC21A18D0ED9200545962 /* spark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = spark.png; sourceTree = "<group>"; };
+		387B05D118E0053A005C8D1F /* sounds */ = {isa = PBXFileReference; lastKnownFileType = folder; path = sounds; sourceTree = "<group>"; };
 		389AA04B18DE3EC70089CA98 /* domino-green.atlasc */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "domino-green.atlasc"; sourceTree = "<group>"; };
 		389AA04D18DE67340089CA98 /* new-arena.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "new-arena.png"; sourceTree = "<group>"; };
 		389B9CF418CFCDCF004960E5 /* clsDomino.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = clsDomino.h; sourceTree = "<group>"; };
@@ -122,6 +124,10 @@
 		380DC21D18D0F02B00545962 /* particles */ = {
 			isa = PBXGroup;
 			children = (
+				344B5BCC18D4A70300E43D82 /* SKEmitterNode+fromFile.m */,
+				344B5BCB18D4A6DC00E43D82 /* SKEmitterNode+fromFile.h */,
+				344B5BCE18D4AE7500E43D82 /* Background_Fire.sks */,
+				344B5BC918D4A4EF00E43D82 /* Background_Stars.sks */,
 				38E4967E18D7CDD600D111E9 /* brick.png */,
 				380DC21A18D0ED9200545962 /* spark.png */,
 				380DC21918D0ED9200545962 /* explosion.sks */,
@@ -136,6 +142,14 @@
 				344B5BC518D3FA9500E43D82 /* domMenuScene.m */,
 			);
 			name = Menus;
+			sourceTree = "<group>";
+		};
+		389AA04F18DF941F0089CA98 /* arenas */ = {
+			isa = PBXGroup;
+			children = (
+				389AA04D18DE67340089CA98 /* new-arena.png */,
+			);
+			name = arenas;
 			sourceTree = "<group>";
 		};
 		389B9CFA18CFD776004960E5 /* helpers */ = {
@@ -222,12 +236,9 @@
 		55CB7E2718CBD180001EFA1C /* dominoes */ = {
 			isa = PBXGroup;
 			children = (
-				389AA04D18DE67340089CA98 /* new-arena.png */,
-				344B5BC918D4A4EF00E43D82 /* Background_Stars.sks */,
+				387B05D118E0053A005C8D1F /* sounds */,
+				389AA04F18DF941F0089CA98 /* arenas */,
 				389AA04B18DE3EC70089CA98 /* domino-green.atlasc */,
-				344B5BCE18D4AE7500E43D82 /* Background_Fire.sks */,
-				344B5BCB18D4A6DC00E43D82 /* SKEmitterNode+fromFile.h */,
-				344B5BCC18D4A70300E43D82 /* SKEmitterNode+fromFile.m */,
 				380DC21D18D0F02B00545962 /* particles */,
 				389B9CFC18CFD7EF004960E5 /* delegates */,
 				389B9CFD18CFD811004960E5 /* storyboards */,
@@ -348,6 +359,7 @@
 			files = (
 				55CB7E4218CBD181001EFA1C /* Images.xcassets in Resources */,
 				389AA04C18DE3EC70089CA98 /* domino-green.atlasc in Resources */,
+				387B05D218E0053A005C8D1F /* sounds in Resources */,
 				55CB7E3818CBD181001EFA1C /* Main_iPad.storyboard in Resources */,
 				389AA04E18DE67340089CA98 /* new-arena.png in Resources */,
 				380DC21C18D0ED9200545962 /* spark.png in Resources */,

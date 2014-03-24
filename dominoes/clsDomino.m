@@ -16,8 +16,13 @@
 
 NSMutableArray* dominoFrames;
 
+//-(id) init {
+//
+//    return self;
+//
+//}
 
--(void) fallDown:(NSTimeInterval)delay isPlayer:(BOOL)bPlayer{
+-(void) fallDown:(NSTimeInterval)delay isPlayer:(BOOL)bPlayer isEnd:(BOOL)bIsEnd{
 
     SKTexture* txtr; //= [SKTexture textureWithImageNamed:@"dominoH"];
     SKAction* moveAction = [SKAction new];
@@ -53,15 +58,38 @@ NSMutableArray* dominoFrames;
 
     }
 
+    NSString* which = @"";
+
+    if (bIsEnd) {
+        which = @"-end";
+    }else{
+        int rnd = 1 + arc4random() % 9;
+        which = [@(rnd) stringValue];
+    };
+
+
+    NSString* sound = [NSString stringWithFormat:@"sounds/dom%@.wav", which];
 
     [self runAction:[SKAction sequence:@[
         [SKAction waitForDuration:delay],
         [SKAction runBlock:^{
             [self setTexture: txtr];
         }],
+        [SKAction playSoundFileNamed:sound waitForCompletion:NO],
         [SKAction waitForDuration:.1],
         moveAction,
     ]]];
 }
 
 @end
+
+//Have an iVar
+//
+//SKAction *_ballsHitSound;
+//Set it up when load the scene
+//
+//_ballsHitSound = [SKAction playSoundFileNamed:@"ballsCollide.mp3" waitForCompletion:NO];
+//then the sound is ready to go
+//
+//[self runAction:_ballsHitSound];
+
