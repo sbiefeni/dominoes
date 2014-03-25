@@ -351,7 +351,7 @@
 
     score = 0;//temp for debugging
 
-    scoreLabel = [[SKLabelNode alloc] initWithFontNamed:@"ChalkboardSE-Bold"];
+    scoreLabel = [[SKLabelNode alloc] initWithFontNamed:@"Chalkduster"];
     scoreLabel.color = [UIColor whiteColor];
     scoreLabel.fontSize = 120;
     scoreLabel.position = CGPointMake(CGRectGetMidX(self.frame),
