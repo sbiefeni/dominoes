@@ -316,14 +316,15 @@
 
                   [SKAction runBlock:^{
                     _fallingAnimationDelay = 0;
+                    [self enableScore];
                     for (clsDomino* dom in [computerDominos reverseObjectEnumerator]) {
                             //code to be executed on the main queue after delay
                         [dom fallDown:_fallingAnimationDelay isPlayer:false isEnd:false];
                         _fallingAnimationDelay += _fallingAnimationInterval;
 
                     };
-                clsDomino* lastDom = [computerDominos objectAtIndex: 0];
-                [lastDom fallDown:_fallingAnimationDelay isPlayer:false isEnd:true ];
+                    clsDomino* lastDom = [computerDominos objectAtIndex: 0];
+                    [lastDom fallDown:_fallingAnimationDelay isPlayer:false isEnd:true ];//gets us the end of run 'clack' sound
                   }],
 
                   [SKAction waitForDuration:.2],
@@ -342,6 +343,27 @@
         } //end if (player2.didExplosion)
     }
 
+}
+SKLabelNode *scoreLabel; //enabling this draws an auto-updating label using 'score' variable
+-(void) enableScore{
+    
+    score = 0;//temp for debugging
+
+    scoreLabel = [[SKLabelNode alloc] initWithFontNamed:@"Chalkduster"];
+    scoreLabel.color = [UIColor whiteColor];
+    scoreLabel.fontSize = 48;
+    scoreLabel.position = CGPointMake(CGRectGetMidX(self.frame),
+                                 CGRectGetMidY(self.frame));
+
+    scoreLabel.zPosition = 100;
+    [self addChild:scoreLabel];
+
+    SKAction *tempAction = [SKAction runBlock:^{
+        scoreLabel.text = [NSString stringWithFormat:@"%i", score];
+    }];
+
+    SKAction *waitAction = [SKAction waitForDuration:0.05];
+    [scoreLabel runAction:[SKAction repeatActionForever:[SKAction sequence:@[tempAction, waitAction]]]];
 }
 int rndIncreases;
 -(void) checkNextComputerMove{

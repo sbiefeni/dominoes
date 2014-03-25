@@ -51,6 +51,8 @@ extern NSMutableArray* computerDominos;
 extern player* player1;
 extern player* computer;
 
+extern int* score;
+
 extern SKAction* _dominoSound;
 
 //extern float gameSpeed;

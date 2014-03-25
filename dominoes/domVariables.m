@@ -48,6 +48,8 @@ NSMutableArray* computerDominos;
 player* player1;
 player* computer;
 
+int* score;
+
 
 
 //Set it up when load the scene

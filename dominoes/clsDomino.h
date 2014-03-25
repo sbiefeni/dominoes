@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import <SpriteKit/SpriteKit.h>
+#import "domVariables.h"
 
 @interface clsDomino : SKSpriteNode
 
