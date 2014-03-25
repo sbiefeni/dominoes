@@ -317,6 +317,7 @@
                   [SKAction runBlock:^{
                     _fallingAnimationDelay = 0;
                     [self enableScore];
+                    NSLog(@"Dominoes: %i",computerDominos.count);
                     for (clsDomino* dom in [computerDominos reverseObjectEnumerator]) {
                             //code to be executed on the main queue after delay
                         [dom fallDown:_fallingAnimationDelay isPlayer:false isEnd:false];
@@ -344,14 +345,15 @@
     }
 
 }
-SKLabelNode *scoreLabel; //enabling this draws an auto-updating label using 'score' variable
+
+//enabling this draws an auto-updating label using 'score' variable
 -(void) enableScore{
-    
+
     score = 0;//temp for debugging
 
     scoreLabel = [[SKLabelNode alloc] initWithFontNamed:@"Chalkduster"];
     scoreLabel.color = [UIColor whiteColor];
-    scoreLabel.fontSize = 48;
+    scoreLabel.fontSize = 120;
     scoreLabel.position = CGPointMake(CGRectGetMidX(self.frame),
                                  CGRectGetMidY(self.frame));
 
@@ -359,7 +361,7 @@ SKLabelNode *scoreLabel; //enabling this draws an auto-updating label using 'sco
     [self addChild:scoreLabel];
 
     SKAction *tempAction = [SKAction runBlock:^{
-        scoreLabel.text = [NSString stringWithFormat:@"%i", score];
+        scoreLabel.text = [NSString stringWithFormat:@"%i", score]; //(score+4-1)/4
     }];
 
     SKAction *waitAction = [SKAction waitForDuration:0.05];

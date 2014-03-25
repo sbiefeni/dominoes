@@ -51,7 +51,9 @@ extern NSMutableArray* computerDominos;
 extern player* player1;
 extern player* computer;
 
-extern int* score;
+//score and label
+extern int score;
+extern SKLabelNode* scoreLabel;
 
 extern SKAction* _dominoSound;
 

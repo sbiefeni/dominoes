@@ -77,8 +77,8 @@ NSMutableArray* dominoFrames;
         [SKAction waitForDuration:delay],
         [SKAction runBlock:^{
             [self setTexture: txtr];
-            if (!bPlayer) {
-                score+=1;
+            if ( !(bPlayer || bIsEnd) ) {
+                score += 1;
             }
         }],
         [SKAction playSoundFileNamed:sound waitForCompletion:NO],

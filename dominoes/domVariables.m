@@ -48,7 +48,9 @@ NSMutableArray* computerDominos;
 player* player1;
 player* computer;
 
-int* score;
+
+int score;
+SKLabelNode *scoreLabel;
 
 
 
