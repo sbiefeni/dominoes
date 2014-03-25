@@ -351,7 +351,7 @@
 
     score = 0;//temp for debugging
 
-    scoreLabel = [[SKLabelNode alloc] initWithFontNamed:@"Chalkduster"];
+    scoreLabel = [[SKLabelNode alloc] initWithFontNamed:@"ChalkboardSE-Bold"];
     scoreLabel.color = [UIColor whiteColor];
     scoreLabel.fontSize = 120;
     scoreLabel.position = CGPointMake(CGRectGetMidX(self.frame),
@@ -564,8 +564,8 @@ int rndIncreases;
             player1.didExplosion = true;
             _sceneChangeDelay  = 3;
             _fallingAnimationInterval = (NSTimeInterval)_sceneChangeDelay/playerDominos.count;
-            if (_fallingAnimationInterval > .05)
-                _fallingAnimationInterval = .05;
+            //if (_fallingAnimationInterval > .05)
+                //_fallingAnimationInterval = .05;
             //crashed = false;
         __weak typeof(self) weakSelf = self;
         [weakSelf runAction:[SKAction sequence:@[
