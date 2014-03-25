@@ -70,6 +70,7 @@ NSMutableArray* dominoFrames;
         which = [@(rnd) stringValue];
     };
 
+    float rotation = [self randomFloatBetween:-.1 and:.1];
 
     NSString* sound = [NSString stringWithFormat:@"sounds/dom%@.wav", which];
 
@@ -77,6 +78,7 @@ NSMutableArray* dominoFrames;
         [SKAction waitForDuration:delay],
         [SKAction runBlock:^{
             [self setTexture: txtr];
+            self.zRotation = rotation;
             if ( !(bPlayer || bIsEnd) ) {
                 score += 1;
             }
@@ -87,6 +89,12 @@ NSMutableArray* dominoFrames;
     ]]];
 
 }
+
+- (float)randomFloatBetween:(float)smallNumber and:(float)bigNumber {
+    float diff = bigNumber - smallNumber;
+    return (((float) (arc4random() % ((unsigned)RAND_MAX + 1)) / RAND_MAX) * diff) + smallNumber;
+}
+
 
 @end
 
