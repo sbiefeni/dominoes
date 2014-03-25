@@ -59,7 +59,9 @@
 
 @property NSTimeInterval fallingAnimationInterval;
 @property NSTimeInterval fallingAnimationDelay;
+@property NSTimeInterval fallingAnimationSlowStart;
 @property int sceneChangeDelay;
+
 
 
 
@@ -304,6 +306,8 @@
 
             _sceneChangeDelay  = 5;
             _fallingAnimationInterval = (NSTimeInterval)_sceneChangeDelay/computerDominos.count;
+            _fallingAnimationSlowStart = .2;
+
 
             //crashed = false;
             [self runAction:[SKAction sequence:@[
@@ -321,7 +325,14 @@
                     for (clsDomino* dom in [computerDominos reverseObjectEnumerator]) {
                             //code to be executed on the main queue after delay
                         [dom fallDown:_fallingAnimationDelay isPlayer:false isEnd:false];
-                        _fallingAnimationDelay += _fallingAnimationInterval;
+
+                        _fallingAnimationDelay += _fallingAnimationSlowStart;
+                        if (_fallingAnimationSlowStart > _fallingAnimationInterval) {
+                            _fallingAnimationSlowStart -= .02;
+                        }else if(_fallingAnimationSlowStart < _fallingAnimationInterval){
+                            _fallingAnimationSlowStart = _fallingAnimationInterval;
+                        }
+
 
                     };
                     clsDomino* lastDom = [computerDominos objectAtIndex: 0];
