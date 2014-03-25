@@ -9,9 +9,12 @@
 #import "domGameScene.h"
 #import "player.h"
 #import "clsDomino.h"
-//#import "domVariablesAndFunctions.h"
-//#import <AudioToolbox/AudioServices.h>
+
+#import <AudioToolbox/AudioServices.h>
 #import "domMenuScene.h"
+
+//import Global Variables
+#import "domVariables.h"
 
 //this is used like the VB isRunningInIde()
 //usage: isRunningInIde( <statement>; <statement>...)
@@ -36,68 +39,30 @@
 
 @interface domGameScene (){
 
-    SKSpriteNode* backGround;
-    SKSpriteNode* topDoor;
-    SKSpriteNode* rightDoor;
-    SKSpriteNode* bottomDoor;
-    SKSpriteNode* leftDoor;
+    //moved (almost) all variables to domVariables.m
 
-    //to hold animation arrays
-//    NSArray *_DominoFallingLeft;
-//    NSArray *_DominoFallingUp;
-//    NSArray *_DominoFallingRight;
-//    NSArray *_DominoFallingDown;
-
-    //dominoes
-//    SKSpriteNode* dominoH;
-//    SKSpriteNode* dominoV;
-    
     CFTimeInterval startTime;
     //ADBannerView *adView;
     
-//to get the scale factor for the current screen (orig size / new size)
-    float scaleX;
-    float scaleY;
-
-//to store the arena unscaled size
-    CGSize arenaSize;
-//store the scaled size of the arena
-    CGSize scaledSize;
-    
-//banner height depends on the screen width, which can only be 320, or 768 (portrait mode)
-    int bannerSizeY;
-    float bannerHeightAdjuster;
-    
-//boolean 2D array, representing our playing grid
-//each value is true if there is a domino placed there
+    //boolean 2D array, representing our playing grid
+    //each value is true if there is a domino placed there
     BOOL grid [cols+1][rows+1];
     BOOL testGrid [cols+1][rows+1];  //to record matches during recursive testing
-    float gridWidth;
-    float gridHeight;
 
-    CGSize gridSize;
-    CGSize dominoSize;
-
-// min/max extents
-    double minX;
-    double minY;
-    double maxX;
-    double maxY;
-    
-//use these to store each movement, in sequence, for each player
-//max size is the total available grid squares, so we never run out
-//of room
-    NSMutableArray* playerDominos;
-    NSMutableArray* computerDominos;
-    
-    player* player1;
-    player* computer;
+     //player* player1;
+     //player* computer;
 
     
-// set game speed
-   // float gameSpeed
-
 }
+
+@property float gameSpeed;
+
+@property NSTimeInterval fallingAnimationInterval;
+@property NSTimeInterval fallingAnimationDelay;
+@property int sceneChangeDelay;
+
+
+
 @end
 
 @implementation domGameScene
@@ -115,8 +80,12 @@
         //[self setUpDoors:size];
         
         [self setUpDominoGrid];
+
+        [self setUpSounds];
         
         [self initializeGame];
+
+
 
         //}
         //NSLog(@"Width: %f, Height: %f", size.width, size.height);
@@ -125,6 +94,17 @@
     //startTime=CACurrentMediaTime();
 
     return self;
+}
+
+-(void) setUpSounds {
+
+    //_dominoSound = [SKAction playSoundFileNamed:@"sounds/dom1.wav" waitForCompletion:NO];
+
+    //AudioServicesPlaySystemSound (1104); //tock sound
+
+    //then the sound is ready to go
+    //
+    //[self runAction:_dominoSound];
 }
 
 -(void) setUpDominoGrid{
@@ -286,7 +266,10 @@
 
         [self addChild:domino];
 
-        [self runAction:[SKAction playSoundFileNamed:@"click.wav" waitForCompletion:NO]];
+        [self runAction:_dominoSound];
+         //AudioServicesPlaySystemSound (1200);
+
+        //[self runAction:[SKAction playSoundFileNamed:@"click2.wav" waitForCompletion:NO]];
 
         //reset explosion so it can happen again..
         computer.didExplosion = false;
@@ -303,7 +286,7 @@
         [self checkNextComputerMove];
 
         //play a sound
-        //[self runAction: [SKAction playSoundFileNamed:@"click.wav" waitForCompletion:NO]];
+        //[self runAction: [SKAction playSoundFileNamed:@"click2.wav" waitForCompletion:NO]];
     }else{
         if (!computer.didExplosion) {
             NSString *burstPath =
@@ -538,7 +521,7 @@ int rndIncreases;
         grid[player1.curX][player1.curY]=true;
         
     //play a sound
-    //[self runAction: [SKAction playSoundFileNamed:@"click.wav" waitForCompletion:NO]];
+    //[self runAction: [SKAction playSoundFileNamed:@"click2.wav" waitForCompletion:NO]];
         
 }else{  //we crashed!
     if (!player1.didExplosion) {
@@ -663,45 +646,45 @@ int rndIncreases;
     
 }
 
--(void) setUpDoors:(CGSize) size{
-    
-    topDoor = [SKSpriteNode spriteNodeWithImageNamed:@"dominoes-topdoor"];
-
-    //grab the unscaled image, and resize using the scale factors scaleX and scaleY
-    scaledSize = [self getScaledSizeForNode:topDoor];
-    
-    topDoor.size= scaledSize;
-    topDoor.position = CGPointMake(size.width /1.735 ,size.height - (scaledSize.height/2) - (ceilingOn * bannerSizeY) );
-    topDoor.zPosition = doorZPos;
-    
-    [self addChild:topDoor];
-    
-    bottomDoor = [SKSpriteNode spriteNodeWithImageNamed:@"dominoes-bottomdoor"];
-    //grab the unscaled image, and resize using the scale factors scaleX and scaleY
-    scaledSize = [self getScaledSizeForNode:bottomDoor];
-    bottomDoor.size= scaledSize;
-    bottomDoor.position = CGPointMake(size.width /1.735 ,72/scaleY + (floorOn * bannerSizeY) );
-    bottomDoor.zPosition = doorZPos;
-    [self addChild:bottomDoor];
-    
-    
-    leftDoor = [SKSpriteNode spriteNodeWithImageNamed:@"dominoes-leftdoor"];
-    //grab the unscaled image, and resize using the scale factors scaleX and scaleY
-    scaledSize = [self getScaledSizeForNode:leftDoor];
-    leftDoor.size= scaledSize;
-    leftDoor.position = CGPointMake(82/scaleX ,size.height/2 + (37/scaleY)+bannerHeightAdjuster);
-    leftDoor.zPosition = doorZPos;
-    [self addChild:leftDoor];
-
-    rightDoor = [SKSpriteNode spriteNodeWithImageNamed:@"dominoes-rightdoor"];
-    //grab the unscaled image, and resize using the scale factors scaleX and scaleY
-    scaledSize = [self getScaledSizeForNode:rightDoor];
-    rightDoor.size= scaledSize;
-    rightDoor.position = CGPointMake(size.width - (84/scaleX),size.height/2 + (45/scaleY)+bannerHeightAdjuster);
-    rightDoor.zPosition = doorZPos;
-    [self addChild:rightDoor];
-    
-}
+//-(void) setUpDoors:(CGSize) size{
+//    
+//    topDoor = [SKSpriteNode spriteNodeWithImageNamed:@"dominoes-topdoor"];
+//
+//    //grab the unscaled image, and resize using the scale factors scaleX and scaleY
+//    scaledSize = [self getScaledSizeForNode:topDoor];
+//    
+//    topDoor.size= scaledSize;
+//    topDoor.position = CGPointMake(size.width /1.735 ,size.height - (scaledSize.height/2) - (ceilingOn * bannerSizeY) );
+//    topDoor.zPosition = doorZPos;
+//    
+//    [self addChild:topDoor];
+//    
+//    bottomDoor = [SKSpriteNode spriteNodeWithImageNamed:@"dominoes-bottomdoor"];
+//    //grab the unscaled image, and resize using the scale factors scaleX and scaleY
+//    scaledSize = [self getScaledSizeForNode:bottomDoor];
+//    bottomDoor.size= scaledSize;
+//    bottomDoor.position = CGPointMake(size.width /1.735 ,72/scaleY + (floorOn * bannerSizeY) );
+//    bottomDoor.zPosition = doorZPos;
+//    [self addChild:bottomDoor];
+//    
+//    
+//    leftDoor = [SKSpriteNode spriteNodeWithImageNamed:@"dominoes-leftdoor"];
+//    //grab the unscaled image, and resize using the scale factors scaleX and scaleY
+//    scaledSize = [self getScaledSizeForNode:leftDoor];
+//    leftDoor.size= scaledSize;
+//    leftDoor.position = CGPointMake(82/scaleX ,size.height/2 + (37/scaleY)+bannerHeightAdjuster);
+//    leftDoor.zPosition = doorZPos;
+//    [self addChild:leftDoor];
+//
+//    rightDoor = [SKSpriteNode spriteNodeWithImageNamed:@"dominoes-rightdoor"];
+//    //grab the unscaled image, and resize using the scale factors scaleX and scaleY
+//    scaledSize = [self getScaledSizeForNode:rightDoor];
+//    rightDoor.size= scaledSize;
+//    rightDoor.position = CGPointMake(size.width - (84/scaleX),size.height/2 + (45/scaleY)+bannerHeightAdjuster);
+//    rightDoor.zPosition = doorZPos;
+//    [self addChild:rightDoor];
+//    
+//}
 
 -(CGSize) getScaledSizeForNode:(SKSpriteNode*)node{
     return CGSizeMake(node.size.width / scaleX, node.size.height / scaleY );

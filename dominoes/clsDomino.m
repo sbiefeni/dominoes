@@ -60,6 +60,9 @@ NSMutableArray* dominoFrames;
 
     NSString* which = @"";
 
+        //load either the -end sound if it's true, or one of
+        //9 random domino falling sounds
+        //the end sound is distinct and represents the end of a run
     if (bIsEnd) {
         which = @"-end";
     }else{
@@ -79,6 +82,7 @@ NSMutableArray* dominoFrames;
         [SKAction waitForDuration:.1],
         moveAction,
     ]]];
+
 }
 
 @end
