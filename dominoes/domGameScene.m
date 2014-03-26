@@ -29,6 +29,8 @@
 //define z positions for objects
 #define doorZPos    5
 #define dominoZPos  6
+#define domSpeed    .05
+
 
 //define rows and cols
 #define rows        28
@@ -98,6 +100,7 @@
     return self;
 }
 
+
 -(void) setUpSounds {
 
     [backgroundMusic stop];
@@ -156,7 +159,7 @@
 
 //set the speed interval between moves (time for both player and computer to complete one move)
     if (_gameSpeed == 0 ) {
-        _gameSpeed = .05;
+        _gameSpeed = domSpeed;
     }
     
 //set initial player1 direction - ***HACK? - NSUserDefaults lets us easily communicate variables between classes.
@@ -177,7 +180,10 @@
 
 //********* Game Runner - is called on interval time 'gameSpeed' from the repeat action above..
 -(void) gameRunner {
-
+if(adsShowing)
+{
+    return;
+}
 //player move
     [self handlePlayerMove];
 

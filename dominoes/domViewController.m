@@ -9,6 +9,7 @@
 #import "domViewController.h"
 #import "domMenuScene.h"
 #import "player.h"
+#import "domVariables.h"
 
 @interface domViewController ()
 
@@ -16,13 +17,20 @@
 
 @implementation domViewController
 
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    UIViewController *destination = [segue destinationViewController];
+    
+    destination.interstitialPresentationPolicy =
+    ADInterstitialPresentationPolicyAutomatic;
+}
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     
     self.canDisplayBannerAds=YES;
-
+    
 
     // Configure the view.
     //SKView * skView = (SKView *)self.view;
@@ -60,22 +68,14 @@
 //following function called by the iAds if user clicks the ad and ad pops up
 -(void)viewWillDisappear:(BOOL)animated
 {
-    // View is about to be obscured by an advert.
-    //Pause activities if necessary
-    UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"Paused" message:@"Press the button to continue" delegate:self cancelButtonTitle:@"Resume" otherButtonTitles:nil];
-    [alert show];
-    
-}
-
--(void)gameLoop
-{
-    
+    //pause the game
+    adsShowing=YES;
 }
 
 -(void)viewWillAppear:(BOOL)animated
 {
     // Advert has been dismissed. Resume paused activities
-    
+    adsShowing=NO;
 }
 
 //- (void)keyDown:(nse *)theEvent {
