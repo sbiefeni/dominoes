@@ -11,6 +11,7 @@
 //make this a global variable
 
 SKSpriteNode* backGround;
+BOOL adsShowing;
 
 //to get the scale factor for the current screen (orig size / new size)
 float scaleX;

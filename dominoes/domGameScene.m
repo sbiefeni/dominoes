@@ -29,6 +29,8 @@
 //define z positions for objects
 #define doorZPos    5
 #define dominoZPos  6
+#define domSpeed    .05
+
 
 //define rows and cols
 #define rows        28
@@ -98,6 +100,7 @@
     return self;
 }
 
+
 -(void) setUpSounds {
 
     //_dominoSound = [SKAction playSoundFileNamed:@"sounds/dom1.wav" waitForCompletion:NO];
@@ -161,7 +164,7 @@
 
 //set the speed interval between moves (time for both player and computer to complete one move)
     if (_gameSpeed == 0 ) {
-        _gameSpeed = .05;
+        _gameSpeed = domSpeed;
     }
     
 //set initial player1 direction - ***HACK? - NSUserDefaults lets us easily communicate variables between classes.
@@ -182,7 +185,10 @@
 
 //********* Game Runner - is called on interval time 'gameSpeed' from the repeat action above..
 -(void) gameRunner {
-
+if(adsShowing)
+{
+    return;
+}
 //player move
     [self handlePlayerMove];
 
@@ -636,7 +642,7 @@ int rndIncreases;
     
     
     //determine the banner size (according to iAD)
-    bannerSizeY = (arenaSize.width == 320) ? 50 : 66;
+    bannerSizeY = (arenaSize.width == 320) ? 25 : 66;
     //if only one of the banners is on, then we need an adjuster to center things
     if (ceilingOn + floorOn ==1){
         bannerHeightAdjuster = (ceilingOn) ? -(bannerSizeY/2): +(bannerSizeY/2);

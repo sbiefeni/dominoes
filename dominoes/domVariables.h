@@ -14,6 +14,7 @@
 
   //extern SKSpriteNode* test;
   extern SKSpriteNode* backGround;
+extern BOOL adsShowing;
 
 //to get the scale factor for the current screen (orig size / new size)
 extern float scaleX;
