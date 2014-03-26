@@ -16,42 +16,56 @@
 
 NSMutableArray* dominoFrames;
 
-//-(id) init {
-//
-//    return self;
-//
-//}
++ (void)initialize {
+    if (self == [clsDomino self]) {
+
+        //this is (confirmed) pre-loading all the sounds.. this only runs once in the game
+        //during class initialization. the actions die right after this, but the sounds
+        //are loaded and there is no delay the first time a sound plays
+        SKAction* S1 = [SKAction playSoundFileNamed:@"/sounds/dom1.wav" waitForCompletion:NO];
+        SKAction* S2 = [SKAction playSoundFileNamed:@"/sounds/dom2.wav" waitForCompletion:NO];
+        SKAction* S3 = [SKAction playSoundFileNamed:@"/sounds/dom3.wav" waitForCompletion:NO];
+        SKAction* S4 = [SKAction playSoundFileNamed:@"/sounds/dom4.wav" waitForCompletion:NO];
+        SKAction* S5 = [SKAction playSoundFileNamed:@"/sounds/dom5.wav" waitForCompletion:NO];
+        SKAction* S6 = [SKAction playSoundFileNamed:@"/sounds/dom6.wav" waitForCompletion:NO];
+        SKAction* S7 = [SKAction playSoundFileNamed:@"/sounds/dom7.wav" waitForCompletion:NO];
+        SKAction* S8 = [SKAction playSoundFileNamed:@"/sounds/dom8.wav" waitForCompletion:NO];
+        SKAction* S9 = [SKAction playSoundFileNamed:@"/sounds/dom9.wav" waitForCompletion:NO];
+        SKAction* SEnd = [SKAction playSoundFileNamed:@"/sounds/dom-end.wav" waitForCompletion:NO];
+
+    }
+}
 
 -(void) fallDown:(NSTimeInterval)delay isPlayer:(BOOL)bPlayer isEnd:(BOOL)bIsEnd{
 
     SKTexture* txtr; //= [SKTexture textureWithImageNamed:@"dominoH"];
     SKAction* moveAction = [SKAction new];
     NSString *whichPlayer=(bPlayer)?@"blue":@"green";
-    //double rotation = 0;
+    double moveDuration = 0.15;
 
     switch (_direction) {
     case 1:  //left    domino-green-fallen-d.png
             txtr = [SKTexture textureWithImageNamed:[NSString stringWithFormat:@"%s-%@-fallen-r","domino",whichPlayer]];
             //rotation = (M_PI / 180) * 90; // degrees to radians
-            moveAction = [SKAction moveByX:5 y:0 duration:.15];
+            moveAction = [SKAction moveByX:5 y:0 duration:moveDuration];
             self.xScale = 1.2;
         break;
     case 2:  //right
             txtr = [SKTexture textureWithImageNamed:[NSString stringWithFormat:@"%s-%@-fallen-L","domino",whichPlayer]];
             //rotation = (M_PI / 180) * 270;
-            moveAction = [SKAction moveByX:-5 y:0 duration:.15];
+            moveAction = [SKAction moveByX:-5 y:0 duration:moveDuration];
             self.xScale = 1.2;
         break;
     case 3: //up
             txtr = [SKTexture textureWithImageNamed:[NSString stringWithFormat:@"%s-%@-fallen-d","domino",whichPlayer]];
             //rotation = (M_PI / 180) * 180;
-            moveAction = [SKAction moveByX:0 y:-5 duration:.15];
+            moveAction = [SKAction moveByX:0 y:-5 duration:moveDuration];
             self.yScale = 1.2;
         break;
     case 4: //down
             txtr = [SKTexture textureWithImageNamed:[NSString stringWithFormat:@"%s-%@-fallen-u","domino",whichPlayer]];
             //rotation = 0;
-            moveAction = [SKAction moveByX:0 y:5 duration:.15];
+            moveAction = [SKAction moveByX:0 y:5 duration:moveDuration];
             self.yScale = 1.2;
         break;
     default: ;
@@ -66,11 +80,11 @@ NSMutableArray* dominoFrames;
     if (bIsEnd) {
         which = @"-end";
     }else{
-        int rnd = 1 + arc4random() % 9;
+        int rnd = [self getRanInt:1 maxNumber:9];
         which = [@(rnd) stringValue];
     };
 
-    float rotation = [self randomFloatBetween:-.1 and:.1];
+    float rotation = [self getRanFloat:-.1 and:.1];
 
     NSString* sound = [NSString stringWithFormat:@"sounds/dom%@.wav", which];
 
@@ -90,11 +104,14 @@ NSMutableArray* dominoFrames;
 
 }
 
-- (float)randomFloatBetween:(float)smallNumber and:(float)bigNumber {
+- (float)getRanFloat:(float)smallNumber and:(float)bigNumber {
     float diff = bigNumber - smallNumber;
     return (((float) (arc4random() % ((unsigned)RAND_MAX + 1)) / RAND_MAX) * diff) + smallNumber;
 }
-
+- (NSInteger)getRanInt:(NSInteger)min maxNumber:(NSInteger)max
+{
+    return min + arc4random() % (max - min + 1);
+}
 
 @end
 

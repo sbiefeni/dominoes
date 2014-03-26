@@ -9,10 +9,10 @@
 #import <Foundation/Foundation.h>
 #import <SpriteKit/SpriteKit.h>
 #import "player.h"
+#import <AVFoundation/AVFoundation.h>
 
 @interface domVariables : NSObject
 
-  //extern SKSpriteNode* test;
   extern SKSpriteNode* backGround;
 
 //to get the scale factor for the current screen (orig size / new size)
@@ -59,7 +59,7 @@ extern SKAction* _dominoSound;
 
 //extern float gameSpeed;
 
-
+extern AVAudioPlayer* backgroundMusic;
 
 
 

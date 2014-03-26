@@ -100,13 +100,8 @@
 
 -(void) setUpSounds {
 
-    //_dominoSound = [SKAction playSoundFileNamed:@"sounds/dom1.wav" waitForCompletion:NO];
+    [backgroundMusic stop];
 
-    //AudioServicesPlaySystemSound (1104); //tock sound
-
-    //then the sound is ready to go
-    //
-    //[self runAction:_dominoSound];
 }
 
 -(void) setUpDominoGrid{
@@ -306,7 +301,7 @@
 
             _sceneChangeDelay  = 5;
             _fallingAnimationInterval = (NSTimeInterval)_sceneChangeDelay/computerDominos.count;
-            _fallingAnimationSlowStart = .2;
+            _fallingAnimationSlowStart = .15;
 
 
             //crashed = false;
@@ -332,11 +327,10 @@
                         }else if(_fallingAnimationSlowStart < _fallingAnimationInterval){
                             _fallingAnimationSlowStart = _fallingAnimationInterval;
                         }
-
-
                     };
                     clsDomino* lastDom = [computerDominos objectAtIndex: 0];
                     [lastDom fallDown:_fallingAnimationDelay isPlayer:false isEnd:true ];//gets us the end of run 'clack' sound
+
                   }],
 
                   [SKAction waitForDuration:.2],
@@ -346,12 +340,7 @@
                         domMenuScene *menu = [[domMenuScene alloc] initWithSize:self.size];
                         [self.view presentScene:menu transition:[SKTransition doorsCloseHorizontalWithDuration:1]];
                     }],
-                  //[SKAction waitForDuration:1.2],
-
                 ]]];
-//            domMenuScene *menu = [[domMenuScene alloc] initWithSize:self.size];
-//            [self.view presentScene:menu transition:[SKTransition doorsOpenHorizontalWithDuration:1.5]];
-
         } //end if (player2.didExplosion)
     }
 
@@ -378,7 +367,7 @@
     SKAction *waitAction = [SKAction waitForDuration:0.05];
     [scoreLabel runAction:[SKAction repeatActionForever:[SKAction sequence:@[tempAction, waitAction]]]];
 }
-int rndIncreases;
+
 -(void) checkNextComputerMove{
 
     //checks if the next move will cause the computer to crash
@@ -394,14 +383,14 @@ int rndIncreases;
     int rndChance = 50;
 
     //increase random chance when computer is close to a wall
-    if ((D == left && X < 4) || (D == up && Y > maxY-4) || (D == right && X > maxX-4) || (D == down && Y < 4) || Y==0  || Y==rows || X==0 || X==cols){
-        rndChance /=6;
-        rndIncreases++;
-        //isRunningInIde( NSLog(@"Random chance increased %i times", rndIncreases) );
-    }
+    if ((D == left && X < 6) || (D == up && Y > maxY-6) || (D == right && X > maxX-6) || (D == down && Y < 6) || Y==0  || Y==rows || X==0 || X==cols)
+        {
+            rndChance =2;
+        }
+        //((D == left && X < 4) || (D == up && Y > maxY-4) || (D == right && X > maxX-4) || (D == down && Y < 4) || Y==0  || Y==rows || X==0 || X==cols)
 
 //generate a random change BOOL - all direction changes will have 2 possible choices
-    BOOL randChange = ( arc4random() % rndChance) == 2;
+    BOOL randChange = ( arc4random() % rndChance) == 1;
 
 //if any of these conditions are true.. player2 is about to crash..
     switch (D) {
@@ -571,40 +560,49 @@ int rndIncreases;
             explosion.zPosition = 10;
 
             [self addChild:explosion];
-
             player1.didExplosion = true;
-            _sceneChangeDelay  = 3;
+
+            _sceneChangeDelay  = 5;
             _fallingAnimationInterval = (NSTimeInterval)_sceneChangeDelay/playerDominos.count;
-            //if (_fallingAnimationInterval > .05)
-                //_fallingAnimationInterval = .05;
-            //crashed = false;
-        __weak typeof(self) weakSelf = self;
-        [weakSelf runAction:[SKAction sequence:@[
+            _fallingAnimationSlowStart = .1;
+
+
+            [self runAction:[SKAction sequence:@[
                 //[SKAction playSoundFileNamed:@"explosion.wav" waitForCompletion:NO],
 //                [SKAction runBlock:^{
 //                    AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
 //                }],
-                                [SKAction waitForDuration:1.2],
-                [SKAction runBlock:^{ [explosion removeFromParent]; } ],
+                [SKAction waitForDuration:.6],
+                [SKAction runBlock:^{ explosion.particleBirthRate = 0; } ],
+
                 [SKAction runBlock:^{
                     _fallingAnimationDelay = 0;
-                    for (clsDomino* dom in [playerDominos reverseObjectEnumerator]) {
-                            //code to be executed on the main queue after delay
-                        [dom fallDown:_fallingAnimationDelay isPlayer:true isEnd:false ];
-                        _fallingAnimationDelay += _fallingAnimationInterval;
-                    };
-            clsDomino* lastDom = [playerDominos objectAtIndex: 0];
-            [lastDom fallDown:_fallingAnimationDelay isPlayer:true isEnd:true ];
+                //[self enableScore];
+                NSLog(@"Dominoes: %i",playerDominos.count);
+                for (clsDomino* dom in [playerDominos reverseObjectEnumerator]) {
+                        //code to be executed on the main queue after delay
+                    [dom fallDown:_fallingAnimationDelay isPlayer:true isEnd:false ];
+
+                    _fallingAnimationDelay += _fallingAnimationSlowStart;
+                    if (_fallingAnimationSlowStart > _fallingAnimationInterval) {
+                        _fallingAnimationSlowStart -= .02;
+                    }else if(_fallingAnimationSlowStart < _fallingAnimationInterval){
+                        _fallingAnimationSlowStart = _fallingAnimationInterval;
+                    }
+                };
+                clsDomino* lastDom = [playerDominos objectAtIndex: 0];
+                [lastDom fallDown:_fallingAnimationDelay isPlayer:true isEnd:true ];
 
                 }],
+
                 [SKAction waitForDuration:0.2],
                 [SKAction runBlock:^{ explosion.particleBirthRate = 0;} ],
-
-                //[SKAction runBlock:^{
-                        //ORBMenuScene *menu = [[ORBMenuScene alloc] initWithSize:self.size];
-                          //[self.view presentScene:menu transition:[SKTransition doorsCloseHorizontalWithDuration:0.5]];
+                [SKAction waitForDuration:_sceneChangeDelay + 3],
+//                [SKAction runBlock:^{
+//                        domMenuScene *menu = [[domMenuScene alloc] initWithSize:self.size];
+//                          [self.view presentScene:menu transition:[SKTransition doorsCloseHorizontalWithDuration:0.5]];
+//                    }],
                 ]]];
-
 
     } //end if (player1.crashed)
     
@@ -636,7 +634,7 @@ int rndIncreases;
     
     
     //determine the banner size (according to iAD)
-    bannerSizeY = (arenaSize.width == 320) ? 50 : 66;
+    bannerSizeY = (arenaSize.width == 320) ? 25 : 25;
     //if only one of the banners is on, then we need an adjuster to center things
     if (ceilingOn + floorOn ==1){
         bannerHeightAdjuster = (ceilingOn) ? -(bannerSizeY/2): +(bannerSizeY/2);

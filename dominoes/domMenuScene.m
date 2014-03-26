@@ -8,14 +8,29 @@
 
 #import "domMenuScene.h"
 #import "domGameScene.h"
+#import "domVariables.h"
+
 #import "SKEmitterNode+fromFile.h"
+
+//#import <AudioToolbox/AudioServices.h>
 
 @implementation domMenuScene
 -(instancetype)initWithSize:(CGSize)size
 {
     if(self = [super initWithSize:size]) {
 
-        
+
+        NSString *path = [NSString stringWithFormat:@"%@/%@",
+                          [[NSBundle mainBundle] resourcePath],
+                          @"sounds/tick_tock_jingle2.mp3"];
+        NSURL *filePath = [NSURL fileURLWithPath:path isDirectory:NO];
+        backgroundMusic = [[AVAudioPlayer alloc] initWithContentsOfURL:filePath error:nil];
+        [backgroundMusic prepareToPlay];
+
+        backgroundMusic.volume = .1;
+
+        [backgroundMusic play];
+
 
         SKEmitterNode *background = [SKEmitterNode dom_emitterNamed:@"Background_Stars"];
         background.particlePositionRange = CGVectorMake(self.size.width*2, self.size.height*2);
@@ -26,10 +41,10 @@
         [self addChild:background];
 
         
-        SKLabelNode *title = [SKLabelNode labelNodeWithFontNamed:@"Avenir-Black"];
+        SKLabelNode *title = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
         
-        title.text = @"Flappy Bricks";
-        title.fontSize = 48;
+        title.text = @"brick'd";
+        title.fontSize = 60;
         title.position = CGPointMake(CGRectGetMidX(self.frame),
                                      CGRectGetMidY(self.frame));
         title.fontColor = [SKColor colorWithHue:0 saturation:0 brightness:1 alpha:1.0];
@@ -57,15 +72,17 @@
         //[self updateModeButton];
         //[_modeButton addTarget:self action:@selector(selectMode) forControlEvents:UIControlEventTouchUpInside];
 
-        [self runAction:[SKAction sequence:@[
-                                                  //[SKAction playSoundFileNamed:@"explosion.wav" waitForCompletion:NO],
-            [SKAction waitForDuration:2],
-            [SKAction runBlock:^{
-                domGameScene *game = [[domGameScene alloc] initWithSize:self.size];
 
-                [self.view presentScene:game transition:[SKTransition doorsOpenHorizontalWithDuration:1.5]];
-            }],
-            ]]];
+
+//        [self runAction:[SKAction sequence:@[
+//                                                  //[SKAction playSoundFileNamed:@"explosion.wav" waitForCompletion:NO],
+//            [SKAction waitForDuration:2],
+//            [SKAction runBlock:^{
+//                domGameScene *game = [[domGameScene alloc] initWithSize:self.size];
+//
+//                [self.view presentScene:game transition:[SKTransition doorsOpenHorizontalWithDuration:1.5]];
+//            }],
+//            ]]];
 
 
     }
