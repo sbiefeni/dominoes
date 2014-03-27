@@ -78,7 +78,7 @@ NSMutableArray* dominoFrames;
         //9 random domino falling sounds
         //the end sound is distinct and represents the end of a run
     if (bIsEnd) {
-        which = @"-end";
+        which = @"-end2";
     }else{
         int rnd = [self getRanInt:1 maxNumber:9];
         which = [@(rnd) stringValue];
@@ -101,6 +101,8 @@ NSMutableArray* dominoFrames;
         [SKAction waitForDuration:.1],
         moveAction,
     ]]];
+
+    [domVariables playSound:@"dom1.wav"];
 
 }
 

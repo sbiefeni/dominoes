@@ -103,8 +103,16 @@
 
 -(void) setUpSounds {
 
-    [backgroundMusic stop];
+    [self doVolumeFadeOut];
 
+}
+-(void)doVolumeFadeOut {
+    if (backgroundMusic.volume > 0.1) {
+        backgroundMusic.volume = backgroundMusic.volume - 0.01;
+        [self performSelector:@selector(doVolumeFadeOut) withObject:nil afterDelay:0.01];
+    }else{
+        [backgroundMusic stop];
+    }
 }
 
 -(void) setUpDominoGrid{

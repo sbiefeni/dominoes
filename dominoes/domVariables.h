@@ -13,7 +13,7 @@
 
 @interface domVariables : NSObject
 
-  extern SKSpriteNode* backGround;
+extern SKSpriteNode* backGround;
 extern BOOL adsShowing;
 
 //to get the scale factor for the current screen (orig size / new size)
@@ -63,7 +63,7 @@ extern SKAction* _dominoSound;
 extern AVAudioPlayer* backgroundMusic;
 
 
-
++(void) playSound:(NSString*)file;
 
 
 

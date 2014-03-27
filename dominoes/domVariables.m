@@ -79,6 +79,13 @@ AVAudioPlayer* backgroundMusic;
 
 @implementation domVariables
 
++(void) playSound:(NSString*)file {
+
+    NSString* sound = [NSString stringWithFormat:@"sounds/%@", file];
+
+    [SKAction playSoundFileNamed:sound waitForCompletion:NO];
+
+}
 
 
 @end

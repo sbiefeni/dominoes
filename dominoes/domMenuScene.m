@@ -27,7 +27,7 @@
         backgroundMusic = [[AVAudioPlayer alloc] initWithContentsOfURL:filePath error:nil];
         [backgroundMusic prepareToPlay];
 
-        backgroundMusic.volume = .1;
+        //backgroundMusic.volume = .5;
 
         [backgroundMusic play];
 
