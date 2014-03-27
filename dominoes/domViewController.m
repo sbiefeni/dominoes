@@ -9,7 +9,7 @@
 #import "domViewController.h"
 #import "domMenuScene.h"
 #import "player.h"
-#import "domVariables.h"
+#import "domCommon.h"
 
 @interface domViewController ()
 

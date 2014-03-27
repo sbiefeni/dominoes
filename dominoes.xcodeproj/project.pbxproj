@@ -16,7 +16,7 @@
 		380DC21B18D0ED9200545962 /* explosion.sks in Resources */ = {isa = PBXBuildFile; fileRef = 380DC21918D0ED9200545962 /* explosion.sks */; };
 		380DC21C18D0ED9200545962 /* spark.png in Resources */ = {isa = PBXBuildFile; fileRef = 380DC21A18D0ED9200545962 /* spark.png */; };
 		387B05D218E0053A005C8D1F /* sounds in Resources */ = {isa = PBXBuildFile; fileRef = 387B05D118E0053A005C8D1F /* sounds */; };
-		387B05D518E0A6EE005C8D1F /* domVariables.m in Sources */ = {isa = PBXBuildFile; fileRef = 387B05D418E0A6EE005C8D1F /* domVariables.m */; };
+		387B05D518E0A6EE005C8D1F /* domCommon.m in Sources */ = {isa = PBXBuildFile; fileRef = 387B05D418E0A6EE005C8D1F /* domCommon.m */; };
 		389AA04C18DE3EC70089CA98 /* domino-green.atlasc in Resources */ = {isa = PBXBuildFile; fileRef = 389AA04B18DE3EC70089CA98 /* domino-green.atlasc */; };
 		389AA04E18DE67340089CA98 /* new-arena.png in Resources */ = {isa = PBXBuildFile; fileRef = 389AA04D18DE67340089CA98 /* new-arena.png */; };
 		389B9CF618CFCDCF004960E5 /* clsDomino.m in Sources */ = {isa = PBXBuildFile; fileRef = 389B9CF518CFCDCF004960E5 /* clsDomino.m */; };
@@ -63,8 +63,8 @@
 		380DC21918D0ED9200545962 /* explosion.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = explosion.sks; sourceTree = "<group>"; };
 		380DC21A18D0ED9200545962 /* spark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = spark.png; sourceTree = "<group>"; };
 		387B05D118E0053A005C8D1F /* sounds */ = {isa = PBXFileReference; lastKnownFileType = folder; path = sounds; sourceTree = "<group>"; };
-		387B05D318E0A6EE005C8D1F /* domVariables.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = domVariables.h; sourceTree = "<group>"; };
-		387B05D418E0A6EE005C8D1F /* domVariables.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = domVariables.m; sourceTree = "<group>"; };
+		387B05D318E0A6EE005C8D1F /* domCommon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = domCommon.h; sourceTree = "<group>"; };
+		387B05D418E0A6EE005C8D1F /* domCommon.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = domCommon.m; sourceTree = "<group>"; };
 		389AA04B18DE3EC70089CA98 /* domino-green.atlasc */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "domino-green.atlasc"; sourceTree = "<group>"; };
 		389AA04D18DE67340089CA98 /* new-arena.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "new-arena.png"; sourceTree = "<group>"; };
 		389B9CF418CFCDCF004960E5 /* clsDomino.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = clsDomino.h; sourceTree = "<group>"; };
@@ -158,8 +158,8 @@
 		389B9CFA18CFD776004960E5 /* helpers */ = {
 			isa = PBXGroup;
 			children = (
-				387B05D418E0A6EE005C8D1F /* domVariables.m */,
-				387B05D318E0A6EE005C8D1F /* domVariables.h */,
+				387B05D418E0A6EE005C8D1F /* domCommon.m */,
+				387B05D318E0A6EE005C8D1F /* domCommon.h */,
 				389B9CF418CFCDCF004960E5 /* clsDomino.h */,
 				389B9CF518CFCDCF004960E5 /* clsDomino.m */,
 				389B9CF718CFD449004960E5 /* player.h */,
@@ -333,6 +333,9 @@
 				LastUpgradeCheck = 0510;
 				ORGANIZATIONNAME = Abstractions;
 				TargetAttributes = {
+					55CB7E1B18CBD180001EFA1C = {
+						DevelopmentTeam = JP43X6H6PR;
+					};
 					55CB7E4618CBD181001EFA1C = {
 						TestTargetID = 55CB7E1B18CBD180001EFA1C;
 					};
@@ -393,7 +396,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				344B5BCD18D4A70300E43D82 /* SKEmitterNode+fromFile.m in Sources */,
-				387B05D518E0A6EE005C8D1F /* domVariables.m in Sources */,
+				387B05D518E0A6EE005C8D1F /* domCommon.m in Sources */,
 				389B9CF918CFD449004960E5 /* player.m in Sources */,
 				55CB7E3B18CBD181001EFA1C /* domViewController.m in Sources */,
 				55CB7E2E18CBD180001EFA1C /* main.m in Sources */,
@@ -535,11 +538,15 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COMPRESS_PNG_FILES = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "dominoes/dominoes-Prefix.pch";
 				INFOPLIST_FILE = "dominoes/dominoes-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				SDKROOT = iphoneos7.1;
 				SPRITEKIT_TEXTURE_ATLAS_OUTPUT = YES;
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
@@ -551,11 +558,15 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COMPRESS_PNG_FILES = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "dominoes/dominoes-Prefix.pch";
 				INFOPLIST_FILE = "dominoes/dominoes-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				SDKROOT = iphoneos7.1;
 				SPRITEKIT_TEXTURE_ATLAS_OUTPUT = YES;
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;

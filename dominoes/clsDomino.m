@@ -80,11 +80,11 @@ NSMutableArray* dominoFrames;
     if (bIsEnd) {
         which = @"-end2";
     }else{
-        int rnd = [self getRanInt:1 maxNumber:9];
+        int rnd = [domCommon getRanInt:1 maxNumber:9];
         which = [@(rnd) stringValue];
     };
 
-    float rotation = [self getRanFloat:-.1 and:.1];
+    float rotation = [domCommon getRanFloat:-.1 and:.1];
 
     NSString* sound = [NSString stringWithFormat:@"sounds/dom%@.wav", which];
 
@@ -102,17 +102,8 @@ NSMutableArray* dominoFrames;
         moveAction,
     ]]];
 
-    [domVariables playSound:@"dom1.wav"];
+    [domCommon playSound:@"dom1.wav"];
 
-}
-
-- (float)getRanFloat:(float)smallNumber and:(float)bigNumber {
-    float diff = bigNumber - smallNumber;
-    return (((float) (arc4random() % ((unsigned)RAND_MAX + 1)) / RAND_MAX) * diff) + smallNumber;
-}
-- (NSInteger)getRanInt:(NSInteger)min maxNumber:(NSInteger)max
-{
-    return min + arc4random() % (max - min + 1);
 }
 
 @end

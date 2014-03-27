@@ -11,7 +11,7 @@
 #import "player.h"
 #import <AVFoundation/AVFoundation.h>
 
-@interface domVariables : NSObject
+@interface domCommon : NSObject
 
 extern SKSpriteNode* backGround;
 extern BOOL adsShowing;
@@ -44,8 +44,6 @@ extern double maxX;
 extern double maxY;
 
 //use these to store each movement, in sequence, for each player
-//max size is the total available grid squares, so we never run out
-//of room
 extern NSMutableArray* playerDominos;
 extern NSMutableArray* computerDominos;
 
@@ -54,16 +52,26 @@ extern player* computer;
 
 //score and label
 extern int score;
+
 extern SKLabelNode* scoreLabel;
 
-extern SKAction* _dominoSound;
+extern int levels;
 
-//extern float gameSpeed;
 
 extern AVAudioPlayer* backgroundMusic;
 
 
 +(void) playSound:(NSString*)file;
++(void) playBackgroundMusicWithVolume:(double)volume;
++(void) doBackgroundMusicFadeToQuiet;
+
++ (float)getRanFloat:(float)smallNumber and:(float)bigNumber;
+
++ (int)getRanInt:(int)min maxNumber:(int)max;
+
+
+
+
 
 
 

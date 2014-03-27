@@ -8,7 +8,7 @@
 
 #import "domMenuScene.h"
 #import "domGameScene.h"
-#import "domVariables.h"
+#import "domCommon.h"
 
 #import "SKEmitterNode+fromFile.h"
 
@@ -20,16 +20,9 @@
     if(self = [super initWithSize:size]) {
 
 
-        NSString *path = [NSString stringWithFormat:@"%@/%@",
-                          [[NSBundle mainBundle] resourcePath],
-                          @"sounds/tick_tock_jingle2.mp3"];
-        NSURL *filePath = [NSURL fileURLWithPath:path isDirectory:NO];
-        backgroundMusic = [[AVAudioPlayer alloc] initWithContentsOfURL:filePath error:nil];
-        [backgroundMusic prepareToPlay];
+        //start the background music track playing
 
-        //backgroundMusic.volume = .5;
-
-        [backgroundMusic play];
+        [domCommon playBackgroundMusicWithVolume:.2];
 
 
         SKEmitterNode *background = [SKEmitterNode dom_emitterNamed:@"Background_Stars"];

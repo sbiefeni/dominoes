@@ -14,7 +14,7 @@
 #import "domMenuScene.h"
 
 //import Global Variables
-#import "domVariables.h"
+#import "domCommon.h"
 
 //this is used like the VB isRunningInIde()
 //usage: isRunningInIde( <statement>; <statement>...)
@@ -29,7 +29,7 @@
 //define z positions for objects
 #define doorZPos    5
 #define dominoZPos  6
-#define domSpeed    .05
+#define domSpeed    .25
 
 
 //define rows and cols
@@ -103,17 +103,10 @@
 
 -(void) setUpSounds {
 
-    [self doVolumeFadeOut];
+    [domCommon doBackgroundMusicFadeToQuiet];
 
 }
--(void)doVolumeFadeOut {
-    if (backgroundMusic.volume > 0.1) {
-        backgroundMusic.volume = backgroundMusic.volume - 0.01;
-        [self performSelector:@selector(doVolumeFadeOut) withObject:nil afterDelay:0.01];
-    }else{
-        [backgroundMusic stop];
-    }
-}
+
 
 -(void) setUpDominoGrid{
 
@@ -277,7 +270,7 @@ if(adsShowing)
 
         [self addChild:domino];
 
-        [self runAction:_dominoSound];
+        //[self runAction:_dominoSound];
          //AudioServicesPlaySystemSound (1200);
 
         //[self runAction:[SKAction playSoundFileNamed:@"click2.wav" waitForCompletion:NO]];
@@ -320,10 +313,10 @@ if(adsShowing)
 
             //crashed = false;
             [self runAction:[SKAction sequence:@[
-                  //[SKAction playSoundFileNamed:@"explosion.wav" waitForCompletion:NO],
-//                  [SKAction runBlock:^{
-//                        AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
-//                   }],
+                  [SKAction playSoundFileNamed:@"sounds/long_ding2.mp3" waitForCompletion:NO],
+                  [SKAction runBlock:^{
+                        AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
+                   }],
                   [SKAction waitForDuration:.6],
                   [SKAction runBlock:^{ explosion.particleBirthRate = 0;} ],
 
@@ -582,10 +575,10 @@ if(adsShowing)
 
 
             [self runAction:[SKAction sequence:@[
-                //[SKAction playSoundFileNamed:@"explosion.wav" waitForCompletion:NO],
-//                [SKAction runBlock:^{
-//                    AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
-//                }],
+                [SKAction playSoundFileNamed:@"sounds/long_ding2.mp3" waitForCompletion:NO],
+                [SKAction runBlock:^{
+                    AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
+                }],
                 [SKAction waitForDuration:.6],
                 [SKAction runBlock:^{ explosion.particleBirthRate = 0; } ],
 
