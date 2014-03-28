@@ -849,8 +849,17 @@ int countSquares;
 }
 
 -(void)handleAngleSwipe:(float) angle{
-    //here we need to handle what to do when a swiped angle detected during play
     
+    //here we need to handle what to do when a swiped angle detected during play
+    if (angle>=20 && angle<=70) {
+        //down-right
+    } else if(angle>=110 && angle<=160) {
+        //up-right
+    } else if (angle>=210 && angle<=250) {
+        //up-left
+    } else if (angle>=290 && angle<=340) {
+        //down-left
+    }
 }
 
 //-(void)update:(CFTimeInterval)currentTime {
