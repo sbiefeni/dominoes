@@ -46,6 +46,8 @@ NSMutableArray* computerDominos;
 clsPlayer* player;
 clsPlayer* computer;
 
+
+
 int score;
 int totalScore;
 int lives;
@@ -54,6 +56,8 @@ int levels;
 SKLabelNode *scoreLabel;
 
 AVAudioPlayer* backgroundMusic;
+
+
 
 @implementation clsGameSettings
 

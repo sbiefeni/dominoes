@@ -35,9 +35,16 @@
 
         
         SKLabelNode *title = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
-        
+
+        int sizeDoubler = 1;
+        if (size.width > 320){ //make fonts and spacing bigger on larger screen
+            sizeDoubler = 2;
+        }
+
         title.text = @"brick'd";
-        title.fontSize = 60;
+
+        title.fontSize = (sizeDoubler * 60);
+
         title.position = CGPointMake(CGRectGetMidX(self.frame),
                                      CGRectGetMidY(self.frame));
         title.fontColor = [SKColor colorWithHue:0 saturation:0 brightness:1 alpha:1.0];
@@ -47,9 +54,10 @@
         SKLabelNode *tapToPlay = [SKLabelNode labelNodeWithFontNamed:@"Avenir-Black"];
         
         tapToPlay.text = @"Tap to play";
-        tapToPlay.fontSize = 40;
+        tapToPlay.fontSize = (sizeDoubler * 40);
+
         tapToPlay.position = CGPointMake(CGRectGetMidX(self.frame),
-                                         CGRectGetMidY(self.frame) - 80);
+                                         CGRectGetMidY(self.frame) - (80 * sizeDoubler) );
         tapToPlay.fontColor = [SKColor colorWithHue:0 saturation:0 brightness:1 alpha:0.7];
         [self addChild:tapToPlay];
         

@@ -29,7 +29,7 @@
 //define z positions for objects
 #define doorZPos    5
 #define dominoZPos  6
-#define domSpeed    .05
+#define domSpeed    .02
 
 
 //define rows and cols
@@ -801,6 +801,7 @@ int countSquares;
     return countSquares;
 
 }
+
 
 
 

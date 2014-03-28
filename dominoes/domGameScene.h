@@ -14,8 +14,6 @@
 @interface domGameScene : SKScene
 <ADBannerViewDelegate>
 
-//@property (strong,nonatomic) ADBannerView *adView;
-
 //enum the last swipe action
 typedef enum  {
     none=   0,
@@ -25,5 +23,5 @@ typedef enum  {
     down=   4,
 } swipeDirection;
 
-//-(void) updatePlayerDirection:(swipeDirection)direction;
+
 @end

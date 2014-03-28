@@ -51,6 +51,8 @@ extern NSMutableArray* computerDominos;
 extern clsPlayer* player;
 extern clsPlayer* computer;
 
+
+
 //score, lives, levels
 extern int score;
 extern int totalScore;
