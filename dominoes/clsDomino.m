@@ -31,7 +31,7 @@ NSMutableArray* dominoFrames;
         SKAction* S7 = [SKAction playSoundFileNamed:@"/sounds/dom7.wav" waitForCompletion:NO];
         SKAction* S8 = [SKAction playSoundFileNamed:@"/sounds/dom8.wav" waitForCompletion:NO];
         SKAction* S9 = [SKAction playSoundFileNamed:@"/sounds/dom9.wav" waitForCompletion:NO];
-        SKAction* SEnd = [SKAction playSoundFileNamed:@"/sounds/dom-end.wav" waitForCompletion:NO];
+        SKAction* SEnd = [SKAction playSoundFileNamed:@"/sounds/dom-end3.wav" waitForCompletion:NO];
 
     }
 }
@@ -78,7 +78,7 @@ NSMutableArray* dominoFrames;
         //9 random domino falling sounds
         //the end sound is distinct and represents the end of a run
     if (bIsEnd) {
-        which = @"-end2";
+        which = @"-end3";
     }else{
         int rnd = [clsCommon getRanInt:1 maxNumber:9];
         which = [@(rnd) stringValue];

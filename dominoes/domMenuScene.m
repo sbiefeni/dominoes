@@ -58,7 +58,7 @@
         tapToPlay.text = @"Tap to play";
         tapToPlay.fontSize = (sizeDoubler * 40);
         tapToPlay.position = CGPointMake(CGRectGetMidX(self.frame),
-                                         CGRectGetMidY(self.frame) - (60 * sizeDoubler) );
+                                         CGRectGetMidY(self.frame) - (30 * sizeDoubler) );
         tapToPlay.fontColor = [SKColor colorWithHue:0 saturation:0 brightness:1 alpha:0.7];
         [self addChild:tapToPlay];
         

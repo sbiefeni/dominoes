@@ -165,7 +165,7 @@ CGPoint pointA;
         _gameSpeed = domSpeed;
     }
     isRunningInIde(
-        _gameSpeed = .01;
+        _gameSpeed = .05;
     )
     
 //set initial player1 direction - ***HACK? - NSUserDefaults lets us easily communicate variables between classes.
