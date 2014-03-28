@@ -113,9 +113,8 @@ switch (swipe.direction) {
 
     player.curDirection = tmpDirection;
 
-
-
 }
+
 - (BOOL)shouldAutorotate
 {
     return YES;

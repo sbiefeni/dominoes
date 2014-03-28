@@ -29,7 +29,7 @@
 //define z positions for objects
 #define doorZPos    5
 #define dominoZPos  6
-#define domSpeed    .05
+#define domSpeed    .3
 
 
 //define rows and cols
@@ -70,6 +70,8 @@
 @end
 
 @implementation domGameScene
+
+CGPoint pointA;
 
 -(id)initWithSize:(CGSize)size {
     if (self = [super initWithSize:size]) {
@@ -802,27 +804,53 @@ int countSquares;
 
 }
 
-
-
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
+    UITouch *touch = [touches anyObject];
+    
+    // Get the specific point that was touched
+    pointA = [touch locationInView:self.view];
+    NSLog(@"X location: %f", pointA.x);
+    NSLog(@"Y Location: %f",pointA.y);
+    
+}
 
-    //[scene runAction:[SKAction scaleTo:0.5 duration:0]];
+-(float)CalcDegrees:(CGPoint) pointB{
+    float Theta;
+    if ( pointB.x - pointA.x == 0 )
+        if ( pointB.y > pointA.y )
+            Theta = 0;
+        else
+            Theta = (float)( M_PI);
+        else
+        {
+            Theta = atan((pointB.y - pointA.y) / (pointB.x - pointA.x));
+            if ( pointB.x > pointA.x )
+                Theta = (float)( M_PI ) / 2.0f - Theta;
+            else
+                Theta = (float)( M_PI ) * 1.5f - Theta;
+        };
+    return Theta * (180/M_PI);
+    
+}
 
-//    SKAction *zoom =       [SKAction scaleTo:2.0 duration:0.25];
-//    SKAction *wait =       [SKAction waitForDuration: 0.5];
-//    SKAction *fadeAway =   [SKAction fadeOutWithDuration:0.25];
-//    SKAction *removeNode = [SKAction removeFromParent];
-//
-//    SKAction *sequence = [SKAction sequence:@[moveUp, zoom, wait, fadeAway, removeNode]];
-//    [node runAction: sequence];
 
+-(void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
+    UITouch *touch=[touches anyObject];
+    CGPoint pointB=[touch locationInView:self.view];
+    float angle=[self CalcDegrees:pointB];
+    NSLog(@"Angle is: %f",angle);
+    //now we need to calc the angle difference when touch stops to determine if an angled swipe
+    //straight down     =   360/0
+    //straight right    =   90
+    //straight up      =    180
+    //straight left     =   270
+    //straight down     =   360/0
+    [self handleAngleSwipe:angle];
+}
 
-//just to be able to log coords and see what they are
-//    UITouch *touched = [[event allTouches] anyObject];
-//    CGPoint location = [touched locationInView:touched.view];
-//    location.x = location.x * scaleX;
-//    location.y = location.y * scaleY;
-//    NSLog(@"x=%.2f y=%.2f", location.x, location.y);
+-(void)handleAngleSwipe:(float) angle{
+    //here we need to handle what to do when a swiped angle detected during play
+    
 }
 
 //-(void)update:(CFTimeInterval)currentTime {
