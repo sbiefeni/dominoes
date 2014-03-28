@@ -837,28 +837,32 @@ int countSquares;
 -(void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
     UITouch *touch=[touches anyObject];
     CGPoint pointB=[touch locationInView:self.view];
+    
+    //now we need to calc the angle difference when touch stops to determine if an angled swipe
     float angle=[self CalcDegrees:pointB];
     NSLog(@"Angle is: %f",angle);
-    //now we need to calc the angle difference when touch stops to determine if an angled swipe
-    //straight down     =   360/0
-    //straight right    =   90
-    //straight up      =    180
-    //straight left     =   270
-    //straight down     =   360/0
+
     [self handleAngleSwipe:angle];
 }
 
 -(void)handleAngleSwipe:(float) angle{
     
+    //straight down     =   360/0
+    //straight right    =   90
+    //straight up      =    180
+    //straight left     =   270
+    //straight down     =   360/0
+    
     //here we need to handle what to do when a swiped angle detected during play
     if (angle>=20 && angle<=70) {
         //down-right
+        NSLog(@"Angle was down-right");
     } else if(angle>=110 && angle<=160) {
-        //up-right
+        NSLog(@"Angle was up-right");
     } else if (angle>=210 && angle<=250) {
-        //up-left
+        NSLog(@"Angle was up-left");
     } else if (angle>=290 && angle<=340) {
-        //down-left
+        NSLog(@"Angle was down-left");
     }
 }
 
