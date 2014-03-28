@@ -8,7 +8,7 @@
 
 
 #import "clsDomino.h"
-
+#import "clsCommon.h"
 
 
 @implementation clsDomino
@@ -80,11 +80,11 @@ NSMutableArray* dominoFrames;
     if (bIsEnd) {
         which = @"-end2";
     }else{
-        int rnd = [domCommon getRanInt:1 maxNumber:9];
+        int rnd = [clsCommon getRanInt:1 maxNumber:9];
         which = [@(rnd) stringValue];
     };
 
-    float rotation = [domCommon getRanFloat:-.1 and:.1];
+    float rotation = [clsCommon getRanFloat:-.1 and:.1];
 
     NSString* sound = [NSString stringWithFormat:@"sounds/dom%@.wav", which];
 
@@ -102,7 +102,7 @@ NSMutableArray* dominoFrames;
         moveAction,
     ]]];
 
-    [domCommon playSound:@"dom1.wav"];
+    [clsCommon playSound:@"dom1.wav"];
 
 }
 

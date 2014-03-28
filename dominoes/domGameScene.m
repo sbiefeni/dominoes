@@ -7,14 +7,14 @@
 //
 
 #import "domGameScene.h"
-#import "player.h"
+#import "clsPlayer.h"
 #import "clsDomino.h"
 
 #import <AudioToolbox/AudioServices.h>
 #import "domMenuScene.h"
 
-//import Global Variables
-#import "domCommon.h"
+//import Common and Global Variables
+#import "clsCommon.h"
 
 //this is used like the VB isRunningInIde()
 //usage: isRunningInIde( <statement>; <statement>...)
@@ -29,7 +29,7 @@
 //define z positions for objects
 #define doorZPos    5
 #define dominoZPos  6
-#define domSpeed    .25
+#define domSpeed    .05
 
 
 //define rows and cols
@@ -103,7 +103,7 @@
 
 -(void) setUpSounds {
 
-    [domCommon doBackgroundMusicFadeToQuiet];
+    [clsCommon doBackgroundMusicFadeToQuiet];
 
 }
 
@@ -143,16 +143,16 @@
 }
 -(void) initializeGame{
 
-    player1 = [player new];
-    computer = [player new];
+    player = [clsPlayer new];
+    computer = [clsPlayer new];
 
     playerDominos=[NSMutableArray new ];
     computerDominos=[NSMutableArray new];
     
 //set the start position and direction of players
-    player1.curX = cols/2 - 1;
-    player1.curY = rows/2 -1;
-    player1.curDirection = up;
+    player.curX = cols/2 - 1;
+    player.curY = rows/2 -1;
+    player.curDirection = up;
 
     computer.curX = cols/2 +1;
     computer.curY = rows/2 +1;
@@ -164,11 +164,11 @@
     }
     
 //set initial player1 direction - ***HACK? - NSUserDefaults lets us easily communicate variables between classes.
-    NSUserDefaults *standardUserDefaults = [NSUserDefaults standardUserDefaults];
-    if (standardUserDefaults) {
-        [standardUserDefaults setObject:[NSNumber numberWithInt:3] forKey:@"playerDirection"];
-        [standardUserDefaults synchronize];
-    }
+//    NSUserDefaults *standardUserDefaults = [NSUserDefaults standardUserDefaults];
+//    if (standardUserDefaults) {
+//        [standardUserDefaults setObject:[NSNumber numberWithInt:3] forKey:@"playerDirection"];
+//        [standardUserDefaults synchronize];
+//    }
 
 //start the timer that runs the game!
     __weak typeof(self) weakSelf = self;
@@ -475,42 +475,42 @@ if(adsShowing)
     clsDomino* domino =[clsDomino new];
     BOOL crashed = false;
     
-        //get player direction
-    NSUserDefaults *standardUserDefaults = [NSUserDefaults standardUserDefaults];
-    NSNumber *tmpValue;
-    if (standardUserDefaults) {
-        tmpValue = [standardUserDefaults objectForKey:@"playerDirection"];
-    }
-    player1.curDirection = [tmpValue intValue];
+//        //get player direction
+//    NSUserDefaults *standardUserDefaults = [NSUserDefaults standardUserDefaults];
+//    NSNumber *tmpValue;
+//    if (standardUserDefaults) {
+//        tmpValue = [standardUserDefaults objectForKey:@"playerDirection"];
+//    }
+//    player.curDirection = [tmpValue intValue];
 
-    switch (player1.curDirection) {
+    switch (player.curDirection) {
         case left:
-            if (player1.curX > 0 && grid[player1.curX-1][player1.curY]==false) {
-                player1.curX --;
+            if (player.curX > 0 && grid[player.curX-1][player.curY]==false) {
+                player.curX --;
             }else{
                 //NSLog(@"CRASH!!!");
                 crashed = true;
             }
             break;
         case right:
-            if (player1.curX < cols && grid[player1.curX+1][player1.curY]==false){
-                player1.curX ++;
+            if (player.curX < cols && grid[player.curX+1][player.curY]==false){
+                player.curX ++;
             }else{
                 //NSLog(@"CRASH!!!");
                 crashed = true;
             }
             break;
         case up:
-            if (player1.curY < rows && grid[player1.curX][player1.curY+1]==false){
-                player1.curY ++;
+            if (player.curY < rows && grid[player.curX][player.curY+1]==false){
+                player.curY ++;
             }else{
                 //NSLog(@"CRASH!!!");
                 crashed = true;
             }
             break;
         case down:
-            if (player1.curY > 0 && grid[player1.curX][player1.curY-1]==false){
-                player1.curY --;
+            if (player.curY > 0 && grid[player.curX][player.curY-1]==false){
+                player.curY --;
             }else{
                 //NSLog(@"CRASH!!!");
                 crashed = true;
@@ -522,7 +522,7 @@ if(adsShowing)
 
     if (!crashed) {
         //draw a domino
-        if (player1.curDirection == up || player1.curDirection == down) {
+        if (player.curDirection == up || player.curDirection == down) {
             [domino setTexture:[SKTexture textureWithImageNamed:@"dom-blue-horizontal"]];
             //domino = [clsDomino spriteNodeWithImageNamed:@"dominoH1"];
         }else {
@@ -534,8 +534,8 @@ if(adsShowing)
         domino.zPosition = dominoZPos;
 
         //[objectWithOurMethod methodName:int1 withArg2:int2];
-        domino.position = [self calcDominoPosition:player1.curX withArg2:player1.curY];
-        domino.direction=player1.curDirection;
+        domino.position = [self calcDominoPosition:player.curX withArg2:player.curY];
+        domino.direction=player.curDirection;
 //        domino.color = [SKColor greenColor];
 //        domino.colorBlendFactor = .4;
 
@@ -543,19 +543,19 @@ if(adsShowing)
         [self addChild:domino];
 
         //reset explosion so it can happen again..
-        player1.didExplosion = false;
+        player.didExplosion = false;
 
         //add to the array so we can track back later
         [playerDominos addObject:domino];
 
         //add to the grid... for domino colision detection
-        grid[player1.curX][player1.curY]=true;
+        grid[player.curX][player.curY]=true;
         
     //play a sound
     //[self runAction: [SKAction playSoundFileNamed:@"click2.wav" waitForCompletion:NO]];
         
 }else{  //we crashed!
-    if (!player1.didExplosion) {
+    if (!player.didExplosion) {
         NSString *burstPath =
         [[NSBundle mainBundle]
         pathForResource:@"explosion" ofType:@"sks"];
@@ -563,11 +563,11 @@ if(adsShowing)
             SKEmitterNode *explosion =
             [NSKeyedUnarchiver unarchiveObjectWithFile:burstPath];
 
-            explosion.position = [self calcDominoPosition:player1.curX withArg2:player1.curY];
+            explosion.position = [self calcDominoPosition:player.curX withArg2:player.curY];
             explosion.zPosition = 10;
 
             [self addChild:explosion];
-            player1.didExplosion = true;
+            player.didExplosion = true;
 
             _sceneChangeDelay  = 5;
             _fallingAnimationInterval = (NSTimeInterval)_sceneChangeDelay/playerDominos.count;

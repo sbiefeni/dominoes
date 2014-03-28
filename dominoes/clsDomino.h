@@ -6,9 +6,9 @@
 //  Copyright (c) 2014 Abstractions. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+//#import <Foundation/Foundation.h>
 #import <SpriteKit/SpriteKit.h>
-#import "domCommon.h"
+
 
 @interface clsDomino : SKSpriteNode
 

@@ -6,60 +6,13 @@
 //  Copyright (c) 2014 Abstractions. All rights reserved.
 //
 
-#import "domCommon.h"
-//this declaration, along with the extern declaration in the .h file,
-//make this a global variable
-
-SKSpriteNode* backGround;
-BOOL adsShowing;
-
-//to get the scale factor for the current screen (orig size / new size)
-float scaleX;
-float scaleY;
-
-//to store the arena unscaled size
-CGSize arenaSize;
-//store the scaled size of the arena
-CGSize scaledSize;
-
-//banner height depends on the screen width, which can only be 320, or 768 (portrait mode)
-int bannerSizeY;
-float bannerHeightAdjuster;
-
- float gridWidth;
- float gridHeight;
+#import "clsCommon.h"
 
 
- CGSize gridSize;
- CGSize dominoSize;
-
-// min/max extents
- double minX;
- double minY;
- double maxX;
- double maxY;
-
-//use these to store each movement, in sequence, for each player
-NSMutableArray* playerDominos;
-NSMutableArray* computerDominos;
-
-player* player1;
-player* computer;
-
-
-int score;
-
-SKLabelNode *scoreLabel;
-
-int levels;
-
-
-AVAudioPlayer* backgroundMusic;
-
-@interface domCommon() {}
+@interface clsCommon() {}
 @end
 
-@implementation domCommon
+@implementation clsCommon
 
 +(void) playBackgroundMusicWithVolume:(double)volume{
     NSString *path = [NSString stringWithFormat:@"%@/%@",
@@ -96,4 +49,12 @@ AVAudioPlayer* backgroundMusic;
     return min + arc4random() % (max - min + 1);
 }
 
+//should store data in between game runs..
++ (void) storeUserSetting:(NSString*)key value:(NSString*)value {
+    NSUserDefaults *standardUserDefaults = [NSUserDefaults standardUserDefaults];
+    if (standardUserDefaults) {
+        [standardUserDefaults setObject:value forKey:key];
+        [standardUserDefaults synchronize];
+    }
+}
 @end

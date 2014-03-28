@@ -13,7 +13,7 @@
 
 @interface domGameScene : SKScene
 <ADBannerViewDelegate>
-//@property (strong, nonatomic) SKAction *playMySound;
+
 //@property (strong,nonatomic) ADBannerView *adView;
 
 //enum the last swipe action

@@ -1,17 +1,18 @@
 //
-//  domVariables.h
+//  domGameSettings.h
 //  dominoes
 //
-//  Created by Stefano on 3/24/14.
+//  Created by Stefano on 3/27/14.
 //  Copyright (c) 2014 Abstractions. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
 #import <SpriteKit/SpriteKit.h>
-#import "player.h"
+#import "clsPlayer.h"
 #import <AVFoundation/AVFoundation.h>
+#import "clsGameSettings.h"
 
-@interface domCommon : NSObject
+@interface clsGameSettings : NSObject
 
 extern SKSpriteNode* backGround;
 extern BOOL adsShowing;
@@ -47,32 +48,17 @@ extern double maxY;
 extern NSMutableArray* playerDominos;
 extern NSMutableArray* computerDominos;
 
-extern player* player1;
-extern player* computer;
+extern clsPlayer* player;
+extern clsPlayer* computer;
 
-//score and label
+//score, lives, levels
 extern int score;
+extern int totalScore;
+extern int lives;
+extern int levels;
 
 extern SKLabelNode* scoreLabel;
 
-extern int levels;
-
-
 extern AVAudioPlayer* backgroundMusic;
-
-
-+(void) playSound:(NSString*)file;
-+(void) playBackgroundMusicWithVolume:(double)volume;
-+(void) doBackgroundMusicFadeToQuiet;
-
-+ (float)getRanFloat:(float)smallNumber and:(float)bigNumber;
-
-+ (int)getRanInt:(int)min maxNumber:(int)max;
-
-
-
-
-
-
 
 @end

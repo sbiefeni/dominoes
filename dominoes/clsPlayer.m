@@ -6,9 +6,9 @@
 //  Copyright (c) 2014 Abstractions. All rights reserved.
 //
 
-#import "player.h"
+#import "clsPlayer.h"
 
-@implementation player
+@implementation clsPlayer
 
 
 @end

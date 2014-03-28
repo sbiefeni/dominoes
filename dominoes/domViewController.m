@@ -8,8 +8,8 @@
 
 #import "domViewController.h"
 #import "domMenuScene.h"
-#import "player.h"
-#import "domCommon.h"
+#import "clsPlayer.h"
+#import "clsCommon.h"
 
 @interface domViewController ()
 
@@ -111,13 +111,9 @@ switch (swipe.direction) {
         break;
     };
 
-    //storing the swipe using the NSUserDefaults structure
-    NSUserDefaults *standardUserDefaults = [NSUserDefaults standardUserDefaults];
+    player.curDirection = tmpDirection;
 
-    if (standardUserDefaults) {
-        [standardUserDefaults setObject:[NSNumber numberWithInt:tmpDirection] forKey:@"playerDirection"];
-        [standardUserDefaults synchronize];
-    }
+
 
 }
 - (BOOL)shouldAutorotate

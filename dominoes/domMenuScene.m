@@ -8,7 +8,7 @@
 
 #import "domMenuScene.h"
 #import "domGameScene.h"
-#import "domCommon.h"
+#import "clsCommon.h"
 
 #import "SKEmitterNode+fromFile.h"
 
@@ -22,7 +22,7 @@
 
         //start the background music track playing
 
-        [domCommon playBackgroundMusicWithVolume:.2];
+        [clsCommon playBackgroundMusicWithVolume:.2];
 
 
         SKEmitterNode *background = [SKEmitterNode dom_emitterNamed:@"Background_Stars"];

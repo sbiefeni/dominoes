@@ -16,11 +16,12 @@
 		380DC21B18D0ED9200545962 /* explosion.sks in Resources */ = {isa = PBXBuildFile; fileRef = 380DC21918D0ED9200545962 /* explosion.sks */; };
 		380DC21C18D0ED9200545962 /* spark.png in Resources */ = {isa = PBXBuildFile; fileRef = 380DC21A18D0ED9200545962 /* spark.png */; };
 		387B05D218E0053A005C8D1F /* sounds in Resources */ = {isa = PBXBuildFile; fileRef = 387B05D118E0053A005C8D1F /* sounds */; };
-		387B05D518E0A6EE005C8D1F /* domCommon.m in Sources */ = {isa = PBXBuildFile; fileRef = 387B05D418E0A6EE005C8D1F /* domCommon.m */; };
+		387B05D518E0A6EE005C8D1F /* clsCommon.m in Sources */ = {isa = PBXBuildFile; fileRef = 387B05D418E0A6EE005C8D1F /* clsCommon.m */; };
 		389AA04C18DE3EC70089CA98 /* domino-green.atlasc in Resources */ = {isa = PBXBuildFile; fileRef = 389AA04B18DE3EC70089CA98 /* domino-green.atlasc */; };
 		389AA04E18DE67340089CA98 /* new-arena.png in Resources */ = {isa = PBXBuildFile; fileRef = 389AA04D18DE67340089CA98 /* new-arena.png */; };
 		389B9CF618CFCDCF004960E5 /* clsDomino.m in Sources */ = {isa = PBXBuildFile; fileRef = 389B9CF518CFCDCF004960E5 /* clsDomino.m */; };
-		389B9CF918CFD449004960E5 /* player.m in Sources */ = {isa = PBXBuildFile; fileRef = 389B9CF818CFD449004960E5 /* player.m */; };
+		389B9CF918CFD449004960E5 /* clsPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 389B9CF818CFD449004960E5 /* clsPlayer.m */; };
+		38B7A7F918E4F10D00F51451 /* clsGameSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = 38B7A7F818E4F10D00F51451 /* clsGameSettings.m */; };
 		38E4967F18D7CDD600D111E9 /* brick.png in Resources */ = {isa = PBXBuildFile; fileRef = 38E4967E18D7CDD600D111E9 /* brick.png */; };
 		55CB7E2018CBD180001EFA1C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55CB7E1F18CBD180001EFA1C /* Foundation.framework */; };
 		55CB7E2218CBD180001EFA1C /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55CB7E2118CBD180001EFA1C /* CoreGraphics.framework */; };
@@ -63,14 +64,16 @@
 		380DC21918D0ED9200545962 /* explosion.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = explosion.sks; sourceTree = "<group>"; };
 		380DC21A18D0ED9200545962 /* spark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = spark.png; sourceTree = "<group>"; };
 		387B05D118E0053A005C8D1F /* sounds */ = {isa = PBXFileReference; lastKnownFileType = folder; path = sounds; sourceTree = "<group>"; };
-		387B05D318E0A6EE005C8D1F /* domCommon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = domCommon.h; sourceTree = "<group>"; };
-		387B05D418E0A6EE005C8D1F /* domCommon.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = domCommon.m; sourceTree = "<group>"; };
+		387B05D318E0A6EE005C8D1F /* clsCommon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = clsCommon.h; sourceTree = "<group>"; };
+		387B05D418E0A6EE005C8D1F /* clsCommon.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = clsCommon.m; sourceTree = "<group>"; };
 		389AA04B18DE3EC70089CA98 /* domino-green.atlasc */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "domino-green.atlasc"; sourceTree = "<group>"; };
 		389AA04D18DE67340089CA98 /* new-arena.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "new-arena.png"; sourceTree = "<group>"; };
 		389B9CF418CFCDCF004960E5 /* clsDomino.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = clsDomino.h; sourceTree = "<group>"; };
 		389B9CF518CFCDCF004960E5 /* clsDomino.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = clsDomino.m; sourceTree = "<group>"; };
-		389B9CF718CFD449004960E5 /* player.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = player.h; sourceTree = "<group>"; };
-		389B9CF818CFD449004960E5 /* player.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = player.m; sourceTree = "<group>"; };
+		389B9CF718CFD449004960E5 /* clsPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = clsPlayer.h; sourceTree = "<group>"; };
+		389B9CF818CFD449004960E5 /* clsPlayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = clsPlayer.m; sourceTree = "<group>"; };
+		38B7A7F718E4F10D00F51451 /* clsGameSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = clsGameSettings.h; sourceTree = "<group>"; };
+		38B7A7F818E4F10D00F51451 /* clsGameSettings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = clsGameSettings.m; sourceTree = "<group>"; };
 		38E4967E18D7CDD600D111E9 /* brick.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = brick.png; sourceTree = "<group>"; };
 		55CB7E1C18CBD180001EFA1C /* dominoes.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = dominoes.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		55CB7E1F18CBD180001EFA1C /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -158,12 +161,11 @@
 		389B9CFA18CFD776004960E5 /* helpers */ = {
 			isa = PBXGroup;
 			children = (
-				387B05D418E0A6EE005C8D1F /* domCommon.m */,
-				387B05D318E0A6EE005C8D1F /* domCommon.h */,
-				389B9CF418CFCDCF004960E5 /* clsDomino.h */,
+				38B7A7FA18E4F91F00F51451 /* h_files */,
+				387B05D418E0A6EE005C8D1F /* clsCommon.m */,
 				389B9CF518CFCDCF004960E5 /* clsDomino.m */,
-				389B9CF718CFD449004960E5 /* player.h */,
-				389B9CF818CFD449004960E5 /* player.m */,
+				389B9CF818CFD449004960E5 /* clsPlayer.m */,
+				38B7A7F818E4F10D00F51451 /* clsGameSettings.m */,
 			);
 			name = helpers;
 			sourceTree = "<group>";
@@ -203,6 +205,17 @@
 				55CB7E3A18CBD181001EFA1C /* domViewController.m */,
 			);
 			name = viewcontrollers;
+			sourceTree = "<group>";
+		};
+		38B7A7FA18E4F91F00F51451 /* h_files */ = {
+			isa = PBXGroup;
+			children = (
+				387B05D318E0A6EE005C8D1F /* clsCommon.h */,
+				389B9CF418CFCDCF004960E5 /* clsDomino.h */,
+				389B9CF718CFD449004960E5 /* clsPlayer.h */,
+				38B7A7F718E4F10D00F51451 /* clsGameSettings.h */,
+			);
+			name = h_files;
 			sourceTree = "<group>";
 		};
 		55CB7E1318CBD180001EFA1C = {
@@ -396,12 +409,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				344B5BCD18D4A70300E43D82 /* SKEmitterNode+fromFile.m in Sources */,
-				387B05D518E0A6EE005C8D1F /* domCommon.m in Sources */,
-				389B9CF918CFD449004960E5 /* player.m in Sources */,
+				387B05D518E0A6EE005C8D1F /* clsCommon.m in Sources */,
+				389B9CF918CFD449004960E5 /* clsPlayer.m in Sources */,
 				55CB7E3B18CBD181001EFA1C /* domViewController.m in Sources */,
 				55CB7E2E18CBD180001EFA1C /* main.m in Sources */,
 				55CB7E3218CBD181001EFA1C /* domAppDelegate.m in Sources */,
 				344B5BC618D3FA9500E43D82 /* domMenuScene.m in Sources */,
+				38B7A7F918E4F10D00F51451 /* clsGameSettings.m in Sources */,
 				389B9CF618CFCDCF004960E5 /* clsDomino.m in Sources */,
 				55CB7E3E18CBD181001EFA1C /* domGameScene.m in Sources */,
 			);

@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "domGameScene.h"
 
-@interface player : NSObject
+@interface clsPlayer : NSObject
 
 @property swipeDirection lastSwipe;
 @property swipeDirection curDirection;
