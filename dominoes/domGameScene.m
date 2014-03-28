@@ -29,7 +29,7 @@
 //define z positions for objects
 #define doorZPos    5
 #define dominoZPos  6
-#define domSpeed    .02
+#define domSpeed    .20
 
 
 //define rows and cols
@@ -164,6 +164,9 @@ CGPoint pointA;
     if (_gameSpeed == 0 ) {
         _gameSpeed = domSpeed;
     }
+    isRunningInIde(
+        _gameSpeed = .01;
+    )
     
 //set initial player1 direction - ***HACK? - NSUserDefaults lets us easily communicate variables between classes.
 //    NSUserDefaults *standardUserDefaults = [NSUserDefaults standardUserDefaults];

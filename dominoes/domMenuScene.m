@@ -5,6 +5,8 @@
 //  Created by Mauro Biefeni on 2014-03-14.
 //  Copyright (c) 2014 Abstractions. All rights reserved.
 //
+#define isRunningInIde(x) if ([[[UIDevice currentDevice].model lowercaseString] rangeOfString:@"simulator"].location != NSNotFound){x;}
+
 
 #import "domMenuScene.h"
 #import "domGameScene.h"
@@ -42,22 +44,21 @@
         }
 
         title.text = @"brick'd";
-
         title.fontSize = (sizeDoubler * 60);
-
         title.position = CGPointMake(CGRectGetMidX(self.frame),
-                                     CGRectGetMidY(self.frame));
+                                     CGRectGetMidY(self.frame)+ 30*sizeDoubler);
         title.fontColor = [SKColor colorWithHue:0 saturation:0 brightness:1 alpha:1.0];
-        
         [self addChild:title];
-        
+
+
+        [self addChild: [self instruct:sizeDoubler]]; //instructions button, from below
+
+
         SKLabelNode *tapToPlay = [SKLabelNode labelNodeWithFontNamed:@"Avenir-Black"];
-        
         tapToPlay.text = @"Tap to play";
         tapToPlay.fontSize = (sizeDoubler * 40);
-
         tapToPlay.position = CGPointMake(CGRectGetMidX(self.frame),
-                                         CGRectGetMidY(self.frame) - (80 * sizeDoubler) );
+                                         CGRectGetMidY(self.frame) - (60 * sizeDoubler) );
         tapToPlay.fontColor = [SKColor colorWithHue:0 saturation:0 brightness:1 alpha:0.7];
         [self addChild:tapToPlay];
         
@@ -75,21 +76,31 @@
 
 
 
-//        [self runAction:[SKAction sequence:@[
-//                                                  //[SKAction playSoundFileNamed:@"explosion.wav" waitForCompletion:NO],
-//            [SKAction waitForDuration:2],
-//            [SKAction runBlock:^{
-//                domGameScene *game = [[domGameScene alloc] initWithSize:self.size];
-//
-//                [self.view presentScene:game transition:[SKTransition doorsOpenHorizontalWithDuration:1.5]];
-//            }],
-//            ]]];
+
+            [self runAction:[SKAction sequence:@[
+                [SKAction waitForDuration:2],
+                [SKAction runBlock:^{
+                    isRunningInIde(
+                            domGameScene *game = [[domGameScene alloc] initWithSize:self.size];
+                            [self.view presentScene:game transition:[SKTransition doorsOpenHorizontalWithDuration:1.5]];
+                    )
+                }],
+            ]]];
 
 
     }
     return self;
 }
 
+- (SKSpriteNode *)instruct:(int)sizeDoubler
+{
+    SKSpriteNode *instruct = [SKSpriteNode spriteNodeWithImageNamed:@"directions"];
+    instruct.position = CGPointMake(CGRectGetMidX(self.frame),
+                                    CGRectGetMidY(self.frame) - (150 * sizeDoubler) );
+    instruct.name = @"instructions";//how the node is identified later
+    instruct.zPosition = 10;
+    return instruct;
+}
 
 -(void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {

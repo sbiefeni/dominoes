@@ -355,7 +355,7 @@
 				ORGANIZATIONNAME = Abstractions;
 				TargetAttributes = {
 					55CB7E1B18CBD180001EFA1C = {
-						DevelopmentTeam = TVP369UU3E;
+						DevelopmentTeam = JP43X6H6PR;
 					};
 					55CB7E4618CBD181001EFA1C = {
 						TestTargetID = 55CB7E1B18CBD180001EFA1C;
