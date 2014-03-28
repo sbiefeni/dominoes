@@ -99,6 +99,7 @@
                                     CGRectGetMidY(self.frame) - (150 * sizeDoubler) );
     instruct.name = @"instructions";//how the node is identified later
     instruct.zPosition = 10;
+    instruct.alpha = .7;
     return instruct;
 }
 
