@@ -218,6 +218,13 @@
 			name = h_files;
 			sourceTree = "<group>";
 		};
+		38B7A81218E5043000F51451 /* iPad */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = iPad;
+			sourceTree = "<group>";
+		};
 		55CB7E1318CBD180001EFA1C = {
 			isa = PBXGroup;
 			children = (
@@ -254,6 +261,7 @@
 		55CB7E2718CBD180001EFA1C /* dominoes */ = {
 			isa = PBXGroup;
 			children = (
+				38B7A81218E5043000F51451 /* iPad */,
 				387B05D118E0053A005C8D1F /* sounds */,
 				389AA04F18DF941F0089CA98 /* arenas */,
 				389AA04B18DE3EC70089CA98 /* domino-green.atlasc */,
@@ -558,11 +566,12 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "dominoes/dominoes-Prefix.pch";
 				INFOPLIST_FILE = "dominoes/dominoes-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos7.1;
 				SPRITEKIT_TEXTURE_ATLAS_OUTPUT = YES;
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -578,11 +587,12 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "dominoes/dominoes-Prefix.pch";
 				INFOPLIST_FILE = "dominoes/dominoes-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos7.1;
 				SPRITEKIT_TEXTURE_ATLAS_OUTPUT = YES;
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
