@@ -46,7 +46,7 @@ int iHeight;
     //self.canDisplayBannerAds=YES;
     
     adView=[[ADBannerView alloc]initWithFrame:aRect];
-    adView.currentContentSizeIdentifier = ADBannerContentSizeIdentifierPortrait;
+    //adView.currentContentSizeIdentifier = ADBannerContentSizeIdentifierPortrait;
     [adView setAlpha:0];
     [self.view addSubview:adView];
     

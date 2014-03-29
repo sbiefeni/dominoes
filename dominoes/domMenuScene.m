@@ -11,6 +11,7 @@
 #import "domMenuScene.h"
 #import "domGameScene.h"
 #import "clsCommon.h"
+#import "domViewController.h"
 
 #import "SKEmitterNode+fromFile.h"
 
@@ -23,7 +24,7 @@
 
 
         //start the background music track playing
-
+        [domViewController setAdView:NO ShowOnTop:NO];
         [clsCommon playBackgroundMusicWithVolume:.2];
 
 
