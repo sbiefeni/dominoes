@@ -93,7 +93,7 @@ CGPoint pointA;
 
         [self setUpBackgroundFloor];
 
-
+        [domViewController setAdView:YES ShowOnTop:NO];
 
         //}
         //NSLog(@"Width: %f, Height: %f", size.width, size.height);

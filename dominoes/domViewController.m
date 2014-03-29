@@ -47,9 +47,8 @@ int iHeight;
     
     adView=[[ADBannerView alloc]initWithFrame:aRect];
     adView.currentContentSizeIdentifier = ADBannerContentSizeIdentifierPortrait;
-    
+    [adView setAlpha:0];
     [self.view addSubview:adView];
-    [domViewController setAdView:NO ShowOnTop:YES];
     
     // Configure the view.
     //SKView * skView = (SKView *)self.view;
