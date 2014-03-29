@@ -47,6 +47,7 @@
 + (int)getRanInt:(int)min maxNumber:(int)max
 {
     return min + arc4random() % (max - min + 1);
+    
 }
 
 //should store data in between game runs..

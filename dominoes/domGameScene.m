@@ -10,7 +10,6 @@
 #import "clsPlayer.h"
 #import "clsDomino.h"
 #import "domViewController.h"
-
 #import <AudioToolbox/AudioServices.h>
 #import "domMenuScene.h"
 
@@ -24,8 +23,8 @@
 
 //using 0 and 1 instead of BOOL so I can use these in calculations
 //not needed?
-#define ceilingOn   1
-#define floorOn     0
+#define ceilingOn   0
+#define floorOn     1
 
 //define z positions for objects
 #define doorZPos    5
@@ -51,7 +50,7 @@
     //each value is true if there is a domino placed there
     BOOL grid [cols+1][rows+1];
     BOOL testGrid [cols+1][rows+1];  //to record matches during recursive testing
-
+    
      //player* player1;
      //player* computer;
 

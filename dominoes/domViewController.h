@@ -13,4 +13,6 @@
 
 @interface domViewController : UIViewController <ADBannerViewDelegate>
 
++(void)setAdView:(BOOL)showAd ShowOnTop:(BOOL)onTop;
+
 @end
