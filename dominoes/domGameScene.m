@@ -9,6 +9,7 @@
 #import "domGameScene.h"
 #import "clsPlayer.h"
 #import "clsDomino.h"
+#import "domViewController.h"
 
 #import <AudioToolbox/AudioServices.h>
 #import "domMenuScene.h"
@@ -90,8 +91,6 @@ CGPoint pointA;
         [self setUpSounds];
         
         [self initializeGame];
-
-
 
         //}
         //NSLog(@"Width: %f, Height: %f", size.width, size.height);
@@ -646,7 +645,7 @@ if(adsShowing)
     
     
     //determine the banner size (according to iAD)
-    bannerSizeY = (arenaSize.width == 320) ? 25 : 25;
+    bannerSizeY = (arenaSize.width == 320) ? 50 : 50;
     //if only one of the banners is on, then we need an adjuster to center things
     if (ceilingOn + floorOn ==1){
         bannerHeightAdjuster = (ceilingOn) ? -(bannerSizeY/2): +(bannerSizeY/2);
