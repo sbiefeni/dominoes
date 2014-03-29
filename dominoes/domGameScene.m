@@ -23,7 +23,7 @@
 
 //using 0 and 1 instead of BOOL so I can use these in calculations
 //not needed?
-#define ceilingOn   0
+#define ceilingOn   1
 #define floorOn     0
 
 //define z positions for objects

@@ -15,23 +15,17 @@
 
 @end
 
-@implementation domViewController
-
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    UIViewController *destination = [segue destinationViewController];
-    
-    destination.interstitialPresentationPolicy =
-    ADInterstitialPresentationPolicyAutomatic;
-}
+@implementation domViewController{}
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     
-    self.canDisplayBannerAds=YES;
+    //self.canDisplayBannerAds=YES;
+    ADBannerView *adView=[[ADBannerView alloc]initWithFrame:CGRectZero];
+    adView.currentContentSizeIdentifier = ADBannerContentSizeIdentifierPortrait;
+    [self.view addSubview:adView];
     
-
     // Configure the view.
     //SKView * skView = (SKView *)self.view;
     SKView * skView = (SKView*)self.originalContentView;
