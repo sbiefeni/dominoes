@@ -11,16 +11,32 @@
 #import "clsPlayer.h"
 #import "clsCommon.h"
 
+ADBannerView *adView;
+
 @interface domViewController ()
 
 @end
 
-@implementation domViewController{}
+@implementation domViewController{
+    
+}
+
+//(float)getRanFloat:(float)smallNumber and:(float)bigNumber {
+
++(void)setAdView:(BOOL)showAd ShowOnTop:(BOOL)onTop{
+    
+    }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     
+    //CGFloat width = CGRectGetWidth(self.view.bounds);
+    //CGFloat height = CGRectGetHeight(self.view.bounds);
+    
+    CGRect aRect;
+    aRect.origin.x =0;
+    aRect.origin.y = CGRectGetHeight(self.view.bounds)-50;
     //self.canDisplayBannerAds=YES;
     ADBannerView *adView=[[ADBannerView alloc]initWithFrame:CGRectZero];
     //adView.currentContentSizeIdentifier = ADBannerContentSizeIdentifierPortrait;

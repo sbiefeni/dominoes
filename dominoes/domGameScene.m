@@ -9,6 +9,7 @@
 #import "domGameScene.h"
 #import "clsPlayer.h"
 #import "clsDomino.h"
+#import "domViewController.h"
 
 #import <AudioToolbox/AudioServices.h>
 #import "domMenuScene.h"
