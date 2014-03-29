@@ -654,7 +654,7 @@ if(adsShowing)
 
     //floor.position = backGround.position;
 
-    floor.zPosition = 0;
+    floor.zPosition = -1;
 
     [backGround addChild:floor];
 }

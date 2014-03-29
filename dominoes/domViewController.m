@@ -23,13 +23,14 @@ ADBannerView *adView;
 
 //(float)getRanFloat:(float)smallNumber and:(float)bigNumber {
 
-+(void)setAdView:(BOOL)showAd ShowOnTop:(BOOL)onTop{
+-(void)setAdView:(BOOL)showAd ShowOnTop:(BOOL)onTop{
     
     }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+
     
     //CGFloat width = CGRectGetWidth(self.view.bounds);
     //CGFloat height = CGRectGetHeight(self.view.bounds);
@@ -38,8 +39,10 @@ ADBannerView *adView;
     aRect.origin.x =0;
     aRect.origin.y = CGRectGetHeight(self.view.bounds)-50;
     //self.canDisplayBannerAds=YES;
-    ADBannerView *adView=[[ADBannerView alloc]initWithFrame:CGRectZero];
-    //adView.currentContentSizeIdentifier = ADBannerContentSizeIdentifierPortrait;
+    
+    adView=[[ADBannerView alloc]initWithFrame:aRect];
+    adView.currentContentSizeIdentifier = ADBannerContentSizeIdentifierPortrait;
+    
     [self.view addSubview:adView];
 
     
