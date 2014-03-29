@@ -28,7 +28,7 @@ int iHeight;
 
     //adView. = (onTop==YES?iHeight-50:0);
     [UIView beginAnimations:nil context:NULL];
-    [UIView setAnimationDuration:1];
+    [UIView setAnimationDuration:10];
     [adView setAlpha:showAd==YES?1:0];
     [UIView commitAnimations];
 }
