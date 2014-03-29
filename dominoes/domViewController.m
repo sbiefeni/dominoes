@@ -12,6 +12,7 @@
 #import "clsCommon.h"
 
 ADBannerView *adView;
+int iHeight;
 
 @interface domViewController ()
 
@@ -44,7 +45,7 @@ ADBannerView *adView;
     adView.currentContentSizeIdentifier = ADBannerContentSizeIdentifierPortrait;
     
     [self.view addSubview:adView];
-
+    [domViewController setAdView:NO ShowOnTop:YES];
     
     // Configure the view.
     //SKView * skView = (SKView *)self.view;
@@ -84,6 +85,7 @@ ADBannerView *adView;
 {
     //pause the game
     adsShowing=YES;
+    
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -126,7 +128,7 @@ switch (swipe.direction) {
     };
 
     player.curDirection = tmpDirection;
-
+ 
 }
 
 - (BOOL)shouldAutorotate

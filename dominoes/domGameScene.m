@@ -10,7 +10,6 @@
 #import "clsPlayer.h"
 #import "clsDomino.h"
 #import "domViewController.h"
-
 #import <AudioToolbox/AudioServices.h>
 #import "domMenuScene.h"
 
@@ -51,7 +50,7 @@
     //each value is true if there is a domino placed there
     BOOL grid [cols+1][rows+1];
     BOOL testGrid [cols+1][rows+1];  //to record matches during recursive testing
-
+    
      //player* player1;
      //player* computer;
 
