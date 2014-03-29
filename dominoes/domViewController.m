@@ -24,15 +24,19 @@ int iHeight;
 
 //(float)getRanFloat:(float)smallNumber and:(float)bigNumber {
 
--(void)setAdView:(BOOL)showAd ShowOnTop:(BOOL)onTop{
-    
-    }
++(void)setAdView:(BOOL)showAd ShowOnTop:(BOOL)onTop{
+
+    //adView. = (onTop==YES?iHeight-50:0);
+    [UIView beginAnimations:nil context:NULL];
+    [UIView setAnimationDuration:1];
+    [adView setAlpha:showAd==YES?1:0];
+    [UIView commitAnimations];
+}
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
-    
+    iHeight=CGRectGetHeight(self.view.bounds);
     //CGFloat width = CGRectGetWidth(self.view.bounds);
     //CGFloat height = CGRectGetHeight(self.view.bounds);
     
