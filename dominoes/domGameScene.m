@@ -23,11 +23,11 @@
 
 //using 0 and 1 instead of BOOL so I can use these in calculations
 //not needed?
-#define ceilingOn   1
-#define floorOn     0
+#define ceilingOn   0
+#define floorOn     1
 
 //define z positions for objects
-#define doorZPos    5
+//#define doorZPos    5
 #define dominoZPos  6
 #define domSpeed    .20
 
@@ -90,6 +90,8 @@ CGPoint pointA;
         [self setUpSounds];
         
         [self initializeGame];
+
+        [self setUpBackgroundFloor];
 
 
 
@@ -640,13 +642,29 @@ if(adsShowing)
     return CGPointMake(xPos, yPos);
 }
 
+-(void) setUpBackgroundFloor{
+    NSString *floorPath =
+    [[NSBundle mainBundle]
+     pathForResource:@"floor1" ofType:@"sks"];
+
+    SKEmitterNode *floor =
+    [NSKeyedUnarchiver unarchiveObjectWithFile:floorPath];
+
+
+    //floor.position = backGround.position;
+
+    floor.zPosition = 0;
+
+    [backGround addChild:floor];
+}
+
 -(void) setUpBackGround{
 
     int bannerCount =0;
     
     
     //determine the banner size (according to iAD)
-    bannerSizeY = (arenaSize.width == 320) ? 25 : 25;
+    bannerSizeY = (arenaSize.width == 320) ? 50 : 66;
     //if only one of the banners is on, then we need an adjuster to center things
     if (ceilingOn + floorOn ==1){
         bannerHeightAdjuster = (ceilingOn) ? -(bannerSizeY/2): +(bannerSizeY/2);
@@ -682,8 +700,8 @@ if(adsShowing)
     backGround.position = CGPointMake(arenaSize.width/2, backGroundPos);
     backGround.zPosition = 1;
 
-           self.backgroundColor = [SKColor blackColor];
-            //backGround.colorBlendFactor = 1;
+    self.backgroundColor = [SKColor blackColor];
+    //backGround.colorBlendFactor = 1;
 
     
     [self addChild:backGround];

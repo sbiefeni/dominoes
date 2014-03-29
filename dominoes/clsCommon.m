@@ -25,7 +25,7 @@
     backgroundMusic.volume = volume;
 }
 
-+(void) doBackgroundMusicFadeToQuiet {
++ (void) doBackgroundMusicFadeToQuiet {
     if (backgroundMusic.volume > 0.03) {
         backgroundMusic.volume = backgroundMusic.volume - 0.01;
         [self performSelector:@selector(doBackgroundMusicFadeToQuiet) withObject:nil afterDelay:0.02];
@@ -34,7 +34,7 @@
     }
 }
 
-+(void) playSound:(NSString*)file {
++ (void) playSound:(NSString*)file {
     NSString* sound = [NSString stringWithFormat:@"sounds/%@", file];
     [SKAction playSoundFileNamed:sound waitForCompletion:NO];
 }

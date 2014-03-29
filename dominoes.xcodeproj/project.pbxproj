@@ -23,6 +23,7 @@
 		389B9CF918CFD449004960E5 /* clsPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 389B9CF818CFD449004960E5 /* clsPlayer.m */; };
 		38B7A7F918E4F10D00F51451 /* clsGameSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = 38B7A7F818E4F10D00F51451 /* clsGameSettings.m */; };
 		38E4967F18D7CDD600D111E9 /* brick.png in Resources */ = {isa = PBXBuildFile; fileRef = 38E4967E18D7CDD600D111E9 /* brick.png */; };
+		38FA7D3618E77F5E00820901 /* floor1.sks in Resources */ = {isa = PBXBuildFile; fileRef = 38FA7D3518E77F5E00820901 /* floor1.sks */; };
 		55CB7E2018CBD180001EFA1C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55CB7E1F18CBD180001EFA1C /* Foundation.framework */; };
 		55CB7E2218CBD180001EFA1C /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55CB7E2118CBD180001EFA1C /* CoreGraphics.framework */; };
 		55CB7E2418CBD180001EFA1C /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55CB7E2318CBD180001EFA1C /* UIKit.framework */; };
@@ -75,6 +76,7 @@
 		38B7A7F718E4F10D00F51451 /* clsGameSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = clsGameSettings.h; sourceTree = "<group>"; };
 		38B7A7F818E4F10D00F51451 /* clsGameSettings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = clsGameSettings.m; sourceTree = "<group>"; };
 		38E4967E18D7CDD600D111E9 /* brick.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = brick.png; sourceTree = "<group>"; };
+		38FA7D3518E77F5E00820901 /* floor1.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = floor1.sks; sourceTree = "<group>"; };
 		55CB7E1C18CBD180001EFA1C /* dominoes.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = dominoes.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		55CB7E1F18CBD180001EFA1C /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		55CB7E2118CBD180001EFA1C /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -137,6 +139,7 @@
 				38E4967E18D7CDD600D111E9 /* brick.png */,
 				380DC21A18D0ED9200545962 /* spark.png */,
 				380DC21918D0ED9200545962 /* explosion.sks */,
+				38FA7D3518E77F5E00820901 /* floor1.sks */,
 			);
 			name = particles;
 			sourceTree = "<group>";
@@ -387,6 +390,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				55CB7E4218CBD181001EFA1C /* Images.xcassets in Resources */,
+				38FA7D3618E77F5E00820901 /* floor1.sks in Resources */,
 				389AA04C18DE3EC70089CA98 /* domino-green.atlasc in Resources */,
 				387B05D218E0053A005C8D1F /* sounds in Resources */,
 				55CB7E3818CBD181001EFA1C /* Main_iPad.storyboard in Resources */,

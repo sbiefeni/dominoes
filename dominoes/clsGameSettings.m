@@ -19,6 +19,7 @@ float scaleY;
 
 //to store the arena unscaled size
 CGSize arenaSize;
+
 //store the scaled size of the arena
 CGSize scaledSize;
 

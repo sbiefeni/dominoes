@@ -21,7 +21,11 @@
 {
     [super viewDidLoad];
     
-    self.canDisplayBannerAds=NO;
+    //self.canDisplayBannerAds=YES;
+    ADBannerView *adView=[[ADBannerView alloc]initWithFrame:CGRectZero];
+    //adView.currentContentSizeIdentifier = ADBannerContentSizeIdentifierPortrait;
+    [self.view addSubview:adView];
+
     
     // Configure the view.
     //SKView * skView = (SKView *)self.view;
