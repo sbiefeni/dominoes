@@ -15,15 +15,7 @@
 
 @end
 
-@implementation domViewController
-
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    UIViewController *destination = [segue destinationViewController];
-    
-    destination.interstitialPresentationPolicy =
-    ADInterstitialPresentationPolicyAutomatic;
-}
+@implementation domViewController{}
 
 - (void)viewDidLoad
 {
@@ -31,7 +23,6 @@
     
     self.canDisplayBannerAds=NO;
     
-
     // Configure the view.
     //SKView * skView = (SKView *)self.view;
     SKView * skView = (SKView*)self.originalContentView;
