@@ -184,9 +184,9 @@ CGPoint pointA;
 //    }
 
 //start the timer that runs the game!
-    __weak typeof(self) weakSelf = self;
+
     [self runAction:[SKAction repeatActionForever:[SKAction sequence:@[
-                [SKAction performSelector:@selector(gameRunner) onTarget:weakSelf],
+                [SKAction performSelector:@selector(gameRunner) onTarget:self],
                 [SKAction waitForDuration:_gameSpeed]
     ]]]];
 
@@ -199,13 +199,12 @@ if(adsShowing)
     return;
 }
 //player move
-    [self handlePlayerMove];
+    [self handleComputerMove];
 
 //computer move, 1/2 of gameSpeed interval wait time to run it
-    __weak typeof(self) weakSelf = self;
     [self runAction:[SKAction sequence:@[
         [SKAction waitForDuration:_gameSpeed/2],
-        [SKAction performSelector:@selector(handleComputerMove) onTarget:weakSelf],
+        [SKAction performSelector:@selector(handlePlayerMove) onTarget:self],
     ]]];
 }
 
@@ -327,7 +326,7 @@ if(adsShowing)
 
             roundOver  = TRUE;
 
-            _sceneChangeDelay  = 5;
+            _sceneChangeDelay  = 3;
             _fallingAnimationInterval = (NSTimeInterval)_sceneChangeDelay/computerDominos.count;
             _fallingAnimationSlowStart = .15;
 
@@ -632,7 +631,7 @@ if(adsShowing)
 
             roundOver = TRUE;
 
-            _sceneChangeDelay  = 5;
+            _sceneChangeDelay  = 3;
             _fallingAnimationInterval = (NSTimeInterval)_sceneChangeDelay/playerDominos.count;
             _fallingAnimationSlowStart = .1;
 
