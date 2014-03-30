@@ -13,6 +13,8 @@
 
 ADBannerView *adView;
 int iHeight;
+int iWidth;
+BOOL bOnTop;
 
 @interface domViewController ()
 
@@ -25,19 +27,34 @@ int iHeight;
 //(float)getRanFloat:(float)smallNumber and:(float)bigNumber {
 
 +(void)setAdView:(BOOL)showAd ShowOnTop:(BOOL)onTop{
-
-    //adView. = (onTop==YES?iHeight-50:0);
+    
+    //following commented code to randomize between top and bottom
+//    int rand = arc4random() % 4;
+//    if (rand=0) {
+//        <#statements#>
+//    }
+    if (showAd) {
+        if (onTop) {
+            adView.frame=CGRectMake(0,0, iWidth, iWidth==320? 50:66);
+        }
+        else{
+            adView.frame=CGRectMake(0,iHeight-50, iWidth, iWidth==320? 50:66);
+        }
+    }
     [UIView beginAnimations:nil context:NULL];
     [UIView setAnimationDuration:showAd==YES?3:0];
     [adView setAlpha:showAd==YES?1:0];
+    
     [UIView commitAnimations];
 }
+
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     iHeight=CGRectGetHeight(self.view.bounds);
-    //CGFloat width = CGRectGetWidth(self.view.bounds);
+    iWidth=CGRectGetWidth(self.view.bounds);
+    //CGFloat width = 
     //CGFloat height = CGRectGetHeight(self.view.bounds);
     
     CGRect aRect;
@@ -88,6 +105,12 @@ int iHeight;
     //pause the game
     adsShowing=YES;
     
+}
+-(void)bannerView:(ADBannerView *)banner didFailToReceiveAdWithError:(NSError *)error{
+    //hide the ad banner as error detected
+    [domViewController setAdView:NO ShowOnTop:NO];
+    //show the error in NSLog
+    NSLog(@"Failed to receive banner with error '%@'",error.description);
 }
 
 -(void)viewWillAppear:(BOOL)animated

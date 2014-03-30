@@ -95,7 +95,7 @@ CGPoint pointA;
 
         [self setUpBackgroundFloor];
 
-        [domViewController setAdView:YES ShowOnTop:NO];
+        [domViewController setAdView:YES ShowOnTop:YES];
 
         roundOver = FALSE;
 
@@ -671,6 +671,10 @@ if(adsShowing)
     floor.zPosition = -1;
 
     [backGround addChild:floor];
+}
+
+-(int) getBannerWidth{
+    return (arenaSize.width == 320) ? 50 : 66;
 }
 
 -(void) setUpBackGround{
