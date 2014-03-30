@@ -95,7 +95,7 @@ CGPoint pointA;
 
         [self setUpBackgroundFloor];
 
-        [domViewController setAdView:YES ShowOnTop:YES];
+        [domViewController setAdView:YES ShowOnTop:NO];
 
         roundOver = FALSE;
 
