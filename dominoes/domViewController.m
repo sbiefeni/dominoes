@@ -28,7 +28,7 @@ int iHeight;
 
     //adView. = (onTop==YES?iHeight-50:0);
     [UIView beginAnimations:nil context:NULL];
-    [UIView setAnimationDuration:10];
+    [UIView setAnimationDuration:showAd==YES?3:0];
     [adView setAlpha:showAd==YES?1:0];
     [UIView commitAnimations];
 }
@@ -46,7 +46,6 @@ int iHeight;
     //self.canDisplayBannerAds=YES;
     
     adView=[[ADBannerView alloc]initWithFrame:aRect];
-    //adView.currentContentSizeIdentifier = ADBannerContentSizeIdentifierPortrait;
     [adView setAlpha:0];
     [self.view addSubview:adView];
     

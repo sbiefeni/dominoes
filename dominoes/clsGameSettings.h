@@ -27,6 +27,9 @@ extern CGSize arenaSize;
 //store the scaled size of the arena
 extern CGSize scaledSize;
 
+//for scaling arena for ads
+extern float adShowingArenaScaleAmount;
+
 //banner height depends on the screen width, which can only be 320, or 768 (portrait mode)
 extern int bannerSizeY;
 extern float bannerHeightAdjuster;
@@ -58,6 +61,8 @@ extern int score;
 extern int totalScore;
 extern int lives;
 extern int levels;
+
+extern BOOL roundOver;
 
 extern SKLabelNode* scoreLabel;
 

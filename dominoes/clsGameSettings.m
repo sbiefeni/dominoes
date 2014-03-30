@@ -23,6 +23,9 @@ CGSize arenaSize;
 //store the scaled size of the arena
 CGSize scaledSize;
 
+//this determines the arena scale for displaying an ad banner
+float adShowingArenaScaleAmount;
+
 //banner height depends on the screen width, which can only be 320, or 768 (portrait mode)
 int bannerSizeY;
 float bannerHeightAdjuster;
@@ -53,6 +56,8 @@ int score;
 int totalScore;
 int lives;
 int levels;
+
+BOOL roundOver;
 
 SKLabelNode *scoreLabel;
 

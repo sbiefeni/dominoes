@@ -21,6 +21,8 @@
 //apparently NSLog() also stays in the app in production
 #define isRunningInIde(x) if ([[[UIDevice currentDevice].model lowercaseString] rangeOfString:@"simulator"].location != NSNotFound){x;}
 
+#define notRunningInIde(x) if ([[[UIDevice currentDevice].model lowercaseString] rangeOfString:@"simulator"].location == NSNotFound){x;}
+
 //using 0 and 1 instead of BOOL so I can use these in calculations
 //not needed?
 #define ceilingOn   0
@@ -29,7 +31,7 @@
 //define z positions for objects
 //#define doorZPos    5
 #define dominoZPos  6
-#define domSpeed    .20
+#define domSpeed    .15
 
 
 //define rows and cols
@@ -94,6 +96,8 @@ CGPoint pointA;
         [self setUpBackgroundFloor];
 
         [domViewController setAdView:YES ShowOnTop:NO];
+
+        roundOver = FALSE;
 
         //}
         //NSLog(@"Width: %f, Height: %f", size.width, size.height);
@@ -313,6 +317,8 @@ if(adsShowing)
             [self addChild:explosion];
             computer.didExplosion = true;
 
+            roundOver  = TRUE;
+
             _sceneChangeDelay  = 5;
             _fallingAnimationInterval = (NSTimeInterval)_sceneChangeDelay/computerDominos.count;
             _fallingAnimationSlowStart = .15;
@@ -479,6 +485,11 @@ if(adsShowing)
 
 -(void) handlePlayerMove{
 
+
+    if (roundOver) {
+        return;
+    }
+
     clsDomino* domino =[clsDomino new];
     BOOL crashed = false;
     
@@ -576,6 +587,8 @@ if(adsShowing)
             [self addChild:explosion];
             player.didExplosion = true;
 
+            roundOver = TRUE;
+
             _sceneChangeDelay  = 5;
             _fallingAnimationInterval = (NSTimeInterval)_sceneChangeDelay/playerDominos.count;
             _fallingAnimationSlowStart = .1;
@@ -612,10 +625,12 @@ if(adsShowing)
                 [SKAction waitForDuration:0.2],
                 [SKAction runBlock:^{ explosion.particleBirthRate = 0;} ],
                 [SKAction waitForDuration:_sceneChangeDelay + 3],
-//                [SKAction runBlock:^{
-//                        domMenuScene *menu = [[domMenuScene alloc] initWithSize:self.size];
-//                          [self.view presentScene:menu transition:[SKTransition doorsCloseHorizontalWithDuration:0.5]];
-//                    }],
+                [SKAction runBlock:^{
+                    notRunningInIde(
+                        domMenuScene *menu = [[domMenuScene alloc] initWithSize:self.size];
+                          [self.view presentScene:menu transition:[SKTransition doorsCloseHorizontalWithDuration:0.5]];
+                    );
+                    }],
                 ]]];
 
     } //end if (player1.crashed)
@@ -661,10 +676,20 @@ if(adsShowing)
 -(void) setUpBackGround{
 
     int bannerCount =0;
+
+    adShowingArenaScaleAmount = 0;
     
     
     //determine the banner size (according to iAD)
     bannerSizeY = (arenaSize.width == 320) ? 50 : 66;
+    if (arenaSize.width == 320){
+        bannerSizeY = 50;
+        adShowingArenaScaleAmount = .895;  //custom scaling factors depends on the
+    }else{
+        bannerSizeY = 66;
+        adShowingArenaScaleAmount = .955;
+
+    }
     //if only one of the banners is on, then we need an adjuster to center things
     if (ceilingOn + floorOn ==1){
         bannerHeightAdjuster = (ceilingOn) ? -(bannerSizeY/2): +(bannerSizeY/2);
@@ -692,7 +717,9 @@ if(adsShowing)
     scaleX = backGround.size.width  / arenaSize.width;
     scaleY = backGround.size.height / (arenaSize.height -(bannerSizeY * bannerCount) );
     
-    backGround.size = CGSizeMake(arenaSize.width, arenaSize.height-(bannerSizeY * bannerCount) );
+    backGround.size = CGSizeMake(arenaSize.width, arenaSize.height );
+
+    [backGround setYScale:adShowingArenaScaleAmount];
     
     float backGroundPos = arenaSize.height/2 + bannerHeightAdjuster ;
 
