@@ -169,11 +169,11 @@ switch (swipe.direction) {
 
 - (NSUInteger)supportedInterfaceOrientations
 {
-    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
+    //if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
         return UIInterfaceOrientationMaskPortrait | UIInterfaceOrientationMaskPortraitUpsideDown;
-    } else {
-        return UIInterfaceOrientationMaskAll;
-    }
+    //} else {
+        //return UIInterfaceOrientationMaskAll;
+    //}
 }
 
 - (void)didReceiveMemoryWarning

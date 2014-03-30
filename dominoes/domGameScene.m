@@ -31,7 +31,7 @@
 //define z positions for objects
 //#define doorZPos    5
 #define dominoZPos  6
-#define domSpeed    .15
+#define domSpeed    .10
 
 
 //define rows and cols
@@ -83,7 +83,7 @@ CGPoint pointA;
 
         arenaSize = size;
 
-        [domViewController setAdView:YES ShowOnTop:NO];
+        [domViewController setAdView:YES ShowOnTop:YES];
         
         [self setUpBackGround];
         
@@ -161,10 +161,12 @@ CGPoint pointA;
     player.curX = cols/2 - 1;
     player.curY = rows/2 -1;
     player.curDirection = up;
+    player.lastDirection = up;
 
     computer.curX = cols/2 +1;
     computer.curY = rows/2 +1;
     computer.curDirection = down;
+    computer.lastDirection = down;
 
 //set the speed interval between moves (time for both player and computer to complete one move)
     if (_gameSpeed == 0 ) {
@@ -512,6 +514,7 @@ if(adsShowing)
             if (player.lastDirection != right) {
                 if (player.curX > 0 && grid[player.curX-1][player.curY]==false) {
                     player.curX --;
+                    player.lastDirection = player.curDirection;
                 }else{
                     if (player.curDirection == player.lastDirection) {
                         crashed = true;
@@ -528,6 +531,7 @@ if(adsShowing)
             if (player.lastDirection != left) {
                 if (player.curX < cols && grid[player.curX+1][player.curY]==false){
                     player.curX ++;
+                    player.lastDirection = player.curDirection;
                 }else{
                     if (player.curDirection == player.lastDirection) {
                         crashed = true;
@@ -543,6 +547,7 @@ if(adsShowing)
             if (player.lastDirection != down) {
                 if (player.curY < rows && grid[player.curX][player.curY+1]==false){
                     player.curY ++;
+                    player.lastDirection = player.curDirection;
                 }else{
                     if (player.curDirection == player.lastDirection) {
                         crashed = true;
@@ -559,6 +564,7 @@ if(adsShowing)
             if (player.lastDirection != up) {
                 if (player.curY > 0 && grid[player.curX][player.curY-1]==false){
                     player.curY --;
+                    player.lastDirection = player.curDirection;
                 }else{
                     if (player.curDirection == player.lastDirection) {
                         crashed = true;
