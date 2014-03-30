@@ -35,9 +35,13 @@ BOOL bOnTop;
 //    }
     if (showAd) {
         if (onTop) {
+            ceilingOn = 1;
+            floorOn = 0;
             adView.frame=CGRectMake(0,0, iWidth, iWidth==320? 50:66);
         }
         else{
+            ceilingOn = 0;
+            floorOn = 1;
             adView.frame=CGRectMake(0,iHeight-50, iWidth, iWidth==320? 50:66);
         }
     }
@@ -152,6 +156,8 @@ switch (swipe.direction) {
         break;
     };
 
+
+    player.lastDirection = player.curDirection;
     player.curDirection = tmpDirection;
  
 }

@@ -54,6 +54,8 @@ extern NSMutableArray* computerDominos;
 extern clsPlayer* player;
 extern clsPlayer* computer;
 
+extern BOOL ceilingOn;
+extern BOOL floorOn;
 
 
 //score, lives, levels

@@ -50,6 +50,10 @@ NSMutableArray* computerDominos;
 clsPlayer* player;
 clsPlayer* computer;
 
+//using 0 and 1 instead of BOOL so I can use these in calculations
+//not needed?
+BOOL ceilingOn;
+BOOL floorOn;     
 
 
 int score;

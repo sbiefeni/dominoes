@@ -25,8 +25,8 @@
 
 //using 0 and 1 instead of BOOL so I can use these in calculations
 //not needed?
-#define ceilingOn   0
-#define floorOn     1
+//#define ceilingOn   0
+//#define floorOn     1
 
 //define z positions for objects
 //#define doorZPos    5
@@ -82,6 +82,8 @@ CGPoint pointA;
         //@autoreleasepool {
 
         arenaSize = size;
+
+        [domViewController setAdView:YES ShowOnTop:NO];
         
         [self setUpBackGround];
         
@@ -94,8 +96,6 @@ CGPoint pointA;
         [self initializeGame];
 
         [self setUpBackgroundFloor];
-
-        [domViewController setAdView:YES ShowOnTop:NO];
 
         roundOver = FALSE;
 
@@ -304,6 +304,12 @@ if(adsShowing)
         //[self runAction: [SKAction playSoundFileNamed:@"click2.wav" waitForCompletion:NO]];
     }else{
         if (!computer.didExplosion) {
+
+            computer.didExplosion = true;
+            if (roundOver) {
+                return;
+            }
+
             NSString *burstPath =
             [[NSBundle mainBundle]
              pathForResource:@"explosion" ofType:@"sks"];
@@ -315,7 +321,7 @@ if(adsShowing)
             explosion.zPosition = 10;
 
             [self addChild:explosion];
-            computer.didExplosion = true;
+
 
             roundOver  = TRUE;
 
@@ -503,36 +509,67 @@ if(adsShowing)
 
     switch (player.curDirection) {
         case left:
-            if (player.curX > 0 && grid[player.curX-1][player.curY]==false) {
-                player.curX --;
+            if (player.lastDirection != right) {
+                if (player.curX > 0 && grid[player.curX-1][player.curY]==false) {
+                    player.curX --;
+                }else{
+                    if (player.curDirection == player.lastDirection) {
+                        crashed = true;
+                    }else{
+                        player.curDirection = player.lastDirection;
+                    }
+                }
             }else{
-                //NSLog(@"CRASH!!!");
-                crashed = true;
+                player.curDirection = player.lastDirection;
             }
+
             break;
         case right:
-            if (player.curX < cols && grid[player.curX+1][player.curY]==false){
-                player.curX ++;
+            if (player.lastDirection != left) {
+                if (player.curX < cols && grid[player.curX+1][player.curY]==false){
+                    player.curX ++;
+                }else{
+                    if (player.curDirection == player.lastDirection) {
+                        crashed = true;
+                    }else{
+                        player.curDirection = player.lastDirection;
+                    }                }
             }else{
-                //NSLog(@"CRASH!!!");
-                crashed = true;
+                player.curDirection = player.lastDirection;
             }
+
             break;
         case up:
-            if (player.curY < rows && grid[player.curX][player.curY+1]==false){
-                player.curY ++;
+            if (player.lastDirection != down) {
+                if (player.curY < rows && grid[player.curX][player.curY+1]==false){
+                    player.curY ++;
+                }else{
+                    if (player.curDirection == player.lastDirection) {
+                        crashed = true;
+                    }else{
+                        player.curDirection = player.lastDirection;
+                    }
+                }
             }else{
-                //NSLog(@"CRASH!!!");
-                crashed = true;
+                player.curDirection = player.lastDirection;
             }
+
             break;
         case down:
-            if (player.curY > 0 && grid[player.curX][player.curY-1]==false){
-                player.curY --;
+            if (player.lastDirection != up) {
+                if (player.curY > 0 && grid[player.curX][player.curY-1]==false){
+                    player.curY --;
+                }else{
+                    if (player.curDirection == player.lastDirection) {
+                        crashed = true;
+                    }else{
+                        player.curDirection = player.lastDirection;
+                    }
+                }
             }else{
-                //NSLog(@"CRASH!!!");
-                crashed = true;
+                player.curDirection = player.lastDirection;
             }
+
             break;
         default:
             break;
