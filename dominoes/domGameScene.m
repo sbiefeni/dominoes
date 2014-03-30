@@ -93,7 +93,7 @@ CGPoint pointA;
 
         [self setUpBackgroundFloor];
 
-        [domViewController setAdView:YES ShowOnTop:NO];
+        [domViewController setAdView:YES ShowOnTop:YES];
 
         //}
         //NSLog(@"Width: %f, Height: %f", size.width, size.height);
@@ -658,13 +658,18 @@ if(adsShowing)
     [backGround addChild:floor];
 }
 
+-(int) getBannerWidth{
+    return (arenaSize.width == 320) ? 50 : 66;
+}
+
 -(void) setUpBackGround{
 
     int bannerCount =0;
     
     
     //determine the banner size (according to iAD)
-    bannerSizeY = (arenaSize.width == 320) ? 50 : 66;
+    bannerSizeY = [self getBannerWidth];
+    
     //if only one of the banners is on, then we need an adjuster to center things
     if (ceilingOn + floorOn ==1){
         bannerHeightAdjuster = (ceilingOn) ? -(bannerSizeY/2): +(bannerSizeY/2);
