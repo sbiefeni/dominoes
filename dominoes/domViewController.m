@@ -30,6 +30,7 @@ int iHeight;
     [UIView beginAnimations:nil context:NULL];
     [UIView setAnimationDuration:showAd==YES?3:0];
     [adView setAlpha:showAd==YES?1:0];
+    
     [UIView commitAnimations];
 }
 
