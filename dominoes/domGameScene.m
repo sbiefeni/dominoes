@@ -83,7 +83,7 @@ CGPoint pointA;
 
         arenaSize = size;
 
-        [domViewController setAdView:YES ShowOnTop:YES];
+        [domViewController setAdView:YES ShowOnTop:NO];
         
         [self setUpBackGround];
         
