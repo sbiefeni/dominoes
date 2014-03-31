@@ -18,6 +18,10 @@
     [UIViewController prepareInterstitialAds];
     return YES;
 }
+
+- (BOOL)prefersStatusBarHidden {
+    return YES;
+}
 							
 - (void)applicationWillResignActive:(UIApplication *)application
 {
