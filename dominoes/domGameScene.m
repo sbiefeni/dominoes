@@ -30,12 +30,12 @@
 
 //define z positions for objects
 //#define doorZPos    5
-#define dominoZPos  6
-#define domSpeed    .10
+#define dominoZPos      6
+#define domStartSpeed   .10
 
 
 //define rows and cols
-#define rows        28
+#define rows        29
 #define cols        21
 //scale up the domino size relative to the grid
 #define dominoScaleFactorX 1   // - 1.25
@@ -149,6 +149,69 @@ CGPoint pointA;
 //    maxY = size.height - minY;
 
 }
+
+-(void) setRandomStartLocation: (clsPlayer*) _player computer:(BOOL)comp{
+
+    int halfX = cols/2;
+    BOOL lowerQuad;
+    BOOL leftQuad;
+
+    NSMutableArray* directionChoices = [NSMutableArray new];
+
+    int xPos = [clsCommon getRanInt:1 maxNumber:halfX];
+    int yPos = [clsCommon getRanInt:1 maxNumber:rows];
+
+    lowerQuad = (yPos < rows/2);
+    leftQuad = (xPos < halfX/2);
+
+    if (lowerQuad) {
+        [directionChoices addObject:[NSNumber numberWithInt:up]];
+    }else{
+        [directionChoices addObject:[NSNumber numberWithInt:down]];
+    }
+    if (leftQuad) {
+        [directionChoices addObject:[NSNumber numberWithInt:right]];
+    }else{
+        [directionChoices addObject:[NSNumber numberWithInt:left]];
+    }
+
+    _player.curX = (comp==TRUE)? xPos + halfX:xPos;
+    _player.curY = yPos;
+
+    int choice = [clsCommon getRanInt:0 maxNumber:1];
+    _player.curDirection = [[directionChoices objectAtIndex:choice] intValue];
+    _player.lastDirection = _player.curDirection;
+
+    if (player.curDirection > 4 || player.curDirection < 1) {
+        NSLog(@"pldir");
+    }
+
+//    switch (right) {
+//        case TRUE:
+//            if (leftQuad) {
+//                [directionChoices addObject:[NSNumber numberWithInt:right]];
+//            }else{
+//                [directionChoices addObject:[NSNumber numberWithInt:left]];
+//            }
+//            break;
+//
+//        case FALSE:
+//            if (leftQuad) {
+//                [directionChoices addObject:[NSNumber numberWithInt:right]];
+//            }else{
+//                [directionChoices addObject:[NSNumber numberWithInt:left]];
+//            }
+//            break;
+//        default:
+//            break;
+//    }
+
+
+
+
+
+}
+
 -(void) initializeGame{
 
     player = [clsPlayer new];
@@ -158,19 +221,25 @@ CGPoint pointA;
     computerDominos=[NSMutableArray new];
     
 //set the start position and direction of players
-    player.curX = cols/2 - 1;
-    player.curY = rows/2 -1;
-    player.curDirection = up;
-    player.lastDirection = up;
+//TODO random start locations
 
-    computer.curX = cols/2 +1;
-    computer.curY = rows/2 +1;
-    computer.curDirection = down;
-    computer.lastDirection = down;
+    [self setRandomStartLocation:player computer:FALSE];
+//
+    [self setRandomStartLocation:computer computer:TRUE];
+
+//    player.curX = cols/2 - 1;
+//    player.curY = rows/2 -1;
+//    player.curDirection = up;
+//    player.lastDirection = up;
+//
+//    computer.curX = cols/2 +1;
+//    computer.curY = rows/2 +1;
+//    computer.curDirection = down;
+//    computer.lastDirection = down;
 
 //set the speed interval between moves (time for both player and computer to complete one move)
     if (_gameSpeed == 0 ) {
-        _gameSpeed = domSpeed;
+        _gameSpeed = domStartSpeed;
     }
     isRunningInIde(
         _gameSpeed = .05;
@@ -199,7 +268,9 @@ if(adsShowing)
     return;
 }
 //player move
-    [self handleComputerMove];
+    if (playerDominos.count > 5) {
+        [self handleComputerMove];
+    }
 
 //computer move, 1/2 of gameSpeed interval wait time to run it
     [self runAction:[SKAction sequence:@[
@@ -668,10 +739,10 @@ if(adsShowing)
                 [SKAction runBlock:^{ explosion.particleBirthRate = 0;} ],
                 [SKAction waitForDuration:_sceneChangeDelay + 3],
                 [SKAction runBlock:^{
-                    notRunningInIde(
+                    //isRunningInIde(
                         domMenuScene *menu = [[domMenuScene alloc] initWithSize:self.size];
                           [self.view presentScene:menu transition:[SKTransition doorsCloseHorizontalWithDuration:0.5]];
-                    );
+                    //);
                     }],
                 ]]];
 
