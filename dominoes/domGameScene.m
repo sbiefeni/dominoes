@@ -576,6 +576,42 @@ if(adsShowing)
 //    }
 //    player.curDirection = [tmpValue intValue];
 
+    //change the direction if a uTurn was executed
+    switch (player.uTurnStep) {
+        case step1:
+            switch (player.uTurnDirection) {
+                case clockWise:
+                    player.curDirection += 1;
+                    break;
+                default:
+                    player.curDirection -= 1;
+                    break;
+            }
+            player.uTurnStep = step2;
+            break;
+        case step2:
+            switch (player.uTurnDirection) {
+                case clockWise:
+                    player.curDirection += 1;
+                    break;
+                default:
+                    player.curDirection -= 1;
+                    break;
+            }
+            player.uTurnStep = unone;
+            break;
+        default:
+            break;
+    }
+
+    if (player.curDirection < 1)
+        player.curDirection = down;
+
+    if (player.curDirection > 4)
+        player.curDirection = left;
+
+
+
     switch (player.curDirection) {
         case left:
             if (player.lastDirection != right) {
@@ -1021,15 +1057,21 @@ int countSquares;
     //straight down     =   360/0
     
     //here we need to handle what to do when a swiped angle detected during play
-    if (angle>=20 && angle<=70) {
-        //down-right
+    if (angle>=15 && angle<=75) {
         NSLog(@"Angle was down-right");
-    } else if(angle>=110 && angle<=160) {
+    } else if(angle>=105 && angle<=165) {
+        //clockwise
+        player.uTurnDirection = clockWise;
+        player.uTurnStep = step1;
         NSLog(@"Angle was up-right");
-    } else if (angle>=210 && angle<=250) {
+    } else if (angle>=205 && angle<=255) {
         NSLog(@"Angle was up-left");
-    } else if (angle>=290 && angle<=340) {
+    } else if (angle>=285 && angle<=345) {
         NSLog(@"Angle was down-left");
+        //cclockwise
+        player.uTurnDirection = cclockWise;
+        player.uTurnStep = step1;
+
     }
 }
 

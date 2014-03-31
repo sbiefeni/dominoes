@@ -23,5 +23,8 @@
 
 @property BOOL didExplosion;
 
+@property uTurnStep uTurnStep;
+@property uTurnDirection uTurnDirection;
+
 
 @end

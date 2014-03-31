@@ -44,25 +44,25 @@ NSMutableArray* dominoFrames;
     double moveDuration = 0.15;
 
     switch (_direction) {
-    case 1:  //left    domino-green-fallen-d.png
+    case left:  //domino-green-fallen-d.png
             txtr = [SKTexture textureWithImageNamed:[NSString stringWithFormat:@"%s-%@-fallen-r","domino",whichPlayer]];
             //rotation = (M_PI / 180) * 90; // degrees to radians
             moveAction = [SKAction moveByX:5 y:0 duration:moveDuration];
             self.xScale = 1.2;
         break;
-    case 2:  //right
+    case right:
             txtr = [SKTexture textureWithImageNamed:[NSString stringWithFormat:@"%s-%@-fallen-L","domino",whichPlayer]];
             //rotation = (M_PI / 180) * 270;
             moveAction = [SKAction moveByX:-5 y:0 duration:moveDuration];
             self.xScale = 1.2;
         break;
-    case 3: //up
+    case up:
             txtr = [SKTexture textureWithImageNamed:[NSString stringWithFormat:@"%s-%@-fallen-d","domino",whichPlayer]];
             //rotation = (M_PI / 180) * 180;
             moveAction = [SKAction moveByX:0 y:-5 duration:moveDuration];
             self.yScale = 1.2;
         break;
-    case 4: //down
+    case down:
             txtr = [SKTexture textureWithImageNamed:[NSString stringWithFormat:@"%s-%@-fallen-u","domino",whichPlayer]];
             //rotation = 0;
             moveAction = [SKAction moveByX:0 y:5 duration:moveDuration];

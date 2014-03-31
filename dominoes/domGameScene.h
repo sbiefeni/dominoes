@@ -18,10 +18,23 @@
 typedef enum  {
     none=   0,
     left=   1,
-    right=  2,
-    up=     3,
+    up=     2,
+    right=  3,
     down=   4,
+    none2 = 5
 } swipeDirection;
+
+typedef enum    {
+    cnone=0,
+    clockWise = 1,
+    cclockWise = 2,
+} uTurnDirection;
+
+typedef enum {
+    step1 = 1,
+    step2 = 2,
+    unone = 3,
+} uTurnStep;
 
 
 @end
