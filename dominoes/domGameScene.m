@@ -265,7 +265,7 @@ if(adsShowing)
     return;
 }
 //player move
-    if (playerDominos.count > 5) {
+    if (playerDominos.count > 4) {
         [self handleComputerMove];
     }
 
@@ -394,7 +394,7 @@ if(adsShowing)
 
             roundOver  = TRUE;
 
-            _sceneChangeDelay  = 3;
+            _sceneChangeDelay  = 4;
             _fallingAnimationInterval = (NSTimeInterval)_sceneChangeDelay/computerDominos.count;
             _fallingAnimationSlowStart = .15;
 
@@ -697,9 +697,11 @@ if(adsShowing)
             [self addChild:explosion];
             player.didExplosion = true;
 
-            roundOver = TRUE;
+            notRunningInIde(
+                roundOver = TRUE;
+            );
 
-            _sceneChangeDelay  = 3;
+            _sceneChangeDelay  = 4;
             _fallingAnimationInterval = (NSTimeInterval)_sceneChangeDelay/playerDominos.count;
             _fallingAnimationSlowStart = .1;
 
@@ -736,10 +738,10 @@ if(adsShowing)
                 [SKAction runBlock:^{ explosion.particleBirthRate = 0;} ],
                 [SKAction waitForDuration:_sceneChangeDelay + 3],
                 [SKAction runBlock:^{
-                    //isRunningInIde(
+                    notRunningInIde(
                         domMenuScene *menu = [[domMenuScene alloc] initWithSize:self.size];
                           [self.view presentScene:menu transition:[SKTransition doorsCloseHorizontalWithDuration:0.5]];
-                    //);
+                    );
                     }],
                 ]]];
 
