@@ -182,9 +182,6 @@ CGPoint pointA;
     _player.curDirection = [[directionChoices objectAtIndex:choice] intValue];
     _player.lastDirection = _player.curDirection;
 
-    if (player.curDirection > 4 || player.curDirection < 1) {
-        NSLog(@"pldir");
-    }
 
 //    switch (right) {
 //        case TRUE:
