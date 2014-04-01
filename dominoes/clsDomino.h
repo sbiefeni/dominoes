@@ -18,6 +18,9 @@
 //is this a player domino, or computer
 @property BOOL player;
 
+//this is just to make sure that this object can't count score more than once
+@property BOOL CountedScore;
+
 //@property NSMutableArray* dominos;
 
 -(void) fallDown:(NSTimeInterval)delay isPlayer:(BOOL)bPlayer isEnd:(BOOL)bIsEnd;

@@ -94,7 +94,10 @@ NSMutableArray* dominoFrames;
             [self setTexture: txtr];
             self.zRotation = rotation;
             if ( !(bPlayer || bIsEnd) ) {
-                score += 1;
+                if (bPlayer !=true && _CountedScore != true) {
+                    score += 1;
+                    _CountedScore = true;
+                }
             }
         }],
         [SKAction playSoundFileNamed:sound waitForCompletion:NO],

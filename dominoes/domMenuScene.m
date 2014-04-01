@@ -76,6 +76,8 @@ if (gameStatus != game_Started ) {  //game hasn't started.. show initial screen
         SKLabelNode *title = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
         [self createLabel:title text:@"GAME OVER" fontSize:45 posY:30 color:[SKColor whiteColor] alpha:1 sizeDoubler:sizeDoubler];
 
+        totalScore += score;
+
         SKLabelNode *tot_score = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
         [self createLabel:tot_score text:@"Total Score" fontSize:40 posY:-60 color:[SKColor whiteColor] alpha:1 sizeDoubler:sizeDoubler];
 
