@@ -54,7 +54,7 @@ if (gameStatus == reset) {  //game hasn't started.. show initial screen
         SKLabelNode *tapToPlay = [SKLabelNode labelNodeWithFontNamed:@"Avenir-Black"];
         [self createLabel:tapToPlay text:@"Tap to Play" fontSize:40 posY:-40 color:[SKColor whiteColor] alpha:.7 sizeDoubler:sizeDoubler];
 
-}else if(gameStatus == game_Started || lives > 0)   { // game started...
+}else if(gameStatus == game_Started && lives > 0)   { // game started...
 
         //show score screen
 
