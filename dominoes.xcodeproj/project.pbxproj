@@ -23,6 +23,7 @@
 		389B9CF918CFD449004960E5 /* clsPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 389B9CF818CFD449004960E5 /* clsPlayer.m */; };
 		38B7A7F918E4F10D00F51451 /* clsGameSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = 38B7A7F818E4F10D00F51451 /* clsGameSettings.m */; };
 		38E4967F18D7CDD600D111E9 /* brick.png in Resources */ = {isa = PBXBuildFile; fileRef = 38E4967E18D7CDD600D111E9 /* brick.png */; };
+		38E7383118EB4E9400EE0C6E /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 38E7383018EB4E9400EE0C6E /* GameKit.framework */; };
 		38FA7D3618E77F5E00820901 /* floor1.sks in Resources */ = {isa = PBXBuildFile; fileRef = 38FA7D3518E77F5E00820901 /* floor1.sks */; };
 		55CB7E2018CBD180001EFA1C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55CB7E1F18CBD180001EFA1C /* Foundation.framework */; };
 		55CB7E2218CBD180001EFA1C /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55CB7E2118CBD180001EFA1C /* CoreGraphics.framework */; };
@@ -76,6 +77,7 @@
 		38B7A7F718E4F10D00F51451 /* clsGameSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = clsGameSettings.h; sourceTree = "<group>"; };
 		38B7A7F818E4F10D00F51451 /* clsGameSettings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = clsGameSettings.m; sourceTree = "<group>"; };
 		38E4967E18D7CDD600D111E9 /* brick.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = brick.png; sourceTree = "<group>"; };
+		38E7383018EB4E9400EE0C6E /* GameKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameKit.framework; path = System/Library/Frameworks/GameKit.framework; sourceTree = SDKROOT; };
 		38FA7D3518E77F5E00820901 /* floor1.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = floor1.sks; sourceTree = "<group>"; };
 		55CB7E1C18CBD180001EFA1C /* dominoes.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = dominoes.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		55CB7E1F18CBD180001EFA1C /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -109,6 +111,7 @@
 			files = (
 				34C0142D18D2A4C8007C37AB /* iAd.framework in Frameworks */,
 				34C0142A18D183BF007C37AB /* AudioToolbox.framework in Frameworks */,
+				38E7383118EB4E9400EE0C6E /* GameKit.framework in Frameworks */,
 				55CB7E2218CBD180001EFA1C /* CoreGraphics.framework in Frameworks */,
 				55CB7E2418CBD180001EFA1C /* UIKit.framework in Frameworks */,
 				55CB7E2618CBD180001EFA1C /* SpriteKit.framework in Frameworks */,
@@ -250,6 +253,7 @@
 		55CB7E1E18CBD180001EFA1C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				38E7383018EB4E9400EE0C6E /* GameKit.framework */,
 				34C0142C18D2A4C8007C37AB /* iAd.framework */,
 				34C0142918D183BF007C37AB /* AudioToolbox.framework */,
 				55CB7E1F18CBD180001EFA1C /* Foundation.framework */,
@@ -359,6 +363,11 @@
 				TargetAttributes = {
 					55CB7E1B18CBD180001EFA1C = {
 						DevelopmentTeam = JP43X6H6PR;
+						SystemCapabilities = {
+							com.apple.GameCenter = {
+								enabled = 1;
+							};
+						};
 					};
 					55CB7E4618CBD181001EFA1C = {
 						TestTargetID = 55CB7E1B18CBD180001EFA1C;
