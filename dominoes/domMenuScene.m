@@ -44,10 +44,15 @@
             sizeDoubler = 2;
         }
 
+        int highScore = [self getHighScore];
+
 if (gameStatus != game_Started ) {  //game hasn't started.. show initial screen
 
         SKLabelNode *title = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
         [self createLabel:title text:@"brick'd" fontSize:75 posY:30 color:[SKColor whiteColor] alpha:1 sizeDoubler:sizeDoubler];
+
+    SKLabelNode* hscore = [SKLabelNode labelNodeWithFontNamed:@"Arial"];
+    [self createLabel:hscore text:[NSString stringWithFormat:@"High Score: %i",(int)highScore] fontSize:30 posY:120 color:[SKColor whiteColor] alpha:.7 sizeDoubler:sizeDoubler];
 
         [self addChild: [self instruct:sizeDoubler posY:150]]; //instructions button, from below
 
@@ -60,10 +65,10 @@ if (gameStatus != game_Started ) {  //game hasn't started.. show initial screen
 
         //show score screen
 
+        totalScore += score;
+
         SKLabelNode *cur_score = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
         [self createLabel:cur_score text:[NSString stringWithFormat:@"Score: %i",score] fontSize:50 posY:30 color:[SKColor whiteColor] alpha:1 sizeDoubler:sizeDoubler];
-
-        totalScore += score;
 
         SKLabelNode *tot_score = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
         [self createLabel:tot_score text:[NSString stringWithFormat:@"Total Score: %i",totalScore] fontSize:30 posY:-60 color:[SKColor whiteColor] alpha:1 sizeDoubler:sizeDoubler];
@@ -73,10 +78,19 @@ if (gameStatus != game_Started ) {  //game hasn't started.. show initial screen
 }else{
         //game over
         //TODO game over stuff here
+
+        totalScore += score;
+
+        if (totalScore > highScore) {
+            [self setHighScore:totalScore];
+            //TODO display something.. new high score
+            SKLabelNode *hs = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
+            [self createLabel:hs text:@"NEW HIGH SCORE!" fontSize:30 posY:120 color:[SKColor whiteColor] alpha:1 sizeDoubler:sizeDoubler];
+        }
+
         SKLabelNode *title = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
         [self createLabel:title text:@"GAME OVER" fontSize:45 posY:30 color:[SKColor whiteColor] alpha:1 sizeDoubler:sizeDoubler];
 
-        totalScore += score;
 
         SKLabelNode *tot_score = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
         [self createLabel:tot_score text:@"Total Score" fontSize:40 posY:-60 color:[SKColor whiteColor] alpha:1 sizeDoubler:sizeDoubler];
@@ -87,7 +101,7 @@ if (gameStatus != game_Started ) {  //game hasn't started.. show initial screen
         gameStatus = game_Over;
 
         //TODO
-        //check fo rhigh score.. store the score..
+        //check for high score.. store the score..
         //games center stuff
 
 }
@@ -120,6 +134,17 @@ if (gameStatus != game_Started ) {  //game hasn't started.. show initial screen
 
     }
     return self;
+}
+
+-(void) setHighScore:(int)score {
+    NSString* _score = [NSString stringWithFormat:@"%i",score];
+    [clsCommon storeUserSetting:@"highscore" value:_score];
+}
+-(int) getHighScore {
+    NSString* _score = [NSString stringWithFormat:@"%i",score];
+    _score = [clsCommon getUserSettingForKey:@"highscore"];
+    int value = [_score intValue];
+    return value;
 }
 
 -(void) createLabel:(SKLabelNode*)label text:(NSString*)text fontSize:(int)fontSize posY:(int)posY color:(SKColor*)color alpha:(float)alpha sizeDoubler:(int)sizeDoubler {

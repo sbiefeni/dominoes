@@ -11,15 +11,20 @@
 SKSpriteNode* backGround;
 
 
+
+
+
+
 BOOL adsShowing;
+
 
 //to get the scale factor for the current screen (orig size / new size)
 float scaleX;
 float scaleY;
 
+
 //to store the arena unscaled size
 CGSize arenaSize;
-
 //store the scaled size of the arena
 CGSize scaledSize;
 
@@ -30,12 +35,14 @@ float adShowingArenaScaleAmount;
 int bannerSizeY;
 float bannerHeightAdjuster;
 
+
 float gridWidth;
 float gridHeight;
 
-
 CGSize gridSize;
 CGSize dominoSize;
+
+
 
 // min/max extents
 double minX;
@@ -60,13 +67,16 @@ int sizeDoubler;
 // actual game settings..
 int score;
 int totalScore;
+int highScore;
 int lives;
 int level;
 
 float gameSpeed;
 
+
+
 BOOL roundOver;
-BOOL gameStarted;
+//BOOL gameStarted;
 
 game_Status gameStatus;
 

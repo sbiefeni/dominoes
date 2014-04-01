@@ -59,6 +59,17 @@
     }
 }
 
++ (NSString*) getUserSettingForKey:(NSString*)key {
+
+    NSUserDefaults *standardUserDefaults = [NSUserDefaults standardUserDefaults];
+    if (standardUserDefaults) {
+        NSString* tmpValue = [standardUserDefaults objectForKey:key];
+        return tmpValue;
+    }else{
+        return false;
+    }
+}
+
 //set initial player1 direction - ***HACK? - NSUserDefaults lets us easily communicate variables between classes.
 //****kept this snippet for function to save data to "disk" for game stats and settings****
 //    NSUserDefaults *standardUserDefaults = [NSUserDefaults standardUserDefaults];

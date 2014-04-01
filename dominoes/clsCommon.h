@@ -28,7 +28,7 @@
 
 + (void) storeUserSetting:(NSString*)key value:(NSObject*)value;
 
-
++ (NSString*) getUserSettingForKey:(NSString*)key;
 
 
 @end
