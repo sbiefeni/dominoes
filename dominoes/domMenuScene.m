@@ -59,11 +59,12 @@ if (!gameStarted) {  //game hasn't started.. show initial screen
         [self createLabel:cur_score text:[NSString stringWithFormat:@"Score: %i",score] fontSize:60 posY:30 color:[SKColor whiteColor] alpha:1 sizeDoubler:sizeDoubler];
 
         totalScore += score;
+
         SKLabelNode *tot_score = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
         [self createLabel:tot_score text:[NSString stringWithFormat:@"Total Score: %i",totalScore] fontSize:30 posY:-60 color:[SKColor whiteColor] alpha:1 sizeDoubler:sizeDoubler];
 
         SKLabelNode *Lives = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
-        [self createLabel:Lives text:[NSString stringWithFormat:@"Total Score: %i",lives] fontSize:30 posY:-100 color:[SKColor whiteColor] alpha:1 sizeDoubler:sizeDoubler];
+        [self createLabel:Lives text:[NSString stringWithFormat:@"Lives: %i",lives] fontSize:30 posY:-100 color:[SKColor whiteColor] alpha:1 sizeDoubler:sizeDoubler];
 
 }
         //NSString *currentModeName = [[NSUserDefaults standardUserDefaults] stringForKey:ORBGameModeDefault];

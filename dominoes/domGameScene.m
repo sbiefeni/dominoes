@@ -212,7 +212,7 @@ CGPoint pointA;
 
 
 //set up params
-    if (!gameStarted) {
+    if (gameStarted != true) {
         gameStarted = true;
         totalScore = 0;
         lives = 3;
