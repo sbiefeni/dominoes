@@ -231,7 +231,9 @@ CGPoint pointA;
         gameSpeed = .01;
     )
 
-    //flash some stuff on the screen TODO
+    // flash some stuff on the screen TODO
+    // show level number
+    // change level parameters
     // start countdown.. direction arrows
 
 //start the timer that runs the game!

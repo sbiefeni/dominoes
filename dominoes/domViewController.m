@@ -74,7 +74,7 @@ BOOL bOnTop;
     //SKView * skView = (SKView *)self.view;
     SKView * skView = (SKView*)self.originalContentView;
     skView.showsFPS = NO;
-    skView.showsNodeCount = NO;
+    skView.showsNodeCount = YES;
     
     //self.removeFromParentViewController;
     
