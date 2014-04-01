@@ -10,9 +10,9 @@
 #import <Foundation/Foundation.h>
 
 
-@interface domMenuScene : SKScene {
+@interface domMenuScene : SKScene
 
     
-}
+
 
 @end

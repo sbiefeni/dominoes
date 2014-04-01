@@ -10,7 +10,7 @@
 #import <SpriteKit/SpriteKit.h>
 #import "clsPlayer.h"
 #import <AVFoundation/AVFoundation.h>
-#import "clsGameSettings.h"
+//#import "clsGameSettings.h"
 
 @interface clsGameSettings : NSObject
 
@@ -68,10 +68,12 @@ extern float gameSpeed;
 // functionality bool to let certain processes know the current round has ended with someone crashing
 extern BOOL roundOver;
 
-extern BOOL gameStarted;
+extern game_Status gameStatus;
 
 extern SKLabelNode* scoreLabel;
 
 extern AVAudioPlayer* backgroundMusic;
+
+
 
 @end

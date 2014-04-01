@@ -66,6 +66,8 @@ float gameSpeed;
 BOOL roundOver;
 BOOL gameStarted;
 
+game_Status gameStatus;
+
 SKLabelNode *scoreLabel;
 
 AVAudioPlayer* backgroundMusic;

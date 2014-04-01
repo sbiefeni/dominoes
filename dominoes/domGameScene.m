@@ -23,10 +23,6 @@
 
 #define notRunningInIde(x) if ([[[UIDevice currentDevice].model lowercaseString] rangeOfString:@"simulator"].location == NSNotFound){x;}
 
-//using 0 and 1 instead of BOOL so I can use these in calculations
-//not needed?
-//#define ceilingOn   0
-//#define floorOn     1
 
 //define z positions for objects
 //#define doorZPos    5
@@ -212,8 +208,8 @@ CGPoint pointA;
 
 
 //set up params
-    if (gameStarted != true) {
-        gameStarted = true;
+    if (gameStatus != game_Started) {
+        gameStatus = game_Started;
         totalScore = 0;
         lives = 3;
         level = 1;
@@ -226,7 +222,7 @@ CGPoint pointA;
     }
 
     score = 0;
-    lives -= 1;
+    lives -= 1;  //TODO move this to after we crash
     level += 1;
 
 
@@ -399,7 +395,7 @@ if(adsShowing)
                   [SKAction runBlock:^{
                     _fallingAnimationDelay = 0;
                     [self enableScore];
-                    NSLog(@"Dominoes: %i",computerDominos.count);
+                    NSLog(@"Dominoes: %i",(int)computerDominos.count);
                     for (clsDomino* dom in [computerDominos reverseObjectEnumerator]) {
                             //code to be executed on the main queue after delay
                         [dom fallDown:_fallingAnimationDelay isPlayer:false isEnd:false];
@@ -742,7 +738,7 @@ if(adsShowing)
                 [SKAction runBlock:^{
                     _fallingAnimationDelay = 0;
                 //[self enableScore];
-                NSLog(@"Dominoes: %i",playerDominos.count);
+                NSLog(@"Dominoes: %i",(int)playerDominos.count);
                 for (clsDomino* dom in [playerDominos reverseObjectEnumerator]) {
                         //code to be executed on the main queue after delay
                     [dom fallDown:_fallingAnimationDelay isPlayer:true isEnd:false ];

@@ -12,6 +12,7 @@
 #import "domGameScene.h"
 #import "clsCommon.h"
 #import "domViewController.h"
+#import "clsGameSettings.h"
 
 #import "SKEmitterNode+fromFile.h"
 
@@ -43,7 +44,7 @@
             sizeDoubler = 2;
         }
 
-if (!gameStarted) {  //game hasn't started.. show initial screen
+if (gameStatus == reset) {  //game hasn't started.. show initial screen
 
         SKLabelNode *title = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
         [self createLabel:title text:@"brick'd" fontSize:60 posY:30 color:[SKColor whiteColor] alpha:1 sizeDoubler:sizeDoubler];
@@ -53,7 +54,9 @@ if (!gameStarted) {  //game hasn't started.. show initial screen
         SKLabelNode *tapToPlay = [SKLabelNode labelNodeWithFontNamed:@"Avenir-Black"];
         [self createLabel:tapToPlay text:@"Tap to Play" fontSize:40 posY:-40 color:[SKColor whiteColor] alpha:.7 sizeDoubler:sizeDoubler];
 
-}else{ // game started... show score screen
+}else if(gameStatus == game_Started || lives > 0)   { // game started...
+
+        //show score screen
 
         SKLabelNode *cur_score = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
         [self createLabel:cur_score text:[NSString stringWithFormat:@"Score: %i",score] fontSize:60 posY:30 color:[SKColor whiteColor] alpha:1 sizeDoubler:sizeDoubler];
@@ -65,6 +68,16 @@ if (!gameStarted) {  //game hasn't started.. show initial screen
 
         SKLabelNode *Lives = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
         [self createLabel:Lives text:[NSString stringWithFormat:@"Lives: %i",lives] fontSize:30 posY:-100 color:[SKColor whiteColor] alpha:1 sizeDoubler:sizeDoubler];
+}else{
+        //game over
+        //TODO game over stuff here
+        SKLabelNode *title = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
+        [self createLabel:title text:@"GAME OVER" fontSize:60 posY:30 color:[SKColor whiteColor] alpha:1 sizeDoubler:sizeDoubler];
+
+        SKLabelNode *tot_score = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
+        [self createLabel:tot_score text:[NSString stringWithFormat:@"Total Score: %i",totalScore] fontSize:40 posY:-60 color:[SKColor whiteColor] alpha:1 sizeDoubler:sizeDoubler];
+
+        gameStatus = 2;
 
 }
         //NSString *currentModeName = [[NSUserDefaults standardUserDefaults] stringForKey:ORBGameModeDefault];
@@ -125,10 +138,14 @@ if (!gameStarted) {  //game hasn't started.. show initial screen
 {
     @autoreleasepool {
 
-    domGameScene *game = [[domGameScene alloc] initWithSize:self.size];
+        if (gameStatus == reset || gameStatus == game_Started) {
+            domGameScene *game = [[domGameScene alloc] initWithSize:self.size];
+            [self.view presentScene:game transition:[SKTransition doorsOpenHorizontalWithDuration:1.5]];
+        }else{
+            domMenuScene *menu = [[domMenuScene alloc] initWithSize:self.size];
+            [self.view presentScene:menu transition:[SKTransition doorsOpenHorizontalWithDuration:1.5]];
+        }
 
-    [self.view presentScene:game transition:[SKTransition doorsOpenHorizontalWithDuration:1.5]];
-    //game.gameSpeed = 5;
 
     }
 }

@@ -14,6 +14,12 @@
 @interface domGameScene : SKScene
 <ADBannerViewDelegate>
 
+//typedef enum {
+//    reset = 0,
+//    game_Started = 1,
+//    game_Over = 2
+//} game_Status;
+
 //enum the last swipe action
 typedef enum  {
     none=   0,
@@ -36,5 +42,10 @@ typedef enum {
     unone = 3,
 } uTurnStep;
 
+typedef enum {
+    reset = 0,
+    game_Started = 1,
+    game_Over = 2
+} game_Status;
 
 @end
