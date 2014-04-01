@@ -59,7 +59,7 @@ if (gameStatus == reset) {  //game hasn't started.. show initial screen
         //show score screen
 
         SKLabelNode *cur_score = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
-        [self createLabel:cur_score text:[NSString stringWithFormat:@"Score: %i",score] fontSize:60 posY:30 color:[SKColor whiteColor] alpha:1 sizeDoubler:sizeDoubler];
+        [self createLabel:cur_score text:[NSString stringWithFormat:@"Score: %i",score] fontSize:50 posY:30 color:[SKColor whiteColor] alpha:1 sizeDoubler:sizeDoubler];
 
         totalScore += score;
 
@@ -72,10 +72,13 @@ if (gameStatus == reset) {  //game hasn't started.. show initial screen
         //game over
         //TODO game over stuff here
         SKLabelNode *title = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
-        [self createLabel:title text:@"GAME OVER" fontSize:60 posY:30 color:[SKColor whiteColor] alpha:1 sizeDoubler:sizeDoubler];
+        [self createLabel:title text:@"GAME OVER" fontSize:45 posY:30 color:[SKColor whiteColor] alpha:1 sizeDoubler:sizeDoubler];
 
         SKLabelNode *tot_score = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
-        [self createLabel:tot_score text:[NSString stringWithFormat:@"Total Score: %i",totalScore] fontSize:40 posY:-60 color:[SKColor whiteColor] alpha:1 sizeDoubler:sizeDoubler];
+        [self createLabel:tot_score text:@"Total Score" fontSize:40 posY:-60 color:[SKColor whiteColor] alpha:1 sizeDoubler:sizeDoubler];
+
+        SKLabelNode *tot_score2 = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
+        [self createLabel:tot_score2 text:[NSString stringWithFormat:@"%i",totalScore] fontSize:80 posY:-150 color:[SKColor whiteColor] alpha:1 sizeDoubler:sizeDoubler];
 
         gameStatus = 2;
 
@@ -96,15 +99,15 @@ if (gameStatus == reset) {  //game hasn't started.. show initial screen
 
 //this block only auto-restarts if the app is
 //        running in the IDE
-            [self runAction:[SKAction sequence:@[
-                [SKAction waitForDuration:2],
-                [SKAction runBlock:^{
-                    isRunningInIde(
-                            domGameScene *game = [[domGameScene alloc] initWithSize:self.size];
-                            [self.view presentScene:game transition:[SKTransition doorsOpenHorizontalWithDuration:1.5]];
-                    )
-                }],
-            ]]];
+//            [self runAction:[SKAction sequence:@[
+//                [SKAction waitForDuration:2],
+//                [SKAction runBlock:^{
+//                    isRunningInIde(
+//                            domGameScene *game = [[domGameScene alloc] initWithSize:self.size];
+//                            [self.view presentScene:game transition:[SKTransition doorsOpenHorizontalWithDuration:1.5]];
+//                    )
+//                }],
+//            ]]];
 
 
     }

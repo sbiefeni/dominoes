@@ -228,7 +228,7 @@ CGPoint pointA;
 
 
     isRunningInIde(
-        gameSpeed = .05;
+        gameSpeed = .01;
     )
 
     
