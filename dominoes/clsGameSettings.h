@@ -57,6 +57,8 @@ extern clsPlayer* computer;
 extern BOOL ceilingOn;
 extern BOOL floorOn;
 
+extern int sizeDoubler;
+
 
 //score, lives, levels
 extern int score;

@@ -39,7 +39,7 @@
         
         [self addChild:background];
 
-        int sizeDoubler = 1;
+        sizeDoubler = 1;
         if (size.width > 320){ //make fonts and spacing bigger on larger screen
             sizeDoubler = 2;
         }
@@ -47,7 +47,7 @@
 if (gameStatus != game_Started ) {  //game hasn't started.. show initial screen
 
         SKLabelNode *title = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
-        [self createLabel:title text:@"brick'd" fontSize:60 posY:30 color:[SKColor whiteColor] alpha:1 sizeDoubler:sizeDoubler];
+        [self createLabel:title text:@"brick'd" fontSize:75 posY:30 color:[SKColor whiteColor] alpha:1 sizeDoubler:sizeDoubler];
 
         [self addChild: [self instruct:sizeDoubler posY:150]]; //instructions button, from below
 

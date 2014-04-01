@@ -231,7 +231,8 @@ CGPoint pointA;
         gameSpeed = .01;
     )
 
-    
+    //flash some stuff on the screen TODO
+    // start countdown.. direction arrows
 
 //start the timer that runs the game!
 
@@ -432,7 +433,7 @@ if(adsShowing)
 
     scoreLabel = [[SKLabelNode alloc] initWithFontNamed:@"Chalkduster"];
     scoreLabel.color = [UIColor whiteColor];
-    scoreLabel.fontSize = 120;
+    scoreLabel.fontSize = 120 * sizeDoubler;;
     scoreLabel.position = CGPointMake(CGRectGetMidX(self.frame),
                                  CGRectGetMidY(self.frame));
 
