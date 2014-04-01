@@ -58,4 +58,13 @@
         [standardUserDefaults synchronize];
     }
 }
+
+//set initial player1 direction - ***HACK? - NSUserDefaults lets us easily communicate variables between classes.
+//****kept this snippet for function to save data to "disk" for game stats and settings****
+//    NSUserDefaults *standardUserDefaults = [NSUserDefaults standardUserDefaults];
+//    if (standardUserDefaults) {
+//        [standardUserDefaults setObject:[NSNumber numberWithInt:3] forKey:@"playerDirection"];
+//        [standardUserDefaults synchronize];
+//    }
+
 @end

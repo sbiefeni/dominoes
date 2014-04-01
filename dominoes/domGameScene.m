@@ -31,7 +31,7 @@
 //define z positions for objects
 //#define doorZPos    5
 #define dominoZPos      6
-#define domStartSpeed   .10
+//#define domStartSpeed   .10
 
 
 //define rows and cols
@@ -58,8 +58,6 @@
 
     
 }
-
-@property float gameSpeed;
 
 @property NSTimeInterval fallingAnimationInterval;
 @property NSTimeInterval fallingAnimationDelay;
@@ -183,30 +181,6 @@ CGPoint pointA;
     _player.lastDirection = _player.curDirection;
 
 
-//    switch (right) {
-//        case TRUE:
-//            if (leftQuad) {
-//                [directionChoices addObject:[NSNumber numberWithInt:right]];
-//            }else{
-//                [directionChoices addObject:[NSNumber numberWithInt:left]];
-//            }
-//            break;
-//
-//        case FALSE:
-//            if (leftQuad) {
-//                [directionChoices addObject:[NSNumber numberWithInt:right]];
-//            }else{
-//                [directionChoices addObject:[NSNumber numberWithInt:left]];
-//            }
-//            break;
-//        default:
-//            break;
-//    }
-
-
-
-
-
 }
 
 -(void) initializeGame{
@@ -217,8 +191,8 @@ CGPoint pointA;
     playerDominos=[NSMutableArray new ];
     computerDominos=[NSMutableArray new];
     
-//set the start position and direction of players
-//TODO random start locations
+// set the start position and direction of players
+// random start locations
 
     [self setRandomStartLocation:player computer:FALSE];
 //
@@ -235,25 +209,39 @@ CGPoint pointA;
 //    computer.lastDirection = down;
 
 //set the speed interval between moves (time for both player and computer to complete one move)
-    if (_gameSpeed == 0 ) {
-        _gameSpeed = domStartSpeed;
+
+
+//set up params
+    if (!gameStarted) {
+        gameStarted = true;
+        totalScore = 0;
+        lives = 3;
+        level = 1;
+        gameSpeed = .15;
     }
+
+    //if won the last round, speed things up a bit
+    if (score > 0) {
+        gameSpeed -= .02;
+    }
+
+    score = 0;
+    lives -= 1;
+    level += 1;
+
+
+
     isRunningInIde(
-        _gameSpeed = .05;
+        gameSpeed = .05;
     )
+
     
-//set initial player1 direction - ***HACK? - NSUserDefaults lets us easily communicate variables between classes.
-//    NSUserDefaults *standardUserDefaults = [NSUserDefaults standardUserDefaults];
-//    if (standardUserDefaults) {
-//        [standardUserDefaults setObject:[NSNumber numberWithInt:3] forKey:@"playerDirection"];
-//        [standardUserDefaults synchronize];
-//    }
 
 //start the timer that runs the game!
 
     [self runAction:[SKAction repeatActionForever:[SKAction sequence:@[
                 [SKAction performSelector:@selector(gameRunner) onTarget:self],
-                [SKAction waitForDuration:_gameSpeed]
+                [SKAction waitForDuration:gameSpeed]
     ]]]];
 
 }
@@ -271,7 +259,7 @@ if(adsShowing)
 
 //computer move, 1/2 of gameSpeed interval wait time to run it
     [self runAction:[SKAction sequence:@[
-        [SKAction waitForDuration:_gameSpeed/2],
+        [SKAction waitForDuration:gameSpeed/2],
         [SKAction performSelector:@selector(handlePlayerMove) onTarget:self],
     ]]];
 }
@@ -601,6 +589,7 @@ if(adsShowing)
             player.uTurnStep = unone;
             break;
         default:
+            player.uTurnStep = unone;
             break;
     }
 
@@ -1042,10 +1031,31 @@ int countSquares;
     CGPoint pointB=[touch locationInView:self.view];
     
     //now we need to calc the angle difference when touch stops to determine if an angled swipe
+    if (abs(pointA.x - pointB.x) < 30 && abs(pointA.y - pointB.y) < 30) {
+        //toint touch detected
+        [self handlePointTouchWith_X:pointB.x andY:pointB.y];
+
+    }
     float angle=[self CalcDegrees:pointB];
     NSLog(@"Angle is: %f",angle);
 
     [self handleAngleSwipe:angle];
+}
+
+-(void) handlePointTouchWith_X:(int)Xpos andY:(int)Ypos{
+
+    NSLog(@"X:%i  Y:%i",Xpos,Ypos);
+
+    if (Xpos < arenaSize.width/2) {
+        //counterClockwise
+        player.uTurnDirection = cclockWise;
+        player.uTurnStep = step1;
+    }
+    if (Xpos > arenaSize.width/2) {
+        //clockwise
+        player.uTurnDirection = clockWise;
+        player.uTurnStep = step1;
+    }
 }
 
 -(void)handleAngleSwipe:(float) angle{

@@ -18,6 +18,8 @@
 //#import <AudioToolbox/AudioServices.h>
 
 @implementation domMenuScene
+
+
 -(instancetype)initWithSize:(CGSize)size
 {
     if(self = [super initWithSize:size]) {
@@ -36,33 +38,34 @@
         
         [self addChild:background];
 
-        
-        SKLabelNode *title = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
-
         int sizeDoubler = 1;
         if (size.width > 320){ //make fonts and spacing bigger on larger screen
             sizeDoubler = 2;
         }
 
-        title.text = @"brick'd";
-        title.fontSize = (sizeDoubler * 60);
-        title.position = CGPointMake(CGRectGetMidX(self.frame),
-                                     CGRectGetMidY(self.frame)+ 30*sizeDoubler);
-        title.fontColor = [SKColor colorWithHue:0 saturation:0 brightness:1 alpha:1.0];
-        [self addChild:title];
+if (!gameStarted) {  //game hasn't started.. show initial screen
 
+        SKLabelNode *title = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
+        [self createLabel:title text:@"brick'd" fontSize:60 posY:30 color:[SKColor whiteColor] alpha:1 sizeDoubler:sizeDoubler];
 
-        [self addChild: [self instruct:sizeDoubler]]; //instructions button, from below
-
+        [self addChild: [self instruct:sizeDoubler posY:150]]; //instructions button, from below
 
         SKLabelNode *tapToPlay = [SKLabelNode labelNodeWithFontNamed:@"Avenir-Black"];
-        tapToPlay.text = @"Tap to play";
-        tapToPlay.fontSize = (sizeDoubler * 40);
-        tapToPlay.position = CGPointMake(CGRectGetMidX(self.frame),
-                                         CGRectGetMidY(self.frame) - (30 * sizeDoubler) );
-        tapToPlay.fontColor = [SKColor colorWithHue:0 saturation:0 brightness:1 alpha:0.7];
-        [self addChild:tapToPlay];
-        
+        [self createLabel:tapToPlay text:@"Tap to Play" fontSize:40 posY:-40 color:[SKColor whiteColor] alpha:.7 sizeDoubler:sizeDoubler];
+
+}else{ // game started... show score screen
+
+        SKLabelNode *cur_score = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
+        [self createLabel:cur_score text:[NSString stringWithFormat:@"Score: %i",score] fontSize:60 posY:30 color:[SKColor whiteColor] alpha:1 sizeDoubler:sizeDoubler];
+
+        totalScore += score;
+        SKLabelNode *tot_score = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
+        [self createLabel:tot_score text:[NSString stringWithFormat:@"Total Score: %i",totalScore] fontSize:30 posY:-60 color:[SKColor whiteColor] alpha:1 sizeDoubler:sizeDoubler];
+
+        SKLabelNode *Lives = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
+        [self createLabel:Lives text:[NSString stringWithFormat:@"Total Score: %i",lives] fontSize:30 posY:-100 color:[SKColor whiteColor] alpha:1 sizeDoubler:sizeDoubler];
+
+}
         //NSString *currentModeName = [[NSUserDefaults standardUserDefaults] stringForKey:ORBGameModeDefault];
         //_currentMode = NSClassFromString(currentModeName);
         //if(!_currentMode)
@@ -77,7 +80,8 @@
 
 
 
-
+//this block only auto-restarts if the app is
+//        running in the IDE
             [self runAction:[SKAction sequence:@[
                 [SKAction waitForDuration:2],
                 [SKAction runBlock:^{
@@ -93,11 +97,23 @@
     return self;
 }
 
-- (SKSpriteNode *)instruct:(int)sizeDoubler
+-(void) createLabel:(SKLabelNode*)label text:(NSString*)text fontSize:(int)fontSize posY:(int)posY color:(SKColor*)color alpha:(float)alpha sizeDoubler:(int)sizeDoubler {
+
+    label.text = text;
+    label.fontSize = fontSize * sizeDoubler;
+    label.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame) + posY * sizeDoubler);
+    label.color = color;
+    label.alpha = alpha;
+
+    [self addChild:label];
+
+}
+
+- (SKSpriteNode *)instruct:(int)sizeDoubler posY:(int)posY
 {
     SKSpriteNode *instruct = [SKSpriteNode spriteNodeWithImageNamed:@"directions"];
     instruct.position = CGPointMake(CGRectGetMidX(self.frame),
-                                    CGRectGetMidY(self.frame) - (150 * sizeDoubler) );
+                                    CGRectGetMidY(self.frame) - (posY * sizeDoubler) );
     instruct.name = @"instructions";//how the node is identified later
     instruct.zPosition = 10;
     instruct.alpha = .7;

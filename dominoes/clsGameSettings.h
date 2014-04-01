@@ -62,9 +62,13 @@ extern BOOL floorOn;
 extern int score;
 extern int totalScore;
 extern int lives;
-extern int levels;
+extern int level;
+extern float gameSpeed;
 
+// functionality bool to let certain processes know the current round has ended with someone crashing
 extern BOOL roundOver;
+
+extern BOOL gameStarted;
 
 extern SKLabelNode* scoreLabel;
 

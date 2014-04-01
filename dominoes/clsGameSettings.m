@@ -55,13 +55,16 @@ clsPlayer* computer;
 BOOL ceilingOn;
 BOOL floorOn;     
 
-
+// actual game settings..
 int score;
 int totalScore;
 int lives;
-int levels;
+int level;
+
+float gameSpeed;
 
 BOOL roundOver;
+BOOL gameStarted;
 
 SKLabelNode *scoreLabel;
 
