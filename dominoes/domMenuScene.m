@@ -44,7 +44,7 @@
             sizeDoubler = 2;
         }
 
-if (gameStatus == reset) {  //game hasn't started.. show initial screen
+if (gameStatus != game_Started ) {  //game hasn't started.. show initial screen
 
         SKLabelNode *title = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
         [self createLabel:title text:@"brick'd" fontSize:60 posY:30 color:[SKColor whiteColor] alpha:1 sizeDoubler:sizeDoubler];
@@ -53,6 +53,8 @@ if (gameStatus == reset) {  //game hasn't started.. show initial screen
 
         SKLabelNode *tapToPlay = [SKLabelNode labelNodeWithFontNamed:@"Avenir-Black"];
         [self createLabel:tapToPlay text:@"Tap to Play" fontSize:40 posY:-40 color:[SKColor whiteColor] alpha:.7 sizeDoubler:sizeDoubler];
+
+        gameStatus = reset;
 
 }else if(gameStatus == game_Started && lives > 0)   { // game started...
 
@@ -80,7 +82,7 @@ if (gameStatus == reset) {  //game hasn't started.. show initial screen
         SKLabelNode *tot_score2 = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
         [self createLabel:tot_score2 text:[NSString stringWithFormat:@"%i",totalScore] fontSize:80 posY:-150 color:[SKColor whiteColor] alpha:1 sizeDoubler:sizeDoubler];
 
-        gameStatus = reset;
+        gameStatus = game_Over;
 
         //TODO
         //check fo rhigh score.. store the score..
