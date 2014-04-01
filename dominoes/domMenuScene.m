@@ -80,7 +80,11 @@ if (gameStatus == reset) {  //game hasn't started.. show initial screen
         SKLabelNode *tot_score2 = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
         [self createLabel:tot_score2 text:[NSString stringWithFormat:@"%i",totalScore] fontSize:80 posY:-150 color:[SKColor whiteColor] alpha:1 sizeDoubler:sizeDoubler];
 
-        gameStatus = 2;
+        gameStatus = reset;
+
+        //TODO
+        //check fo rhigh score.. store the score..
+        //games center stuff
 
 }
         //NSString *currentModeName = [[NSUserDefaults standardUserDefaults] stringForKey:ORBGameModeDefault];
