@@ -49,15 +49,18 @@
 if (gameStatus != game_Started ) {  //game hasn't started.. show initial screen
 
         SKLabelNode *title = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
-        [self createLabel:title text:@"brick'd" fontSize:75 posY:30 color:[SKColor whiteColor] alpha:1 sizeDoubler:sizeDoubler];
+        [self createLabel:title text:@"300" fontSize:130 posY:30 color:[SKColor whiteColor] alpha:1 sizeDoubler:sizeDoubler];
+
+    SKLabelNode *title2 = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
+    [self createLabel:title2 text:@"bricks" fontSize:30 posY:0 color:[SKColor whiteColor] alpha:1 sizeDoubler:sizeDoubler];
 
     SKLabelNode* hscore = [SKLabelNode labelNodeWithFontNamed:@"Arial"];
-    [self createLabel:hscore text:[NSString stringWithFormat:@"High Score: %i",(int)highScore] fontSize:30 posY:120 color:[SKColor whiteColor] alpha:.7 sizeDoubler:sizeDoubler];
+    [self createLabel:hscore text:[NSString stringWithFormat:@"High Score: %i",(int)highScore] fontSize:30 posY:140 color:[SKColor whiteColor] alpha:.7 sizeDoubler:sizeDoubler];
 
         [self addChild: [self instruct:sizeDoubler posY:150]]; //instructions button, from below
 
         SKLabelNode *tapToPlay = [SKLabelNode labelNodeWithFontNamed:@"Avenir-Black"];
-        [self createLabel:tapToPlay text:@"Tap to Play" fontSize:40 posY:-40 color:[SKColor whiteColor] alpha:.7 sizeDoubler:sizeDoubler];
+        [self createLabel:tapToPlay text:@"Tap to Play" fontSize:40 posY:-60 color:[SKColor whiteColor] alpha:.7 sizeDoubler:sizeDoubler];
 
         gameStatus = reset;
 
@@ -81,6 +84,7 @@ if (gameStatus != game_Started ) {  //game hasn't started.. show initial screen
 
         totalScore += score;
 
+        //if new high score, give a message and store it!
         if (totalScore > highScore) {
             [self setHighScore:totalScore];
             //TODO display something.. new high score
@@ -100,23 +104,9 @@ if (gameStatus != game_Started ) {  //game hasn't started.. show initial screen
 
         gameStatus = game_Over;
 
-        //TODO
-        //check for high score.. store the score..
-        //games center stuff
+        // TODO games center stuff
 
 }
-        //NSString *currentModeName = [[NSUserDefaults standardUserDefaults] stringForKey:ORBGameModeDefault];
-        //_currentMode = NSClassFromString(currentModeName);
-        //if(!_currentMode)
-            //_currentMode = [self availableGameScenes][0];
-        
-        //_modeButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        //_modeButton.titleLabel.font = [UIFont fontWithName:@"Avenir-Black" size:40];
-        //[_modeButton setTitleColor:[UIColor colorWithWhite:1 alpha:1] forState:UIControlStateNormal];
-        //_modeButton.frame = CGRectMake(0, (self.size.height - tapToPlay.position.y) + 20, self.size.width, 60);
-        //[self updateModeButton];
-        //[_modeButton addTarget:self action:@selector(selectMode) forControlEvents:UIControlEventTouchUpInside];
-
 
 
 //this block only auto-restarts if the app is
@@ -132,9 +122,9 @@ if (gameStatus != game_Started ) {  //game hasn't started.. show initial screen
 //            ]]];
 
 
-    }
+    }//end super initwithsize
     return self;
-}
+}//end initwithsize
 
 -(void) setHighScore:(int)score {
     NSString* _score = [NSString stringWithFormat:@"%i",score];
