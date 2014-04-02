@@ -45,6 +45,7 @@
         }
 
         int highScore = [self getHighScore];
+        int levelHighscore = [self getLevelHighscore];
 
 if (gameStatus != game_Started ) {  //game hasn't started.. show initial screen
 
@@ -55,7 +56,10 @@ if (gameStatus != game_Started ) {  //game hasn't started.. show initial screen
     [self createLabel:title2 text:@"bricks" fontSize:45 posY:0 color:[SKColor whiteColor] alpha:1 sizeDoubler:sizeDoubler];
 
     SKLabelNode* hscore = [SKLabelNode labelNodeWithFontNamed:@"Arial"];
-    [self createLabel:hscore text:[NSString stringWithFormat:@"High Score: %i",(int)highScore] fontSize:30 posY:140 color:[SKColor whiteColor] alpha:1 sizeDoubler:sizeDoubler];
+    [self createLabel:hscore text:[NSString stringWithFormat:@"High Score: %i",(int)highScore] fontSize:20 posY:140 color:[SKColor whiteColor] alpha:1 sizeDoubler:sizeDoubler];
+
+    SKLabelNode* hlscore = [SKLabelNode labelNodeWithFontNamed:@"Arial"];
+    [self createLabel:hlscore text:[NSString stringWithFormat:@"Best Level: %i",(int)levelHighscore] fontSize:30 posY:170 color:[SKColor whiteColor] alpha:1 sizeDoubler:sizeDoubler];
 
         [self addChild: [self instruct:sizeDoubler posY:150]]; //instructions button, from below
 
@@ -71,13 +75,33 @@ if (gameStatus != game_Started ) {  //game hasn't started.. show initial screen
         totalScore += score;
 
         SKLabelNode *cur_score = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
-        [self createLabel:cur_score text:[NSString stringWithFormat:@"Score: %i",score] fontSize:50 posY:30 color:[SKColor whiteColor] alpha:1 sizeDoubler:sizeDoubler];
+        [self createLabel:cur_score text:[NSString stringWithFormat:@"Score: %i",score] fontSize:50 posY:0 color:[SKColor whiteColor] alpha:1 sizeDoubler:sizeDoubler];
 
         SKLabelNode *tot_score = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
         [self createLabel:tot_score text:[NSString stringWithFormat:@"Total Score: %i",totalScore] fontSize:30 posY:-60 color:[SKColor whiteColor] alpha:1 sizeDoubler:sizeDoubler];
 
         SKLabelNode *Lives = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
         [self createLabel:Lives text:[NSString stringWithFormat:@"Lives: %i",lives] fontSize:30 posY:-100 color:[SKColor whiteColor] alpha:1 sizeDoubler:sizeDoubler];
+
+        SKLabelNode *tapToPlay = [SKLabelNode labelNodeWithFontNamed:@"Avenir-Black"];
+        [self createLabel:tapToPlay text:@"Tap to continue" fontSize:40 posY:80 color:[SKColor whiteColor] alpha:.7 sizeDoubler:sizeDoubler];
+
+    //for debugging - to reset the level high score
+    //levelHighscore = 0;
+
+        //if new best level, give a message and store it!
+        if (score > levelHighscore) {
+            [self setLevelHighScore: score];
+
+            levelHighscore = score;
+
+            SKLabelNode *hs = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
+            [self createLabel:hs text:@"NEW BEST LEVEL!" fontSize:30 posY:120 color:[SKColor whiteColor] alpha:1 sizeDoubler:sizeDoubler];
+        }
+
+        SKLabelNode* hlscore = [SKLabelNode labelNodeWithFontNamed:@"Arial"];
+        [self createLabel:hlscore text:[NSString stringWithFormat:@"Best Level: %i",(int)levelHighscore] fontSize:20 posY:-145 color:[SKColor whiteColor] alpha:1 sizeDoubler:sizeDoubler];
+
 }else{
         //game over
         //TODO game over stuff here
@@ -130,9 +154,21 @@ if (gameStatus != game_Started ) {  //game hasn't started.. show initial screen
     NSString* _score = [NSString stringWithFormat:@"%i",score];
     [clsCommon storeUserSetting:@"highscore" value:_score];
 }
+
+-(void) setLevelHighScore:(int)score {
+    NSString* _score = [NSString stringWithFormat:@"%i",score];
+    [clsCommon storeUserSetting:@"levelHighscore" value:_score];
+}
 -(int) getHighScore {
     NSString* _score = [NSString stringWithFormat:@"%i",score];
     _score = [clsCommon getUserSettingForKey:@"highscore"];
+    int value = [_score intValue];
+    return value;
+}
+
+-(int) getLevelHighscore {
+    NSString* _score = [NSString stringWithFormat:@"%i",score];
+    _score = [clsCommon getUserSettingForKey:@"levelHighscore"];
     int value = [_score intValue];
     return value;
 }
