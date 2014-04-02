@@ -213,7 +213,7 @@ CGPoint pointA;
         totalScore = 0;
         lives = 3;
         level = 1;
-        gameSpeed = .15;
+        gameSpeed = .20;
     }
 
     //if won the last round, speed things up a bit
@@ -228,7 +228,7 @@ CGPoint pointA;
 
 
     isRunningInIde(
-       // gameSpeed = .01;
+        gameSpeed = .01;
     )
 
     // flash some stuff on the screen TODO
