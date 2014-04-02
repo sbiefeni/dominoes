@@ -55,7 +55,7 @@ if (gameStatus != game_Started ) {  //game hasn't started.. show initial screen
     [self createLabel:title2 text:@"bricks" fontSize:30 posY:0 color:[SKColor whiteColor] alpha:1 sizeDoubler:sizeDoubler];
 
     SKLabelNode* hscore = [SKLabelNode labelNodeWithFontNamed:@"Arial"];
-    [self createLabel:hscore text:[NSString stringWithFormat:@"High Score: %i",(int)highScore] fontSize:30 posY:140 color:[SKColor whiteColor] alpha:.7 sizeDoubler:sizeDoubler];
+    [self createLabel:hscore text:[NSString stringWithFormat:@"High Score: %i",(int)highScore] fontSize:30 posY:140 color:[SKColor redColor] alpha:1 sizeDoubler:sizeDoubler];
 
         [self addChild: [self instruct:sizeDoubler posY:150]]; //instructions button, from below
 
@@ -87,7 +87,7 @@ if (gameStatus != game_Started ) {  //game hasn't started.. show initial screen
         //if new high score, give a message and store it!
         if (totalScore > highScore) {
             [self setHighScore:totalScore];
-            //TODO display something.. new high score
+
             SKLabelNode *hs = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
             [self createLabel:hs text:@"NEW HIGH SCORE!" fontSize:30 posY:120 color:[SKColor whiteColor] alpha:1 sizeDoubler:sizeDoubler];
         }

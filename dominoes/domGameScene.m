@@ -228,7 +228,7 @@ CGPoint pointA;
 
 
     isRunningInIde(
-        gameSpeed = .01;
+       // gameSpeed = .01;
     )
 
     // flash some stuff on the screen TODO
@@ -817,16 +817,16 @@ if(adsShowing)
 
     int bannerCount =0;
 
-    adShowingArenaScaleAmount = 0;
+    //adShowingArenaScaleAmount = 0;
     
     
     //determine the banner size (according to iAD)
     bannerSizeY = (arenaSize.width == 320) ? 50 : 66;
     if (arenaSize.width == 320){
         bannerSizeY = 50;
-        adShowingArenaScaleAmount = .895;  //custom scaling factors depends on the
+        adShowingArenaScaleAmount = .895;  //custom scaling factors depends on the device
     }else{
-        bannerSizeY = 66;
+        bannerSizeY = 56;
         adShowingArenaScaleAmount = .955;
 
     }
