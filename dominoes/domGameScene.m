@@ -76,8 +76,9 @@ CGPoint pointA;
         //@autoreleasepool {
 
         arenaSize = size;
-
-        [domViewController setAdView:YES ShowOnTop:NO];
+        //if(bannerIsLoaded && !bannerIsVisible){
+            [domViewController setAdView:YES ShowOnTop:NO];
+        //}
         
         [self setUpBackGround];
         
@@ -213,16 +214,16 @@ CGPoint pointA;
         totalScore = 0;
         lives = 3;
         level = 1;
-        gameSpeed = .15;
+        gameSpeed = .25;
     }
 
     //if won the last round, speed things up a bit
     if (score > 0) {
-        gameSpeed -= .02;
+        gameSpeed -= .03;
     }
 
     score = 0;
-    lives -= 1;  //TODO move this to after we crash
+    
     level += 1;
 
 
@@ -712,63 +713,63 @@ if(adsShowing)
         [[NSBundle mainBundle]
         pathForResource:@"explosion" ofType:@"sks"];
 
-            SKEmitterNode *explosion =
-            [NSKeyedUnarchiver unarchiveObjectWithFile:burstPath];
+        SKEmitterNode *explosion =
+        [NSKeyedUnarchiver unarchiveObjectWithFile:burstPath];
 
-            explosion.position = [self calcDominoPosition:player.curX withArg2:player.curY];
-            explosion.zPosition = 10;
+        explosion.position = [self calcDominoPosition:player.curX withArg2:player.curY];
+        explosion.zPosition = 10;
 
-            [self addChild:explosion];
-            player.didExplosion = true;
+        [self addChild:explosion];
+        player.didExplosion = true;
 
-            notRunningInIde(
-                roundOver = TRUE;
-            );
+        notRunningInIde(
+            roundOver = TRUE;
+        );
 
-            _sceneChangeDelay  = 4;
-            _fallingAnimationInterval = (NSTimeInterval)_sceneChangeDelay/playerDominos.count;
-            _fallingAnimationSlowStart = .1;
+        _sceneChangeDelay  = 4;
+        _fallingAnimationInterval = (NSTimeInterval)_sceneChangeDelay/playerDominos.count;
+        _fallingAnimationSlowStart = .1;
 
 
-            [self runAction:[SKAction sequence:@[
-                [SKAction playSoundFileNamed:@"sounds/long_ding2.mp3" waitForCompletion:NO],
-                [SKAction runBlock:^{
-                    AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
+        [self runAction:[SKAction sequence:@[
+            [SKAction playSoundFileNamed:@"sounds/long_ding2.mp3" waitForCompletion:NO],
+            [SKAction runBlock:^{
+                AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
+            }],
+            [SKAction waitForDuration:.6],
+            [SKAction runBlock:^{ explosion.particleBirthRate = 0; } ],
+
+            [SKAction runBlock:^{
+                _fallingAnimationDelay = 0;
+            //[self enableScore];
+            NSLog(@"Dominoes: %i",(int)playerDominos.count);
+            for (clsDomino* dom in [playerDominos reverseObjectEnumerator]) {
+                    //code to be executed on the main queue after delay
+                [dom fallDown:_fallingAnimationDelay isPlayer:true isEnd:false ];
+
+                _fallingAnimationDelay += _fallingAnimationSlowStart;
+                if (_fallingAnimationSlowStart > _fallingAnimationInterval) {
+                    _fallingAnimationSlowStart -= .02;
+                }else if(_fallingAnimationSlowStart < _fallingAnimationInterval){
+                    _fallingAnimationSlowStart = _fallingAnimationInterval;
+                }
+            };
+            clsDomino* lastDom = [playerDominos objectAtIndex: 0];
+            [lastDom fallDown:_fallingAnimationDelay isPlayer:true isEnd:true ];
+
+            }],
+
+            [SKAction waitForDuration:0.2],
+            [SKAction runBlock:^{ explosion.particleBirthRate = 0;} ],
+            [SKAction waitForDuration:_sceneChangeDelay + 3],
+            [SKAction runBlock:^{
+                notRunningInIde(
+                    domMenuScene *menu = [[domMenuScene alloc] initWithSize:self.size];
+                      [self.view presentScene:menu transition:[SKTransition doorsCloseHorizontalWithDuration:0.5]];
+                );
                 }],
-                [SKAction waitForDuration:.6],
-                [SKAction runBlock:^{ explosion.particleBirthRate = 0; } ],
-
-                [SKAction runBlock:^{
-                    _fallingAnimationDelay = 0;
-                //[self enableScore];
-                NSLog(@"Dominoes: %i",(int)playerDominos.count);
-                for (clsDomino* dom in [playerDominos reverseObjectEnumerator]) {
-                        //code to be executed on the main queue after delay
-                    [dom fallDown:_fallingAnimationDelay isPlayer:true isEnd:false ];
-
-                    _fallingAnimationDelay += _fallingAnimationSlowStart;
-                    if (_fallingAnimationSlowStart > _fallingAnimationInterval) {
-                        _fallingAnimationSlowStart -= .02;
-                    }else if(_fallingAnimationSlowStart < _fallingAnimationInterval){
-                        _fallingAnimationSlowStart = _fallingAnimationInterval;
-                    }
-                };
-                clsDomino* lastDom = [playerDominos objectAtIndex: 0];
-                [lastDom fallDown:_fallingAnimationDelay isPlayer:true isEnd:true ];
-
-                }],
-
-                [SKAction waitForDuration:0.2],
-                [SKAction runBlock:^{ explosion.particleBirthRate = 0;} ],
-                [SKAction waitForDuration:_sceneChangeDelay + 3],
-                [SKAction runBlock:^{
-                    notRunningInIde(
-                        domMenuScene *menu = [[domMenuScene alloc] initWithSize:self.size];
-                          [self.view presentScene:menu transition:[SKTransition doorsCloseHorizontalWithDuration:0.5]];
-                    );
-                    }],
-                ]]];
-
+            ]]];
+        lives -= 1;  //TODO move this to after we crash
     } //end if (player1.crashed)
     
 }  //end if (!crashed)

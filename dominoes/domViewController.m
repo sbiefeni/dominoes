@@ -33,25 +33,30 @@ BOOL bOnTop;
 //    if (rand=0) {
 //        <#statements#>
 //    }
-    if (showAd) {
-        if (onTop) {
-            ceilingOn = 1;
-            floorOn = 0;
-            adView.frame=CGRectMake(0,0, iWidth, iWidth==320? 50:66);
+    //if(bannerIsLoaded){
+        if (showAd) {
+            if (onTop) {
+                ceilingOn = 1;
+                floorOn = 0;
+                adView.frame=CGRectMake(0,0, iWidth, iWidth==320? 50:66);
+            }
+            else{
+                ceilingOn = 0;
+                floorOn = 1;
+                adView.frame=CGRectMake(0,iHeight-50, iWidth, iWidth==320? 50:66);
+            }
         }
-        else{
-            ceilingOn = 0;
-            floorOn = 1;
-            adView.frame=CGRectMake(0,iHeight-50, iWidth, iWidth==320? 50:66);
-        }
-    }
-    [UIView beginAnimations:nil context:NULL];
-    [UIView setAnimationDuration:showAd==YES?3:0];
-    [adView setAlpha:showAd==YES?1:0];
-    
-    [UIView commitAnimations];
+        [UIView beginAnimations:nil context:NULL];
+        [UIView setAnimationDuration:showAd==YES?3:0];
+        [adView setAlpha:showAd==YES?1:0];
+        
+        [UIView commitAnimations];
+        //bannerIsVisible=showAd;
+//    }else{
+//        [adView setAlpha:showAd==0];
+//        bannerIsVisible=NO;
+//    }
 }
-
 
 - (void)viewDidLoad
 {
@@ -115,6 +120,11 @@ BOOL bOnTop;
     [domViewController setAdView:NO ShowOnTop:NO];
     //show the error in NSLog
     NSLog(@"Failed to receive banner with error '%@'",error.description);
+    //bannerIsLoaded=NO;
+}
+
+-(void)bannerViewDidLoadAd:(ADBannerView *)banner{
+    //bannerIsLoaded=YES;
 }
 
 -(void)viewWillAppear:(BOOL)animated
