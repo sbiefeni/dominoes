@@ -214,7 +214,7 @@ CGPoint pointA;
         totalScore = 0;
         lives = 3;
         level = 1;
-        gameSpeed = .20;
+        gameSpeed = .25;
     }
 
     //if won the last round, speed things up a bit
@@ -769,7 +769,7 @@ if(adsShowing)
                 );
                 }],
             ]]];
-        lives -= 1;  //TODO move this to after we crash
+        lives -= 1;  //minus one life
     } //end if (player1.crashed)
     
 }  //end if (!crashed)
@@ -819,23 +819,20 @@ if(adsShowing)
     int bannerCount =0;
 
     //adShowingArenaScaleAmount = 0;
-    
-    
-    //determine the banner size (according to iAD)
-    bannerSizeY = (arenaSize.width == 320) ? 50 : 66;
-    if (arenaSize.width == 320){
-        bannerSizeY = 50;
-        adShowingArenaScaleAmount = .895;  //custom scaling factors depends on the device
-    }else{
-        bannerSizeY = 56;
-        adShowingArenaScaleAmount = .955;
+    backGround = [SKSpriteNode spriteNodeWithImageNamed:@"new-arena"];
 
-    }
+    //calculate min and max extents, based on original background size
+    [self setUpMinMaxExtents:backGround.size];
+
+    //determine the banner size (according to iAD)
+    bannerSizeY = (arenaSize.width == 320)?50:56;
+
+
     //if only one of the banners is on, then we need an adjuster to center things
     if (ceilingOn + floorOn ==1){
         bannerHeightAdjuster = (ceilingOn) ? -(bannerSizeY/2): +(bannerSizeY/2);
     }
-    
+
     if (floorOn){
         bannerCount +=1;
     }
@@ -844,35 +841,45 @@ if(adsShowing)
     }
 
 
-    
-    backGround = [SKSpriteNode spriteNodeWithImageNamed:@"new-arena"];
-
-    //CGSize backGroundSize = CGSizeMake(1536, 2048) ;
-
-
-    //calculate min and max extents, based on original background size
-    [self setUpMinMaxExtents:backGround.size];
-
-
-//get the scale factors, so we know how much to scale any other images
+    //get the scale factors, so we know how much to scale any other images
     scaleX = backGround.size.width  / arenaSize.width;
     scaleY = backGround.size.height / (arenaSize.height -(bannerSizeY * bannerCount) );
-    
+
     backGround.size = CGSizeMake(arenaSize.width, arenaSize.height );
 
+    //fine tune the scale of the background
+    if (arenaSize.width == 320){
+        if (scaleY > 4.5) {
+            adShowingArenaScaleAmount = .895; //for 3.5" iphone
+        }else{
+        adShowingArenaScaleAmount = .915;  //for 4.0" iphone
+        }
+    }else{
+        adShowingArenaScaleAmount = .955;  //for ipad
+    }
+
     [backGround setYScale:adShowingArenaScaleAmount];
-    
+
     float backGroundPos = arenaSize.height/2 + bannerHeightAdjuster ;
 
-    
+
     backGround.position = CGPointMake(arenaSize.width/2, backGroundPos);
     backGround.zPosition = 1;
 
     self.backgroundColor = [SKColor blackColor];
     //backGround.colorBlendFactor = 1;
 
-    
+
     [self addChild:backGround];
+
+
+
+
+
+    
+
+
+
 
     
 }

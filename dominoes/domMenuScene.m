@@ -49,13 +49,13 @@
 if (gameStatus != game_Started ) {  //game hasn't started.. show initial screen
 
         SKLabelNode *title = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
-        [self createLabel:title text:@"300" fontSize:130 posY:30 color:[SKColor whiteColor] alpha:1 sizeDoubler:sizeDoubler];
+        [self createLabel:title text:@"300" fontSize:130 posY:30 color:[SKColor redColor] alpha:.7 sizeDoubler:sizeDoubler];
 
-    SKLabelNode *title2 = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
-    [self createLabel:title2 text:@"bricks" fontSize:30 posY:0 color:[SKColor whiteColor] alpha:1 sizeDoubler:sizeDoubler];
+    SKLabelNode *title2 = [SKLabelNode labelNodeWithFontNamed:@"Arial"];
+    [self createLabel:title2 text:@"bricks" fontSize:45 posY:0 color:[SKColor whiteColor] alpha:1 sizeDoubler:sizeDoubler];
 
     SKLabelNode* hscore = [SKLabelNode labelNodeWithFontNamed:@"Arial"];
-    [self createLabel:hscore text:[NSString stringWithFormat:@"High Score: %i",(int)highScore] fontSize:30 posY:140 color:[SKColor redColor] alpha:1 sizeDoubler:sizeDoubler];
+    [self createLabel:hscore text:[NSString stringWithFormat:@"High Score: %i",(int)highScore] fontSize:30 posY:140 color:[SKColor whiteColor] alpha:1 sizeDoubler:sizeDoubler];
 
         [self addChild: [self instruct:sizeDoubler posY:150]]; //instructions button, from below
 
@@ -142,7 +142,7 @@ if (gameStatus != game_Started ) {  //game hasn't started.. show initial screen
     label.text = text;
     label.fontSize = fontSize * sizeDoubler;
     label.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame) + posY * sizeDoubler);
-    label.color = color;
+    label.fontColor = color;
     label.alpha = alpha;
 
     [self addChild:label];
