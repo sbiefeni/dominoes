@@ -26,5 +26,7 @@
 @property uTurnStep uTurnStep;
 @property uTurnDirection uTurnDirection;
 
+@property BOOL isPlayer;
+
 
 @end
