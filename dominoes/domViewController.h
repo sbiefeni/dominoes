@@ -11,8 +11,9 @@
 #import <iAd/iAd.h>
 
 
-@interface domViewController : UIViewController <ADBannerViewDelegate>
+@interface domViewController : UIViewController
 
-+(void)setAdView:(BOOL)showAd ShowOnTop:(BOOL)onTop;
++(void)setAdView:(BOOL)showAd ShowOnTop:(BOOL)onTop ChooseRandom:(BOOL)useRandom;
+
 
 @end

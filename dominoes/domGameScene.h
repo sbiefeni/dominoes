@@ -12,7 +12,6 @@
 
 
 @interface domGameScene : SKScene
-<ADBannerViewDelegate>
 
 //typedef enum {
 //    reset = 0,

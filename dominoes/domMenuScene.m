@@ -27,7 +27,7 @@
 
 
         //start the background music track playing
-        [domViewController setAdView:NO ShowOnTop:NO];
+        [domViewController setAdView:NO ShowOnTop:NO ChooseRandom:YES];
         [clsCommon playBackgroundMusicWithVolume:.2];
 
 
@@ -56,6 +56,7 @@ if (gameStatus != game_Started ) {  //game hasn't started.. show initial screen
     [self createLabel:title2 text:@"bricks" fontSize:45 posY:0 color:[SKColor whiteColor] alpha:1 sizeDoubler:sizeDoubler];
 
     SKLabelNode* hscore = [SKLabelNode labelNodeWithFontNamed:@"Arial"];
+    
     [self createLabel:hscore text:[NSString stringWithFormat:@"High Score: %i",(int)highScore] fontSize:20 posY:140 color:[SKColor whiteColor] alpha:1 sizeDoubler:sizeDoubler];
 
     SKLabelNode* hlscore = [SKLabelNode labelNodeWithFontNamed:@"Arial"];

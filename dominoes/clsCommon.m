@@ -14,6 +14,8 @@
 
 @implementation clsCommon
 
+
+
 +(void) playBackgroundMusicWithVolume:(double)volume{
     NSString *path = [NSString stringWithFormat:@"%@/%@",
                       [[NSBundle mainBundle] resourcePath],

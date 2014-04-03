@@ -10,14 +10,9 @@
 
 SKSpriteNode* backGround;
 
-
-
-
-
-
 BOOL adsShowing;
-//BOOL bannerIsVisible;
-//BOOL bannerIsLoaded;
+BOOL bannerIsVisible;
+BOOL bannerIsLoaded;
 
 //to get the scale factor for the current screen (orig size / new size)
 float scaleX;

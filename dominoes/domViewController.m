@@ -16,7 +16,7 @@ int iHeight;
 int iWidth;
 BOOL bOnTop;
 
-@interface domViewController ()
+@interface domViewController () <ADBannerViewDelegate>
 
 @end
 
@@ -26,16 +26,30 @@ BOOL bOnTop;
 
 //(float)getRanFloat:(float)smallNumber and:(float)bigNumber {
 
-+(void)setAdView:(BOOL)showAd ShowOnTop:(BOOL)onTop{
++(void)setAdView:(BOOL)showAd ShowOnTop:(BOOL)onTop ChooseRandom:(BOOL)useRandom{
     
     //following commented code to randomize between top and bottom
 //    int rand = arc4random() % 4;
 //    if (rand=0) {
 //        <#statements#>
 //    }
-    //if(bannerIsLoaded){
+        if(bannerIsLoaded){
+        
         if (showAd) {
-            if (onTop) {
+            BOOL blOnTop;
+            if(useRandom){
+                if([clsCommon getRanInt:0 maxNumber:1]==0){
+                    blOnTop=NO;
+                }
+                else {
+                    blOnTop=YES;
+                }
+            }
+            else{
+                blOnTop=onTop;
+            }
+
+            if (blOnTop) {
                 ceilingOn = 1;
                 floorOn = 0;
                 adView.frame=CGRectMake(0,0, iWidth, iWidth==320? 50:66);
@@ -52,10 +66,12 @@ BOOL bOnTop;
         
         [UIView commitAnimations];
         //bannerIsVisible=showAd;
-//    }else{
-//        [adView setAlpha:showAd==0];
-//        bannerIsVisible=NO;
-//    }
+    }else{
+        [adView setAlpha:0];
+        bannerIsVisible=NO;
+        ceilingOn=0;
+        floorOn=1;
+    }
 }
 
 - (void)viewDidLoad
@@ -66,12 +82,14 @@ BOOL bOnTop;
     //CGFloat width = 
     //CGFloat height = CGRectGetHeight(self.view.bounds);
     
+    
     CGRect aRect;
     aRect.origin.x =0;
     aRect.origin.y = CGRectGetHeight(self.view.bounds)-50;
     //self.canDisplayBannerAds=YES;
     
     adView=[[ADBannerView alloc]initWithFrame:aRect];
+    adView.delegate=self;
     [adView setAlpha:0];
     [self.view addSubview:adView];
     
@@ -106,6 +124,7 @@ BOOL bOnTop;
 
     // Present the Menu scene
     [skView presentScene:scene];
+    
 }
 
 //following function called by the iAds if user clicks the ad and ad pops up
@@ -115,22 +134,23 @@ BOOL bOnTop;
     adsShowing=YES;
     
 }
--(void)bannerView:(ADBannerView *)banner didFailToReceiveAdWithError:(NSError *)error{
-    //hide the ad banner as error detected
-    [domViewController setAdView:NO ShowOnTop:NO];
-    //show the error in NSLog
-    NSLog(@"Failed to receive banner with error '%@'",error.description);
-    //bannerIsLoaded=NO;
-}
-
--(void)bannerViewDidLoadAd:(ADBannerView *)banner{
-    //bannerIsLoaded=YES;
-}
 
 -(void)viewWillAppear:(BOOL)animated
 {
     // Advert has been dismissed. Resume paused activities
     adsShowing=NO;
+}
+
+-(void)bannerView:(ADBannerView *)banner didFailToReceiveAdWithError:(NSError *)error{
+    //hide the ad banner as error detected
+    [domViewController setAdView:NO ShowOnTop:NO ChooseRandom:NO];
+    //show the error in NSLog
+    NSLog(@"Failed to receive banner with error '%@'",error.description);
+    bannerIsLoaded=NO;
+}
+
+-(void)bannerViewDidLoadAd:(ADBannerView *)banner{
+    bannerIsLoaded=YES;
 }
 
 //- (void)keyDown:(nse *)theEvent {

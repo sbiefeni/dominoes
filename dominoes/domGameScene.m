@@ -77,7 +77,7 @@ CGPoint pointA;
 
         arenaSize = size;
         //if(bannerIsLoaded && !bannerIsVisible){
-            [domViewController setAdView:YES ShowOnTop:NO];
+            [domViewController setAdView:YES ShowOnTop:YES ChooseRandom:YES];
         //}
         
         [self setUpBackGround];
