@@ -173,6 +173,8 @@ CGPoint pointA;
     _player.curX = (comp==TRUE)? xPos + halfX:xPos;
     _player.curY = yPos;
 
+    _player.isPlayer = (comp==false);
+
     int choice = [clsCommon getRanInt:0 maxNumber:1];
     _player.curDirection = [[directionChoices objectAtIndex:choice] intValue];
     _player.lastDirection = _player.curDirection;
@@ -239,13 +241,56 @@ CGPoint pointA;
 
 //start the timer that runs the game!
 
-    [self runAction:[SKAction repeatActionForever:[SKAction sequence:@[
+    [self runAction:
+        [SKAction runBlock:^{
+            [self flashingArrowFor:player];
+            [self flashingArrowFor:computer];
+    }]];
+
+    [self runAction:
+        [SKAction sequence:@[
+            [SKAction runBlock:^{
+                [self flashingArrowFor:player];
+                [self flashingArrowFor:computer];
+            }],
+            [SKAction waitForDuration:2],
+            [SKAction repeatActionForever:[SKAction sequence:@[
                 [SKAction performSelector:@selector(gameRunner) onTarget:self],
-                [SKAction waitForDuration:gameSpeed]
-    ]]]];
+                [SKAction waitForDuration:gameSpeed],
+    ]]]]]];
 
 }
+-(void) flashingArrowFor:(clsPlayer*)player{
+//flash an arrow for a couple seconds
+    SKSpriteNode *arrow = [SKSpriteNode spriteNodeWithImageNamed:[NSString stringWithFormat:@"arrow%i",player.curDirection ]];
+    arrow.position = [self calcDominoPosition:player.curX withArg2:player.curY];
+    arrow.alpha = .7;
 
+    if (player.isPlayer) {
+        arrow.color = [SKColor cyanColor];
+    }else{
+        arrow.color = [SKColor greenColor];
+    }
+    arrow.colorBlendFactor = .7;
+
+    [self addChild:arrow];
+
+
+    [self runAction:[SKAction repeatAction:
+            [SKAction sequence:@[
+                [SKAction runBlock:^{
+                    arrow.alpha = .7;
+                }],
+                [SKAction waitForDuration:.15],
+                [SKAction runBlock:^{
+                    arrow.alpha = 0;
+                }],
+                [SKAction waitForDuration:.15],
+            ]]
+        count:6
+    ]];
+
+}
 //********* Game Runner - is called on interval time 'gameSpeed' from the repeat action above..
 -(void) gameRunner {
 if(adsShowing)

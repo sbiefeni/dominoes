@@ -13,11 +13,6 @@
 
 @interface domGameScene : SKScene
 
-//typedef enum {
-//    reset = 0,
-//    game_Started = 1,
-//    game_Over = 2
-//} game_Status;
 
 //enum the last swipe action
 typedef enum  {
