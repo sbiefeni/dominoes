@@ -83,9 +83,9 @@ BOOL bOnTop;
     //CGFloat height = CGRectGetHeight(self.view.bounds);
     
     
-    CGRect aRect;
-    aRect.origin.x =0;
-    aRect.origin.y = CGRectGetHeight(self.view.bounds)-50;
+    CGRect aRect=CGRectMake(0, CGRectGetHeight(self.view.bounds)-iWidth==320? 50:66, iWidth, iWidth==320? 50:66);
+//    aRect.origin.x =0;
+//    aRect.origin.y = CGRectGetHeight(self.view.bounds)-50;
     //self.canDisplayBannerAds=YES;
     
     adView=[[ADBannerView alloc]initWithFrame:aRect];
