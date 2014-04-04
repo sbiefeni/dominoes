@@ -266,6 +266,8 @@ CGPoint pointA;
     SKSpriteNode *arrow = [SKSpriteNode spriteNodeWithImageNamed:[NSString stringWithFormat:@"arrow%i",player.curDirection ]];
     arrow.position = [self calcDominoPosition:player.curX withArg2:player.curY];
     arrow.alpha = .6;
+    arrow.xScale = .7;
+    arrow.yScale = .7;
 
     if (player.isPlayer) {
         arrow.color = [SKColor cyanColor];
@@ -281,8 +283,13 @@ CGPoint pointA;
         SKLabelNode *lblFaster = [SKLabelNode labelNodeWithFontNamed:@"Arial"];
         lblFaster.text = @"A Little Faster!";
         lblFaster.fontSize = 40 * sizeDoubler;
-        lblFaster.alpha = .7;
-        lblFaster.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame) ); //
+        lblFaster.alpha = .5;
+    //adjust label position if it's on the arrow
+    if (player.curY > 13 && player.curY < 17) {
+        lblFaster.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame)+(100 * sizeDoubler) ); //
+    }else{
+        lblFaster.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame) );
+    }
     if (faster) {
         [self addChild:lblFaster];
     }
@@ -446,7 +453,11 @@ if(adsShowing)
             roundOver  = TRUE;
 
             _sceneChangeDelay  = 4;
+            isRunningInIde(_sceneChangeDelay = 2);
             _fallingAnimationInterval = (NSTimeInterval)_sceneChangeDelay/computerDominos.count;
+            if (_fallingAnimationInterval > .1) {
+                _fallingAnimationInterval = .1;
+            }
             _fallingAnimationSlowStart = .15;
 
 
@@ -791,6 +802,9 @@ if(adsShowing)
 
         _sceneChangeDelay  = 4;
         _fallingAnimationInterval = (NSTimeInterval)_sceneChangeDelay/playerDominos.count;
+        if (_fallingAnimationInterval > .1) {
+            _fallingAnimationInterval = .1;
+        }
         _fallingAnimationSlowStart = .1;
 
 

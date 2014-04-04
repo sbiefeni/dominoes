@@ -133,6 +133,9 @@ if (gameStatus != game_Started ) {  //game hasn't started.. show initial screen
             [self setLevelHighScore: score];
         }
 
+        //reset score to 0 now, for next round
+        score = 0;
+
         // TODO games center stuff
 
 }
