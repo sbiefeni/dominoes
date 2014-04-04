@@ -234,8 +234,6 @@ CGPoint pointA;
     
     level += 1;
 
-    
-
 
     isRunningInIde(
         gameSpeed = .01;

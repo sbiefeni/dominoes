@@ -85,7 +85,7 @@ if (gameStatus != game_Started ) {  //game hasn't started.. show initial screen
         [self createLabel:Lives text:[NSString stringWithFormat:@"Lives: %i",lives] fontSize:30 posY:-100 color:[SKColor whiteColor] alpha:1 sizeDoubler:sizeDoubler];
 
         SKLabelNode *tapToPlay = [SKLabelNode labelNodeWithFontNamed:@"Avenir-Black"];
-        [self createLabel:tapToPlay text:@"Tap to continue" fontSize:40 posY:80 color:[SKColor whiteColor] alpha:.7 sizeDoubler:sizeDoubler];
+        [self createLabel:tapToPlay text:@"Tap to continue" fontSize:40 posY:-145 color:[SKColor whiteColor] alpha:.7 sizeDoubler:sizeDoubler];
 
     //for debugging - to reset the level high score
     //levelHighscore = 0;
@@ -101,7 +101,7 @@ if (gameStatus != game_Started ) {  //game hasn't started.. show initial screen
         }
 
         SKLabelNode* hlscore = [SKLabelNode labelNodeWithFontNamed:@"Arial"];
-        [self createLabel:hlscore text:[NSString stringWithFormat:@"Best Level: %i",(int)levelHighscore] fontSize:20 posY:-145 color:[SKColor whiteColor] alpha:1 sizeDoubler:sizeDoubler];
+        [self createLabel:hlscore text:[NSString stringWithFormat:@"Best Level: %i",(int)levelHighscore] fontSize:20 posY:80 color:[SKColor whiteColor] alpha:1 sizeDoubler:sizeDoubler];
 
 }else{
         //game over
