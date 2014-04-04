@@ -78,7 +78,11 @@ NSMutableArray* dominoFrames;
         //9 random domino falling sounds
         //the end sound is distinct and represents the end of a run
     if (bIsEnd) {
-        which = @"-end3";
+        if (bPlayer) {
+            which = @"-clak";
+        }else{
+            which = @"-end3";
+        }
     }else{
         int rnd = [clsCommon getRanInt:1 maxNumber:9];
         which = [@(rnd) stringValue];
@@ -105,7 +109,9 @@ NSMutableArray* dominoFrames;
         moveAction,
     ]]];
 
-    [clsCommon playSound:@"dom1.wav"];
+    self.ZPosition = 25;
+
+    //[clsCommon playSound:@"dom1.wav"];
 
 }
 

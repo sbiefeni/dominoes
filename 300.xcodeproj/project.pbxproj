@@ -234,7 +234,7 @@
 		55CB7E1318CBD180001EFA1C = {
 			isa = PBXGroup;
 			children = (
-				55CB7E2718CBD180001EFA1C /* 300 */,
+				55CB7E2718CBD180001EFA1C /* 300 Bricks */,
 				55CB7E4E18CBD181001EFA1C /* dominoesTests */,
 				55CB7E1E18CBD180001EFA1C /* Frameworks */,
 				55CB7E1D18CBD180001EFA1C /* Products */,
@@ -265,7 +265,7 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		55CB7E2718CBD180001EFA1C /* 300 */ = {
+		55CB7E2718CBD180001EFA1C /* 300 Bricks */ = {
 			isa = PBXGroup;
 			children = (
 				38B7A81218E5043000F51451 /* iPad */,
@@ -281,7 +281,7 @@
 				55CB7E4118CBD181001EFA1C /* Images.xcassets */,
 				55CB7E2818CBD180001EFA1C /* Supporting Files */,
 			);
-			name = 300;
+			name = "300 Bricks";
 			path = dominoes;
 			sourceTree = "<group>";
 		};
@@ -363,7 +363,7 @@
 				ORGANIZATIONNAME = Abstractions;
 				TargetAttributes = {
 					55CB7E1B18CBD180001EFA1C = {
-						DevelopmentTeam = TVP369UU3E;
+						DevelopmentTeam = JP43X6H6PR;
 						SystemCapabilities = {
 							com.apple.GameCenter = {
 								enabled = 1;

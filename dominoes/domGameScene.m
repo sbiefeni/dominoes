@@ -73,7 +73,11 @@ CGPoint pointA;
     if (self = [super initWithSize:size]) {
         /* Setup your scene here */
 
-        //@autoreleasepool {
+        sizeDoubler = 1;
+        if (size.width > 320){ //make fonts and spacing bigger on larger screen
+            sizeDoubler = 2;
+        }
+
 
         arenaSize = size;
         //if(bannerIsLoaded && !bannerIsVisible){
@@ -187,7 +191,7 @@ CGPoint pointA;
     player = [clsPlayer new];
     computer = [clsPlayer new];
 
-    playerDominos=[NSMutableArray new ];
+    playerDominos=[NSMutableArray new];
     computerDominos=[NSMutableArray new];
     
 // set the start position and direction of players
@@ -220,14 +224,17 @@ CGPoint pointA;
     }
 
     //if won the last round, speed things up a bit
+    BOOL isFaster = false;
     if (score > 0) {
         gameSpeed -= .03;
+        isFaster = true;
     }
 
     score = 0;
     
     level += 1;
 
+    
 
 
     isRunningInIde(
@@ -242,29 +249,25 @@ CGPoint pointA;
 //start the timer that runs the game!
 
     [self runAction:
-        [SKAction runBlock:^{
-            [self flashingArrowFor:player];
-            [self flashingArrowFor:computer];
-    }]];
-
-    [self runAction:
         [SKAction sequence:@[
             [SKAction runBlock:^{
-                [self flashingArrowFor:player];
-                [self flashingArrowFor:computer];
+                [self flashingArrowFor:player showFasterMessage:isFaster];
+                //[self flashingArrowFor:computer];
             }],
             [SKAction waitForDuration:2],
             [SKAction repeatActionForever:[SKAction sequence:@[
                 [SKAction performSelector:@selector(gameRunner) onTarget:self],
                 [SKAction waitForDuration:gameSpeed],
-    ]]]]]];
+            ]]]
+        ]]
+     ];
 
 }
--(void) flashingArrowFor:(clsPlayer*)player{
+-(void) flashingArrowFor:(clsPlayer*)player showFasterMessage:(BOOL)faster{
 //flash an arrow for a couple seconds
     SKSpriteNode *arrow = [SKSpriteNode spriteNodeWithImageNamed:[NSString stringWithFormat:@"arrow%i",player.curDirection ]];
     arrow.position = [self calcDominoPosition:player.curX withArg2:player.curY];
-    arrow.alpha = .7;
+    arrow.alpha = .6;
 
     if (player.isPlayer) {
         arrow.color = [SKColor cyanColor];
@@ -275,8 +278,20 @@ CGPoint pointA;
 
     [self addChild:arrow];
 
+    ///show "A little bit faster now!" label if
+    //faster BOOL is set true
+        SKLabelNode *lblFaster = [SKLabelNode labelNodeWithFontNamed:@"Arial"];
+        lblFaster.text = @"A Little Faster!";
+        lblFaster.fontSize = 40 * sizeDoubler;
+        lblFaster.alpha = .7;
+        lblFaster.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame) ); //
+    if (faster) {
+        [self addChild:lblFaster];
+    }
 
-    [self runAction:[SKAction repeatAction:
+    [self runAction:
+       [SKAction sequence:@[
+         [SKAction repeatAction:
             [SKAction sequence:@[
                 [SKAction runBlock:^{
                     arrow.alpha = .7;
@@ -287,8 +302,13 @@ CGPoint pointA;
                 }],
                 [SKAction waitForDuration:.15],
             ]]
-        count:6
-    ]];
+            count:6
+          ],
+          [SKAction runBlock:^{
+                [lblFaster removeFromParent];
+          }],
+        ]]
+     ];
 
 }
 //********* Game Runner - is called on interval time 'gameSpeed' from the repeat action above..
@@ -298,9 +318,9 @@ if(adsShowing)
     return;
 }
 //player move
-    if (playerDominos.count > 4) {
+    //if (playerDominos.count > 4) {
         [self handleComputerMove];
-    }
+    //}
 
 //computer move, 1/2 of gameSpeed interval wait time to run it
     [self runAction:[SKAction sequence:@[

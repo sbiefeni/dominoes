@@ -129,6 +129,10 @@ if (gameStatus != game_Started ) {  //game hasn't started.. show initial screen
 
         gameStatus = game_Over;
 
+        if (score > levelHighscore) {
+            [self setLevelHighScore: score];
+        }
+
         // TODO games center stuff
 
 }
