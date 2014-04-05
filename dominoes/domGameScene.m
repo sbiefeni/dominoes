@@ -127,8 +127,8 @@ CGPoint pointA;
     dominoSize = CGSizeMake((gridWidth/cols)/scaleX*dominoScaleFactorX, (gridHeight/rows)/scaleY*dominoScaleFactorY);
 
 //initialize the grid BOOL to false
-    for (int i=0; i<(cols+1); i++) {
-        for (int ii=0; ii < (rows+1); ii++) {
+    for (int i=0; i<cols+1; i++) {
+        for (int ii=0; ii < rows+1; ii++) {
             grid[i][ii]=false;
         }
     }
@@ -285,7 +285,7 @@ CGPoint pointA;
         lblFaster.fontSize = 40 * sizeDoubler;
         lblFaster.alpha = .5;
     //adjust label position if it's on the arrow
-    if (player.curY > 13 && player.curY < 17) {
+    if (player.curY > 12 && player.curY < 18) {
         lblFaster.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame)+(100 * sizeDoubler) ); //
     }else{
         lblFaster.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame) );
@@ -535,6 +535,8 @@ if(adsShowing)
     int X = computer.curX;
     int Y = computer.curY;
     int D = computer.curDirection;
+    //don't change path if choices are equal on a unforced 2 choice evaluation
+    BOOL noChange = false;
 
     //1 in n chance of a random direction change at any time
     int rndChance = 50;
@@ -542,7 +544,7 @@ if(adsShowing)
     //increase random chance when computer is close to a wall
     if ((D == left && X < 6) || (D == up && Y > maxY-6) || (D == right && X > maxX-6) || (D == down && Y < 6) || Y==0  || Y==rows || X==0 || X==cols)
         {
-            rndChance =2;
+            rndChance =4;
         }
         //((D == left && X < 4) || (D == up && Y > maxY-4) || (D == right && X > maxX-4) || (D == down && Y < 4) || Y==0  || Y==rows || X==0 || X==cols)
 
@@ -595,9 +597,51 @@ if(adsShowing)
         default:
             break;
     }
+    if (directionChoices.count == 0) {
+        //now check if we are about to go into a situation where
+        //we are being 'coralled' by not checking
+        //this would mean we have 2 available choices on the
+        //next move, not 3. since we are not crashing, we won't
+        //check for the best option, unless we do this.
+        //int choice=0;
+        int count=0;
+        BOOL choices[5];//1-4, not using 0
+        if (X-1 >= 0 && grid[X-1][Y]==false) {
+            choices[left]=true; //[self checkPath:X  originY:Y direction:left] ;
+            count++;
+        }
+        if (Y+1 <= rows && grid[X][Y+1]==false) {
+            choices[up]=true; //[self checkPath:X  originY:Y direction:up];
+            count++;
+        }
+        if (X+1 <= cols && grid[X+1][Y]==false) {
+            choices[right]=true; //[self checkPath:X  originY:Y direction:right];
+            count++;
+        }
+        if (Y-1 >= 0 && grid[X][Y-1]==false) {
+            choices[down]=true; //[self checkPath:X  originY:Y direction:down];
+            count++;
+        }
+
+        if (count==2) {
+            //grab the best choice while we check for a count of 2
+            for (int i=1; i<5; i++) {
+                if (choices[i] ==true) {
+                    //if we have exactly 2 choices, insert the best choice into
+                    //the choices object.. so the computer will take it.
+                    [directionChoices addObject:[NSNumber numberWithInt:i]];
+                }
+            }
+            noChange = true;
+        }
+
+
+
+        memset(choices, NO, sizeof(choices));
+    }
 
     //check how many choices we have, and change direction if we can
-    if ([directionChoices count] ==2) {
+    if (directionChoices.count ==2) {
         int C1; int C2;
         //2 choices.. call a parser to see which is the best choice
          C1 = [self checkPath:X  originY:Y direction:[[directionChoices objectAtIndex:0]intValue] ];
@@ -607,7 +651,7 @@ if(adsShowing)
             computer.curDirection = [[directionChoices objectAtIndex:0] intValue];
         }else if (C2 > C1){
             computer.curDirection = [[directionChoices objectAtIndex:1] intValue];
-        }else{
+        }else if (noChange == false){
             //randomize this choice between index 0 or 1
             int choice;
             choice = ( arc4random() % 2);
@@ -617,8 +661,10 @@ if(adsShowing)
         computer.curDirection = [[directionChoices objectAtIndex:0]intValue];
     }
 
+    noChange = false;
 
 }
+
 
 -(void) handlePlayerMove{
 
