@@ -134,7 +134,8 @@ if (gameStatus != game_Started ) {  //game hasn't started.. show initial screen
         }
 
         // TODO games center stuff
-
+        //dfdkjhfskjhfskjhfk00-00
+        
 }
 
 
@@ -165,14 +166,14 @@ if (gameStatus != game_Started ) {  //game hasn't started.. show initial screen
     [clsCommon storeUserSetting:@"levelHighscore" value:_score];
 }
 -(int) getHighScore {
-    NSString* _score;// = [NSString stringWithFormat:@"%i",score];
+    NSString* _score;
     _score = [clsCommon getUserSettingForKey:@"highscore"];
     int value = [_score intValue];
     return value;
 }
 
 -(int) getLevelHighscore {
-    NSString* _score;// = [NSString stringWithFormat:@"%i",score];
+    NSString* _score;
     _score = [clsCommon getUserSettingForKey:@"levelHighscore"];
     int value = [_score intValue];
     return value;
