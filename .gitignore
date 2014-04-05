@@ -1,9 +1,6 @@
 *.xcbkptlist
-
 *.xcuserstate
-
 *.xcsettings
-
 project.xcworkspace/
-
 xcuserdata/
+300-info.plist
