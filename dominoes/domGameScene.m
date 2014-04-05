@@ -929,6 +929,19 @@ if(adsShowing)
     //floor.position = backGround.position;
 
     floor.zPosition = -1;
+    float red = [clsCommon getRanFloat:0.0 and:1.0];
+    float green = [clsCommon getRanFloat:0.0 and:1.0];
+    float blue = [clsCommon getRanFloat:0.0 and:1.0];
+
+
+    SKColor* color = [SKColor colorWithRed:red green:green blue:blue alpha:1];
+
+    floor.particleColorSequence = nil;
+    floor.particleColorBlendFactor = 1.0;
+
+    floor.particleColor = color;
+
+
 
     [backGround addChild:floor];
 }
@@ -941,8 +954,12 @@ if(adsShowing)
 
     int bannerCount =0;
 
+    //TODO randomize or otherwise have changing arenas
+
+    int rndBackground = [clsCommon getRanInt:1 maxNumber:7];
+
     //adShowingArenaScaleAmount = 0;
-    backGround = [SKSpriteNode spriteNodeWithImageNamed:@"new-arena"];
+    backGround = [SKSpriteNode spriteNodeWithImageNamed:[NSString stringWithFormat:@"new-arena%i.png",rndBackground]];
 
     //calculate min and max extents, based on original background size
     [self setUpMinMaxExtents:backGround.size];
@@ -987,7 +1004,7 @@ if(adsShowing)
 
 
     backGround.position = CGPointMake(arenaSize.width/2, backGroundPos);
-    backGround.zPosition = 1;
+    backGround.zPosition = 250;
 
     self.backgroundColor = [SKColor blackColor];
     //backGround.colorBlendFactor = 1;
