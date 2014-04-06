@@ -138,7 +138,8 @@ if (gameStatus != game_Started ) {  //game hasn't started.. show initial screen
 
         // TODO games center stuff
         //dfdkjhfskjhfskjhfk00-00
-        
+    domViewController *obj=[[domViewController alloc]init];
+    [obj showGameCenter];
 }
 
 

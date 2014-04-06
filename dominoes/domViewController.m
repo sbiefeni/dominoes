@@ -15,13 +15,27 @@ ADBannerView *adView;
 int iHeight;
 int iWidth;
 BOOL bOnTop;
+GKLocalPlayer *gcPlayer;
 
-@interface domViewController () <ADBannerViewDelegate>
+@interface domViewController () <ADBannerViewDelegate,GKGameCenterControllerDelegate>
 
 @end
 
 @implementation domViewController{
     
+}
+
+-(void)showGameCenter{
+    GKGameCenterViewController *gameCenterController = [[GKGameCenterViewController alloc] init];
+    if (gameCenterController != nil)
+    {
+        gameCenterController.gameCenterDelegate = self;
+        [self presentViewController: gameCenterController animated: YES completion:nil];
+    }
+}
+
+-(void)gameCenterViewControllerDidFinish:(GKGameCenterViewController *)gameCenterViewController{
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 //(float)getRanFloat:(float)smallNumber and:(float)bigNumber {
@@ -31,7 +45,7 @@ BOOL bOnTop;
     //following commented code to randomize between top and bottom
 //    int rand = arc4random() % 4;
 //    if (rand=0) {
-//        <#statements#>
+//
 //    }
         if(bannerIsLoaded){
         
@@ -81,7 +95,7 @@ BOOL bOnTop;
     iWidth=CGRectGetWidth(self.view.bounds);
     //CGFloat width = 
     //CGFloat height = CGRectGetHeight(self.view.bounds);
-    
+    gcPlayer=[[GKLocalPlayer alloc]init];
     
     CGRect aRect=CGRectMake(0, CGRectGetHeight(self.view.bounds)-iWidth==320? 50:66, iWidth, iWidth==320? 50:66);
 //    aRect.origin.x =0;
