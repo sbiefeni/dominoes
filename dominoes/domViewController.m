@@ -10,6 +10,7 @@
 #import "domMenuScene.h"
 #import "clsPlayer.h"
 #import "clsCommon.h"
+#import "GameKitHelper.h"
 
 ADBannerView *adView;
 int iHeight;
@@ -17,7 +18,7 @@ int iWidth;
 BOOL bOnTop;
 GKLocalPlayer *gcPlayer;
 
-@interface domViewController () <ADBannerViewDelegate,GKGameCenterControllerDelegate>
+@interface domViewController () <ADBannerViewDelegate>
 
 @end
 
@@ -25,20 +26,45 @@ GKLocalPlayer *gcPlayer;
     
 }
 
--(void)showGameCenter{
-    GKGameCenterViewController *gameCenterController = [[GKGameCenterViewController alloc] init];
-    if (gameCenterController != nil)
-    {
-        gameCenterController.gameCenterDelegate = self;
-        [self presentViewController: gameCenterController animated: YES completion:nil];
-    }
-}
-
--(void)gameCenterViewControllerDidFinish:(GKGameCenterViewController *)gameCenterViewController{
-    [self dismissViewControllerAnimated:YES completion:nil];
-}
+//-(void)showGameCenter{
+//    GKGameCenterViewController *gameCenterController = [[GKGameCenterViewController alloc] init];
+//    if (gameCenterController != nil)
+//    {
+//        gameCenterController.gameCenterDelegate = self;
+//        [self presentViewController: gameCenterController animated: YES completion:nil];
+//    }
+//}
+//
+//-(void)gameCenterViewControllerDidFinish:(GKGameCenterViewController *)gameCenterViewController{
+//    [self dismissViewControllerAnimated:YES completion:nil];
+//}
 
 //(float)getRanFloat:(float)smallNumber and:(float)bigNumber {
+-(void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    [[NSNotificationCenter defaultCenter]
+     addObserver:self
+     selector:@selector(showAuthenticationViewController)
+     name:PresentAuthenticationViewController
+     object:nil];
+    [[GameKitHelper sharedGameKitHelper] authenticateLocalPlayer];
+}
+
+- (void)showAuthenticationViewController
+{
+    GameKitHelper *gameKitHelper =
+    [GameKitHelper sharedGameKitHelper];
+    
+    [self presentViewController:
+     gameKitHelper.authenticationViewController
+                                         animated:YES
+                                       completion:nil];
+}
+
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
 
 +(void)setAdView:(BOOL)showAd ShowOnTop:(BOOL)onTop ChooseRandom:(BOOL)useRandom{
     
@@ -93,9 +119,11 @@ GKLocalPlayer *gcPlayer;
     [super viewDidLoad];
     iHeight=CGRectGetHeight(self.view.bounds);
     iWidth=CGRectGetWidth(self.view.bounds);
-    //CGFloat width = 
+    //CGFloat width =
     //CGFloat height = CGRectGetHeight(self.view.bounds);
+    
     gcPlayer=[[GKLocalPlayer alloc]init];
+    NSLog(@"Number of friends:%i", gcPlayer.friends.count);
     
     CGRect aRect=CGRectMake(0, CGRectGetHeight(self.view.bounds)-iWidth==320? 50:66, iWidth, iWidth==320? 50:66);
 //    aRect.origin.x =0;
