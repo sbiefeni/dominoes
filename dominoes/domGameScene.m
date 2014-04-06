@@ -553,7 +553,7 @@ if(adsShowing)
 
 //if any of these conditions are true.. player2 is about to crash..
     switch (D) {
-        case left:
+        case left:  //can only change to up/down
             if (X == 0 || grid[X-1][Y]==true || randChange) {
                 if (grid[X][Y-1] == false && Y > 0) {
                     [directionChoices addObject:[NSNumber numberWithInt:down]];
@@ -563,7 +563,7 @@ if(adsShowing)
                 }
             }
             break;
-        case right:
+        case right: //can only change to up/down
             if (X == cols || grid[X+1][Y]==true || randChange) {
                 if (grid[X][Y-1] == false && Y > 0) {
                     [directionChoices addObject:[NSNumber numberWithInt:down]];
@@ -573,7 +573,7 @@ if(adsShowing)
                 }
             }
             break;
-        case up:
+        case up:   //can only change to left/right
             if (Y == rows || grid[X][Y+1]==true || randChange) {
                 if (grid[X-1][Y] == false && X > 0) {
                     [directionChoices addObject:[NSNumber numberWithInt:left]];
@@ -583,7 +583,7 @@ if(adsShowing)
                 }
             }
             break;
-        case down:
+        case down:  //can only change to left/right
             if (Y == 0 || grid[X][Y-1]==true || randChange) {
                 if (grid[X-1][Y] == false && X > 0) {
                     [directionChoices addObject:[NSNumber numberWithInt:left]];
