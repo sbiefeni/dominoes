@@ -211,10 +211,10 @@ if (gameStatus != game_Started ) {  //game hasn't started.. show initial screen
 
         if (gameStatus == reset || gameStatus == game_Started) {
             domGameScene *game = [[domGameScene alloc] initWithSize:self.size];
-            [self.view presentScene:game transition:[SKTransition doorsOpenHorizontalWithDuration:1.5]];
+            [self.view presentScene:game transition:[SKTransition doorsOpenHorizontalWithDuration:.75]];
         }else{
             domMenuScene *menu = [[domMenuScene alloc] initWithSize:self.size];
-            [self.view presentScene:menu transition:[SKTransition doorsOpenHorizontalWithDuration:1.5]];
+            [self.view presentScene:menu transition:[SKTransition doorsOpenHorizontalWithDuration:.75]];
         }
 
 

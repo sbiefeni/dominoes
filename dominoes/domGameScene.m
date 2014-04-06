@@ -425,7 +425,7 @@ if(adsShowing)
          //add logic to test the next move, and change direction if
         //required, or calculated. Also should make some random function to
         //change direction periodically for no reason
-        [self checkNextComputerMove];
+        [self testNextComputerMove];
 
         //play a sound
         //[self runAction: [SKAction playSoundFileNamed:@"click2.wav" waitForCompletion:NO]];
@@ -525,7 +525,7 @@ if(adsShowing)
     [scoreLabel runAction:[SKAction repeatActionForever:[SKAction sequence:@[tempAction, waitAction]]]];
 }
 
--(void) checkNextComputerMove{
+-(void) testNextComputerMove{
 
     //checks if the next move will cause the computer to crash
     //avoid crash if possible
@@ -597,48 +597,48 @@ if(adsShowing)
         default:
             break;
     }
-    if (directionChoices.count == 0) {
-        //now check if we are about to go into a situation where
-        //we are being 'coralled' by not checking
-        //this would mean we have 2 available choices on the
-        //next move, not 3. since we are not crashing, we won't
-        //check for the best option, unless we do this.
-        //int choice=0;
-        int count=0;
-        BOOL choices[5];//1-4, not using 0
-        if (X-1 >= 0 && grid[X-1][Y]==false) {
-            choices[left]=true; //[self checkPath:X  originY:Y direction:left] ;
-            count++;
-        }
-        if (Y+1 <= rows && grid[X][Y+1]==false) {
-            choices[up]=true; //[self checkPath:X  originY:Y direction:up];
-            count++;
-        }
-        if (X+1 <= cols && grid[X+1][Y]==false) {
-            choices[right]=true; //[self checkPath:X  originY:Y direction:right];
-            count++;
-        }
-        if (Y-1 >= 0 && grid[X][Y-1]==false) {
-            choices[down]=true; //[self checkPath:X  originY:Y direction:down];
-            count++;
-        }
-
-        if (count==2) {
-            //grab the best choice while we check for a count of 2
-            for (int i=1; i<5; i++) {
-                if (choices[i] ==true) {
-                    //if we have exactly 2 choices, insert the best choice into
-                    //the choices object.. so the computer will take it.
-                    [directionChoices addObject:[NSNumber numberWithInt:i]];
-                }
-            }
-            noChange = true;
-        }
-
-
-
-        memset(choices, NO, sizeof(choices));
-    }
+//    if (directionChoices.count == 0 || randChange) {
+//        //now check if we are about to go into a situation where
+//        //we are being 'coralled' by not checking
+//        //this would mean we have 2 available choices on the
+//        //next move, not 3. since we are not crashing, we won't
+//        //check for the best option, unless we do this.
+//        //int choice=0;
+//        int count=0;
+//        BOOL choices[5];//1-4, not using 0
+//        if (X-1 >= 0 && grid[X-1][Y]==false) {
+//            choices[left]=true; //[self checkPath:X  originY:Y direction:left] ;
+//            count++;
+//        }
+//        if (Y+1 <= rows && grid[X][Y+1]==false) {
+//            choices[up]=true; //[self checkPath:X  originY:Y direction:up];
+//            count++;
+//        }
+//        if (X+1 <= cols && grid[X+1][Y]==false) {
+//            choices[right]=true; //[self checkPath:X  originY:Y direction:right];
+//            count++;
+//        }
+//        if (Y-1 >= 0 && grid[X][Y-1]==false) {
+//            choices[down]=true; //[self checkPath:X  originY:Y direction:down];
+//            count++;
+//        }
+//
+//        if (count==2) {
+//            //clear out the array before adding
+//            [directionChoices removeAllObjects];
+//
+//            //grab the best choice while we check for a count of 2
+//            for (int i=1; i<5; i++) {
+//                if (choices[i] ==true) {
+//                    //if we have exactly 2 choices, insert the best choice into
+//                    //the choices object.. so the computer will take it.
+//                    [directionChoices addObject:[NSNumber numberWithInt:i]];
+//                }
+//            }
+//            //noChange = true;
+//        }
+//        memset(choices, NO, sizeof(choices));
+//    }
 
     //check how many choices we have, and change direction if we can
     if (directionChoices.count ==2) {
