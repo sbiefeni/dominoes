@@ -11,6 +11,7 @@
 		344B5BCA18D4A4EF00E43D82 /* Background_Stars.sks in Resources */ = {isa = PBXBuildFile; fileRef = 344B5BC918D4A4EF00E43D82 /* Background_Stars.sks */; };
 		344B5BCD18D4A70300E43D82 /* SKEmitterNode+fromFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 344B5BCC18D4A70300E43D82 /* SKEmitterNode+fromFile.m */; };
 		344B5BCF18D4AE7500E43D82 /* Background_Fire.sks in Resources */ = {isa = PBXBuildFile; fileRef = 344B5BCE18D4AE7500E43D82 /* Background_Fire.sks */; };
+		345F2BC418F1E69200E7A533 /* GameKitHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 345F2BC318F1E69200E7A533 /* GameKitHelper.m */; };
 		34C0142A18D183BF007C37AB /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 34C0142918D183BF007C37AB /* AudioToolbox.framework */; };
 		34C0142D18D2A4C8007C37AB /* iAd.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 34C0142C18D2A4C8007C37AB /* iAd.framework */; };
 		380DC21B18D0ED9200545962 /* explosion.sks in Resources */ = {isa = PBXBuildFile; fileRef = 380DC21918D0ED9200545962 /* explosion.sks */; };
@@ -67,6 +68,8 @@
 		344B5BCB18D4A6DC00E43D82 /* SKEmitterNode+fromFile.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SKEmitterNode+fromFile.h"; sourceTree = "<group>"; };
 		344B5BCC18D4A70300E43D82 /* SKEmitterNode+fromFile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "SKEmitterNode+fromFile.m"; sourceTree = "<group>"; };
 		344B5BCE18D4AE7500E43D82 /* Background_Fire.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Background_Fire.sks; sourceTree = "<group>"; };
+		345F2BC218F1E69200E7A533 /* GameKitHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameKitHelper.h; sourceTree = "<group>"; };
+		345F2BC318F1E69200E7A533 /* GameKitHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameKitHelper.m; sourceTree = "<group>"; };
 		34C0142918D183BF007C37AB /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		34C0142C18D2A4C8007C37AB /* iAd.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = iAd.framework; path = System/Library/Frameworks/iAd.framework; sourceTree = SDKROOT; };
 		380DC21918D0ED9200545962 /* explosion.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = explosion.sks; sourceTree = "<group>"; };
@@ -144,6 +147,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		345F2BC118F1E2DA00E7A533 /* GameKit */ = {
+			isa = PBXGroup;
+			children = (
+				345F2BC218F1E69200E7A533 /* GameKitHelper.h */,
+				345F2BC318F1E69200E7A533 /* GameKitHelper.m */,
+			);
+			name = GameKit;
+			path = ..;
+			sourceTree = "<group>";
+		};
 		380DC21D18D0F02B00545962 /* particles */ = {
 			isa = PBXGroup;
 			children = (
@@ -286,6 +299,7 @@
 		55CB7E2718CBD180001EFA1C /* 300 Bricks */ = {
 			isa = PBXGroup;
 			children = (
+				345F2BC118F1E2DA00E7A533 /* GameKit */,
 				38B7A81218E5043000F51451 /* iPad */,
 				387B05D118E0053A005C8D1F /* sounds */,
 				389AA04F18DF941F0089CA98 /* arenas */,
@@ -461,6 +475,7 @@
 				55CB7E2E18CBD180001EFA1C /* main.m in Sources */,
 				55CB7E3218CBD181001EFA1C /* domAppDelegate.m in Sources */,
 				344B5BC618D3FA9500E43D82 /* domMenuScene.m in Sources */,
+				345F2BC418F1E69200E7A533 /* GameKitHelper.m in Sources */,
 				38B7A7F918E4F10D00F51451 /* clsGameSettings.m in Sources */,
 				389B9CF618CFCDCF004960E5 /* clsDomino.m in Sources */,
 				55CB7E3E18CBD181001EFA1C /* domGameScene.m in Sources */,
