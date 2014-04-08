@@ -242,7 +242,7 @@ CGPoint pointA;
 
 
     isRunningInIde(
-        gameSpeed = .01;
+        gameSpeed = .08;
     )
 
     // flash some stuff on the screen TODO
@@ -785,7 +785,7 @@ if(adsShowing)
         grid[player.curX][player.curY]=true;
         
     //play a sound
-    //[self runAction: [SKAction playSoundFileNamed:@"click2.wav" waitForCompletion:NO]];
+    [self runAction: [SKAction playSoundFileNamed:@"sounds/woosh_2.wav" waitForCompletion:NO]];
         
 }else{  //we crashed!
     if (!player.didExplosion) {
