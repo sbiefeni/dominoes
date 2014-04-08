@@ -38,7 +38,8 @@ float gridHeight;
 CGSize gridSize;
 CGSize dominoSize;
 
-
+double dominoScaleFactorX;   // - 1.25
+double dominoScaleFactorY; //
 
 // min/max extents
 double minX;

@@ -52,6 +52,19 @@
     
 }
 
+//get the max moves of any object in the array
++(int) maxInArray:(int*)Array size:(int) array_size
+{
+    int max = Array[0];
+    for (int i = 1; i < array_size; i++)
+    {
+        if (Array[i] > max)
+            max = Array[i];
+    }
+    return max;
+}
+
+
 //should store data in between game runs..
 + (void) storeUserSetting:(NSString*)key value:(NSString*)value {
     NSUserDefaults *standardUserDefaults = [NSUserDefaults standardUserDefaults];
