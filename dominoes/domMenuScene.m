@@ -138,9 +138,8 @@
 
         // TODO games center stuff
         //dfdkjhfskjhfskjhfk00-00
-    //domViewController *obj=[[domViewController alloc]init];
-    //[obj showGameCenter];
-}
+        
+    }
 
 
 //this block only auto-restarts if the app is
