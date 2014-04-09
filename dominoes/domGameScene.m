@@ -785,7 +785,17 @@ if(adsShowing)
         grid[player.curX][player.curY]=true;
         
     //play a sound
-    [self runAction: [SKAction playSoundFileNamed:@"sounds/woosh_2.wav" waitForCompletion:NO]];
+//    [self runAction: [SKAction playSoundFileNamed:@"sounds/woosh_2.wav" waitForCompletion:NO]];
+        [self runAction: [SKAction playSoundFileNamed:@"sounds/click.wav" waitForCompletion:NO]];
+//        AVAudioPlayer *audioPlayer;
+//        
+//        NSURL *url = [NSURL fileURLWithPath:@"sounds/woosh_2.wav"];
+//       
+//        NSError *error;
+//        audioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:url error:&error];
+//        audioPlayer.numberOfLoops = -1;
+//        [audioPlayer play];
+        
         
 }else{  //we crashed!
     if (!player.didExplosion) {
