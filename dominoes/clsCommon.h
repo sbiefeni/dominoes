@@ -14,7 +14,7 @@
 
 @interface clsCommon : NSObject
 
-+(void) playSound:(NSString*)file;
+//+(void) playSound:(NSString*)file;
 +(void) playBackgroundMusicWithVolume:(double)volume;
 +(void) doBackgroundMusicFadeToQuiet;
 

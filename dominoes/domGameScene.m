@@ -31,8 +31,8 @@
 
 
 //define rows and cols
-#define rows        29
-#define cols        21
+#define rows        28
+#define cols        20
 //scale up the domino size relative to the grid
 
 
@@ -231,7 +231,7 @@ CGPoint pointA;
 
     //if won the last round, speed things up a bit
     BOOL isFaster = false;
-    if (score > 0) {
+    if (score > 0 && gameSpeed > .05) { //define max speed
         gameSpeed -= .03;
         isFaster = true;
     }
@@ -242,7 +242,7 @@ CGPoint pointA;
 
 
     isRunningInIde(
-        gameSpeed = .08;
+        gameSpeed = .01;
     )
 
     // flash some stuff on the screen TODO
@@ -267,6 +267,25 @@ CGPoint pointA;
      ];
 
 }
+
+//********* Game Runner - is called on interval time 'gameSpeed' from the repeat action above..
+-(void) gameRunner {
+    if(adsShowing)
+    {
+        return;
+    }
+    //player move
+    //if (playerDominos.count > 4) {
+    [self handleComputerMove];
+    //}
+
+    //computer move, 1/2 of gameSpeed interval wait time to run it
+    [self runAction:[SKAction sequence:@[
+        [SKAction waitForDuration:gameSpeed/2],
+        [SKAction performSelector:@selector(handlePlayerMove) onTarget:self],
+    ]]];
+}
+
 -(void) flashingArrowFor:(clsPlayer*)player showFasterMessage:(BOOL)faster{
 //flash an arrow for a couple seconds
     SKSpriteNode *arrow = [SKSpriteNode spriteNodeWithImageNamed:[NSString stringWithFormat:@"arrow%i",player.curDirection ]];
@@ -321,23 +340,6 @@ CGPoint pointA;
         ]]
      ];
 
-}
-//********* Game Runner - is called on interval time 'gameSpeed' from the repeat action above..
--(void) gameRunner {
-if(adsShowing)
-{
-    return;
-}
-//player move
-    //if (playerDominos.count > 4) {
-        [self handleComputerMove];
-    //}
-
-//computer move, 1/2 of gameSpeed interval wait time to run it
-    [self runAction:[SKAction sequence:@[
-        [SKAction waitForDuration:gameSpeed/2],
-        [SKAction performSelector:@selector(handlePlayerMove) onTarget:self],
-    ]]];
 }
 
 -(void) handleComputerMove {
@@ -673,10 +675,10 @@ if(adsShowing)
             break;
     }
 
-    if (player.curDirection < 1)
+    if (player.curDirection < left)
         player.curDirection = down;
 
-    if (player.curDirection > 4)
+    if (player.curDirection > down)
         player.curDirection = left;
 
 
@@ -1137,16 +1139,17 @@ int countSquares;
     UITouch *touch=[touches anyObject];
     CGPoint pointB=[touch locationInView:self.view];
     
-    //now we need to calc the angle difference when touch stops to determine if an angled swipe
+    //determine if not a swipe
     if (abs(pointA.x - pointB.x) < 30 && abs(pointA.y - pointB.y) < 30) {
         //toint touch detected
         [self handlePointTouchWith_X:pointB.x andY:pointB.y];
-
+        return;
     }
+    //now we need to calc the angle difference when touch stops to determine if an angled swipe
     float angle=[self CalcDegrees:pointB];
     NSLog(@"Angle is: %f",angle);
 
-    [self handleAngleSwipe:angle];
+    //[self handleAngleSwipe:angle];
 }
 
 -(void) handlePointTouchWith_X:(int)Xpos andY:(int)Ypos{
@@ -1165,32 +1168,32 @@ int countSquares;
     }
 }
 
--(void)handleAngleSwipe:(float) angle{
-    
-    //straight down     =   360/0
-    //straight right    =   90
-    //straight up      =    180
-    //straight left     =   270
-    //straight down     =   360/0
-    
-    //here we need to handle what to do when a swiped angle detected during play
-    if (angle>=15 && angle<=75) {
-        NSLog(@"Angle was down-right");
-    } else if(angle>=105 && angle<=165) {
-        //clockwise
-        player.uTurnDirection = clockWise;
-        player.uTurnStep = step1;
-        NSLog(@"Angle was up-right");
-    } else if (angle>=205 && angle<=255) {
-        NSLog(@"Angle was up-left");
-    } else if (angle>=285 && angle<=345) {
-        NSLog(@"Angle was down-left");
-        //cclockwise
-        player.uTurnDirection = cclockWise;
-        player.uTurnStep = step1;
-
-    }
-}
+//-(void)handleAngleSwipe:(float) angle{
+//    
+//    //straight down     =   360/0
+//    //straight right    =   90
+//    //straight up      =    180
+//    //straight left     =   270
+//    //straight down     =   360/0
+//    
+//    //here we need to handle what to do when a swiped angle detected during play
+//    if (angle>=15 && angle<=75) {
+//        NSLog(@"Angle was down-right");
+//    } else if(angle>=105 && angle<=165) {
+//        //clockwise
+//        player.uTurnDirection = clockWise;
+//        player.uTurnStep = step1;
+//        NSLog(@"Angle was up-right");
+//    } else if (angle>=205 && angle<=255) {
+//        NSLog(@"Angle was up-left");
+//    } else if (angle>=285 && angle<=345) {
+//        NSLog(@"Angle was down-left");
+//        //cclockwise
+//        player.uTurnDirection = cclockWise;
+//        player.uTurnStep = step1;
+//
+//    }
+//}
 
 //-(void)update:(CFTimeInterval)currentTime {
 //    /* Called before each frame is rendered */

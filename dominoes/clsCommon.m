@@ -36,10 +36,12 @@
     }
 }
 
-+ (void) playSound:(NSString*)file {
-    NSString* sound = [NSString stringWithFormat:@"sounds/%@", file];
-    [SKAction playSoundFileNamed:sound waitForCompletion:NO];
-}
+//not working
+//+ (void) playSound:(NSString*)file {
+//    NSString* sound = [NSString stringWithFormat:@"sounds/%@", file];
+//    [SKAction playSoundFileNamed:sound waitForCompletion:NO];
+//    //
+//}
 
 + (float)getRanFloat:(float)smallNumber and:(float)bigNumber {
     float diff = bigNumber - smallNumber;

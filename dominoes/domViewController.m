@@ -41,7 +41,7 @@ GKLocalPlayer *gcPlayer;
 
 //(float)getRanFloat:(float)smallNumber and:(float)bigNumber {
 -(void)viewDidAppear:(BOOL)animated {
-    [super viewDidAppear:animated];
+    //[super viewDidAppear:animated];
     [[NSNotificationCenter defaultCenter]
      addObserver:self
      selector:@selector(showAuthenticationViewController)
