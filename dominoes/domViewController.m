@@ -47,7 +47,8 @@ GKLocalPlayer *gcPlayer;
      selector:@selector(showAuthenticationViewController)
      name:PresentAuthenticationViewController
      object:nil];
-    [[GameKitHelper sharedGameKitHelper] authenticateLocalPlayer];
+
+    //[[GameKitHelper sharedGameKitHelper] authenticateLocalPlayer];
     
 }
 

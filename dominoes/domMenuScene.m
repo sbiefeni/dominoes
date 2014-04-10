@@ -13,6 +13,7 @@
 #import "clsCommon.h"
 #import "domViewController.h"
 #import "clsGameSettings.h"
+#import "GameKitHelper.h"
 
 
 #import "SKEmitterNode+fromFile.h"
@@ -66,6 +67,23 @@
 
                 SKLabelNode *tapToPlay = [SKLabelNode labelNodeWithFontNamed:@"Avenir-Black"];
                 [self createLabel:tapToPlay text:@"Tap to Play" fontSize:40 posY:-60 color:[SKColor whiteColor] alpha:.7 sizeDoubler:sizeDoubler];
+
+
+
+            SKSpriteNode *button = [SKSpriteNode spriteNodeWithImageNamed:@"stretch_button.png"];
+            button.position = CGPointMake(CGRectGetMidX(self.frame), 30);
+            button.name = @"gamecenter";
+            [self addChild:button];
+
+            SKLabelNode *gameCenter = [SKLabelNode labelNodeWithFontNamed:@"Avenir-Black"];
+            [self createLabel:gameCenter text:@"Game Center" fontSize:30 posY:-((size.height/2)/sizeDoubler) color:[SKColor blackColor] alpha:.7 sizeDoubler:1];
+            gameCenter.position = button.position;
+            gameCenter.zPosition = 25;
+            gameCenter.verticalAlignmentMode = SKLabelVerticalAlignmentModeCenter;
+            gameCenter.name = @"gamecenterlabel";
+
+
+
 
                 gameStatus = reset;
 
@@ -214,18 +232,27 @@
 
 -(void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {
-    @autoreleasepool {
 
-        if (gameStatus == reset || gameStatus == game_Started) {
-            domGameScene *game = [[domGameScene alloc] initWithSize:self.size];
-            [self.view presentScene:game transition:[SKTransition doorsOpenHorizontalWithDuration:.75]];
+        UITouch *touch = [touches anyObject];
+        CGPoint location = [touch locationInNode:self];
+        SKNode *node = [self nodeAtPoint:location];
+
+        // if gamecenter button touched, launch it
+        if ([node.name isEqualToString:@"gamecenter"] || [node.name isEqualToString:@"gamecenterlabel"]) {
+            NSLog(@"nextButton pressed");
+
+            [[GameKitHelper sharedGameKitHelper] authenticateLocalPlayer];
         }else{
-            domMenuScene *menu = [[domMenuScene alloc] initWithSize:self.size];
-            [self.view presentScene:menu transition:[SKTransition doorsOpenHorizontalWithDuration:.75]];
+
+            if (gameStatus == reset || gameStatus == game_Started) {
+                domGameScene *game = [[domGameScene alloc] initWithSize:self.size];
+                [self.view presentScene:game transition:[SKTransition doorsOpenHorizontalWithDuration:.75]];
+            }else{
+                domMenuScene *menu = [[domMenuScene alloc] initWithSize:self.size];
+                [self.view presentScene:menu transition:[SKTransition doorsOpenHorizontalWithDuration:.75]];
+            }
         }
 
-
-    }
 }
 
 @end
