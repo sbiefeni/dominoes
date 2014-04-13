@@ -68,7 +68,7 @@
                 SKLabelNode *tapToPlay = [SKLabelNode labelNodeWithFontNamed:@"Avenir-Black"];
                 [self createLabel:tapToPlay text:@"Tap to Play" fontSize:40 posY:-50 color:[SKColor whiteColor] alpha:.7 sizeDoubler:sizeDoubler];
 
-//game center button-----------------
+//game center button------------------
 
         //get the gamecenter enabled setting from usersettings
             gcEnabled = ([[clsCommon getUserSettingForKey:@"gcEnabled"] isEqual: @"1"]);
@@ -113,6 +113,7 @@
 
             //for debugging - to reset the level high score
             //levelHighscore = 0;
+            //[self setLevelHighScore: 0];
 
                 //if new best level, give a message and store it!
                 if (score > levelHighscore) {
@@ -131,7 +132,11 @@
                 //game over
                 //TODO game over stuff here
 
+
                 totalScore += score;
+
+            //debugging - reset the total score
+            highScore=0;
 
                 //if new high score, give a message and store it!
                 if (totalScore > highScore) {
@@ -139,6 +144,10 @@
 
                     SKLabelNode *hs = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
                     [self createLabel:hs text:@"NEW HIGH SCORE!" fontSize:30 posY:120 color:[SKColor whiteColor] alpha:1 sizeDoubler:sizeDoubler];
+                    if (gcEnabled){
+                    //set the gamecenter score
+                     [[GameKitHelper sharedGameKitHelper] reportScore:totalScore];
+                    }
                 }
 
                 SKLabelNode *title = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
