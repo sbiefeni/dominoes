@@ -70,6 +70,7 @@
 
 //game center button-----------------
 
+        //get the gamecenter enabled setting from usersettings
             gcEnabled = ([[clsCommon getUserSettingForKey:@"gcEnabled"] isEqual: @"1"]);
 
         if(gcEnabled){

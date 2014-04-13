@@ -50,6 +50,16 @@ BOOL _enableGameCenter;
             _enableGameCenter = YES;
             gcEnabled = YES;
             [clsCommon storeUserSetting:@"gcEnabled" value:@"1"];
+            // Get the default leaderboard identifier.
+            [[GKLocalPlayer localPlayer] loadDefaultLeaderboardIdentifierWithCompletionHandler:^(NSString *leaderboardIdentifier, NSError *error) {
+
+                if (error != nil) {
+                    NSLog(@"%@", [error localizedDescription]);
+                }
+                else{
+                    _leaderboardIdentifier = leaderboardIdentifier;
+                }
+            }];
         } else {
             //6
             _enableGameCenter = NO;
@@ -76,6 +86,16 @@ BOOL _enableGameCenter;
         NSLog(@"GameKitHelper ERROR: %@",
               [[_lastError userInfo] description]);
     }
+}
+-(void)reportScore:(int)scr{
+    GKScore *score = [[GKScore alloc] initWithLeaderboardIdentifier:_leaderboardIdentifier];
+    score.value = scr;
+
+    [GKScore reportScores:@[score] withCompletionHandler:^(NSError *error) {
+        if (error != nil) {
+            NSLog(@"%@", [error localizedDescription]);
+        }
+    }];
 }
 
 @end
