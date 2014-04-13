@@ -7,11 +7,14 @@
 //
 
 #import "GameKitHelper.h"
+#import "clsGameSettings.h"
+#import "clsCommon.h"
 
 NSString *const PresentAuthenticationViewController = @"present_authentication_view_controller";
 @implementation GameKitHelper
 
 BOOL _enableGameCenter;
+
 +(instancetype)sharedGameKitHelper{
     static GameKitHelper *sharedGameKitHelper;
     static dispatch_once_t onceToken;
@@ -45,9 +48,13 @@ BOOL _enableGameCenter;
         } else if([GKLocalPlayer localPlayer].isAuthenticated) {
             //5
             _enableGameCenter = YES;
+            gcEnabled = YES;
+            [clsCommon storeUserSetting:@"gcEnabled" value:@"1"];
         } else {
             //6
             _enableGameCenter = NO;
+            gcEnabled=NO;
+            [clsCommon storeUserSetting:@"gcEnabled" value:@"0"];
         }
     };
 }
