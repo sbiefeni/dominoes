@@ -242,7 +242,7 @@ CGPoint pointA;
 
 
     isRunningInIde(
-        gameSpeed = .01;
+        gameSpeed = .3;
     )
 
     // flash some stuff on the screen TODO
@@ -788,7 +788,7 @@ CGPoint pointA;
         
     //play a sound
 //    [self runAction: [SKAction playSoundFileNamed:@"sounds/woosh_2.wav" waitForCompletion:NO]];
-        [self runAction: [SKAction playSoundFileNamed:@"sounds/click.wav" waitForCompletion:NO]];
+        [self runAction: [SKAction playSoundFileNamed:@"sounds/woosh_2.wav" waitForCompletion:NO]];
 //        AVAudioPlayer *audioPlayer;
 //        
 //        NSURL *url = [NSURL fileURLWithPath:@"sounds/woosh_2.wav"];

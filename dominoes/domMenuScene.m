@@ -69,7 +69,6 @@
                 [self createLabel:tapToPlay text:@"Tap to Play" fontSize:40 posY:-60 color:[SKColor whiteColor] alpha:.7 sizeDoubler:sizeDoubler];
 
 
-
             SKSpriteNode *button = [SKSpriteNode spriteNodeWithImageNamed:@"stretch_button.png"];
             button.position = CGPointMake(CGRectGetMidX(self.frame), 30);
             button.name = @"gamecenter";
