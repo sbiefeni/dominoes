@@ -244,6 +244,7 @@
 
 }
 
+
 - (SKSpriteNode *)instruct:(int)sizeDoubler posY:(int)posY
 {
     SKSpriteNode *instruct = [SKSpriteNode spriteNodeWithImageNamed:@"directions"];
