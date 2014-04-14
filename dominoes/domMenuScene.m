@@ -51,23 +51,24 @@
         if (gameStatus != game_Started ) {  //game hasn't started.. show initial screen
 
                 SKLabelNode *title = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
-                [self createLabel:title text:@"300" fontSize:130 posY:30 color:[SKColor redColor] alpha:.7 sizeDoubler:sizeDoubler];
+                [self createLabel:title text:@"300" fontSize:130 posY:40 color:[SKColor redColor] alpha:.7 sizeDoubler:sizeDoubler];
 
             SKLabelNode *title2 = [SKLabelNode labelNodeWithFontNamed:@"Arial"];
-            [self createLabel:title2 text:@"bricks" fontSize:45 posY:0 color:[SKColor whiteColor] alpha:1 sizeDoubler:sizeDoubler];
+            [self createLabel:title2 text:@"bricks" fontSize:45 posY:10 color:[SKColor whiteColor] alpha:1 sizeDoubler:sizeDoubler];
 
             SKLabelNode* hscore = [SKLabelNode labelNodeWithFontNamed:@"Arial"];
             
-            [self createLabel:hscore text:[NSString stringWithFormat:@"High Score: %i",(int)highScore] fontSize:20 posY:140 color:[SKColor whiteColor] alpha:1 sizeDoubler:sizeDoubler];
+            [self createLabel:hscore text:[NSString stringWithFormat:@"High Score: %i",(int)highScore] fontSize:20 posY:150 color:[SKColor whiteColor] alpha:1 sizeDoubler:sizeDoubler];
 
             SKLabelNode* hlscore = [SKLabelNode labelNodeWithFontNamed:@"Arial"];
-            [self createLabel:hlscore text:[NSString stringWithFormat:@"Best Level: %i",(int)levelHighscore] fontSize:30 posY:170 color:[SKColor whiteColor] alpha:1 sizeDoubler:sizeDoubler];
+            [self createLabel:hlscore text:[NSString stringWithFormat:@"Best Level: %i",(int)levelHighscore] fontSize:30 posY:180 color:[SKColor whiteColor] alpha:1 sizeDoubler:sizeDoubler];
 
-                [self addChild: [self instruct:sizeDoubler posY:150]]; //instructions button, from below
+                [self addChild: [self instruct:sizeDoubler posY:-135]]; //instructions button, from below
 
                 SKLabelNode *tapToPlay = [SKLabelNode labelNodeWithFontNamed:@"Avenir-Black"];
-                [self createLabel:tapToPlay text:@"Tap to Play" fontSize:40 posY:-60 color:[SKColor whiteColor] alpha:.7 sizeDoubler:sizeDoubler];
+                [self createLabel:tapToPlay text:@"Tap to Play" fontSize:40 posY:-50 color:[SKColor whiteColor] alpha:.7 sizeDoubler:sizeDoubler];
 
+//game center button------------------
 
             SKSpriteNode *button = [SKSpriteNode spriteNodeWithImageNamed:@"stretch_button.png"];
             button.position = CGPointMake(CGRectGetMidX(self.frame), 30);
@@ -80,8 +81,8 @@
             gameCenter.zPosition = 25;
             gameCenter.verticalAlignmentMode = SKLabelVerticalAlignmentModeCenter;
             gameCenter.name = @"gamecenterlabel";
-
-
+        }
+//------------------------------------
 
 
                 gameStatus = reset;
@@ -106,6 +107,7 @@
 
             //for debugging - to reset the level high score
             //levelHighscore = 0;
+            //[self setLevelHighScore: 0];
 
                 //if new best level, give a message and store it!
                 if (score > levelHighscore) {
@@ -124,7 +126,11 @@
                 //game over
                 //TODO game over stuff here
 
+
                 totalScore += score;
+
+            //debugging - reset the total score
+            highScore=0;
 
                 //if new high score, give a message and store it!
                 if (totalScore > highScore) {
@@ -132,6 +138,10 @@
 
                     SKLabelNode *hs = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
                     [self createLabel:hs text:@"NEW HIGH SCORE!" fontSize:30 posY:120 color:[SKColor whiteColor] alpha:1 sizeDoubler:sizeDoubler];
+                    if (gcEnabled){
+                    //set the gamecenter score
+                     [[GameKitHelper sharedGameKitHelper] reportScore:totalScore];
+                    }
                 }
 
                 SKLabelNode *title = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
@@ -222,7 +232,7 @@
 {
     SKSpriteNode *instruct = [SKSpriteNode spriteNodeWithImageNamed:@"directions"];
     instruct.position = CGPointMake(CGRectGetMidX(self.frame),
-                                    CGRectGetMidY(self.frame) - (posY * sizeDoubler) );
+                                    CGRectGetMidY(self.frame) + (posY * sizeDoubler) );
     instruct.name = @"instructions";//how the node is identified later
     instruct.zPosition = 10;
     instruct.alpha = .7;
@@ -238,7 +248,7 @@
 
         // if gamecenter button touched, launch it
         if ([node.name isEqualToString:@"gamecenter"] || [node.name isEqualToString:@"gamecenterlabel"]) {
-            NSLog(@"nextButton pressed");
+            NSLog(@"GameCenter Button pressed");
 
             [[GameKitHelper sharedGameKitHelper] authenticateLocalPlayer];
         }else{

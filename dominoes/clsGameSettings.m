@@ -14,6 +14,9 @@ BOOL adsShowing;
 BOOL bannerIsVisible;
 BOOL bannerIsLoaded;
 
+//gamecenter settings
+BOOL gcEnabled;
+
 //to get the scale factor for the current screen (orig size / new size)
 float scaleX;
 float scaleY;

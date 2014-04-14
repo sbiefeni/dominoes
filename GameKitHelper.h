@@ -17,8 +17,12 @@ extern NSString *const PresentAuthenticationViewController;
 
 @property (nonatomic, readonly)UIViewController *authenticationViewController;
 @property (nonatomic, readonly) NSError *lastError;
+// This property stores the default leaderboard's identifier.
+@property (nonatomic, strong) NSString *leaderboardIdentifier;
 
 +(instancetype)sharedGameKitHelper;
 - (void)authenticateLocalPlayer;
+- (void)reportScore:(int)scr;
+
 
 @end
