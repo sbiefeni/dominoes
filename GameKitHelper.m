@@ -97,5 +97,16 @@ BOOL _enableGameCenter;
         }
     }];
 }
+-(void)reportHighLevel:(int)scr{
+    GKScore *score = [[GKScore alloc] initWithLeaderboardIdentifier:@"300hl"];
+    score.value = scr;
+
+    [GKScore reportScores:@[score] withCompletionHandler:^(NSError *error) {
+        if (error != nil) {
+            NSLog(@"%@", [error localizedDescription]);
+        }
+    }];
+}
+
 
 @end

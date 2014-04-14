@@ -25,6 +25,6 @@ extern NSString *const PresentAuthenticationViewController;
 +(instancetype)sharedGameKitHelper;
 - (void)authenticateLocalPlayer;
 - (void)reportHighScore:(int)scr;
-
+- (void)reportHighLevel:(int)scr;
 
 @end

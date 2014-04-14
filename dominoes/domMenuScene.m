@@ -73,14 +73,22 @@
         //get the gamecenter enabled setting from usersettings
             gcEnabled = ([[clsCommon getUserSettingForKey:@"gcEnabled"] isEqual: @"1"]);
 
-        if(gcEnabled){
-            [[GameKitHelper sharedGameKitHelper] authenticateLocalPlayer];
-        }else{
+
             SKSpriteNode *gcButton = [SKSpriteNode spriteNodeWithImageNamed:@"stretch_button.png"];
             gcButton.position = CGPointMake(CGRectGetMidX(self.frame), 30);
             gcButton.name = @"gamecenter";
             [self addChild:gcButton];
 
+        if(gcEnabled){
+            [[GameKitHelper sharedGameKitHelper] authenticateLocalPlayer];
+            SKLabelNode *gcLabel = [SKLabelNode labelNodeWithFontNamed:@"Avenir-Black"];
+            [self createLabel:gcLabel text:@"Leaderboard" fontSize:30 posY:-((size.height/2)/sizeDoubler) color:[SKColor blackColor] alpha:.7 sizeDoubler:1];
+            gcLabel.position = gcButton.position;
+            gcLabel.zPosition = 25;
+            gcLabel.verticalAlignmentMode = SKLabelVerticalAlignmentModeCenter;
+            gcLabel.name = @"gamecenterlabel";
+
+        }else{
             SKLabelNode *gcLabel = [SKLabelNode labelNodeWithFontNamed:@"Avenir-Black"];
             [self createLabel:gcLabel text:@"Game Center" fontSize:30 posY:-((size.height/2)/sizeDoubler) color:[SKColor blackColor] alpha:.7 sizeDoubler:1];
             gcLabel.position = gcButton.position;
@@ -88,7 +96,8 @@
             gcLabel.verticalAlignmentMode = SKLabelVerticalAlignmentModeCenter;
             gcLabel.name = @"gamecenterlabel";
         }
-//------------------------------------
+
+ //------------------------------------
 
 
                 gameStatus = reset;
