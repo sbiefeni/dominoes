@@ -395,7 +395,7 @@
 				ORGANIZATIONNAME = Abstractions;
 				TargetAttributes = {
 					55CB7E1B18CBD180001EFA1C = {
-						DevelopmentTeam = TVP369UU3E;
+						DevelopmentTeam = JP43X6H6PR;
 						SystemCapabilities = {
 							com.apple.GameCenter = {
 								enabled = 1;

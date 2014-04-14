@@ -102,7 +102,7 @@ GKLocalPlayer *gcPlayer;
         floorOn=1;
     }
 }
-+(void)showLeaderBoard:(BOOL)shouldShowLeaderboard{
+-(void)showLeaderBoard:(BOOL)shouldShowLeaderboard{
     domViewController *dv;
     [dv showLeaderboardAndAchievements:shouldShowLeaderboard];
     
@@ -153,7 +153,7 @@ GKLocalPlayer *gcPlayer;
     //SKView * skView = (SKView *)self.view;
     SKView * skView = (SKView*)self.originalContentView;
     skView.showsFPS = NO;
-    skView.showsNodeCount = YES;
+    skView.showsNodeCount = NO;
     
     //self.removeFromParentViewController;
     
