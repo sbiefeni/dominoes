@@ -9,10 +9,11 @@
 #import <UIKit/UIKit.h>
 #import <SpriteKit/SpriteKit.h>
 #import <iAd/iAd.h>
+#import <GameKit/GameKit.h>
 
-@interface domViewController : UIViewController
+@interface domViewController : UIViewController <GKGameCenterControllerDelegate>
 
 +(void)setAdView:(BOOL)showAd ShowOnTop:(BOOL)onTop ChooseRandom:(BOOL)useRandom;
-
++(void)showLeaderBoard:(BOOL)shouldShowLeaderboard;
 
 @end

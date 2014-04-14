@@ -75,6 +75,7 @@
 
         if(gcEnabled){
             [[GameKitHelper sharedGameKitHelper] authenticateLocalPlayer];
+            [domViewController showLeaderBoard:YES];
         }else{
             SKSpriteNode *gcButton = [SKSpriteNode spriteNodeWithImageNamed:@"stretch_button.png"];
             gcButton.position = CGPointMake(CGRectGetMidX(self.frame), 30);
@@ -234,6 +235,7 @@
     [self addChild:label];
 
 }
+
 
 - (SKSpriteNode *)instruct:(int)sizeDoubler posY:(int)posY
 {
