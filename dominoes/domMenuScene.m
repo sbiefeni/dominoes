@@ -75,7 +75,7 @@
 
         if(gcEnabled){
             [[GameKitHelper sharedGameKitHelper] authenticateLocalPlayer];
-            [domViewController showLeaderBoard:YES];
+            
         }else{
             SKSpriteNode *gcButton = [SKSpriteNode spriteNodeWithImageNamed:@"stretch_button.png"];
             gcButton.position = CGPointMake(CGRectGetMidX(self.frame), 30);
@@ -258,13 +258,17 @@
         // if gamecenter button touched, launch it
         if ([node.name isEqualToString:@"gamecenter"] || [node.name isEqualToString:@"gamecenterlabel"]) {
             NSLog(@"GameCenter Button pressed");
-
+            
             [[GameKitHelper sharedGameKitHelper] authenticateLocalPlayer];
         }else{
 
             if (gameStatus == reset || gameStatus == game_Started) {
-                domGameScene *game = [[domGameScene alloc] initWithSize:self.size];
-                [self.view presentScene:game transition:[SKTransition doorsOpenHorizontalWithDuration:.75]];
+                domViewController *dv=[domViewController new];
+                [dv showLeaderBoard:YES];
+                
+                //domGameScene *game = [[domGameScene alloc] initWithSize:self.size];
+                //[self.view presentScene:game transition:[SKTransition doorsOpenHorizontalWithDuration:.75]];
+                
             }else{
                 domMenuScene *menu = [[domMenuScene alloc] initWithSize:self.size];
                 [self.view presentScene:menu transition:[SKTransition doorsOpenHorizontalWithDuration:.75]];

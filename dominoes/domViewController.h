@@ -14,6 +14,6 @@
 @interface domViewController : UIViewController <GKGameCenterControllerDelegate>
 
 +(void)setAdView:(BOOL)showAd ShowOnTop:(BOOL)onTop ChooseRandom:(BOOL)useRandom;
-+(void)showLeaderBoard:(BOOL)shouldShowLeaderboard;
+-(void)showLeaderBoard:(BOOL)shouldShowLeaderboard;
 
 @end
