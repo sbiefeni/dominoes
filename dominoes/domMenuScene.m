@@ -76,17 +76,17 @@
         if(gcEnabled){
             [[GameKitHelper sharedGameKitHelper] authenticateLocalPlayer];
         }else{
-            SKSpriteNode *button = [SKSpriteNode spriteNodeWithImageNamed:@"stretch_button.png"];
-            button.position = CGPointMake(CGRectGetMidX(self.frame), 30);
-            button.name = @"gamecenter";
-            [self addChild:button];
+            SKSpriteNode *gcButton = [SKSpriteNode spriteNodeWithImageNamed:@"stretch_button.png"];
+            gcButton.position = CGPointMake(CGRectGetMidX(self.frame), 30);
+            gcButton.name = @"gamecenter";
+            [self addChild:gcButton];
 
-            SKLabelNode *gameCenter = [SKLabelNode labelNodeWithFontNamed:@"Avenir-Black"];
-            [self createLabel:gameCenter text:@"Game Center" fontSize:30 posY:-((size.height/2)/sizeDoubler) color:[SKColor blackColor] alpha:.7 sizeDoubler:1];
-            gameCenter.position = button.position;
-            gameCenter.zPosition = 25;
-            gameCenter.verticalAlignmentMode = SKLabelVerticalAlignmentModeCenter;
-            gameCenter.name = @"gamecenterlabel";
+            SKLabelNode *gcLabel = [SKLabelNode labelNodeWithFontNamed:@"Avenir-Black"];
+            [self createLabel:gcLabel text:@"Game Center" fontSize:30 posY:-((size.height/2)/sizeDoubler) color:[SKColor blackColor] alpha:.7 sizeDoubler:1];
+            gcLabel.position = gcButton.position;
+            gcLabel.zPosition = 25;
+            gcLabel.verticalAlignmentMode = SKLabelVerticalAlignmentModeCenter;
+            gcLabel.name = @"gamecenterlabel";
         }
 //------------------------------------
 
@@ -137,6 +137,7 @@
 
             //debugging - reset the total score
             highScore=0;
+            [self setHighScore:0];
 
                 //if new high score, give a message and store it!
                 if (totalScore > highScore) {
@@ -146,7 +147,7 @@
                     [self createLabel:hs text:@"NEW HIGH SCORE!" fontSize:30 posY:120 color:[SKColor whiteColor] alpha:1 sizeDoubler:sizeDoubler];
                     if (gcEnabled){
                     //set the gamecenter score
-                     [[GameKitHelper sharedGameKitHelper] reportScore:totalScore];
+                     [[GameKitHelper sharedGameKitHelper] reportHighScore:totalScore];
                     }
                 }
 

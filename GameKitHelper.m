@@ -51,13 +51,13 @@ BOOL _enableGameCenter;
             gcEnabled = YES;
             [clsCommon storeUserSetting:@"gcEnabled" value:@"1"];
             // Get the default leaderboard identifier.
-            [[GKLocalPlayer localPlayer] loadDefaultLeaderboardIdentifierWithCompletionHandler:^(NSString *leaderboardIdentifier, NSError *error) {
+            [[GKLocalPlayer localPlayer] loadDefaultLeaderboardIdentifierWithCompletionHandler:^(NSString *leaderboardIdentifierHS, NSError *error) {
 
                 if (error != nil) {
                     NSLog(@"%@", [error localizedDescription]);
                 }
                 else{
-                    _leaderboardIdentifier = leaderboardIdentifier;
+                    _leaderboardIdentifierHS = leaderboardIdentifierHS;
                 }
             }];
         } else {
@@ -87,8 +87,8 @@ BOOL _enableGameCenter;
               [[_lastError userInfo] description]);
     }
 }
--(void)reportScore:(int)scr{
-    GKScore *score = [[GKScore alloc] initWithLeaderboardIdentifier:_leaderboardIdentifier];
+-(void)reportHighScore:(int)scr{
+    GKScore *score = [[GKScore alloc] initWithLeaderboardIdentifier:@"300hs"];
     score.value = scr;
 
     [GKScore reportScores:@[score] withCompletionHandler:^(NSError *error) {

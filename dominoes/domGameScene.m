@@ -685,7 +685,6 @@ CGPoint pointA;
 
     switch (player.curDirection) {
         case left:
-            if (player.lastDirection != right) {
                 if (player.curX > 0 && grid[player.curX-1][player.curY]==false) {
                     player.curX --;
                     player.lastDirection = player.curDirection;
@@ -696,13 +695,9 @@ CGPoint pointA;
                         player.curDirection = player.lastDirection;
                     }
                 }
-            }else{
-                player.curDirection = player.lastDirection;
-            }
 
             break;
         case right:
-            if (player.lastDirection != left) {
                 if (player.curX < cols && grid[player.curX+1][player.curY]==false){
                     player.curX ++;
                     player.lastDirection = player.curDirection;
@@ -711,14 +706,10 @@ CGPoint pointA;
                         crashed = true;
                     }else{
                         player.curDirection = player.lastDirection;
-                    }                }
-            }else{
-                player.curDirection = player.lastDirection;
-            }
-
+                    }
+                }
             break;
         case up:
-            if (player.lastDirection != down) {
                 if (player.curY < rows && grid[player.curX][player.curY+1]==false){
                     player.curY ++;
                     player.lastDirection = player.curDirection;
@@ -729,13 +720,9 @@ CGPoint pointA;
                         player.curDirection = player.lastDirection;
                     }
                 }
-            }else{
-                player.curDirection = player.lastDirection;
-            }
 
             break;
         case down:
-            if (player.lastDirection != up) {
                 if (player.curY > 0 && grid[player.curX][player.curY-1]==false){
                     player.curY --;
                     player.lastDirection = player.curDirection;
@@ -746,12 +733,10 @@ CGPoint pointA;
                         player.curDirection = player.lastDirection;
                     }
                 }
-            }else{
-                player.curDirection = player.lastDirection;
-            }
 
             break;
         default:
+            player.curDirection = player.lastDirection;
             break;
     }
 

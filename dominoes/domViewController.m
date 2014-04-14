@@ -195,21 +195,37 @@ GKLocalPlayer *gcPlayer;
 switch (swipe.direction) {
     case UISwipeGestureRecognizerDirectionLeft:
         NSLog(@"swiped Left");
-        tmpDirection = left;
+        if (player.lastDirection != right){
+            tmpDirection = left;
+        }else{
+            tmpDirection = right;
+        }
         break;
 
     case UISwipeGestureRecognizerDirectionRight:
-        tmpDirection = right;
+        if (player.lastDirection != left) {
+            tmpDirection = right;
+        }else{
+            tmpDirection = left;
+        }
         NSLog(@"swipe right");
         break;
         
     case UISwipeGestureRecognizerDirectionUp:
-        tmpDirection = up;
+        if (player.lastDirection != down) {
+            tmpDirection = up;
+        }else{
+            tmpDirection = down;
+        }
         NSLog(@"swiped Up");
         break;
         
     case UISwipeGestureRecognizerDirectionDown:
-        tmpDirection = down;
+       if (player.lastDirection != up) {
+           tmpDirection = down;
+       }else{
+           tmpDirection = up;
+       }
         NSLog(@"swiped Down");
         break;
         
