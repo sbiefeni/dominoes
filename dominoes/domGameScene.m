@@ -621,7 +621,7 @@ CGPoint pointA;
         }
     }
     //multiple equal choices, choice is needed, now choose 1
-    int choice = [clsCommon getRanInt:0 maxNumber:directionChoices.count-1];
+    int choice = [clsCommon getRanInt:0 maxNumber:(int)directionChoices.count-1];
     computer.curDirection = [[directionChoices objectAtIndex:choice] intValue];
 
 

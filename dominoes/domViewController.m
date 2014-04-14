@@ -112,7 +112,7 @@ GKLocalPlayer *gcPlayer;
     //CGFloat height = CGRectGetHeight(self.view.bounds);
     
     gcPlayer=[[GKLocalPlayer alloc]init];
-    NSLog(@"Number of friends:%i", gcPlayer.friends.count);
+    NSLog(@"Number of friends:%i", (int)gcPlayer.friends.count);
     
     CGRect aRect=CGRectMake(0, CGRectGetHeight(self.view.bounds)-iWidth==320? 50:66, iWidth, iWidth==320? 50:66);
 //    aRect.origin.x =0;
