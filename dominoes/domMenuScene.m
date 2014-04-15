@@ -264,10 +264,11 @@
 
             if (gameStatus == reset || gameStatus == game_Started) {
                 domViewController *dv=[domViewController new];
+                
                 [dv showLeaderBoard:YES];
                 
-                //domGameScene *game = [[domGameScene alloc] initWithSize:self.size];
-                //[self.view presentScene:game transition:[SKTransition doorsOpenHorizontalWithDuration:.75]];
+                domGameScene *game = [[domGameScene alloc] initWithSize:self.size];
+                [self.view presentScene:game transition:[SKTransition doorsOpenHorizontalWithDuration:.75]];
                 
             }else{
                 domMenuScene *menu = [[domMenuScene alloc] initWithSize:self.size];
