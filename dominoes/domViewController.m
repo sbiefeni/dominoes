@@ -17,6 +17,7 @@ int iHeight;
 int iWidth;
 BOOL bOnTop;
 GKLocalPlayer *gcPlayer;
+BOOL showingLeaderboard;
 
 @interface domViewController () <ADBannerViewDelegate>
 
@@ -31,6 +32,7 @@ GKLocalPlayer *gcPlayer;
 }
 
 -(void)showLeaderBoard:(BOOL)shouldShowLeaderboard{
+    showingLeaderboard=true;
     [self showLeaderboardAndAchievements:shouldShowLeaderboard];
 }
 
@@ -132,6 +134,9 @@ GKLocalPlayer *gcPlayer;
 
 - (void)viewDidLoad
 {
+    if(showingLeaderboard){
+        return;
+    }
     [super viewDidLoad];
     iHeight=CGRectGetHeight(self.view.bounds);
     iWidth=CGRectGetWidth(self.view.bounds);
