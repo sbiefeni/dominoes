@@ -96,8 +96,9 @@
 //            gcLabel.name = @"gamecenterlabel";
 //
 //        }else{
+
             SKLabelNode *gcLabel = [SKLabelNode labelNodeWithFontNamed:@"Avenir-Black"];
-            [self createLabel:gcLabel text:@"Game Center" fontSize:30 posY:-((size.height/2)/sizeDoubler) color:[SKColor blackColor] alpha:.7 sizeDoubler:1];
+            [self createLabel:gcLabel text:@"Leaderboard" fontSize:30 posY:-((size.height/2)/sizeDoubler) color:[SKColor blackColor] alpha:.7 sizeDoubler:1];
             gcLabel.position = gcButton.position;
             gcLabel.zPosition = 25;
             gcLabel.verticalAlignmentMode = SKLabelVerticalAlignmentModeCenter;
@@ -148,8 +149,6 @@
 
         }else{
                 //game over
-                //TODO game over stuff here
-
 
                 totalScore += score;
 
@@ -218,6 +217,7 @@
 - (void)dealloc
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
+    //[self removeAllChildren];
 }
 
 -(void) setHighScore:(int)score {
