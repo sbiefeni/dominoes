@@ -28,7 +28,7 @@ BOOL showingLeaderboard;
 }
 
 -(void)gameCenterViewControllerDidFinish:(GKGameCenterViewController *)gameCenterViewController{
-    
+     [gameCenterViewController dismissViewControllerAnimated:YES completion:nil];
 }
 
 -(void)showLeaderBoard:(BOOL)shouldShowLeaderboard{
@@ -82,7 +82,7 @@ BOOL showingLeaderboard;
 
 - (void)dealloc
 {
-    //[[NSNotificationCenter defaultCenter] removeObserver:self];
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 +(void)setAdView:(BOOL)showAd ShowOnTop:(BOOL)onTop ChooseRandom:(BOOL)useRandom{
