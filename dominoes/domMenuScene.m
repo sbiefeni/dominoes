@@ -79,22 +79,23 @@
             isRunningInIde(gcEnabled=NO)
 
 
+
+        //if(gcEnabled)
+        if([GKLocalPlayer localPlayer].isAuthenticated){
+
             SKSpriteNode *gcButton = [SKSpriteNode spriteNodeWithImageNamed:@"stretch_button.png"];
             gcButton.position = CGPointMake(CGRectGetMidX(self.frame), 30);
             gcButton.name = @"gamecenter";
             [self addChild:gcButton];
 
-        //if(gcEnabled)
-        if([GKLocalPlayer localPlayer].isAuthenticated){
-
-            SKLabelNode *gcLabel = [SKLabelNode labelNodeWithFontNamed:@"Avenir-Black"];
-            [self createLabel:gcLabel text:@"Leaderboard" fontSize:30 posY:-((size.height/2)/sizeDoubler) color:[SKColor blackColor] alpha:.7 sizeDoubler:1];
-            gcLabel.position = gcButton.position;
-            gcLabel.zPosition = 25;
-            gcLabel.verticalAlignmentMode = SKLabelVerticalAlignmentModeCenter;
-            gcLabel.name = @"gamecenterlabel";
-
-        }else{
+//            SKLabelNode *gcLabel = [SKLabelNode labelNodeWithFontNamed:@"Avenir-Black"];
+//            [self createLabel:gcLabel text:@"Leaderboard" fontSize:30 posY:-((size.height/2)/sizeDoubler) color:[SKColor blackColor] alpha:.7 sizeDoubler:1];
+//            gcLabel.position = gcButton.position;
+//            gcLabel.zPosition = 25;
+//            gcLabel.verticalAlignmentMode = SKLabelVerticalAlignmentModeCenter;
+//            gcLabel.name = @"gamecenterlabel";
+//
+//        }else{
             SKLabelNode *gcLabel = [SKLabelNode labelNodeWithFontNamed:@"Avenir-Black"];
             [self createLabel:gcLabel text:@"Game Center" fontSize:30 posY:-((size.height/2)/sizeDoubler) color:[SKColor blackColor] alpha:.7 sizeDoubler:1];
             gcLabel.position = gcButton.position;
@@ -128,8 +129,8 @@
 
             //for debugging - to reset the level high score
             isRunningInIde(
-                levelHighscore = 0;
-                [self setLevelHighScore: 0];
+                //levelHighscore = 0;
+                //[self setLevelHighScore: 0];
             );
 
                 //if new best level, give a message and store it!
@@ -154,8 +155,8 @@
 
             //debugging - reset the total score
             isRunningInIde(
-                highScore=0;
-                [self setHighScore:0];
+                //highScore=0;
+                //[self setHighScore:0];
             );
 
                 //if new high score, give a message and store it!
@@ -222,11 +223,13 @@
 -(void) setHighScore:(int)score {
     NSString* _score = [NSString stringWithFormat:@"%i",score];
     [clsCommon storeUserSetting:@"highscore" value:_score];
+    [[GameCenterManager sharedManager] saveAndReportScore:score leaderboard:@"300hs"  sortOrder:GameCenterSortOrderHighToLow];
 }
 
 -(void) setLevelHighScore:(int)score {
     NSString* _score = [NSString stringWithFormat:@"%i",score];
     [clsCommon storeUserSetting:@"levelHighscore" value:_score];
+    [[GameCenterManager sharedManager] saveAndReportScore:score leaderboard:@"300hl"  sortOrder:GameCenterSortOrderHighToLow];
 }
 -(int) getHighScore {
     NSString* _score;
@@ -277,6 +280,7 @@
         if ([node.name isEqualToString:@"gamecenter"] || [node.name isEqualToString:@"gamecenterlabel"]) {
             NSLog(@"GameCenter Button pressed");
 
+            //get the active view controller
             UIViewController *activeController = [UIApplication sharedApplication].keyWindow.rootViewController;
             if ([activeController isKindOfClass:[UINavigationController class]])
             {
@@ -291,9 +295,8 @@
                 //show leaderboard
                 [[GameCenterManager sharedManager] presentLeaderboardsOnViewController:activeController];
             }else{
-                //authenticate player
-               // [[GameCenterManager sharedManager] ];
-
+                //authenticate player -- can't do with game center manager
+                //[[GameCenterManager sharedManager] checkGameCenterAvailability ];
             }
 
         }else{

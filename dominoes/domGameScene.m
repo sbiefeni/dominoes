@@ -242,7 +242,7 @@ CGPoint pointA;
 
 
     isRunningInIde(
-        gameSpeed = .3;
+        gameSpeed = .02;
     )
 
     // flash some stuff on the screen TODO
