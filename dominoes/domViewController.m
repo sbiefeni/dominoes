@@ -36,6 +36,7 @@ BOOL showingLeaderboard;
     [self showLeaderboardAndAchievements:shouldShowLeaderboard];
 }
 
+
 -(void)showLeaderboardAndAchievements:(BOOL)shouldShowLeaderboard{
     // Init the following view controller object.
     GKGameCenterViewController *gcViewController = [[GKGameCenterViewController alloc] init];
@@ -81,7 +82,7 @@ BOOL showingLeaderboard;
 
 - (void)dealloc
 {
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    //[[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 +(void)setAdView:(BOOL)showAd ShowOnTop:(BOOL)onTop ChooseRandom:(BOOL)useRandom{
@@ -131,31 +132,13 @@ BOOL showingLeaderboard;
         floorOn=1;
     }
 }
--(void)showLeaderBoard:(BOOL)shouldShowLeaderboard{
-    domViewController *dv;
-    [dv showLeaderboardAndAchievements:shouldShowLeaderboard];
-    
-}
+//-(void)showLeaderBoard:(BOOL)shouldShowLeaderboard{
+//    domViewController *dv;
+//    [dv showLeaderboardAndAchievements:shouldShowLeaderboard];
+//    
+//}
 
--(void)showLeaderboardAndAchievements:(BOOL)shouldShowLeaderboard{
-    // Init the following view controller object.
-    GKGameCenterViewController *gcViewController = [[GKGameCenterViewController alloc] init];
-    
-    // Set self as its delegate.
-    gcViewController.gameCenterDelegate = self;
-    
-    // Depending on the parameter, show either the leaderboard or the achievements.
-    if (shouldShowLeaderboard) {
-        gcViewController.viewState = GKGameCenterViewControllerStateLeaderboards;
-        gcViewController.leaderboardIdentifier = @"300hs";
-    }
-    else{
-        gcViewController.viewState = GKGameCenterViewControllerStateAchievements;
-    }
-    
-    // Finally present the view controller.
-    [self presentViewController:gcViewController animated:YES completion:nil];
-}
+
 
 - (void)viewDidLoad
 {

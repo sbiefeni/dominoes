@@ -121,8 +121,10 @@
                 [self createLabel:tapToPlay text:@"Tap to continue" fontSize:40 posY:-145 color:[SKColor whiteColor] alpha:.7 sizeDoubler:sizeDoubler];
 
             //for debugging - to reset the level high score
-            //levelHighscore = 0;
-            //[self setLevelHighScore: 0];
+            isRunningInIde(
+                levelHighscore = 0;
+                [self setLevelHighScore: 0];
+            );
 
                 //if new best level, give a message and store it!
                 if (score > levelHighscore) {
@@ -145,8 +147,10 @@
                 totalScore += score;
 
             //debugging - reset the total score
-            highScore=0;
-            [self setHighScore:0];
+            isRunningInIde(
+                highScore=0;
+                [self setHighScore:0];
+            );
 
                 //if new high score, give a message and store it!
                 if (totalScore > highScore) {
@@ -266,14 +270,20 @@
         // if gamecenter button touched, launch it
         if ([node.name isEqualToString:@"gamecenter"] || [node.name isEqualToString:@"gamecenterlabel"]) {
             NSLog(@"GameCenter Button pressed");
-            
-            [[GameKitHelper sharedGameKitHelper] authenticateLocalPlayer];
+
+            if([GKLocalPlayer localPlayer].isAuthenticated){
+                //show leaderboard
+                domViewController *dv=[domViewController new];
+                [dv showLeaderBoard:YES];
+            }else{
+                [[GameKitHelper sharedGameKitHelper] authenticateLocalPlayer];
+            }
+
         }else{
 
             if (gameStatus == reset || gameStatus == game_Started) {
-                domViewController *dv=[domViewController new];
-                
-                [dv showLeaderBoard:YES];
+
+
                 
                 domGameScene *game = [[domGameScene alloc] initWithSize:self.size];
                 [self.view presentScene:game transition:[SKTransition doorsOpenHorizontalWithDuration:.75]];
