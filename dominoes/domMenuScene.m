@@ -13,14 +13,17 @@
 #import "clsCommon.h"
 #import "domViewController.h"
 #import "clsGameSettings.h"
-#import "GameKitHelper.h"
+#import "GameCenterManager.h"
 
 
 #import "SKEmitterNode+fromFile.h"
 
 //#import <AudioToolbox/AudioServices.h>
 
-@implementation domMenuScene
+@implementation domMenuScene {
+
+    
+}
 
 -(instancetype)initWithSize:(CGSize)size
 {
@@ -80,7 +83,7 @@
             [self addChild:gcButton];
 
         if(gcEnabled){
-            [[GameKitHelper sharedGameKitHelper] authenticateLocalPlayer];
+
             SKLabelNode *gcLabel = [SKLabelNode labelNodeWithFontNamed:@"Avenir-Black"];
             [self createLabel:gcLabel text:@"Leaderboard" fontSize:30 posY:-((size.height/2)/sizeDoubler) color:[SKColor blackColor] alpha:.7 sizeDoubler:1];
             gcLabel.position = gcButton.position;
@@ -160,7 +163,7 @@
                     [self createLabel:hs text:@"NEW HIGH SCORE!" fontSize:30 posY:120 color:[SKColor whiteColor] alpha:1 sizeDoubler:sizeDoubler];
                     if (gcEnabled){
                     //set the gamecenter score
-                     [[GameKitHelper sharedGameKitHelper] reportHighScore:totalScore];
+
                     }
                 }
 
@@ -273,17 +276,17 @@
 
             if([GKLocalPlayer localPlayer].isAuthenticated){
                 //show leaderboard
-                domViewController *dv=[domViewController new];
-                [dv showLeaderBoard:YES];
+                UIViewController* GC = [UIViewController new];
+
+                [[GameCenterManager sharedManager] presentLeaderboardsOnViewController:GC];
             }else{
-                [[GameKitHelper sharedGameKitHelper] authenticateLocalPlayer];
+                //authenticate player
+//[[GameCenterManager sharedManager]
             }
 
         }else{
 
             if (gameStatus == reset || gameStatus == game_Started) {
-
-
                 
                 domGameScene *game = [[domGameScene alloc] initWithSize:self.size];
                 [self.view presentScene:game transition:[SKTransition doorsOpenHorizontalWithDuration:.75]];

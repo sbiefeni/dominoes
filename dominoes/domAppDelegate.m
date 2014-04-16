@@ -8,6 +8,7 @@
 
 #import "domAppDelegate.h"
 #import <iAd/iAd.h>
+#import "GameCenterManager.h"
 
 @implementation domAppDelegate
 
@@ -16,6 +17,9 @@
 {
     // Override point for customization after application launch.
     [UIViewController prepareInterstitialAds];
+
+    [[GameCenterManager sharedManager] setupManager];
+
     return YES;
 }
 

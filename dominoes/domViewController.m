@@ -10,7 +10,7 @@
 #import "domMenuScene.h"
 #import "clsPlayer.h"
 #import "clsCommon.h"
-#import "GameKitHelper.h"
+#import "GC Manager/GameCenterManager.h"
 
 ADBannerView *adView;
 int iHeight;
@@ -59,26 +59,10 @@ BOOL showingLeaderboard;
 
 -(void)viewDidAppear:(BOOL)animated {
     //[super viewDidAppear:animated];
-    [[NSNotificationCenter defaultCenter]
-     addObserver:self
-     selector:@selector(showAuthenticationViewController)
-     name:PresentAuthenticationViewController
-     object:nil];
 
-    //[[GameKitHelper sharedGameKitHelper] authenticateLocalPlayer];
-    
+
 }
 
-- (void)showAuthenticationViewController
-{
-    GameKitHelper *gameKitHelper =
-    [GameKitHelper sharedGameKitHelper];
-    
-    [self presentViewController:
-     gameKitHelper.authenticationViewController
-                                         animated:YES
-                                       completion:nil];
-}
 
 - (void)dealloc
 {
@@ -142,9 +126,6 @@ BOOL showingLeaderboard;
 
 - (void)viewDidLoad
 {
-    if(showingLeaderboard){
-        return;
-    }
     [super viewDidLoad];
     iHeight=CGRectGetHeight(self.view.bounds);
     iWidth=CGRectGetWidth(self.view.bounds);
@@ -192,6 +173,9 @@ BOOL showingLeaderboard;
     swipeGesture =[[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(swipeRecognized:)];
     [swipeGesture setDirection:UISwipeGestureRecognizerDirectionDown];
     [self.view addGestureRecognizer:swipeGesture];
+
+    // Set GameCenter Manager Delegate
+    [[GameCenterManager sharedManager] setDelegate:self];
 
     // Present the Menu scene
     [skView presentScene:scene];

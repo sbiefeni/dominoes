@@ -11,9 +11,13 @@
 		344B5BCA18D4A4EF00E43D82 /* Background_Stars.sks in Resources */ = {isa = PBXBuildFile; fileRef = 344B5BC918D4A4EF00E43D82 /* Background_Stars.sks */; };
 		344B5BCD18D4A70300E43D82 /* SKEmitterNode+fromFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 344B5BCC18D4A70300E43D82 /* SKEmitterNode+fromFile.m */; };
 		344B5BCF18D4AE7500E43D82 /* Background_Fire.sks in Resources */ = {isa = PBXBuildFile; fileRef = 344B5BCE18D4AE7500E43D82 /* Background_Fire.sks */; };
-		345F2BC418F1E69200E7A533 /* GameKitHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 345F2BC318F1E69200E7A533 /* GameKitHelper.m */; };
 		34C0142A18D183BF007C37AB /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 34C0142918D183BF007C37AB /* AudioToolbox.framework */; };
 		34C0142D18D2A4C8007C37AB /* iAd.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 34C0142C18D2A4C8007C37AB /* iAd.framework */; };
+		380B7AC418FE0F6900DF6A09 /* GameCenterManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 380B7ABF18FE0F6900DF6A09 /* GameCenterManager.m */; };
+		380B7AC518FE0F6900DF6A09 /* NSDataAES256.m in Sources */ = {isa = PBXBuildFile; fileRef = 380B7AC118FE0F6900DF6A09 /* NSDataAES256.m */; };
+		380B7AC618FE0F6900DF6A09 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 380B7AC318FE0F6900DF6A09 /* Reachability.m */; };
+		380B7AC818FE114400DF6A09 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 380B7AC718FE114400DF6A09 /* SystemConfiguration.framework */; };
+		380B7ACA18FE115100DF6A09 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 380B7AC918FE115100DF6A09 /* Security.framework */; };
 		380DC21B18D0ED9200545962 /* explosion.sks in Resources */ = {isa = PBXBuildFile; fileRef = 380DC21918D0ED9200545962 /* explosion.sks */; };
 		380DC21C18D0ED9200545962 /* spark.png in Resources */ = {isa = PBXBuildFile; fileRef = 380DC21A18D0ED9200545962 /* spark.png */; };
 		38530A9718F0B07E00FA19CC /* new-arena2.png in Resources */ = {isa = PBXBuildFile; fileRef = 38530A9618F0B07E00FA19CC /* new-arena2.png */; };
@@ -68,10 +72,16 @@
 		344B5BCB18D4A6DC00E43D82 /* SKEmitterNode+fromFile.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SKEmitterNode+fromFile.h"; sourceTree = "<group>"; };
 		344B5BCC18D4A70300E43D82 /* SKEmitterNode+fromFile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "SKEmitterNode+fromFile.m"; sourceTree = "<group>"; };
 		344B5BCE18D4AE7500E43D82 /* Background_Fire.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Background_Fire.sks; sourceTree = "<group>"; };
-		345F2BC218F1E69200E7A533 /* GameKitHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameKitHelper.h; sourceTree = "<group>"; };
-		345F2BC318F1E69200E7A533 /* GameKitHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameKitHelper.m; sourceTree = "<group>"; };
 		34C0142918D183BF007C37AB /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		34C0142C18D2A4C8007C37AB /* iAd.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = iAd.framework; path = System/Library/Frameworks/iAd.framework; sourceTree = SDKROOT; };
+		380B7ABE18FE0F6900DF6A09 /* GameCenterManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameCenterManager.h; sourceTree = "<group>"; };
+		380B7ABF18FE0F6900DF6A09 /* GameCenterManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameCenterManager.m; sourceTree = "<group>"; };
+		380B7AC018FE0F6900DF6A09 /* NSDataAES256.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSDataAES256.h; sourceTree = "<group>"; };
+		380B7AC118FE0F6900DF6A09 /* NSDataAES256.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSDataAES256.m; sourceTree = "<group>"; };
+		380B7AC218FE0F6900DF6A09 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
+		380B7AC318FE0F6900DF6A09 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
+		380B7AC718FE114400DF6A09 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		380B7AC918FE115100DF6A09 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		380DC21918D0ED9200545962 /* explosion.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = explosion.sks; sourceTree = "<group>"; };
 		380DC21A18D0ED9200545962 /* spark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = spark.png; sourceTree = "<group>"; };
 		38530A9618F0B07E00FA19CC /* new-arena2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "new-arena2.png"; sourceTree = "<group>"; };
@@ -124,6 +134,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				380B7ACA18FE115100DF6A09 /* Security.framework in Frameworks */,
+				380B7AC818FE114400DF6A09 /* SystemConfiguration.framework in Frameworks */,
 				34C0142D18D2A4C8007C37AB /* iAd.framework in Frameworks */,
 				34C0142A18D183BF007C37AB /* AudioToolbox.framework in Frameworks */,
 				38E7383118EB4E9400EE0C6E /* GameKit.framework in Frameworks */,
@@ -147,14 +159,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		345F2BC118F1E2DA00E7A533 /* GameKit */ = {
+		380B7ABD18FE0F6900DF6A09 /* GC Manager */ = {
 			isa = PBXGroup;
 			children = (
-				345F2BC218F1E69200E7A533 /* GameKitHelper.h */,
-				345F2BC318F1E69200E7A533 /* GameKitHelper.m */,
+				380B7ABE18FE0F6900DF6A09 /* GameCenterManager.h */,
+				380B7ABF18FE0F6900DF6A09 /* GameCenterManager.m */,
+				380B7AC018FE0F6900DF6A09 /* NSDataAES256.h */,
+				380B7AC118FE0F6900DF6A09 /* NSDataAES256.m */,
+				380B7AC218FE0F6900DF6A09 /* Reachability.h */,
+				380B7AC318FE0F6900DF6A09 /* Reachability.m */,
 			);
-			name = GameKit;
-			path = ..;
+			path = "GC Manager";
 			sourceTree = "<group>";
 		};
 		380DC21D18D0F02B00545962 /* particles */ = {
@@ -284,6 +299,8 @@
 		55CB7E1E18CBD180001EFA1C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				380B7AC918FE115100DF6A09 /* Security.framework */,
+				380B7AC718FE114400DF6A09 /* SystemConfiguration.framework */,
 				38E7383018EB4E9400EE0C6E /* GameKit.framework */,
 				34C0142C18D2A4C8007C37AB /* iAd.framework */,
 				34C0142918D183BF007C37AB /* AudioToolbox.framework */,
@@ -299,7 +316,7 @@
 		55CB7E2718CBD180001EFA1C /* 300 Bricks */ = {
 			isa = PBXGroup;
 			children = (
-				345F2BC118F1E2DA00E7A533 /* GameKit */,
+				380B7ABD18FE0F6900DF6A09 /* GC Manager */,
 				38B7A81218E5043000F51451 /* iPad */,
 				387B05D118E0053A005C8D1F /* sounds */,
 				389AA04F18DF941F0089CA98 /* arenas */,
@@ -471,11 +488,13 @@
 				344B5BCD18D4A70300E43D82 /* SKEmitterNode+fromFile.m in Sources */,
 				387B05D518E0A6EE005C8D1F /* clsCommon.m in Sources */,
 				389B9CF918CFD449004960E5 /* clsPlayer.m in Sources */,
+				380B7AC518FE0F6900DF6A09 /* NSDataAES256.m in Sources */,
 				55CB7E3B18CBD181001EFA1C /* domViewController.m in Sources */,
 				55CB7E2E18CBD180001EFA1C /* main.m in Sources */,
 				55CB7E3218CBD181001EFA1C /* domAppDelegate.m in Sources */,
 				344B5BC618D3FA9500E43D82 /* domMenuScene.m in Sources */,
-				345F2BC418F1E69200E7A533 /* GameKitHelper.m in Sources */,
+				380B7AC418FE0F6900DF6A09 /* GameCenterManager.m in Sources */,
+				380B7AC618FE0F6900DF6A09 /* Reachability.m in Sources */,
 				38B7A7F918E4F10D00F51451 /* clsGameSettings.m in Sources */,
 				389B9CF618CFCDCF004960E5 /* clsDomino.m in Sources */,
 				55CB7E3E18CBD181001EFA1C /* domGameScene.m in Sources */,
