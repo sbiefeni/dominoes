@@ -76,13 +76,16 @@
         //get the gamecenter enabled setting from usersettings
             gcEnabled = ([[clsCommon getUserSettingForKey:@"gcEnabled"] isEqual: @"1"]);
 
+            isRunningInIde(gcEnabled=NO)
+
 
             SKSpriteNode *gcButton = [SKSpriteNode spriteNodeWithImageNamed:@"stretch_button.png"];
             gcButton.position = CGPointMake(CGRectGetMidX(self.frame), 30);
             gcButton.name = @"gamecenter";
             [self addChild:gcButton];
 
-        if(gcEnabled){
+        //if(gcEnabled)
+        if([GKLocalPlayer localPlayer].isAuthenticated){
 
             SKLabelNode *gcLabel = [SKLabelNode labelNodeWithFontNamed:@"Avenir-Black"];
             [self createLabel:gcLabel text:@"Leaderboard" fontSize:30 posY:-((size.height/2)/sizeDoubler) color:[SKColor blackColor] alpha:.7 sizeDoubler:1];
@@ -163,7 +166,7 @@
                     [self createLabel:hs text:@"NEW HIGH SCORE!" fontSize:30 posY:120 color:[SKColor whiteColor] alpha:1 sizeDoubler:sizeDoubler];
                     if (gcEnabled){
                     //set the gamecenter score
-
+                        [[GameCenterManager sharedManager]highScoreForLeaderboard:@"300hs"];
                     }
                 }
 
@@ -274,14 +277,23 @@
         if ([node.name isEqualToString:@"gamecenter"] || [node.name isEqualToString:@"gamecenterlabel"]) {
             NSLog(@"GameCenter Button pressed");
 
+            UIViewController *activeController = [UIApplication sharedApplication].keyWindow.rootViewController;
+            if ([activeController isKindOfClass:[UINavigationController class]])
+            {
+                activeController = [(UINavigationController*) activeController visibleViewController];
+            }
+            else if (activeController.presentedViewController)
+            {
+                activeController = activeController.presentedViewController;
+            }
+
             if([GKLocalPlayer localPlayer].isAuthenticated){
                 //show leaderboard
-                UIViewController* GC = [UIViewController new];
-
-                [[GameCenterManager sharedManager] presentLeaderboardsOnViewController:GC];
+                [[GameCenterManager sharedManager] presentLeaderboardsOnViewController:activeController];
             }else{
                 //authenticate player
-//[[GameCenterManager sharedManager]
+               // [[GameCenterManager sharedManager] ];
+
             }
 
         }else{

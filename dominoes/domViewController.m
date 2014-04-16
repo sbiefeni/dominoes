@@ -10,7 +10,6 @@
 #import "domMenuScene.h"
 #import "clsPlayer.h"
 #import "clsCommon.h"
-#import "GC Manager/GameCenterManager.h"
 
 ADBannerView *adView;
 int iHeight;
@@ -31,51 +30,61 @@ BOOL showingLeaderboard;
      [gameCenterViewController dismissViewControllerAnimated:YES completion:nil];
 }
 
--(void)showLeaderBoard:(BOOL)shouldShowLeaderboard{
-    showingLeaderboard=true;
-    [self showLeaderboardAndAchievements:shouldShowLeaderboard];
-}
-
-
--(void)showLeaderboardAndAchievements:(BOOL)shouldShowLeaderboard{
-    // Init the following view controller object.
-    GKGameCenterViewController *gcViewController = [[GKGameCenterViewController alloc] init];
-    
-    // Set self as its delegate.
-    gcViewController.gameCenterDelegate = self;
-    
-    // Depending on the parameter, show either the leaderboard or the achievements.
-    if (shouldShowLeaderboard) {
-        gcViewController.viewState = GKGameCenterViewControllerStateLeaderboards;
-        gcViewController.leaderboardIdentifier = @"300hs";
-    }
-    else{
-        gcViewController.viewState = GKGameCenterViewControllerStateAchievements;
-    }
-    
-    // Finally present the view controller.
-    [self presentViewController:gcViewController animated:YES completion:nil];
-}
-
 -(void)viewDidAppear:(BOOL)animated {
     //[super viewDidAppear:animated];
 
-
 }
 
 
-- (void)dealloc
-{
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
+//------------------------------------------------------------------------------------------------------------//
+//------- GameCenter Manager Delegate ------------------------------------------------------------------------//
+//------------------------------------------------------------------------------------------------------------//
+#pragma mark - GameCenter Manager Delegate
+
+- (void)gameCenterManager:(GameCenterManager *)manager authenticateUser:(UIViewController *)gameCenterLoginController {
+        [self presentViewController:gameCenterLoginController animated:YES completion:^{
+        NSLog(@"Finished Presenting Authentication Controller");
+        }];
 }
+
+
+- (void)gameCenterManager:(GameCenterManager *)manager error:(NSError *)error {
+    NSLog(@"GCM Error: %@", error);
+    //actionBarLabel.title = error.domain;
+}
+
+- (void)gameCenterManager:(GameCenterManager *)manager reportedAchievement:(GKAchievement *)achievement withError:(NSError *)error {
+    if (!error) {
+        NSLog(@"GCM Reported Achievement: %@", achievement);
+        //actionBarLabel.title = [NSString stringWithFormat:@"Reported achievement with %.1f percent completed", achievement.percentComplete];
+    } else {
+        NSLog(@"GCM Error while reporting achievement: %@", error);
+    }
+}
+
+- (void)gameCenterManager:(GameCenterManager *)manager reportedScore:(GKScore *)score withError:(NSError *)error {
+    if (!error) {
+        NSLog(@"GCM Reported Score: %@", score);
+        //actionBarLabel.title = [NSString stringWithFormat:@"Reported leaderboard score: %lld", score.value];
+    } else {
+        NSLog(@"GCM Error while reporting score: %@", error);
+    }
+}
+
+- (void)gameCenterManager:(GameCenterManager *)manager didSaveScore:(GKScore *)score {
+    NSLog(@"Saved GCM Score with value: %lld", score.value);
+    //actionBarLabel.title = [NSString stringWithFormat:@"Score saved for upload to GameCenter."];
+}
+
+- (void)gameCenterManager:(GameCenterManager *)manager didSaveAchievement:(GKAchievement *)achievement {
+    NSLog(@"Saved GCM Achievement: %@", achievement);
+    //actionBarLabel.title = [NSString stringWithFormat:@"Achievement saved for upload to GameCenter."];
+}
+
 
 +(void)setAdView:(BOOL)showAd ShowOnTop:(BOOL)onTop ChooseRandom:(BOOL)useRandom{
     
-    //following commented code to randomize between top and bottom
-//    int rand = arc4random() % 4;
-//    if (rand=0) {
-//
-//    }
+
         if(bannerIsLoaded){
         
         if (showAd) {
@@ -131,14 +140,8 @@ BOOL showingLeaderboard;
     iWidth=CGRectGetWidth(self.view.bounds);
     //CGFloat width =
     //CGFloat height = CGRectGetHeight(self.view.bounds);
-    
-    gcPlayer=[[GKLocalPlayer alloc]init];
-    NSLog(@"Number of friends:%i", (int)gcPlayer.friends.count);
-    
+
     CGRect aRect=CGRectMake(0, CGRectGetHeight(self.view.bounds)-iWidth==320? 50:66, iWidth, iWidth==320? 50:66);
-//    aRect.origin.x =0;
-//    aRect.origin.y = CGRectGetHeight(self.view.bounds)-50;
-    //self.canDisplayBannerAds=YES;
     
     adView=[[ADBannerView alloc]initWithFrame:aRect];
     adView.delegate=self;
@@ -146,12 +149,9 @@ BOOL showingLeaderboard;
     [self.view addSubview:adView];
     
     // Configure the view.
-    //SKView * skView = (SKView *)self.view;
     SKView * skView = (SKView*)self.originalContentView;
     skView.showsFPS = NO;
     skView.showsNodeCount = NO;
-    
-    //self.removeFromParentViewController;
     
     // Create and configure the scene.
     SKScene * scene = [domMenuScene sceneWithSize:skView.bounds.size];
@@ -270,11 +270,7 @@ switch (swipe.direction) {
 
 - (NSUInteger)supportedInterfaceOrientations
 {
-    //if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
         return UIInterfaceOrientationMaskPortrait | UIInterfaceOrientationMaskPortraitUpsideDown;
-    //} else {
-        //return UIInterfaceOrientationMaskAll;
-    //}
 }
 
 - (void)didReceiveMemoryWarning

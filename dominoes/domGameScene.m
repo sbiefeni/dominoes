@@ -416,11 +416,6 @@ CGPoint pointA;
 
         [self addChild:domino];
 
-        //[self runAction:_dominoSound];
-         //AudioServicesPlaySystemSound (1200);
-
-        //[self runAction:[SKAction playSoundFileNamed:@"click2.wav" waitForCompletion:NO]];
-
         //reset explosion so it can happen again..
         computer.didExplosion = false;
 
@@ -435,8 +430,6 @@ CGPoint pointA;
         //change direction periodically for no reason
         [self testNextComputerMove];
 
-        //play a sound
-        //[self runAction: [SKAction playSoundFileNamed:@"click2.wav" waitForCompletion:NO]];
     }else{
         if (!computer.didExplosion) {
 
