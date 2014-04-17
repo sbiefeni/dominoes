@@ -47,6 +47,13 @@ BOOL showingLeaderboard;
         }];
 }
 
+- (void)gameCenterManager:(GameCenterManager *)manager availabilityChanged:(NSDictionary *)availabilityInformation {
+    NSLog(@"GC Availabilty: %@", availabilityInformation);
+    if ([[availabilityInformation objectForKey:@"status"] isEqualToString:@"GameCenter Available"]) {
+           // statusDetailLabel.text = @"Game Center is online, the current player is logged in, and this app is setup.";
+        [domMenuScene enableGameCenterButton];
+    }
+}
 
 - (void)gameCenterManager:(GameCenterManager *)manager error:(NSError *)error {
     NSLog(@"GCM Error: %@", error);

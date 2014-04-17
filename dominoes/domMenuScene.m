@@ -21,7 +21,7 @@
 //#import <AudioToolbox/AudioServices.h>
 
 @implementation domMenuScene {
-
+    CGSize mySize;
     
 }
 
@@ -34,6 +34,7 @@
         [domViewController setAdView:NO ShowOnTop:NO ChooseRandom:YES];
         [clsCommon playBackgroundMusicWithVolume:.2];
 
+        mySize = size;
 
         SKEmitterNode *background = [SKEmitterNode dom_emitterNamed:@"Background_Stars"];
         background.particlePositionRange = CGVectorMake(self.size.width*2, self.size.height*2);
@@ -78,32 +79,11 @@
 
             isRunningInIde(gcEnabled=NO)
 
+            //check if gamecenter is available, and create the button
+            [self enableGameCenterButton];
 
 
         //if(gcEnabled)
-        if([GKLocalPlayer localPlayer].isAuthenticated){
-
-            SKSpriteNode *gcButton = [SKSpriteNode spriteNodeWithImageNamed:@"stretch_button.png"];
-            gcButton.position = CGPointMake(CGRectGetMidX(self.frame), 30);
-            gcButton.name = @"gamecenter";
-            [self addChild:gcButton];
-
-//            SKLabelNode *gcLabel = [SKLabelNode labelNodeWithFontNamed:@"Avenir-Black"];
-//            [self createLabel:gcLabel text:@"Leaderboard" fontSize:30 posY:-((size.height/2)/sizeDoubler) color:[SKColor blackColor] alpha:.7 sizeDoubler:1];
-//            gcLabel.position = gcButton.position;
-//            gcLabel.zPosition = 25;
-//            gcLabel.verticalAlignmentMode = SKLabelVerticalAlignmentModeCenter;
-//            gcLabel.name = @"gamecenterlabel";
-//
-//        }else{
-
-            SKLabelNode *gcLabel = [SKLabelNode labelNodeWithFontNamed:@"Avenir-Black"];
-            [self createLabel:gcLabel text:@"Leaderboard" fontSize:30 posY:-((size.height/2)/sizeDoubler) color:[SKColor blackColor] alpha:.7 sizeDoubler:1];
-            gcLabel.position = gcButton.position;
-            gcLabel.zPosition = 25;
-            gcLabel.verticalAlignmentMode = SKLabelVerticalAlignmentModeCenter;
-            gcLabel.name = @"gamecenterlabel";
-        }
 
  //------------------------------------
 
@@ -220,6 +200,32 @@
     //[self removeAllChildren];
 }
 
+-(void)enableGameCenterButton {
+    if([GKLocalPlayer localPlayer].isAuthenticated){
+
+        SKSpriteNode *gcButton = [SKSpriteNode spriteNodeWithImageNamed:@"stretch_button.png"];
+        gcButton.position = CGPointMake(CGRectGetMidX(self.frame), 30);
+        gcButton.name = @"gamecenter";
+        [self addChild:gcButton];
+
+        //            SKLabelNode *gcLabel = [SKLabelNode labelNodeWithFontNamed:@"Avenir-Black"];
+        //            [self createLabel:gcLabel text:@"Leaderboard" fontSize:30 posY:-((size.height/2)/sizeDoubler) color:[SKColor blackColor] alpha:.7 sizeDoubler:1];
+        //            gcLabel.position = gcButton.position;
+        //            gcLabel.zPosition = 25;
+        //            gcLabel.verticalAlignmentMode = SKLabelVerticalAlignmentModeCenter;
+        //            gcLabel.name = @"gamecenterlabel";
+        //
+        //        }else{
+
+        SKLabelNode *gcLabel = [SKLabelNode labelNodeWithFontNamed:@"Avenir-Black"];
+        [self createLabel:gcLabel text:@"Leaderboard" fontSize:30 posY:-((mySize.height/2)/sizeDoubler) color:[SKColor blackColor] alpha:.7 sizeDoubler:1];
+        gcLabel.position = gcButton.position;
+        gcLabel.zPosition = 25;
+        gcLabel.verticalAlignmentMode = SKLabelVerticalAlignmentModeCenter;
+        gcLabel.name = @"gamecenterlabel";
+    }
+
+}
 -(void) setHighScore:(int)score {
     NSString* _score = [NSString stringWithFormat:@"%i",score];
     [clsCommon storeUserSetting:@"highscore" value:_score];
