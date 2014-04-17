@@ -47,6 +47,9 @@ BOOL showingLeaderboard;
         }];
 }
 
+-(void)gameCenterManager:(GameCenterManager *)manager availabilityChanged:(NSDictionary *)availabilityInformation{
+    
+}
 
 - (void)gameCenterManager:(GameCenterManager *)manager error:(NSError *)error {
     NSLog(@"GCM Error: %@", error);

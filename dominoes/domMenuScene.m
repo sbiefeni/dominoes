@@ -21,12 +21,13 @@
 //#import <AudioToolbox/AudioServices.h>
 
 @implementation domMenuScene {
-
+    CGSize mySize;
     
 }
 
 -(instancetype)initWithSize:(CGSize)size
 {
+    mySize=size;
     if(self = [super initWithSize:size]) {
 
 
@@ -256,7 +257,6 @@
     [self addChild:label];
 
 }
-
 
 - (SKSpriteNode *)instruct:(int)sizeDoubler posY:(int)posY
 {
