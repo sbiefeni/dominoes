@@ -67,6 +67,8 @@ extern clsPlayer* computer;
 extern BOOL ceilingOn;
 extern BOOL floorOn;
 
+extern BOOL gameCenterEnabled;
+
 extern int sizeDoubler;
 
 

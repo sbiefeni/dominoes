@@ -51,8 +51,7 @@ BOOL showingLeaderboard;
     NSLog(@"GC Availabilty: %@", availabilityInformation);
     if ([[availabilityInformation objectForKey:@"status"] isEqualToString:@"GameCenter Available"]) {
            // statusDetailLabel.text = @"Game Center is online, the current player is logged in, and this app is setup.";
-        domMenuScene *myScene = [domMenuScene new];
-        [myScene enableGameCenterButton];
+        gameCenterEnabled = true;
     }
 }
 

@@ -22,12 +22,14 @@
 
 @implementation domMenuScene {
     CGSize mySize;
+    NSTimer *aTimer;
     
 }
 
+
 -(instancetype)initWithSize:(CGSize)size
 {
-    mySize=size;
+
     if(self = [super initWithSize:size]) {
 
 
@@ -36,6 +38,10 @@
         [clsCommon playBackgroundMusicWithVolume:.2];
 
         mySize = size;
+
+
+        //timer to check for gamecenter button
+        aTimer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(aTime) userInfo:nil repeats:YES];
 
         SKEmitterNode *background = [SKEmitterNode dom_emitterNamed:@"Background_Stars"];
         background.particlePositionRange = CGVectorMake(self.size.width*2, self.size.height*2);
@@ -76,15 +82,10 @@
 //game center button------------------
 
         //get the gamecenter enabled setting from usersettings
-            gcEnabled = ([[clsCommon getUserSettingForKey:@"gcEnabled"] isEqual: @"1"]);
+           // gcEnabled = ([[clsCommon getUserSettingForKey:@"gcEnabled"] isEqual: @"1"]);
 
             isRunningInIde(gcEnabled=NO)
 
-            //check if gamecenter is available, and create the button
-            [self enableGameCenterButton];
-
-
-        //if(gcEnabled)
 
  //------------------------------------
 
@@ -201,7 +202,25 @@
     //[self removeAllChildren];
 }
 
--(void)enableGameCenterButton {
+-(void)aTime
+{
+//check for gamecenter availability, draw the button, then disable the timer
+    NSLog(@"timer called");
+
+    if([GKLocalPlayer localPlayer].isAuthenticated){
+
+        if ([self enableGameCenterButton]) {
+
+            if(aTimer)
+            {
+                [aTimer invalidate];
+                aTimer = nil;
+            }
+        }
+    }
+}
+
+-(BOOL)enableGameCenterButton {
     if([GKLocalPlayer localPlayer].isAuthenticated){
 
         SKSpriteNode *gcButton = [SKSpriteNode spriteNodeWithImageNamed:@"stretch_button.png"];
@@ -224,9 +243,13 @@
         gcLabel.zPosition = 25;
         gcLabel.verticalAlignmentMode = SKLabelVerticalAlignmentModeCenter;
         gcLabel.name = @"gamecenterlabel";
+
+        return true;
     }
+    return false;
 
 }
+
 -(void) setHighScore:(int)score {
     NSString* _score = [NSString stringWithFormat:@"%i",score];
     [clsCommon storeUserSetting:@"highscore" value:_score];

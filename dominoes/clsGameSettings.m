@@ -62,6 +62,8 @@ clsPlayer* computer;
 BOOL ceilingOn;
 BOOL floorOn;
 
+BOOL gameCenterEnabled;
+
 int sizeDoubler;
 
 // actual game settings..

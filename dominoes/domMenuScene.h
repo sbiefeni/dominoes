@@ -13,7 +13,6 @@
 
 @interface domMenuScene : SKScene
 
--(void)enableGameCenterButton;
-
+-(BOOL)enableGameCenterButton;
 
 @end
