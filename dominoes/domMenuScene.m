@@ -295,13 +295,21 @@
 }
 
 - (void)postToFacebookWithScore:(int)score {
-    //if([SLComposeViewController isAvailableForServiceType:SLServiceTypeFacebook]) {
 
-        SLComposeViewController *faceBook = [SLComposeViewController composeViewControllerForServiceType:SLServiceTypeFacebook];
+    SLComposeViewController *faceBook = [SLComposeViewController composeViewControllerForServiceType:SLServiceTypeFacebook];
 
-    [faceBook setInitialText:[NSString stringWithFormat: @"Check out this cool new game. Can you beat my score of %i Bricks?",score]];
+    if (score > 0) {
+        [faceBook setInitialText:[NSString stringWithFormat: @"Check out this cool new game. Can you beat my best level of %i Bricks? It's free... get it at:",score]];
+    }else{
+
+        [faceBook setInitialText:@"Check out this cool new game. It's free... get it at:"];
+
+    }
+
         [faceBook addURL:[NSURL URLWithString:@"https://itunes.apple.com/us/app/300-brickd/id859320677?ls=1&mt=8"]];
+
         [faceBook addImage:[UIImage imageNamed:@"300_logo"]];
+        [faceBook setEditing:false];
 
         [[self getActiveController] presentViewController:faceBook animated:YES completion:Nil];
 
@@ -321,19 +329,19 @@
         [self showPopupMessage:output withTitle:@"Facebook"];
 
     }];
-
-    //}
 }
 
 - (void)postToTwitterWithScore:(int)score {
-    //if ([SLComposeViewController isAvailableForServiceType:SLServiceTypeTwitter])
-    //{
-        SLComposeViewController *tweetSheet = [SLComposeViewController
+
+    SLComposeViewController *tweetSheet = [SLComposeViewController
                                                composeViewControllerForServiceType:SLServiceTypeTwitter];
-        [tweetSheet setInitialText:[NSString stringWithFormat: @"Check out 300 Brick'd for iphone. Can you beat my score of %i Bricks?",score]];
+    if (score > 0) {
+        [tweetSheet setInitialText:[NSString stringWithFormat: @"Check out 300 Brick'd. Can you beat my best level of %i Bricks? It's free... get it on the Appstore",score]];
+    }else{
+        [tweetSheet setInitialText:@"Check out 300 Brick'd. It's free... get it on the Appstore"];
+    }
 
-
-        [[self getActiveController] presentViewController:tweetSheet animated:YES completion:nil];
+    [[self getActiveController] presentViewController:tweetSheet animated:YES completion:nil];
 
     [tweetSheet setCompletionHandler:^(SLComposeViewControllerResult result) {
         NSString *output;
@@ -352,7 +360,6 @@
         [self showPopupMessage:output withTitle:@"Twitter"];
 
     }];
-    //}
 }
 
 -(void)showPopupMessage:(NSString*)message withTitle:(NSString*)title{
@@ -403,6 +410,7 @@
 
         }else if([node.name isEqualToString:@"twitter"]){
             [self postToTwitterWithScore:levelHighScore];
+
         }else {
             if (gameStatus == reset || gameStatus == game_Started) {
                 
