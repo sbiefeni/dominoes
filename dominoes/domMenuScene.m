@@ -343,6 +343,7 @@
                 break;
             case SLComposeViewControllerResultDone:
                 output = @"Post Successfull";
+                    [clsCommon storeUserSetting:@"socialFreeLife" value:@"yes"];
                 break;
             default:
                 break;
