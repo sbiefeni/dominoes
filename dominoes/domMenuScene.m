@@ -390,9 +390,7 @@
 
             if([GKLocalPlayer localPlayer].isAuthenticated){
                 //show leaderboard
-                //[[GameCenterManager sharedManager] presentLeaderboardsOnViewController:[self getActiveController]];
-                [self postToFacebookWithScore:levelHighScore];
-
+                [[GameCenterManager sharedManager] presentLeaderboardsOnViewController:[self getActiveController]];
                 
             }else{
                 //authenticate player -- can't do with game center manager
