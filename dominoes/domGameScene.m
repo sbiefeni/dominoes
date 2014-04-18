@@ -489,7 +489,7 @@ CGPoint pointA;
 
             //crashed = false;
             [self runAction:[SKAction sequence:@[
-                  [SKAction playSoundFileNamed:@"sounds/long_ding2.mp3" waitForCompletion:NO],
+                  [SKAction playSoundFileNamed:@"sounds/long_ding3.wav" waitForCompletion:NO],
                   [SKAction runBlock:^{
                         AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
                    }],
@@ -518,7 +518,7 @@ CGPoint pointA;
 
                   [SKAction waitForDuration:.2],
                   [SKAction runBlock:^{ [explosion removeFromParent]; } ],
-                  [SKAction waitForDuration:_sceneChangeDelay + 3],
+                  [SKAction waitForDuration:_sceneChangeDelay + 1],
                   [SKAction runBlock:^{
                         domMenuScene *menu = [[domMenuScene alloc] initWithSize:self.size];
                         [self.view presentScene:menu transition:[SKTransition doorsCloseHorizontalWithDuration:1]];
@@ -821,7 +821,7 @@ CGPoint pointA;
             roundOver = TRUE;
         //);
 
-        _sceneChangeDelay  = 4;
+        _sceneChangeDelay  = 2;
         _fallingAnimationInterval = (NSTimeInterval)_sceneChangeDelay/playerDominos.count;
         if (_fallingAnimationInterval > .1) {
             _fallingAnimationInterval = .1;
@@ -830,7 +830,7 @@ CGPoint pointA;
 
 
         [self runAction:[SKAction sequence:@[
-            [SKAction playSoundFileNamed:@"sounds/long_ding2.mp3" waitForCompletion:NO],
+            [SKAction playSoundFileNamed:@"sounds/long_ding3.wav" waitForCompletion:NO],
             [SKAction runBlock:^{
                 AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
             }],
@@ -859,7 +859,7 @@ CGPoint pointA;
 
             [SKAction waitForDuration:0.2],
             [SKAction runBlock:^{ explosion.particleBirthRate = 0;} ],
-            [SKAction waitForDuration:_sceneChangeDelay + 3],
+            [SKAction waitForDuration:_sceneChangeDelay + 1],
             [SKAction runBlock:^{
                 //notRunningInIde(
                     domMenuScene *menu = [[domMenuScene alloc] initWithSize:self.size];
