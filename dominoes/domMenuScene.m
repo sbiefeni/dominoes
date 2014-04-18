@@ -112,8 +112,8 @@
 
             //for debugging - to reset the level high score
             isRunningInIde(
-                levelHighScore = 0;
-                [self setLevelHighScore: 0];
+               // levelHighScore = 0;
+                //[self setLevelHighScore: 0];
             );
 
                 //if new best level, give a message and store it!
@@ -136,8 +136,8 @@
 
             //debugging - reset the total score
             isRunningInIde(
-                highScore=0;
-                [self setHighScore:0];
+               // highScore=0;
+                //[self setHighScore:0];
             );
 
                 //if new high score, give a message and store it!
@@ -321,7 +321,7 @@
                 break;
             case SLComposeViewControllerResultDone:
                 output = @"Post Successfull";
-                 [clsCommon storeUserSetting:@"socialFreeLife" value:@"yes"];
+
                 break;
             default:
                 break;
