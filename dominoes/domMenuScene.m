@@ -24,6 +24,7 @@
 @implementation domMenuScene {
     CGSize mySize;
     NSTimer *aTimer;
+    int levelHighScore;
     
 }
 
@@ -60,7 +61,7 @@
         }
 
         int highScore = [self getHighScore];
-        int levelHighscore = [self getLevelHighscore];
+        levelHighScore = [self getLevelHighscore];
 
         if (gameStatus != game_Started ) {  //game hasn't started.. show initial screen
 
@@ -76,7 +77,7 @@
             [self createLabel:hscore text:[NSString stringWithFormat:@"High Score: %i",(int)highScore] fontSize:20 posY:150 color:[SKColor whiteColor] alpha:1 sizeDoubler:sizeDoubler];
 
             SKLabelNode* hlscore = [SKLabelNode labelNodeWithFontNamed:@"Avenir-Black"];
-            [self createLabel:hlscore text:[NSString stringWithFormat:@"Best Level: %i",(int)levelHighscore] fontSize:30 posY:180 color:[SKColor whiteColor] alpha:.7 sizeDoubler:sizeDoubler];
+            [self createLabel:hlscore text:[NSString stringWithFormat:@"Best Level: %i",levelHighScore] fontSize:30 posY:180 color:[SKColor whiteColor] alpha:.7 sizeDoubler:sizeDoubler];
 
                 [self addChild: [self instruct:sizeDoubler posY:-135]]; //instructions button, from below
 
@@ -111,22 +112,22 @@
 
             //for debugging - to reset the level high score
             isRunningInIde(
-                levelHighscore = 0;
+                levelHighScore = 0;
                 [self setLevelHighScore: 0];
             );
 
                 //if new best level, give a message and store it!
-                if (score > levelHighscore) {
+                if (score > levelHighScore) {
                     [self setLevelHighScore: score];
 
-                    levelHighscore = score;
+                    levelHighScore = score;
 
                     SKLabelNode *hs = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
                     [self createLabel:hs text:@"NEW BEST LEVEL!" fontSize:30 posY:120 color:[SKColor whiteColor] alpha:1 sizeDoubler:sizeDoubler];
                 }
 
                 SKLabelNode* hlscore = [SKLabelNode labelNodeWithFontNamed:@"Arial"];
-                [self createLabel:hlscore text:[NSString stringWithFormat:@"Best Level: %i",(int)levelHighscore] fontSize:20 posY:80 color:[SKColor whiteColor] alpha:1 sizeDoubler:sizeDoubler];
+                [self createLabel:hlscore text:[NSString stringWithFormat:@"Best Level: %i",levelHighScore] fontSize:20 posY:80 color:[SKColor whiteColor] alpha:1 sizeDoubler:sizeDoubler];
 
         }else{
                 //game over
@@ -172,7 +173,7 @@
 
                 gameStatus = game_Over;
 
-                if (score > levelHighscore) {
+                if (score > levelHighScore) {
                     [self setLevelHighScore: score];
                 }
 
@@ -299,7 +300,7 @@
         SLComposeViewController *faceBook = [SLComposeViewController composeViewControllerForServiceType:SLServiceTypeFacebook];
 
     [faceBook setInitialText:[NSString stringWithFormat: @"Check out this cool new game. Can you beat my score of %i Bricks?",score]];
-        [faceBook addURL:[NSURL URLWithString:@"http://www.appstore.link"]];
+        [faceBook addURL:[NSURL URLWithString:@"https://itunes.apple.com/us/app/300-brickd/id859320677?ls=1&mt=8"]];
         [faceBook addImage:[UIImage imageNamed:@"300_logo"]];
 
         [[self getActiveController] presentViewController:faceBook animated:YES completion:Nil];
@@ -389,8 +390,8 @@
 
             if([GKLocalPlayer localPlayer].isAuthenticated){
                 //show leaderboard
-                [[GameCenterManager sharedManager] presentLeaderboardsOnViewController:[self getActiveController]];
-                //[self postToFacebookWithScore:0];
+                //[[GameCenterManager sharedManager] presentLeaderboardsOnViewController:[self getActiveController]];
+                [self postToFacebookWithScore:levelHighScore];
 
                 
             }else{
@@ -399,10 +400,10 @@
             }
 
         }else if([node.name isEqualToString:@"facebook"]){
-            [self postToFacebookWithScore:score];
+            [self postToFacebookWithScore:levelHighScore];
 
         }else if([node.name isEqualToString:@"twitter"]){
-
+            [self postToTwitterWithScore:levelHighScore];
         }else {
             if (gameStatus == reset || gameStatus == game_Started) {
                 
