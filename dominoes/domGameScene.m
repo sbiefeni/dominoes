@@ -227,7 +227,7 @@ CGPoint pointA;
         lives = 3;
         level = 1;
         gameSpeed = .25;
-        isRunningInIde(lives=1)
+        //isRunningInIde(lives=1)
 
         // check if social sharing free life applies to this player
         if([[clsCommon getUserSettingForKey:@"socialFreeLife"] isEqualToString:@"yes"]){
@@ -249,7 +249,7 @@ CGPoint pointA;
 
 
     isRunningInIde(
-        gameSpeed = .02;
+        //gameSpeed = .02;
     )
 
     // flash some stuff on the screen TODO
@@ -326,6 +326,23 @@ CGPoint pointA;
         [self addChild:lblFaster];
     }
 
+    //show lives remaining
+    SKLabelNode *lblLives = [SKLabelNode labelNodeWithFontNamed:@"Arial"];
+    if (lives > 1) {
+        lblLives.text = [NSString stringWithFormat:@"%i Lives Remaining", lives];
+    }else{
+        lblLives.text = @"Last Life!";
+    }
+
+    lblLives.fontSize = 20 * sizeDoubler;
+    lblLives.alpha = .7;
+    int yAdjust = 200;
+    if (ceilingOn) {
+        yAdjust = 150;
+    }
+    lblLives.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame)+ (yAdjust * sizeDoubler) );
+    [self addChild:lblLives];
+
     [self runAction:
        [SKAction sequence:@[
          [SKAction repeatAction:
@@ -343,6 +360,7 @@ CGPoint pointA;
           ],
           [SKAction runBlock:^{
                 [lblFaster removeFromParent];
+                [lblLives removeFromParent];
           }],
         ]]
      ];
@@ -460,8 +478,8 @@ CGPoint pointA;
 
             roundOver  = TRUE;
 
-            _sceneChangeDelay  = 4;
-            isRunningInIde(_sceneChangeDelay = 2);
+            _sceneChangeDelay  = 2;
+            //isRunningInIde(_sceneChangeDelay = 2);
             _fallingAnimationInterval = (NSTimeInterval)_sceneChangeDelay/computerDominos.count;
             if (_fallingAnimationInterval > .1) {
                 _fallingAnimationInterval = .1;
@@ -799,9 +817,9 @@ CGPoint pointA;
         [self addChild:explosion];
         player.didExplosion = true;
 
-        notRunningInIde(
+        //notRunningInIde(
             roundOver = TRUE;
-        );
+        //);
 
         _sceneChangeDelay  = 4;
         _fallingAnimationInterval = (NSTimeInterval)_sceneChangeDelay/playerDominos.count;
@@ -843,10 +861,10 @@ CGPoint pointA;
             [SKAction runBlock:^{ explosion.particleBirthRate = 0;} ],
             [SKAction waitForDuration:_sceneChangeDelay + 3],
             [SKAction runBlock:^{
-                notRunningInIde(
+                //notRunningInIde(
                     domMenuScene *menu = [[domMenuScene alloc] initWithSize:self.size];
                       [self.view presentScene:menu transition:[SKTransition doorsCloseHorizontalWithDuration:0.5]];
-                );
+                //);
                 }],
             ]]];
         lives -= 1;  //minus one life
