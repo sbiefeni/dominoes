@@ -9,7 +9,7 @@
 #import <SpriteKit/SpriteKit.h>
 #import <Foundation/Foundation.h>
 #import <GameKit/GameKit.h>
-
+#import <Social/Social.h>
 
 @interface domMenuScene : SKScene
 

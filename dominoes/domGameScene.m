@@ -227,12 +227,16 @@ CGPoint pointA;
         lives = 3;
         level = 1;
         gameSpeed = .25;
+        isRunningInIde(lives=1)
+
+        // TODO check if social sharing free life applies to this player
+
     }
 
     //if won the last round, speed things up a bit
     BOOL isFaster = false;
     if (score > 0 && gameSpeed > .05) { //define max speed
-        gameSpeed -= .03;
+        gameSpeed -= .02;
         isFaster = true;
     }
 

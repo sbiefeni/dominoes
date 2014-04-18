@@ -36,6 +36,7 @@
 		38E4967F18D7CDD600D111E9 /* brick.png in Resources */ = {isa = PBXBuildFile; fileRef = 38E4967E18D7CDD600D111E9 /* brick.png */; };
 		38E7383118EB4E9400EE0C6E /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 38E7383018EB4E9400EE0C6E /* GameKit.framework */; };
 		38FA7D3618E77F5E00820901 /* floor1.sks in Resources */ = {isa = PBXBuildFile; fileRef = 38FA7D3518E77F5E00820901 /* floor1.sks */; };
+		38FD20541900529700C8461B /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 38FD20531900529700C8461B /* Social.framework */; };
 		55CB7E2018CBD180001EFA1C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55CB7E1F18CBD180001EFA1C /* Foundation.framework */; };
 		55CB7E2218CBD180001EFA1C /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55CB7E2118CBD180001EFA1C /* CoreGraphics.framework */; };
 		55CB7E2418CBD180001EFA1C /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55CB7E2318CBD180001EFA1C /* UIKit.framework */; };
@@ -104,6 +105,7 @@
 		38E4967E18D7CDD600D111E9 /* brick.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = brick.png; sourceTree = "<group>"; };
 		38E7383018EB4E9400EE0C6E /* GameKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameKit.framework; path = System/Library/Frameworks/GameKit.framework; sourceTree = SDKROOT; };
 		38FA7D3518E77F5E00820901 /* floor1.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = floor1.sks; sourceTree = "<group>"; };
+		38FD20531900529700C8461B /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
 		55CB7E1C18CBD180001EFA1C /* 300.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = 300.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		55CB7E1F18CBD180001EFA1C /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		55CB7E2118CBD180001EFA1C /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -134,6 +136,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				38FD20541900529700C8461B /* Social.framework in Frameworks */,
 				380B7ACA18FE115100DF6A09 /* Security.framework in Frameworks */,
 				380B7AC818FE114400DF6A09 /* SystemConfiguration.framework in Frameworks */,
 				34C0142D18D2A4C8007C37AB /* iAd.framework in Frameworks */,
@@ -299,6 +302,7 @@
 		55CB7E1E18CBD180001EFA1C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				38FD20531900529700C8461B /* Social.framework */,
 				380B7AC918FE115100DF6A09 /* Security.framework */,
 				380B7AC718FE114400DF6A09 /* SystemConfiguration.framework */,
 				38E7383018EB4E9400EE0C6E /* GameKit.framework */,
