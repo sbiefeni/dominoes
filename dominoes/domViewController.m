@@ -213,7 +213,6 @@ BOOL showingLeaderboard;
 
 -(void)bannerViewDidLoadAd:(ADBannerView *)banner{
     bannerIsLoaded=YES;
-    NSLog(@"Received Banner Height is %f",banner.bounds.size.height);
 }
 
 //- (void)keyDown:(nse *)theEvent {
