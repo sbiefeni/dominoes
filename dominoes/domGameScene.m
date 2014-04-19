@@ -972,9 +972,11 @@ CGPoint pointA;
     }else{
         adShowingArenaScaleAmount = .955;  //for ipad
     }
-
-    [backGround setYScale:adShowingArenaScaleAmount];
-
+    
+    if(bannerCount>0){
+        [backGround setYScale:adShowingArenaScaleAmount];
+    }
+    
     float backGroundPos = arenaSize.height/2 + bannerHeightAdjuster ;
 
 

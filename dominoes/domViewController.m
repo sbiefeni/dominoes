@@ -129,7 +129,7 @@ BOOL showingLeaderboard;
         [adView setAlpha:0];
         bannerIsVisible=NO;
         ceilingOn=0;
-        floorOn=1;
+        floorOn=0;
     }
 }
 //-(void)showLeaderBoard:(BOOL)shouldShowLeaderboard{
@@ -213,6 +213,7 @@ BOOL showingLeaderboard;
 
 -(void)bannerViewDidLoadAd:(ADBannerView *)banner{
     bannerIsLoaded=YES;
+    NSLog(@"Received Banner Height is %f",banner.bounds.size.height);
 }
 
 //- (void)keyDown:(nse *)theEvent {
