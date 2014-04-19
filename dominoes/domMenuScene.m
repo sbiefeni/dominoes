@@ -323,6 +323,7 @@
                 output = @"Post Successful.. 4 Lives Granted!";
                 [clsCommon storeUserSetting:@"socialFreeLife" value:@"yes"];
                 break;
+            
             default:
                 break;
         } //check if everything worked properly. Give out a message on the state.
