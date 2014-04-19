@@ -92,7 +92,7 @@ BOOL showingLeaderboard;
 +(void)setAdView:(BOOL)showAd ShowOnTop:(BOOL)onTop ChooseRandom:(BOOL)useRandom{
     
 
-        if(bannerIsLoaded){
+    if(bannerIsLoaded){
         
         if (showAd) {
             BOOL blOnTop;
@@ -129,7 +129,7 @@ BOOL showingLeaderboard;
         [adView setAlpha:0];
         bannerIsVisible=NO;
         ceilingOn=0;
-        floorOn=1;
+        floorOn=0;
     }
 }
 //-(void)showLeaderBoard:(BOOL)shouldShowLeaderboard{

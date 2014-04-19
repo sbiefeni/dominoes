@@ -53,7 +53,7 @@
 
         self.backgroundColor = [SKColor blackColor];
         
-        [self addChild:background];
+        //[self addChild:background];
 
         sizeDoubler = 1;
         if (size.width > 320){ //make fonts and spacing bigger on larger screen
@@ -413,6 +413,8 @@
             [self postToTwitterWithScore:levelHighScore];
 
         }else {
+            [aTimer invalidate];
+            aTimer = nil;
             if (gameStatus == reset || gameStatus == game_Started) {
                 
                 domGameScene *game = [[domGameScene alloc] initWithSize:self.size];

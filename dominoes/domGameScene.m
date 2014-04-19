@@ -127,7 +127,7 @@ CGPoint pointA;
         dominoScaleFactorY = .9;
     }
     
-//set the size of the grid and dominoe
+//set the size of the grid and domino
     //pre-scaled should be 64 x 68
     gridSize = CGSizeMake(gridWidth/cols/scaleX, gridHeight/rows/scaleY);
     dominoSize = CGSizeMake((gridWidth/cols)/scaleX*dominoScaleFactorX, (gridHeight/rows)/scaleY*dominoScaleFactorY);
@@ -921,8 +921,8 @@ CGPoint pointA;
     [backGround addChild:floor];
 }
 
--(int) getBannerWidth{
-    return (arenaSize.width == 320) ? 50 : 66;
+-(int) getBannerHeight{
+    return (arenaSize.width == 320) ? 48 : 66;
 }
 
 -(void) setUpBackGround{
@@ -942,6 +942,7 @@ CGPoint pointA;
     //determine the banner size (according to iAD)
     bannerSizeY = (arenaSize.width == 320)?50:56;
 
+    bannerHeightAdjuster = 0;
 
     //if only one of the banners is on, then we need an adjuster to center things
     if (ceilingOn + floorOn ==1){
@@ -973,7 +974,9 @@ CGPoint pointA;
         adShowingArenaScaleAmount = .955;  //for ipad
     }
 
-    [backGround setYScale:adShowingArenaScaleAmount];
+    if (bannerCount > 0){
+        [backGround setYScale:adShowingArenaScaleAmount];
+    }
 
     float backGroundPos = arenaSize.height/2 + bannerHeightAdjuster ;
 
