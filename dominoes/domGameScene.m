@@ -229,7 +229,7 @@ CGPoint pointA;
         gameSpeed = .25;
         //isRunningInIde(lives=1)
 
-        // check if social sharing free life applies to this player
+    // check if social sharing free life applies to this player
         if([[clsCommon getUserSettingForKey:@"socialFreeLife"] isEqualToString:@"yes"]){
             lives=4;
         }

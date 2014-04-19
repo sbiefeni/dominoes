@@ -320,8 +320,8 @@
                 output = @"Post Cancelled";
                 break;
             case SLComposeViewControllerResultDone:
-                output = @"Post Successfull";
-
+                output = @"Post Successful.. 4 Lives Granted!";
+                [clsCommon storeUserSetting:@"socialFreeLife" value:@"yes"];
                 break;
             default:
                 break;
@@ -351,7 +351,7 @@
                 output = @"Post Cancelled";
                 break;
             case SLComposeViewControllerResultDone:
-                output = @"Post Successfull";
+                output = @"Post Successful.. 4 Lives Granted!";
                     [clsCommon storeUserSetting:@"socialFreeLife" value:@"yes"];
                 break;
             default:
