@@ -25,15 +25,16 @@
 
 
 //define z positions for objects
-//#define doorZPos    5
 #define dominoZPos      6
-//#define domStartSpeed   .10
-
 
 //define rows and cols
 #define rows        28
 #define cols        20
-//scale up the domino size relative to the grid
+
+#define _gameSpeed  .25
+#define _maxSpeed   .05
+#define _gameSpeedIncrement  .02
+#define SceneChangeDelay     3
 
 
 @interface domGameScene (){
@@ -59,10 +60,8 @@
 @property NSTimeInterval fallingAnimationSlowStart;
 @property int sceneChangeDelay;
 
-
-
-
 @end
+
 
 @implementation domGameScene
 
@@ -79,13 +78,10 @@ CGPoint pointA;
 
 
         arenaSize = size;
-        //if(bannerIsLoaded && !bannerIsVisible){
-            [domViewController setAdView:YES ShowOnTop:YES ChooseRandom:YES];
-        //}
+
+        [domViewController setAdView:YES ShowOnTop:YES ChooseRandom:YES];
         
         [self setUpBackGround];
-        
-        //[self setUpDoors:size];
         
         [self setUpDominoGrid];
 
@@ -97,12 +93,9 @@ CGPoint pointA;
 
         roundOver = FALSE;
 
-        //}
         //NSLog(@"Width: %f, Height: %f", size.width, size.height);
-    }
-    //get starting time
-    //startTime=CACurrentMediaTime();
 
+    }
     return self;
 }
 
@@ -202,23 +195,9 @@ CGPoint pointA;
     
 // set the start position and direction of players
 // random start locations
-
     [self setRandomStartLocation:player computer:FALSE];
-//
+
     [self setRandomStartLocation:computer computer:TRUE];
-
-//    player.curX = cols/2 - 1;
-//    player.curY = rows/2 -1;
-//    player.curDirection = up;
-//    player.lastDirection = up;
-//
-//    computer.curX = cols/2 +1;
-//    computer.curY = rows/2 +1;
-//    computer.curDirection = down;
-//    computer.lastDirection = down;
-
-//set the speed interval between moves (time for both player and computer to complete one move)
-
 
 //set up params
     if (gameStatus != game_Started) {
@@ -226,7 +205,8 @@ CGPoint pointA;
         totalScore = 0;
         lives = 3;
         level = 1;
-        gameSpeed = .25;
+        gameSpeed = _gameSpeed;
+
         //isRunningInIde(lives=1)
 
     // check if social sharing free life applies to this player
@@ -238,8 +218,8 @@ CGPoint pointA;
 
     //if won the last round, speed things up a bit
     BOOL isFaster = false;
-    if (score > 0 && gameSpeed > .05) { //define max speed
-        gameSpeed -= .02;
+    if (score > 0 && gameSpeed > _maxSpeed) { //define max speed
+        gameSpeed -= _gameSpeedIncrement;
         isFaster = true;
     }
 
@@ -252,12 +232,11 @@ CGPoint pointA;
         //gameSpeed = .02;
     )
 
-    // flash some stuff on the screen TODO
-    // show level number
+    // flash some stuff on the screen
+    // show level number TODO
     // change level parameters
     // start countdown.. direction arrows
-
-//start the timer that runs the game!
+    // start the timer that runs the game!
 
     [self runAction:
         [SKAction sequence:@[
@@ -281,12 +260,10 @@ CGPoint pointA;
     {
         return;
     }
-    //player move
-    //if (playerDominos.count > 4) {
+    //computer move
     [self handleComputerMove];
-    //}
 
-    //computer move, 1/2 of gameSpeed interval wait time to run it
+    //player move, 1/2 gameSpeed interval wait time to run it
     [self runAction:[SKAction sequence:@[
         [SKAction waitForDuration:gameSpeed/2],
         [SKAction performSelector:@selector(handlePlayerMove) onTarget:self],
@@ -322,9 +299,11 @@ CGPoint pointA;
     }else{
         lblFaster.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame) );
     }
+
     if (faster) {
         [self addChild:lblFaster];
     }
+
 
     //show lives remaining
     SKLabelNode *lblLives = [SKLabelNode labelNodeWithFontNamed:@"Arial"];
@@ -342,6 +321,33 @@ CGPoint pointA;
     }
     lblLives.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame)+ (yAdjust * sizeDoubler) );
     [self addChild:lblLives];
+
+    //add a message to prompt user to get next achievement
+    int levelHighScore = [self getLevelHighscore];
+    SKLabelNode* achievPrompt = [SKLabelNode labelNodeWithFontNamed:@"Arial"];
+    int goal = 100;
+
+    //figure out what the next goal level is
+    if (levelHighScore < 150) {
+        goal = 150;
+    }else if (levelHighScore < 200){
+        goal = 200;
+    }else if (levelHighScore < 225){
+        goal = 225;
+    }else if (levelHighScore < 250){
+        goal = 250;
+    }else if (levelHighScore < 275){
+        goal = 275;
+    }else if (levelHighScore < 300){
+        goal = 300;
+    }
+
+    achievPrompt.text = [NSString stringWithFormat:@"Get a badge for %i Bricks!",goal];
+
+    achievPrompt.fontSize = 20;
+    achievPrompt.alpha = .7;
+    achievPrompt.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame)+ (yAdjust * sizeDoubler) - 25 );
+    [self addChild:achievPrompt];
 
     [self runAction:
        [SKAction sequence:@[
@@ -361,10 +367,18 @@ CGPoint pointA;
           [SKAction runBlock:^{
                 [lblFaster removeFromParent];
                 [lblLives removeFromParent];
+                [achievPrompt removeFromParent];
           }],
         ]]
      ];
 
+}
+
+-(int) getLevelHighscore {
+    NSString* _score;
+    _score = [clsCommon getUserSettingForKey:@"levelHighscore"];
+    int value = [_score intValue];
+    return value;
 }
 
 -(void) handleComputerMove {
@@ -478,7 +492,7 @@ CGPoint pointA;
 
             roundOver  = TRUE;
 
-            _sceneChangeDelay  = 2;
+            _sceneChangeDelay  = SceneChangeDelay;
             //isRunningInIde(_sceneChangeDelay = 2);
             _fallingAnimationInterval = (NSTimeInterval)_sceneChangeDelay/computerDominos.count;
             if (_fallingAnimationInterval > .1) {
@@ -821,12 +835,12 @@ CGPoint pointA;
             roundOver = TRUE;
         //);
 
-        _sceneChangeDelay  = 2;
+        _sceneChangeDelay  = SceneChangeDelay;
         _fallingAnimationInterval = (NSTimeInterval)_sceneChangeDelay/playerDominos.count;
         if (_fallingAnimationInterval > .1) {
             _fallingAnimationInterval = .1;
         }
-        _fallingAnimationSlowStart = .1;
+        _fallingAnimationSlowStart = .15;
 
 
         [self runAction:[SKAction sequence:@[

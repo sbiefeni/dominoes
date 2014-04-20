@@ -7,6 +7,11 @@
 //
 #define isRunningInIde(x) if ([[[UIDevice currentDevice].model lowercaseString] rangeOfString:@"simulator"].location != NSNotFound){x;}
 
+#define itunesURL   @"http://goo.gl/EZPeMw"
+
+//shortened with google URL shortener service
+//@"https://itunes.apple.com/us/app/300-brickd/id859320677?ls=1&mt=8"
+
 
 #import "domMenuScene.h"
 #import "domGameScene.h"
@@ -306,7 +311,7 @@
 
     }
 
-        [faceBook addURL:[NSURL URLWithString:@"https://itunes.apple.com/us/app/300-brickd/id859320677?ls=1&mt=8"]];
+        [faceBook addURL:[NSURL URLWithString:itunesURL]];
 
         [faceBook addImage:[UIImage imageNamed:@"300_logo"]];
         [faceBook setEditing:false];
@@ -338,7 +343,7 @@
     SLComposeViewController *tweetSheet = [SLComposeViewController
                                                composeViewControllerForServiceType:SLServiceTypeTwitter];
     if (score > 0) {
-        [tweetSheet setInitialText:[NSString stringWithFormat: @"Check out 300 Brick'd. Can you beat my best level of %i Bricks? It's free... get it on the Appstore",score]];
+        [tweetSheet setInitialText:[NSString stringWithFormat: @"Check out 300 Brick'd. Can you beat my best level of %i Bricks? It's free... get it at %@",score, itunesURL]];
     }else{
         [tweetSheet setInitialText:@"Check out 300 Brick'd. It's free... get it on the Appstore"];
     }
