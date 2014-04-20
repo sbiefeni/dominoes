@@ -667,6 +667,8 @@ CGPoint pointA;
         return;
     }
 
+    doingPlayerMove = true;
+
     clsDomino* domino =[clsDomino new];
     BOOL crashed = false;
     
@@ -714,63 +716,8 @@ CGPoint pointA;
         player.curDirection = left;
 
 
+    crashed = [self doNextPlayerMove];
 
-    switch (player.curDirection) {
-        case left:
-                if (player.curX > 0 && grid[player.curX-1][player.curY]==false) {
-                    player.curX --;
-                    player.lastDirection = player.curDirection;
-                }else{
-                    if (player.curDirection == player.lastDirection) {
-                        crashed = true;
-                    }else{
-                        player.curDirection = player.lastDirection;
-                    }
-                }
-
-            break;
-        case right:
-                if (player.curX < cols && grid[player.curX+1][player.curY]==false){
-                    player.curX ++;
-                    player.lastDirection = player.curDirection;
-                }else{
-                    if (player.curDirection == player.lastDirection) {
-                        crashed = true;
-                    }else{
-                        player.curDirection = player.lastDirection;
-                    }
-                }
-            break;
-        case up:
-                if (player.curY < rows && grid[player.curX][player.curY+1]==false){
-                    player.curY ++;
-                    player.lastDirection = player.curDirection;
-                }else{
-                    if (player.curDirection == player.lastDirection) {
-                        crashed = true;
-                    }else{
-                        player.curDirection = player.lastDirection;
-                    }
-                }
-
-            break;
-        case down:
-                if (player.curY > 0 && grid[player.curX][player.curY-1]==false){
-                    player.curY --;
-                    player.lastDirection = player.curDirection;
-                }else{
-                    if (player.curDirection == player.lastDirection) {
-                        crashed = true;
-                    }else{
-                        player.curDirection = player.lastDirection;
-                    }
-                }
-
-            break;
-        default:
-            player.curDirection = player.lastDirection;
-            break;
-    }
 
     if (!crashed) {
         //draw a domino
@@ -794,26 +741,21 @@ CGPoint pointA;
 
         [self addChild:domino];
 
+        doingPlayerMove = false;
+
         //reset explosion so it can happen again..
         player.didExplosion = false;
 
         //add to the array so we can track back later
         [playerDominos addObject:domino];
 
+
         //add to the grid... for domino colision detection
         grid[player.curX][player.curY]=true;
         
     //play a sound
-//    [self runAction: [SKAction playSoundFileNamed:@"sounds/woosh_2.wav" waitForCompletion:NO]];
         [self runAction: [SKAction playSoundFileNamed:@"sounds/woosh_2.wav" waitForCompletion:NO]];
-//        AVAudioPlayer *audioPlayer;
-//        
-//        NSURL *url = [NSURL fileURLWithPath:@"sounds/woosh_2.wav"];
-//       
-//        NSError *error;
-//        audioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:url error:&error];
-//        audioPlayer.numberOfLoops = -1;
-//        [audioPlayer play];
+
         
         
 }else{  //we crashed!
@@ -888,11 +830,79 @@ CGPoint pointA;
 
 }
 
+-(BOOL)doNextPlayerMove {
+
+    BOOL crashed = false;
+
+    switch (player.curDirection) {
+        case left:
+            if (player.curX > 0 && grid[player.curX-1][player.curY]==false) {
+                player.curX --;
+                player.lastDirection = player.curDirection;
+            }else{
+                if (player.curDirection == player.lastDirection) {
+                    crashed = true;
+                }else{
+                    player.curDirection = player.lastDirection;
+                    crashed = [self doNextPlayerMove];
+                }
+            }
+
+            break;
+        case right:
+            if (player.curX < cols && grid[player.curX+1][player.curY]==false){
+                player.curX ++;
+                player.lastDirection = player.curDirection;
+            }else{
+                if (player.curDirection == player.lastDirection) {
+                    crashed = true;
+                }else{
+                    player.curDirection = player.lastDirection;
+                    crashed = [self doNextPlayerMove];
+                }
+            }
+            break;
+        case up:
+            if (player.curY < rows && grid[player.curX][player.curY+1]==false){
+                player.curY ++;
+                player.lastDirection = player.curDirection;
+            }else{
+                if (player.curDirection == player.lastDirection) {
+                    crashed = true;
+                }else{
+                    player.curDirection = player.lastDirection;
+                    crashed = [self doNextPlayerMove];
+                }
+            }
+
+            break;
+        case down:
+            if (player.curY > 0 && grid[player.curX][player.curY-1]==false){
+                player.curY --;
+                player.lastDirection = player.curDirection;
+            }else{
+                if (player.curDirection == player.lastDirection) {
+                    crashed = true;
+                }else{
+                    player.curDirection = player.lastDirection;
+                    crashed = [self doNextPlayerMove];
+                }
+            }
+
+            break;
+        default:
+            player.curDirection = player.lastDirection;
+            break;
+    }
+
+    return crashed;
+}
+
 - (CGPoint) calcDominoPosition:(int)x withArg2:(int) y{
-    
+
     int xPos;
     int yPos;
-    
+
     //minX = width of wall
     xPos = minX/scaleX + (x * gridSize.width);
     yPos = minY/scaleY + (y * gridSize.height);
@@ -1003,16 +1013,6 @@ CGPoint pointA;
 
 
     [self addChild:backGround];
-
-
-
-
-
-    
-
-
-
-
     
 }
 
@@ -1140,44 +1140,49 @@ int countSquares;
     
     // Get the specific point that was touched
     pointA = [touch locationInView:self.view];
-    NSLog(@"X location: %f", pointA.x);
-    NSLog(@"Y Location: %f",pointA.y);
-    
+//    NSLog(@"X location: %f", pointA.x);
+//    NSLog(@"Y Location: %f",pointA.y);
+
 }
 
--(float)CalcDegrees:(CGPoint) pointB{
-    float Theta;
-    if ( pointB.x - pointA.x == 0 )
-        if ( pointB.y > pointA.y )
-            Theta = 0;
-        else
-            Theta = (float)( M_PI);
-        else
-        {
-            Theta = atan((pointB.y - pointA.y) / (pointB.x - pointA.x));
-            if ( pointB.x > pointA.x )
-                Theta = (float)( M_PI ) / 2.0f - Theta;
-            else
-                Theta = (float)( M_PI ) * 1.5f - Theta;
-        };
-    return Theta * (180/M_PI);
-    
-}
+//-(float)CalcDegrees:(CGPoint) pointB{
+//    float Theta;
+//    if ( pointB.x - pointA.x == 0 )
+//        if ( pointB.y > pointA.y )
+//            Theta = 0;
+//        else
+//            Theta = (float)( M_PI);
+//        else
+//        {
+//            Theta = atan((pointB.y - pointA.y) / (pointB.x - pointA.x));
+//            if ( pointB.x > pointA.x )
+//                Theta = (float)( M_PI ) / 2.0f - Theta;
+//            else
+//                Theta = (float)( M_PI ) * 1.5f - Theta;
+//        };
+//    return Theta * (180/M_PI);
+//    
+//}
 
 
 -(void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
-    UITouch *touch=[touches anyObject];
-    CGPoint pointB=[touch locationInView:self.view];
-    
-    //determine if not a swipe
-    if (abs(pointA.x - pointB.x) < 30 && abs(pointA.y - pointB.y) < 30) {
-        //toint touch detected
-        [self handlePointTouchWith_X:pointB.x andY:pointB.y];
-        return;
+
+    if (!doingPlayerMove){  //if currently processing player move, ignore
+        UITouch *touch=[touches anyObject];
+        CGPoint pointB=[touch locationInView:self.view];
+        //determine if not a swipe
+        if (abs(pointA.x - pointB.x) < 30 && abs(pointA.y - pointB.y) < 30) {
+            //toint touch detected
+            [self handlePointTouchWith_X:pointB.x andY:pointB.y];
+            return;
+        }
+    }else{
+        NSLog(@"Aborted Touch");
     }
+
     //now we need to calc the angle difference when touch stops to determine if an angled swipe
-    float angle=[self CalcDegrees:pointB];
-    NSLog(@"Angle is: %f",angle);
+    //float angle=[self CalcDegrees:pointB];
+    //NSLog(@"Angle is: %f",angle);
 
     //[self handleAngleSwipe:angle];
 }

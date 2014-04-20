@@ -57,6 +57,9 @@ NSMutableArray* computerDominos;
 clsPlayer* player;
 clsPlayer* computer;
 
+//if we are currently calculating player move, use this to ignore swipes
+BOOL doingPlayerMove;
+
 //using 0 and 1 instead of BOOL so I can use these in calculations
 //not needed?
 BOOL ceilingOn;

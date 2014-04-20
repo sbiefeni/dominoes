@@ -223,7 +223,7 @@ BOOL showingLeaderboard;
 
     int tmpDirection=0;
     
-switch (swipe.direction) {
+    switch (swipe.direction) {
     case UISwipeGestureRecognizerDirectionLeft:
         NSLog(@"swiped Left");
         if (player.lastDirection != right){
@@ -264,9 +264,10 @@ switch (swipe.direction) {
         break;
     };
 
-
-    player.lastDirection = player.curDirection;
-    player.curDirection = tmpDirection;
+    if (!doingPlayerMove) {
+        player.lastDirection = player.curDirection;
+        player.curDirection = tmpDirection;
+    }
  
 }
 

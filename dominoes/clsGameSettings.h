@@ -62,6 +62,8 @@ extern NSMutableArray* computerDominos;
 extern clsPlayer* player;
 extern clsPlayer* computer;
 
+extern BOOL doingPlayerMove;
+
 
 
 extern BOOL ceilingOn;
