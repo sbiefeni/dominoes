@@ -263,39 +263,32 @@
     [[GameCenterManager sharedManager] saveAndReportScore:score leaderboard:@"300hl"  sortOrder:GameCenterSortOrderHighToLow];
 
     //check and report achievment level
-    int goal = 100;
+    int goal;
 
-    //figure out what the next achievemnt level is
-    if (score >= 150) {
+    //submit percentage of each achievemnt level
         goal = 150;
         //set to % complete, and name of the achievemnt board
-        [[GameCenterManager sharedManager] saveAndReportAchievement:[NSString stringWithFormat:@"300_%i",goal] percentComplete:100 shouldDisplayNotification:YES];
-    }
-    if (score >= 200){
+        [[GameCenterManager sharedManager] saveAndReportAchievement:[NSString stringWithFormat:@"300_%i",goal] percentComplete:[self getGoalPercent:goal withScore:score] shouldDisplayNotification:YES];
+
         goal = 200;
         //set to % complete, and name of the achievemnt board
-        [[GameCenterManager sharedManager] saveAndReportAchievement:[NSString stringWithFormat:@"300_%i",goal] percentComplete:100 shouldDisplayNotification:YES];
-    }
-    if (score >= 225){
+        [[GameCenterManager sharedManager] saveAndReportAchievement:[NSString stringWithFormat:@"300_%i",goal] percentComplete:[self getGoalPercent:goal withScore:score] shouldDisplayNotification:YES];
+
         goal = 225;
         //set to % complete, and name of the achievemnt board
-        [[GameCenterManager sharedManager] saveAndReportAchievement:[NSString stringWithFormat:@"300_%i",goal] percentComplete:100 shouldDisplayNotification:YES];
-    }
-    if (score >= 250){
+        [[GameCenterManager sharedManager] saveAndReportAchievement:[NSString stringWithFormat:@"300_%i",goal] percentComplete:[self getGoalPercent:goal withScore:score] shouldDisplayNotification:YES];
+
         goal = 250;
         //set to % complete, and name of the achievemnt board
-        [[GameCenterManager sharedManager] saveAndReportAchievement:[NSString stringWithFormat:@"300_%i",goal] percentComplete:100 shouldDisplayNotification:YES];
-    }
-    if (levelHighScore >= 275){
+        [[GameCenterManager sharedManager] saveAndReportAchievement:[NSString stringWithFormat:@"300_%i",goal] percentComplete:[self getGoalPercent:goal withScore:score] shouldDisplayNotification:YES];
+
         goal = 275;
         //set to % complete, and name of the achievemnt board
-        [[GameCenterManager sharedManager] saveAndReportAchievement:[NSString stringWithFormat:@"300_%i",goal] percentComplete:100 shouldDisplayNotification:YES];
-    }
-    if (levelHighScore >= 300){
+        [[GameCenterManager sharedManager] saveAndReportAchievement:[NSString stringWithFormat:@"300_%i",goal] percentComplete:[self getGoalPercent:goal withScore:score] shouldDisplayNotification:YES];
+
         goal = 300;
         //set to % complete, and name of the achievemnt board
-        [[GameCenterManager sharedManager] saveAndReportAchievement:[NSString stringWithFormat:@"300_%i",goal] percentComplete:100 shouldDisplayNotification:YES];
-    }
+        [[GameCenterManager sharedManager] saveAndReportAchievement:[NSString stringWithFormat:@"300_%i",goal] percentComplete:[self getGoalPercent:goal withScore:score] shouldDisplayNotification:YES];
 
 }
 -(double)getGoalPercent:(int)goal withScore:(int)score {
