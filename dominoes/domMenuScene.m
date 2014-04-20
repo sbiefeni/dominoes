@@ -455,7 +455,7 @@
 
             if([GKLocalPlayer localPlayer].isAuthenticated){
                 //show leaderboard
-                [[GameCenterManager sharedManager] presentAchievementsOnViewController:[self getActiveController]];
+                [[GameCenterManager sharedManager] presentLeaderboardsOnViewController:[self getActiveController]];
                 
             }else{
                 //authenticate player -- can't do with game center manager
