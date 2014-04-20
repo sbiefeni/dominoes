@@ -261,7 +261,52 @@
     NSString* _score = [NSString stringWithFormat:@"%i",score];
     [clsCommon storeUserSetting:@"levelHighscore" value:_score];
     [[GameCenterManager sharedManager] saveAndReportScore:score leaderboard:@"300hl"  sortOrder:GameCenterSortOrderHighToLow];
+
+    //check and report achievment level
+    int goal = 100;
+    double goalPercent;
+
+    //figure out what the next achievemnt level is
+    if (score > 150) {
+        goal = 150;
+        //set to % complete, and name of the achievemnt board
+        [[GameCenterManager sharedManager] saveAndReportAchievement:[NSString stringWithFormat:@"300_%i",goal] percentComplete:100 shouldDisplayNotification:YES];
+    }
+    if (score > 200){
+        goal = 200;
+        //set to % complete, and name of the achievemnt board
+        [[GameCenterManager sharedManager] saveAndReportAchievement:[NSString stringWithFormat:@"300_%i",goal] percentComplete:100 shouldDisplayNotification:YES];
+    }
+    if (score > 225){
+        goal = 225;
+        //set to % complete, and name of the achievemnt board
+        [[GameCenterManager sharedManager] saveAndReportAchievement:[NSString stringWithFormat:@"300_%i",goal] percentComplete:100 shouldDisplayNotification:YES];
+    }
+    if (score > 250){
+        goal = 250;
+        //set to % complete, and name of the achievemnt board
+        [[GameCenterManager sharedManager] saveAndReportAchievement:[NSString stringWithFormat:@"300_%i",goal] percentComplete:100 shouldDisplayNotification:YES];
+    }
+    if (levelHighScore > 275){
+        goal = 275;
+        //set to % complete, and name of the achievemnt board
+        [[GameCenterManager sharedManager] saveAndReportAchievement:[NSString stringWithFormat:@"300_%i",goal] percentComplete:100 shouldDisplayNotification:YES];
+    }
+    if (levelHighScore >= 300){
+        goal = 300;
+        //set to % complete, and name of the achievemnt board
+        [[GameCenterManager sharedManager] saveAndReportAchievement:[NSString stringWithFormat:@"300_%i",goal] percentComplete:100 shouldDisplayNotification:YES];
+    }
+
 }
+-(double)getGoalPercent:(int)goal withScore:(int)score {
+    int tmp =  (score/goal)*100;
+    if (tmp > 100)
+        tmp = 100;
+
+    return tmp;
+}
+
 -(int) getHighScore {
     NSString* _score;
     _score = [clsCommon getUserSettingForKey:@"highscore"];
@@ -405,7 +450,7 @@
 
             if([GKLocalPlayer localPlayer].isAuthenticated){
                 //show leaderboard
-                [[GameCenterManager sharedManager] presentLeaderboardsOnViewController:[self getActiveController]];
+                [[GameCenterManager sharedManager] presentAchievementsOnViewController:[self getActiveController]];
                 
             }else{
                 //authenticate player -- can't do with game center manager
