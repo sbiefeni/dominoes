@@ -68,6 +68,8 @@ extern BOOL ceilingOn;
 extern BOOL floorOn;
 
 extern BOOL gameCenterEnabled;
+extern BOOL didReportPrevHighScore;
+extern BOOL didReportPrevHighLevelScore;
 
 extern int sizeDoubler;
 

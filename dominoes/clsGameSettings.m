@@ -63,6 +63,8 @@ BOOL ceilingOn;
 BOOL floorOn;
 
 BOOL gameCenterEnabled;
+BOOL didReportPrevHighScore;
+BOOL didReportPrevHighLevelScore;
 
 int sizeDoubler;
 

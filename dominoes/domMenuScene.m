@@ -229,6 +229,18 @@
         gcLabel.verticalAlignmentMode = SKLabelVerticalAlignmentModeCenter;
         gcLabel.name = @"gamecenterlabel";
 
+
+        // report previous scores to gamecenter as a backup in case they weren't
+        if (!didReportPrevHighScore) {
+            [self setHighScore:[self getHighScore]];
+            didReportPrevHighScore = true;
+        }
+        if (!didReportPrevHighLevelScore) {
+            [self setLevelHighScore:[self getLevelHighscore]];
+            didReportPrevHighLevelScore = true;
+        }
+
+
         return true;
     }
     return false;
@@ -407,6 +419,7 @@
 }
 
 -(void)showPopupMessage:(NSString*)message withTitle:(NSString*)title{
+
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title message:message delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil];
 
     [alert show];
