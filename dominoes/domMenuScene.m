@@ -264,30 +264,29 @@
 
     //check and report achievment level
     int goal = 100;
-    double goalPercent;
 
     //figure out what the next achievemnt level is
-    if (score > 150) {
+    if (score >= 150) {
         goal = 150;
         //set to % complete, and name of the achievemnt board
         [[GameCenterManager sharedManager] saveAndReportAchievement:[NSString stringWithFormat:@"300_%i",goal] percentComplete:100 shouldDisplayNotification:YES];
     }
-    if (score > 200){
+    if (score >= 200){
         goal = 200;
         //set to % complete, and name of the achievemnt board
         [[GameCenterManager sharedManager] saveAndReportAchievement:[NSString stringWithFormat:@"300_%i",goal] percentComplete:100 shouldDisplayNotification:YES];
     }
-    if (score > 225){
+    if (score >= 225){
         goal = 225;
         //set to % complete, and name of the achievemnt board
         [[GameCenterManager sharedManager] saveAndReportAchievement:[NSString stringWithFormat:@"300_%i",goal] percentComplete:100 shouldDisplayNotification:YES];
     }
-    if (score > 250){
+    if (score >= 250){
         goal = 250;
         //set to % complete, and name of the achievemnt board
         [[GameCenterManager sharedManager] saveAndReportAchievement:[NSString stringWithFormat:@"300_%i",goal] percentComplete:100 shouldDisplayNotification:YES];
     }
-    if (levelHighScore > 275){
+    if (levelHighScore >= 275){
         goal = 275;
         //set to % complete, and name of the achievemnt board
         [[GameCenterManager sharedManager] saveAndReportAchievement:[NSString stringWithFormat:@"300_%i",goal] percentComplete:100 shouldDisplayNotification:YES];
