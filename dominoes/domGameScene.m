@@ -204,7 +204,7 @@ CGPoint pointA;
         gameStatus = game_Started;
         totalScore = 0;
         lives = 3;
-        level = 1;
+        level = 0;
         gameSpeed = _gameSpeed;
 
         //isRunningInIde(lives=1)
@@ -290,8 +290,14 @@ CGPoint pointA;
     ///show "A little bit faster now!" label if
     //faster BOOL is set true
         SKLabelNode *lblFaster = [SKLabelNode labelNodeWithFontNamed:@"Arial"];
+    if (level == 1){
+        lblFaster.text = @"Let's start off slow...";
+        lblFaster.fontSize = 30 * sizeDoubler;
+    }else{
         lblFaster.text = @"A Little Faster!";
         lblFaster.fontSize = 40 * sizeDoubler;
+    }
+
         lblFaster.alpha = .5;
     //adjust label position if it's on the arrow
     if (player.curY > 12 && player.curY < 18) {
@@ -300,7 +306,7 @@ CGPoint pointA;
         lblFaster.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame) );
     }
 
-    if (faster) {
+    if (faster || level == 1) {
         [self addChild:lblFaster];
     }
 
@@ -1145,6 +1151,9 @@ int countSquares;
 
 }
 
+-(void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event {
+
+}
 //-(float)CalcDegrees:(CGPoint) pointB{
 //    float Theta;
 //    if ( pointB.x - pointA.x == 0 )

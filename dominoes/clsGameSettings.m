@@ -80,6 +80,9 @@ int level;
 
 float gameSpeed;
 
+//temp swipe direction
+int tmpDirection;
+
 
 
 BOOL roundOver;

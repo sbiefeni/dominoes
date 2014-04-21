@@ -85,6 +85,9 @@ extern int level;
 
 extern float gameSpeed;
 
+//tmp swipe direction
+extern int tmpDirection;
+
 // functionality bool to let certain processes know the current round has ended with someone crashing
 extern BOOL roundOver;
 
