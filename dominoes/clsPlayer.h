@@ -13,6 +13,7 @@
 
 @property swipeDirection lastSwipe;
 @property swipeDirection curDirection;
+@property swipeDirection swipedEarlyDirection;
 
 //going to use this to determine if you are
 //trying to turn into an obstacle..

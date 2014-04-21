@@ -301,7 +301,7 @@ CGPoint pointA;
         lblFaster.alpha = .5;
     //adjust label position if it's on the arrow
     if (player.curY > 12 && player.curY < 18) {
-        lblFaster.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame)+(100 * sizeDoubler) ); //
+        lblFaster.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame)+(75 * sizeDoubler) ); //
     }else{
         lblFaster.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame) );
     }
@@ -350,7 +350,7 @@ CGPoint pointA;
 
     achievPrompt.text = [NSString stringWithFormat:@"Get a badge for %i Bricks!",goal];
 
-    achievPrompt.fontSize = 20;
+    achievPrompt.fontSize = 22;
     achievPrompt.alpha = .7;
     achievPrompt.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame)+ (yAdjust * sizeDoubler) - 25 );
     [self addChild:achievPrompt];
@@ -853,7 +853,6 @@ CGPoint pointA;
                     crashed = [self doNextPlayerMove];
                 }
             }
-
             break;
         case right:
             if (player.curX < cols && grid[player.curX+1][player.curY]==false){

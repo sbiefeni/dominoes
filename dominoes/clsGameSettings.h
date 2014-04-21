@@ -85,6 +85,7 @@ extern int level;
 
 extern float gameSpeed;
 
+
 //tmp swipe direction
 extern int tmpDirection;
 

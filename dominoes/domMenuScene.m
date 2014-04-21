@@ -201,7 +201,7 @@
 //check for gamecenter availability, draw the button, then disable the timer
     NSLog(@"timer called");
 
-    if([GKLocalPlayer localPlayer].isAuthenticated){
+    //if([GKLocalPlayer localPlayer].isAuthenticated){
 
         if ([self enableGameCenterButton]) {
 
@@ -211,10 +211,11 @@
                 aTimer = nil;
             }
         }
-    }
+    //}
 }
 
 -(BOOL)enableGameCenterButton {
+    static BOOL didThis;
     if([GKLocalPlayer localPlayer].isAuthenticated){
 
         SKSpriteNode *gcButton = [SKSpriteNode spriteNodeWithImageNamed:@"stretch_button.png"];
@@ -242,6 +243,17 @@
 
 
         return true;
+    }else{
+        if (!didThis) {
+            SKLabelNode *gcLabel = [SKLabelNode labelNodeWithFontNamed:@"Avenir-Black"];
+            [self createLabel:gcLabel text:@"Log in to Gamecenter to see Leaderboard" fontSize:12 posY:-((mySize.height/2)/sizeDoubler) color:[SKColor whiteColor] alpha:.7 sizeDoubler:1];
+            gcLabel.position = CGPointMake(CGRectGetMidX(self.frame), 20);
+            gcLabel.zPosition = 25;
+            gcLabel.verticalAlignmentMode = SKLabelVerticalAlignmentModeCenter;
+            gcLabel.name = @"gamecenterlabel";
+
+            didThis = true;
+        }
     }
     return false;
 
