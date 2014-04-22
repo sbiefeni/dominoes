@@ -248,7 +248,7 @@
             SKLabelNode *gcLabel = [SKLabelNode labelNodeWithFontNamed:@"Avenir-Black"];
             [self createLabel:gcLabel text:@"Log in to Gamecenter to see Leaderboard" fontSize:12 posY:-((mySize.height/2)/sizeDoubler) color:[SKColor whiteColor] alpha:.7 sizeDoubler:1];
             gcLabel.position = CGPointMake(CGRectGetMidX(self.frame), 20);
-            gcLabel.zPosition = 25;
+            gcLabel.zPosition = 1;
             gcLabel.verticalAlignmentMode = SKLabelVerticalAlignmentModeCenter;
             gcLabel.name = @"gamecenterlabel";
 

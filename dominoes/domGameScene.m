@@ -80,16 +80,23 @@ CGPoint pointA;
         arenaSize = size;
 
         [domViewController setAdView:YES ShowOnTop:YES ChooseRandom:YES];
-        
-        [self setUpBackGround];
-        
-        [self setUpDominoGrid];
 
-        [self setUpSounds];
-        
-        [self initializeGame];
+        //NSOperationQueue mainQueue] addOperationWithBlock:^{
+            // Insert code from doTaskWithContextData: here
 
-        [self setUpBackgroundFloor];
+            [self setUpBackGround];
+        
+            [self setUpDominoGrid];
+
+        //}];
+
+            [self setUpSounds];
+        
+            [self initializeGame];
+
+            [self setUpBackgroundFloor];
+
+
 
         roundOver = FALSE;
 
