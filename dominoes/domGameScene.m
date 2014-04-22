@@ -721,11 +721,11 @@ CGPoint pointA;
     if (player.curDirection > down)
         player.curDirection = left;
 
-    if (player.swipedEarlyDirection !=none) {
+    if (player.swipedEarlyDirection !=none && player.swipedEarlyDirection != none2) {
         player.curDirection = player.swipedEarlyDirection;
-        player.swipedEarlyDirection = none;
+        player.swipedEarlyDirection = none2;
     }
-    
+
     crashed = [self doNextPlayerMove];
 
 
@@ -853,7 +853,11 @@ CGPoint pointA;
                 if (player.curDirection == player.lastDirection) {
                     crashed = true;
                 }else{
-                    player.swipedEarlyDirection = player.curDirection;
+                    if (player.swipedEarlyDirection !=none2) {
+                        player.swipedEarlyDirection = player.curDirection;
+                    }else{
+                        player.swipedEarlyDirection = none;
+                    }
                     player.curDirection = player.lastDirection;
                     crashed = [self doNextPlayerMove];
                 }
@@ -867,7 +871,11 @@ CGPoint pointA;
                 if (player.curDirection == player.lastDirection) {
                     crashed = true;
                 }else{
-                    player.swipedEarlyDirection = player.curDirection;
+                    if (player.swipedEarlyDirection !=none2) {
+                        player.swipedEarlyDirection = player.curDirection;
+                    }else{
+                        player.swipedEarlyDirection = none;
+                    }
                     player.curDirection = player.lastDirection;
                     crashed = [self doNextPlayerMove];
                 }
@@ -881,7 +889,11 @@ CGPoint pointA;
                 if (player.curDirection == player.lastDirection) {
                     crashed = true;
                 }else{
-                    player.swipedEarlyDirection = player.curDirection;
+                    if (player.swipedEarlyDirection !=none2) {
+                        player.swipedEarlyDirection = player.curDirection;
+                    }else{
+                        player.swipedEarlyDirection = none;
+                    }
                     player.curDirection = player.lastDirection;
                     crashed = [self doNextPlayerMove];
                 }
@@ -896,7 +908,11 @@ CGPoint pointA;
                 if (player.curDirection == player.lastDirection) {
                     crashed = true;
                 }else{
-                    player.swipedEarlyDirection = player.curDirection;
+                    if (player.swipedEarlyDirection !=none2) {
+                        player.swipedEarlyDirection = player.curDirection;
+                    }else{
+                        player.swipedEarlyDirection = none;
+                    }
                     player.curDirection = player.lastDirection;
                     crashed = [self doNextPlayerMove];
                 }
