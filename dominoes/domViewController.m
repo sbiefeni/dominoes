@@ -205,7 +205,9 @@ BOOL showingLeaderboard;
 
 -(void)bannerView:(ADBannerView *)banner didFailToReceiveAdWithError:(NSError *)error{
     //hide the ad banner as error detected
-    [domViewController setAdView:NO ShowOnTop:NO ChooseRandom:NO];
+    //[domViewController setAdView:NO ShowOnTop:NO ChooseRandom:NO];
+    [adView setAlpha:0];
+
     //show the error in NSLog
     NSLog(@"Failed to receive banner with error '%@'",error.description);
     bannerIsLoaded=NO;

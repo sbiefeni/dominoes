@@ -76,7 +76,6 @@ CGPoint pointA;
             sizeDoubler = 2;
         }
 
-
         arenaSize = size;
 
         [domViewController setAdView:YES ShowOnTop:YES ChooseRandom:YES];
