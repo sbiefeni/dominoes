@@ -17,6 +17,8 @@
 		346CF12C190C13ED004EB453 /* floor5.sks in Resources */ = {isa = PBXBuildFile; fileRef = 346CF126190C13ED004EB453 /* floor5.sks */; };
 		346CF12D190C13ED004EB453 /* floor6.sks in Resources */ = {isa = PBXBuildFile; fileRef = 346CF127190C13ED004EB453 /* floor6.sks */; };
 		346CF12E190C13ED004EB453 /* floor7.sks in Resources */ = {isa = PBXBuildFile; fileRef = 346CF128190C13ED004EB453 /* floor7.sks */; };
+		346CF130190C5294004EB453 /* floor1.sks in Resources */ = {isa = PBXBuildFile; fileRef = 346CF12F190C5294004EB453 /* floor1.sks */; };
+		346CF132190C5996004EB453 /* arena_white.png in Resources */ = {isa = PBXBuildFile; fileRef = 346CF131190C5996004EB453 /* arena_white.png */; };
 		34C0142A18D183BF007C37AB /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 34C0142918D183BF007C37AB /* AudioToolbox.framework */; };
 		34C0142D18D2A4C8007C37AB /* iAd.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 34C0142C18D2A4C8007C37AB /* iAd.framework */; };
 		380B7AC418FE0F6900DF6A09 /* GameCenterManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 380B7ABF18FE0F6900DF6A09 /* GameCenterManager.m */; };
@@ -84,6 +86,8 @@
 		346CF126190C13ED004EB453 /* floor5.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = floor5.sks; sourceTree = "<group>"; };
 		346CF127190C13ED004EB453 /* floor6.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = floor6.sks; sourceTree = "<group>"; };
 		346CF128190C13ED004EB453 /* floor7.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = floor7.sks; sourceTree = "<group>"; };
+		346CF12F190C5294004EB453 /* floor1.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = floor1.sks; sourceTree = "<group>"; };
+		346CF131190C5996004EB453 /* arena_white.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = arena_white.png; sourceTree = "<group>"; };
 		34C0142918D183BF007C37AB /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		34C0142C18D2A4C8007C37AB /* iAd.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = iAd.framework; path = System/Library/Frameworks/iAd.framework; sourceTree = SDKROOT; };
 		380B7ABE18FE0F6900DF6A09 /* GameCenterManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameCenterManager.h; sourceTree = "<group>"; };
@@ -116,12 +120,12 @@
 		38E4967E18D7CDD600D111E9 /* brick.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = brick.png; sourceTree = "<group>"; };
 		38E7383018EB4E9400EE0C6E /* GameKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameKit.framework; path = System/Library/Frameworks/GameKit.framework; sourceTree = SDKROOT; };
 		38FD20531900529700C8461B /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
-		55CB7E1C18CBD180001EFA1C /* 300.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = 300.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		55CB7E1C18CBD180001EFA1C /* Brick'd.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Brick'd.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		55CB7E1F18CBD180001EFA1C /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		55CB7E2118CBD180001EFA1C /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		55CB7E2318CBD180001EFA1C /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		55CB7E2518CBD180001EFA1C /* SpriteKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SpriteKit.framework; path = System/Library/Frameworks/SpriteKit.framework; sourceTree = SDKROOT; };
-		55CB7E2918CBD180001EFA1C /* 300-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "300-Info.plist"; sourceTree = "<group>"; };
+		55CB7E2918CBD180001EFA1C /* Brick'd-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Brick'd-Info.plist"; sourceTree = "<group>"; };
 		55CB7E2B18CBD180001EFA1C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		55CB7E2D18CBD180001EFA1C /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		55CB7E2F18CBD180001EFA1C /* 300-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "300-Prefix.pch"; sourceTree = "<group>"; };
@@ -134,9 +138,9 @@
 		55CB7E3C18CBD181001EFA1C /* domGameScene.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = domGameScene.h; sourceTree = "<group>"; };
 		55CB7E3D18CBD181001EFA1C /* domGameScene.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = domGameScene.m; sourceTree = "<group>"; };
 		55CB7E4118CBD181001EFA1C /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		55CB7E4718CBD181001EFA1C /* 300Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = 300Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		55CB7E4718CBD181001EFA1C /* Brick'dTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Brick'dTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		55CB7E4818CBD181001EFA1C /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
-		55CB7E5018CBD181001EFA1C /* 300Tests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "300Tests-Info.plist"; sourceTree = "<group>"; };
+		55CB7E5018CBD181001EFA1C /* Brick'dTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Brick'dTests-Info.plist"; sourceTree = "<group>"; };
 		55CB7E5218CBD181001EFA1C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		55CB7E5418CBD181001EFA1C /* dominoesTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = dominoesTests.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -195,6 +199,7 @@
 				38E4967E18D7CDD600D111E9 /* brick.png */,
 				380DC21A18D0ED9200545962 /* spark.png */,
 				380DC21918D0ED9200545962 /* explosion.sks */,
+				346CF12F190C5294004EB453 /* floor1.sks */,
 				346CF123190C13ED004EB453 /* floor2.sks */,
 				346CF124190C13ED004EB453 /* floor3.sks */,
 				346CF125190C13ED004EB453 /* floor4.sks */,
@@ -217,6 +222,7 @@
 		389AA04F18DF941F0089CA98 /* arenas */ = {
 			isa = PBXGroup;
 			children = (
+				346CF131190C5996004EB453 /* arena_white.png */,
 				38530A9818F0B4A400FA19CC /* new-arena3.png */,
 				38530A9918F0B4A400FA19CC /* new-arena4.png */,
 				38530A9A18F0B4A400FA19CC /* new-arena5.png */,
@@ -298,7 +304,7 @@
 		55CB7E1318CBD180001EFA1C = {
 			isa = PBXGroup;
 			children = (
-				55CB7E2718CBD180001EFA1C /* 300 Bricks */,
+				55CB7E2718CBD180001EFA1C /* Brick'd */,
 				55CB7E4E18CBD181001EFA1C /* dominoesTests */,
 				55CB7E1E18CBD180001EFA1C /* Frameworks */,
 				55CB7E1D18CBD180001EFA1C /* Products */,
@@ -308,8 +314,8 @@
 		55CB7E1D18CBD180001EFA1C /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				55CB7E1C18CBD180001EFA1C /* 300.app */,
-				55CB7E4718CBD181001EFA1C /* 300Tests.xctest */,
+				55CB7E1C18CBD180001EFA1C /* Brick'd.app */,
+				55CB7E4718CBD181001EFA1C /* Brick'dTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -332,7 +338,7 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		55CB7E2718CBD180001EFA1C /* 300 Bricks */ = {
+		55CB7E2718CBD180001EFA1C /* Brick'd */ = {
 			isa = PBXGroup;
 			children = (
 				380B7ABD18FE0F6900DF6A09 /* GC Manager */,
@@ -349,14 +355,14 @@
 				55CB7E4118CBD181001EFA1C /* Images.xcassets */,
 				55CB7E2818CBD180001EFA1C /* Supporting Files */,
 			);
-			name = "300 Bricks";
+			name = "Brick'd";
 			path = dominoes;
 			sourceTree = "<group>";
 		};
 		55CB7E2818CBD180001EFA1C /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				55CB7E2918CBD180001EFA1C /* 300-Info.plist */,
+				55CB7E2918CBD180001EFA1C /* Brick'd-Info.plist */,
 				55CB7E2A18CBD180001EFA1C /* InfoPlist.strings */,
 				55CB7E2D18CBD180001EFA1C /* main.m */,
 				55CB7E2F18CBD180001EFA1C /* 300-Prefix.pch */,
@@ -376,7 +382,7 @@
 		55CB7E4F18CBD181001EFA1C /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				55CB7E5018CBD181001EFA1C /* 300Tests-Info.plist */,
+				55CB7E5018CBD181001EFA1C /* Brick'dTests-Info.plist */,
 				55CB7E5118CBD181001EFA1C /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
@@ -385,9 +391,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		55CB7E1B18CBD180001EFA1C /* 300 */ = {
+		55CB7E1B18CBD180001EFA1C /* Brick'd */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 55CB7E5818CBD181001EFA1C /* Build configuration list for PBXNativeTarget "300" */;
+			buildConfigurationList = 55CB7E5818CBD181001EFA1C /* Build configuration list for PBXNativeTarget "Brick'd" */;
 			buildPhases = (
 				55CB7E1818CBD180001EFA1C /* Sources */,
 				55CB7E1918CBD180001EFA1C /* Frameworks */,
@@ -397,14 +403,14 @@
 			);
 			dependencies = (
 			);
-			name = 300;
+			name = "Brick'd";
 			productName = dominoes;
-			productReference = 55CB7E1C18CBD180001EFA1C /* 300.app */;
+			productReference = 55CB7E1C18CBD180001EFA1C /* Brick'd.app */;
 			productType = "com.apple.product-type.application";
 		};
-		55CB7E4618CBD181001EFA1C /* 300Tests */ = {
+		55CB7E4618CBD181001EFA1C /* Brick'dTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 55CB7E5B18CBD181001EFA1C /* Build configuration list for PBXNativeTarget "300Tests" */;
+			buildConfigurationList = 55CB7E5B18CBD181001EFA1C /* Build configuration list for PBXNativeTarget "Brick'dTests" */;
 			buildPhases = (
 				55CB7E4318CBD181001EFA1C /* Sources */,
 				55CB7E4418CBD181001EFA1C /* Frameworks */,
@@ -415,9 +421,9 @@
 			dependencies = (
 				55CB7E4D18CBD181001EFA1C /* PBXTargetDependency */,
 			);
-			name = 300Tests;
+			name = "Brick'dTests";
 			productName = dominoesTests;
-			productReference = 55CB7E4718CBD181001EFA1C /* 300Tests.xctest */;
+			productReference = 55CB7E4718CBD181001EFA1C /* Brick'dTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -431,7 +437,7 @@
 				ORGANIZATIONNAME = Abstractions;
 				TargetAttributes = {
 					55CB7E1B18CBD180001EFA1C = {
-						DevelopmentTeam = JP43X6H6PR;
+						DevelopmentTeam = TVP369UU3E;
 						SystemCapabilities = {
 							com.apple.GameCenter = {
 								enabled = 1;
@@ -443,7 +449,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 55CB7E1718CBD180001EFA1C /* Build configuration list for PBXProject "300" */;
+			buildConfigurationList = 55CB7E1718CBD180001EFA1C /* Build configuration list for PBXProject "Brick'd" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -456,8 +462,8 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				55CB7E1B18CBD180001EFA1C /* 300 */,
-				55CB7E4618CBD181001EFA1C /* 300Tests */,
+				55CB7E1B18CBD180001EFA1C /* Brick'd */,
+				55CB7E4618CBD181001EFA1C /* Brick'dTests */,
 			);
 		};
 /* End PBXProject section */
@@ -470,6 +476,7 @@
 				55CB7E4218CBD181001EFA1C /* Images.xcassets in Resources */,
 				346CF12D190C13ED004EB453 /* floor6.sks in Resources */,
 				38530AA018F0B4A400FA19CC /* new-arena6.png in Resources */,
+				346CF130190C5294004EB453 /* floor1.sks in Resources */,
 				346CF12E190C13ED004EB453 /* floor7.sks in Resources */,
 				389AA04C18DE3EC70089CA98 /* domino-green.atlasc in Resources */,
 				38530A9E18F0B4A400FA19CC /* new-arena4.png in Resources */,
@@ -487,6 +494,7 @@
 				55CB7E3518CBD181001EFA1C /* Main_iPhone.storyboard in Resources */,
 				380DC21B18D0ED9200545962 /* explosion.sks in Resources */,
 				55CB7E2C18CBD180001EFA1C /* InfoPlist.strings in Resources */,
+				346CF132190C5996004EB453 /* arena_white.png in Resources */,
 				344B5BCA18D4A4EF00E43D82 /* Background_Stars.sks in Resources */,
 				38E4967F18D7CDD600D111E9 /* brick.png in Resources */,
 				38530A9718F0B07E00FA19CC /* new-arena2.png in Resources */,
@@ -538,7 +546,7 @@
 /* Begin PBXTargetDependency section */
 		55CB7E4D18CBD181001EFA1C /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 55CB7E1B18CBD180001EFA1C /* 300 */;
+			target = 55CB7E1B18CBD180001EFA1C /* Brick'd */;
 			targetProxy = 55CB7E4C18CBD181001EFA1C /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -664,10 +672,10 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COMPRESS_PNG_FILES = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "dominoes/300-Prefix.pch";
-				INFOPLIST_FILE = "dominoes/300-Info.plist";
+				GCC_PREFIX_HEADER = "dominoes/Brick'd-Prefix.pch";
+				INFOPLIST_FILE = "dominoes/Brick'd-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
-				PRODUCT_NAME = 300;
+				PRODUCT_NAME = "Brick'd";
 				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos7.1;
 				SPRITEKIT_TEXTURE_ATLAS_OUTPUT = YES;
@@ -685,10 +693,10 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COMPRESS_PNG_FILES = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "dominoes/300-Prefix.pch";
-				INFOPLIST_FILE = "dominoes/300-Info.plist";
+				GCC_PREFIX_HEADER = "dominoes/Brick'd-Prefix.pch";
+				INFOPLIST_FILE = "dominoes/Brick'd-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
-				PRODUCT_NAME = 300;
+				PRODUCT_NAME = "Brick'd";
 				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos7.1;
 				SPRITEKIT_TEXTURE_ATLAS_OUTPUT = YES;
@@ -712,8 +720,8 @@
 					"DEBUG=1",
 					"$(inherited)",
 				);
-				INFOPLIST_FILE = "dominoesTests/300Tests-Info.plist";
-				PRODUCT_NAME = 300Tests;
+				INFOPLIST_FILE = "dominoesTests/Brick'dTests-Info.plist";
+				PRODUCT_NAME = "Brick'dTests";
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = xctest;
 			};
@@ -730,8 +738,8 @@
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "dominoes/dominoes-Prefix.pch";
-				INFOPLIST_FILE = "dominoesTests/300Tests-Info.plist";
-				PRODUCT_NAME = 300Tests;
+				INFOPLIST_FILE = "dominoesTests/Brick'dTests-Info.plist";
+				PRODUCT_NAME = "Brick'dTests";
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = xctest;
 			};
@@ -740,7 +748,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		55CB7E1718CBD180001EFA1C /* Build configuration list for PBXProject "300" */ = {
+		55CB7E1718CBD180001EFA1C /* Build configuration list for PBXProject "Brick'd" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				55CB7E5618CBD181001EFA1C /* Debug */,
@@ -749,7 +757,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		55CB7E5818CBD181001EFA1C /* Build configuration list for PBXNativeTarget "300" */ = {
+		55CB7E5818CBD181001EFA1C /* Build configuration list for PBXNativeTarget "Brick'd" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				55CB7E5918CBD181001EFA1C /* Debug */,
@@ -758,7 +766,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		55CB7E5B18CBD181001EFA1C /* Build configuration list for PBXNativeTarget "300Tests" */ = {
+		55CB7E5B18CBD181001EFA1C /* Build configuration list for PBXNativeTarget "Brick'dTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				55CB7E5C18CBD181001EFA1C /* Debug */,

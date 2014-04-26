@@ -1047,11 +1047,12 @@ CGPoint pointA;
 
     //TODO randomize or otherwise have changing arenas
 
-    int rndBackground = [clsCommon getRanInt:1 maxNumber:7];
+    //int rndBackground = [clsCommon getRanInt:1 maxNumber:7];
 
     //adShowingArenaScaleAmount = 0;
-    backGround = [SKSpriteNode spriteNodeWithImageNamed:[NSString stringWithFormat:@"new-arena%i.png",rndBackground]];
-
+    backGround = [SKSpriteNode spriteNodeWithImageNamed:@"arena_white.png"];
+    
+    
     //calculate min and max extents, based on original background size
     [self setUpMinMaxExtents:backGround.size];
 
