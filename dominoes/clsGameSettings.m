@@ -94,7 +94,7 @@ game_Status gameStatus;
 SKLabelNode *scoreLabel;
 
 AVAudioPlayer* backgroundMusic;
-
+AVAudioPlayer* soundFile;
 
 
 @implementation clsGameSettings

@@ -32,10 +32,10 @@
                       [[NSBundle mainBundle] resourcePath],
                       sound];
     NSURL *filePath = [NSURL fileURLWithPath:path isDirectory:NO];
-    backgroundMusic = [[AVAudioPlayer alloc] initWithContentsOfURL:filePath error:nil];
-    [backgroundMusic prepareToPlay];
-    [backgroundMusic play];
-    backgroundMusic.volume = volume;
+    soundFile = [[AVAudioPlayer alloc] initWithContentsOfURL:filePath error:nil];
+    [soundFile prepareToPlay];
+    [soundFile play];
+    soundFile.volume = volume;
 }
 
 + (void) doBackgroundMusicFadeToQuiet {

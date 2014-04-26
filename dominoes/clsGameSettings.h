@@ -97,7 +97,7 @@ extern game_Status gameStatus;
 extern SKLabelNode* scoreLabel;
 
 extern AVAudioPlayer* backgroundMusic;
-
+extern AVAudioPlayer* soundFile;
 
 
 @end
