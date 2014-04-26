@@ -954,9 +954,10 @@ CGPoint pointA;
 }
 
 -(void) setUpBackgroundFloor{
+    int rndFloor=[clsCommon getRanInt:1 maxNumber:7];
     NSString *floorPath =
     [[NSBundle mainBundle]
-     pathForResource:@"floor1" ofType:@"sks"];
+     pathForResource:[NSString stringWithFormat:@"floor%i",rndFloor] ofType:@"sks"];
 
     SKEmitterNode *floor =
     [NSKeyedUnarchiver unarchiveObjectWithFile:floorPath];

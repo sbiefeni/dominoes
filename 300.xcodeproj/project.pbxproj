@@ -11,6 +11,12 @@
 		344B5BCA18D4A4EF00E43D82 /* Background_Stars.sks in Resources */ = {isa = PBXBuildFile; fileRef = 344B5BC918D4A4EF00E43D82 /* Background_Stars.sks */; };
 		344B5BCD18D4A70300E43D82 /* SKEmitterNode+fromFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 344B5BCC18D4A70300E43D82 /* SKEmitterNode+fromFile.m */; };
 		344B5BCF18D4AE7500E43D82 /* Background_Fire.sks in Resources */ = {isa = PBXBuildFile; fileRef = 344B5BCE18D4AE7500E43D82 /* Background_Fire.sks */; };
+		346CF129190C13ED004EB453 /* floor2.sks in Resources */ = {isa = PBXBuildFile; fileRef = 346CF123190C13ED004EB453 /* floor2.sks */; };
+		346CF12A190C13ED004EB453 /* floor3.sks in Resources */ = {isa = PBXBuildFile; fileRef = 346CF124190C13ED004EB453 /* floor3.sks */; };
+		346CF12B190C13ED004EB453 /* floor4.sks in Resources */ = {isa = PBXBuildFile; fileRef = 346CF125190C13ED004EB453 /* floor4.sks */; };
+		346CF12C190C13ED004EB453 /* floor5.sks in Resources */ = {isa = PBXBuildFile; fileRef = 346CF126190C13ED004EB453 /* floor5.sks */; };
+		346CF12D190C13ED004EB453 /* floor6.sks in Resources */ = {isa = PBXBuildFile; fileRef = 346CF127190C13ED004EB453 /* floor6.sks */; };
+		346CF12E190C13ED004EB453 /* floor7.sks in Resources */ = {isa = PBXBuildFile; fileRef = 346CF128190C13ED004EB453 /* floor7.sks */; };
 		34C0142A18D183BF007C37AB /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 34C0142918D183BF007C37AB /* AudioToolbox.framework */; };
 		34C0142D18D2A4C8007C37AB /* iAd.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 34C0142C18D2A4C8007C37AB /* iAd.framework */; };
 		380B7AC418FE0F6900DF6A09 /* GameCenterManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 380B7ABF18FE0F6900DF6A09 /* GameCenterManager.m */; };
@@ -73,6 +79,12 @@
 		344B5BCB18D4A6DC00E43D82 /* SKEmitterNode+fromFile.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SKEmitterNode+fromFile.h"; sourceTree = "<group>"; };
 		344B5BCC18D4A70300E43D82 /* SKEmitterNode+fromFile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "SKEmitterNode+fromFile.m"; sourceTree = "<group>"; };
 		344B5BCE18D4AE7500E43D82 /* Background_Fire.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Background_Fire.sks; sourceTree = "<group>"; };
+		346CF123190C13ED004EB453 /* floor2.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = floor2.sks; sourceTree = "<group>"; };
+		346CF124190C13ED004EB453 /* floor3.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = floor3.sks; sourceTree = "<group>"; };
+		346CF125190C13ED004EB453 /* floor4.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = floor4.sks; sourceTree = "<group>"; };
+		346CF126190C13ED004EB453 /* floor5.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = floor5.sks; sourceTree = "<group>"; };
+		346CF127190C13ED004EB453 /* floor6.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = floor6.sks; sourceTree = "<group>"; };
+		346CF128190C13ED004EB453 /* floor7.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = floor7.sks; sourceTree = "<group>"; };
 		34C0142918D183BF007C37AB /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		34C0142C18D2A4C8007C37AB /* iAd.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = iAd.framework; path = System/Library/Frameworks/iAd.framework; sourceTree = SDKROOT; };
 		380B7ABE18FE0F6900DF6A09 /* GameCenterManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameCenterManager.h; sourceTree = "<group>"; };
@@ -186,6 +198,12 @@
 				380DC21A18D0ED9200545962 /* spark.png */,
 				380DC21918D0ED9200545962 /* explosion.sks */,
 				38FA7D3518E77F5E00820901 /* floor1.sks */,
+				346CF123190C13ED004EB453 /* floor2.sks */,
+				346CF124190C13ED004EB453 /* floor3.sks */,
+				346CF125190C13ED004EB453 /* floor4.sks */,
+				346CF126190C13ED004EB453 /* floor5.sks */,
+				346CF127190C13ED004EB453 /* floor6.sks */,
+				346CF128190C13ED004EB453 /* floor7.sks */,
 			);
 			name = particles;
 			sourceTree = "<group>";
@@ -453,7 +471,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				55CB7E4218CBD181001EFA1C /* Images.xcassets in Resources */,
+				346CF12D190C13ED004EB453 /* floor6.sks in Resources */,
 				38530AA018F0B4A400FA19CC /* new-arena6.png in Resources */,
+				346CF12E190C13ED004EB453 /* floor7.sks in Resources */,
 				38FA7D3618E77F5E00820901 /* floor1.sks in Resources */,
 				389AA04C18DE3EC70089CA98 /* domino-green.atlasc in Resources */,
 				38530A9E18F0B4A400FA19CC /* new-arena4.png in Resources */,
@@ -462,15 +482,19 @@
 				55CB7E3818CBD181001EFA1C /* Main_iPad.storyboard in Resources */,
 				38530AA118F0B4A400FA19CC /* new-arena7.png in Resources */,
 				389AA04E18DE67340089CA98 /* new-arena1.png in Resources */,
+				346CF12A190C13ED004EB453 /* floor3.sks in Resources */,
 				380DC21C18D0ED9200545962 /* spark.png in Resources */,
 				38530A9D18F0B4A400FA19CC /* new-arena3.png in Resources */,
+				346CF12C190C13ED004EB453 /* floor5.sks in Resources */,
 				344B5BCF18D4AE7500E43D82 /* Background_Fire.sks in Resources */,
+				346CF129190C13ED004EB453 /* floor2.sks in Resources */,
 				55CB7E3518CBD181001EFA1C /* Main_iPhone.storyboard in Resources */,
 				380DC21B18D0ED9200545962 /* explosion.sks in Resources */,
 				55CB7E2C18CBD180001EFA1C /* InfoPlist.strings in Resources */,
 				344B5BCA18D4A4EF00E43D82 /* Background_Stars.sks in Resources */,
 				38E4967F18D7CDD600D111E9 /* brick.png in Resources */,
 				38530A9718F0B07E00FA19CC /* new-arena2.png in Resources */,
+				346CF12B190C13ED004EB453 /* floor4.sks in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
