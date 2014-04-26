@@ -221,6 +221,7 @@
         SKSpriteNode *gcButton = [SKSpriteNode spriteNodeWithImageNamed:@"stretch_button.png"];
         gcButton.position = CGPointMake(CGRectGetMidX(self.frame), 30);
         gcButton.name = @"gamecenter";
+        gcButton.zPosition = 2;
         [self addChild:gcButton];
 
         SKLabelNode *gcLabel = [SKLabelNode labelNodeWithFontNamed:@"Avenir-Black"];

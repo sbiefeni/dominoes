@@ -942,6 +942,8 @@ CGPoint pointA;
     xPos = minX/scaleX + (x * gridSize.width);
     yPos = minY/scaleY + (y * gridSize.height);
 
+    //only have to shift the Y pos if the ad banner is on bottom
+    //if not, the y starting location is the same
     if (floorOn) {
         yPos += bannerSizeY;
     }
@@ -980,8 +982,8 @@ CGPoint pointA;
     [backGround addChild:floor];
 }
 
--(int) getBannerHeight{
-    return (arenaSize.width == 320) ? 48 : 66;
+-(void) getBannerHeight{
+    bannerSizeY = (arenaSize.width == 320) ? 50 : 56;
 }
 
 -(void) setUpBackGround{
@@ -999,7 +1001,7 @@ CGPoint pointA;
     [self setUpMinMaxExtents:backGround.size];
 
     //determine the banner size (according to iAD)
-    bannerSizeY = (arenaSize.width == 320)?50:56;
+    [self getBannerHeight];  //bannerSizeY = (arenaSize.width == 320)?50:56;
 
     bannerHeightAdjuster = 0;
 
@@ -1233,11 +1235,13 @@ int countSquares;
         //counterClockwise
         player.uTurnDirection = cclockWise;
         player.uTurnStep = step1;
+        [clsCommon playSound:@"sounds/uturn.mp3" withVolume:.3];
     }
     if (Xpos > arenaSize.width/2) {
         //clockwise
         player.uTurnDirection = clockWise;
         player.uTurnStep = step1;
+        [clsCommon playSound:@"sounds/uturn.mp3" withVolume:.3];
     }
 }
 

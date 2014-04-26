@@ -269,6 +269,8 @@ BOOL showingLeaderboard;
         player.lastDirection = player.curDirection;
         player.curDirection = tmpDirection;
         tmpDirection = 10;
+
+    [clsCommon playSound:@"sounds/swipe.mp3" withVolume:.3];
  
 }
 

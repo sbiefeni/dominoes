@@ -27,6 +27,17 @@
     backgroundMusic.volume = volume;
 }
 
++(void) playSound:(NSString*)sound withVolume:(double)volume{
+    NSString *path = [NSString stringWithFormat:@"%@/%@",
+                      [[NSBundle mainBundle] resourcePath],
+                      sound];
+    NSURL *filePath = [NSURL fileURLWithPath:path isDirectory:NO];
+    backgroundMusic = [[AVAudioPlayer alloc] initWithContentsOfURL:filePath error:nil];
+    [backgroundMusic prepareToPlay];
+    [backgroundMusic play];
+    backgroundMusic.volume = volume;
+}
+
 + (void) doBackgroundMusicFadeToQuiet {
     if (backgroundMusic.volume > 0.03) {
         backgroundMusic.volume = backgroundMusic.volume - 0.01;

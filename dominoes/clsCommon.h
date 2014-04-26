@@ -12,10 +12,13 @@
 #import <AVFoundation/AVFoundation.h>
 #import "clsGameSettings.h"
 
-@interface clsCommon : NSObject
+@interface clsCommon : SKScene
 
 //+(void) playSound:(NSString*)file;
 +(void) playBackgroundMusicWithVolume:(double)volume;
+
++(void) playSound:(NSString*)sound withVolume:(double)volume;
+
 +(void) doBackgroundMusicFadeToQuiet;
 
 + (float)getRanFloat:(float)smallNumber and:(float)bigNumber;
