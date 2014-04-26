@@ -954,33 +954,87 @@ CGPoint pointA;
 }
 
 -(void) setUpBackgroundFloor{
-    int rndFloor=[clsCommon getRanInt:1 maxNumber:7];
-    NSString *floorPath =
-    [[NSBundle mainBundle]
-     pathForResource:[NSString stringWithFormat:@"floor%i",rndFloor] ofType:@"sks"];
-
-    SKEmitterNode *floor =
-    [NSKeyedUnarchiver unarchiveObjectWithFile:floorPath];
-
-
-    //floor.position = backGround.position;
-
-    floor.zPosition = -1;
-    float red = [clsCommon getRanFloat:0.0 and:1.0];
-    float green = [clsCommon getRanFloat:0.0 and:1.0];
-    float blue = [clsCommon getRanFloat:0.0 and:1.0];
-
-
-    SKColor* color = [SKColor colorWithRed:red green:green blue:blue alpha:1];
-
-    floor.particleColorSequence = nil;
-    floor.particleColorBlendFactor = 1.0;
-
-    floor.particleColor = color;
-
-
-
-    [backGround addChild:floor];
+    int rndFloor=[clsCommon getRanInt:1 maxNumber:6];
+    double red;
+    double green;
+    double blue;
+    
+    switch (rndFloor) {
+            
+        case 1:
+            //orange
+            red=255;
+            green=102;
+            blue=0;
+            
+            break;
+        case 2:
+            //yellow
+            red=225;
+            green=255;
+            blue=0;
+            break;
+        case 3:
+            //blue
+            red=7;
+            green=155;
+            blue=176;
+            break;
+        case 4:
+            //purple
+            red=120;
+            green=0;
+            blue=128;
+            break;
+        case 5:
+            //brown/orange?
+            red=224;
+            green=160;
+            blue=84;
+            break;
+        case 6:
+            //green
+            red=30;
+            green=219;
+            blue=19;
+            break;
+        default:
+            red=0;
+            blue=0;
+            green=0;
+            break;
+    }
+    red=(1.0/255)*red;
+    green=(1.0/255)*green;
+    blue=(1.0/255)*blue;
+    SKColor *color=[SKColor colorWithRed:red green:green blue:blue alpha:1];
+    self.backgroundColor=color;
+//    NSString *floorPath =
+//    [[NSBundle mainBundle]
+//     pathForResource:[NSString stringWithFormat:@"floor%i",rndFloor] ofType:@"sks"];
+//
+//    SKEmitterNode *floor =
+//    [NSKeyedUnarchiver unarchiveObjectWithFile:floorPath];
+//
+//
+//    //floor.position = backGround.position;
+//
+//    floor.zPosition = -1;
+//    float red = [clsCommon getRanFloat:0.0 and:1.0];
+//    float green = [clsCommon getRanFloat:0.0 and:1.0];
+//    float blue = [clsCommon getRanFloat:0.0 and:1.0];
+//
+//
+//    SKColor* color = [SKColor colorWithRed:red green:green blue:blue alpha:1];
+//
+//    floor.particleColorSequence = nil;
+//    floor.particleColorBlendFactor = 1.0;
+//
+//    floor.particleColor = color;
+//
+//
+//    
+//    [backGround addChild:floor];
 }
 
 -(void) getBannerHeight{
