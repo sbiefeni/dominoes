@@ -30,6 +30,8 @@
     CGSize mySize;
     NSTimer *aTimer;
     int levelHighScore;
+
+    NSTimer *tapTimer;
     
 }
 
@@ -50,6 +52,9 @@
         //timer to check for gamecenter button
         aTimer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(gameCenterButtonTimer) userInfo:nil repeats:YES];
 
+        //timer to disable tap for a few seconds, to wait for game center
+        tapTimer = [NSTimer scheduledTimerWithTimeInterval:5 target:self selector:@selector(enableTapTimer) userInfo:nil repeats:YES];
+
         SKEmitterNode *background = [SKEmitterNode dom_emitterNamed:@"Background_Stars"];
         background.particlePositionRange = CGVectorMake(self.size.width*2, self.size.height*2);
         [background advanceSimulationTime:10];
@@ -58,7 +63,7 @@
 
         self.backgroundColor = [SKColor blackColor];
         
-        //[self addChild:background];
+        [self addChild:background];
 
         sizeDoubler = 1;
         if (size.width > 320){ //make fonts and spacing bigger on larger screen
@@ -205,6 +210,8 @@
 
         if ([self enableGameCenterButton]) {
 
+            [self enableTapTimer];
+
             if(aTimer)
             {
                 [aTimer invalidate];
@@ -212,6 +219,14 @@
             }
         }
     //}
+}
+
+-(void) enableTapTimer {
+    NSLog(@"TapTimer called");
+
+    tapEnabled = true;
+    [tapTimer invalidate];
+    tapTimer = nil;
 }
 
 -(BOOL)enableGameCenterButton {
@@ -481,7 +496,7 @@
         }else if([node.name isEqualToString:@"twitter"]){
             [self postToTwitterWithScore:levelHighScore];
 
-        }else {
+        }else if(tapEnabled) {
             [aTimer invalidate];
             aTimer = nil;
             if (gameStatus == reset || gameStatus == game_Started) {

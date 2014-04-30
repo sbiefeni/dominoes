@@ -99,5 +99,7 @@ extern SKLabelNode* scoreLabel;
 extern AVAudioPlayer* backgroundMusic;
 extern AVAudioPlayer* soundFile;
 
+//tap enable bool.. initail delay for the gamecenter
+extern BOOL tapEnabled;
 
 @end

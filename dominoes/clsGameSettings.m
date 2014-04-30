@@ -97,6 +97,10 @@ AVAudioPlayer* backgroundMusic;
 AVAudioPlayer* soundFile;
 
 
+//tap enable bool.. initail delay for the gamecenter
+BOOL tapEnabled;
+
+
 @implementation clsGameSettings
 
 @end

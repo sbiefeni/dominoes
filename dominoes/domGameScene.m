@@ -145,7 +145,7 @@ CGPoint pointA;
     maxX    =    1440;
     maxY    =    1971;
 
-    //TODO figure out gridWidth, gridHeight FROM background image size
+    //figure out gridWidth, gridHeight FROM background image size
     //was based on original arena..prob not valid
 //    minX = round((size.width * 10.42) / 100);//based on 1536 = 10.42%
 //    minY = round((size.height * 7.08) / 100);//based on 2048 =  7.08%
@@ -574,7 +574,24 @@ CGPoint pointA;
     }];
 
     SKAction *waitAction = [SKAction waitForDuration:0.05];
+
     [scoreLabel runAction:[SKAction repeatActionForever:[SKAction sequence:@[tempAction, waitAction]]]];
+}
+
+-(void) youLoseMessage{
+
+    scoreLabel = [[SKLabelNode alloc] initWithFontNamed:@"Chalkduster"];
+    scoreLabel.color = [UIColor whiteColor];
+    scoreLabel.fontSize = 45 * sizeDoubler;;
+    scoreLabel.position = CGPointMake(CGRectGetMidX(self.frame),
+                                      CGRectGetMidY(self.frame));
+
+    scoreLabel.text = @"You Lose!";
+    scoreLabel.alpha = .7;
+
+    scoreLabel.zPosition = 100;
+    [self addChild:scoreLabel];
+
 }
 
 -(void) testNextComputerMove{
@@ -801,6 +818,8 @@ CGPoint pointA;
         _fallingAnimationSlowStart = .15;
 
 
+        [self youLoseMessage];
+
         [self runAction:[SKAction sequence:@[
             [SKAction playSoundFileNamed:@"sounds/long_ding3.wav" waitForCompletion:NO],
             [SKAction runBlock:^{
@@ -990,7 +1009,7 @@ CGPoint pointA;
 
     int bannerCount =0;
 
-    //TODO randomize or otherwise have changing arenas
+    //randomize or otherwise have changing arenas
 
     int rndBackground = [clsCommon getRanInt:1 maxNumber:7];
 
