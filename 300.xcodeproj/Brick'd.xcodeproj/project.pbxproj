@@ -120,12 +120,12 @@
 		38E4967E18D7CDD600D111E9 /* brick.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = brick.png; sourceTree = "<group>"; };
 		38E7383018EB4E9400EE0C6E /* GameKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameKit.framework; path = System/Library/Frameworks/GameKit.framework; sourceTree = SDKROOT; };
 		38FD20531900529700C8461B /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
-		55CB7E1C18CBD180001EFA1C /* 300.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = 300.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		55CB7E1C18CBD180001EFA1C /* Brick'd.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Brick'd.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		55CB7E1F18CBD180001EFA1C /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		55CB7E2118CBD180001EFA1C /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		55CB7E2318CBD180001EFA1C /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		55CB7E2518CBD180001EFA1C /* SpriteKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SpriteKit.framework; path = System/Library/Frameworks/SpriteKit.framework; sourceTree = SDKROOT; };
-		55CB7E2918CBD180001EFA1C /* 300-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "300-Info.plist"; sourceTree = "<group>"; };
+		55CB7E2918CBD180001EFA1C /* Brick'd-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Brick'd-Info.plist"; sourceTree = "<group>"; };
 		55CB7E2B18CBD180001EFA1C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		55CB7E2D18CBD180001EFA1C /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		55CB7E2F18CBD180001EFA1C /* 300-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "300-Prefix.pch"; sourceTree = "<group>"; };
@@ -138,7 +138,7 @@
 		55CB7E3C18CBD181001EFA1C /* domGameScene.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = domGameScene.h; sourceTree = "<group>"; };
 		55CB7E3D18CBD181001EFA1C /* domGameScene.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = domGameScene.m; sourceTree = "<group>"; };
 		55CB7E4118CBD181001EFA1C /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		55CB7E4718CBD181001EFA1C /* 300Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = 300Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		55CB7E4718CBD181001EFA1C /* Brick'dTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Brick'dTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		55CB7E4818CBD181001EFA1C /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		55CB7E5018CBD181001EFA1C /* Brick'dTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Brick'dTests-Info.plist"; sourceTree = "<group>"; };
 		55CB7E5218CBD181001EFA1C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -304,7 +304,7 @@
 		55CB7E1318CBD180001EFA1C = {
 			isa = PBXGroup;
 			children = (
-				55CB7E2718CBD180001EFA1C /* 300 Bricks */,
+				55CB7E2718CBD180001EFA1C /* Brick'd */,
 				55CB7E4E18CBD181001EFA1C /* dominoesTests */,
 				55CB7E1E18CBD180001EFA1C /* Frameworks */,
 				55CB7E1D18CBD180001EFA1C /* Products */,
@@ -314,8 +314,8 @@
 		55CB7E1D18CBD180001EFA1C /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				55CB7E1C18CBD180001EFA1C /* 300.app */,
-				55CB7E4718CBD181001EFA1C /* 300Tests.xctest */,
+				55CB7E1C18CBD180001EFA1C /* Brick'd.app */,
+				55CB7E4718CBD181001EFA1C /* Brick'dTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -338,7 +338,7 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		55CB7E2718CBD180001EFA1C /* 300 Bricks */ = {
+		55CB7E2718CBD180001EFA1C /* Brick'd */ = {
 			isa = PBXGroup;
 			children = (
 				380B7ABD18FE0F6900DF6A09 /* GC Manager */,
@@ -355,14 +355,14 @@
 				55CB7E4118CBD181001EFA1C /* Images.xcassets */,
 				55CB7E2818CBD180001EFA1C /* Supporting Files */,
 			);
-			name = "300 Bricks";
+			name = "Brick'd";
 			path = dominoes;
 			sourceTree = "<group>";
 		};
 		55CB7E2818CBD180001EFA1C /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				55CB7E2918CBD180001EFA1C /* 300-Info.plist */,
+				55CB7E2918CBD180001EFA1C /* Brick'd-Info.plist */,
 				55CB7E2A18CBD180001EFA1C /* InfoPlist.strings */,
 				55CB7E2D18CBD180001EFA1C /* main.m */,
 				55CB7E2F18CBD180001EFA1C /* 300-Prefix.pch */,
@@ -391,9 +391,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		55CB7E1B18CBD180001EFA1C /* 300 */ = {
+		55CB7E1B18CBD180001EFA1C /* Brick'd */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 55CB7E5818CBD181001EFA1C /* Build configuration list for PBXNativeTarget "300" */;
+			buildConfigurationList = 55CB7E5818CBD181001EFA1C /* Build configuration list for PBXNativeTarget "Brick'd" */;
 			buildPhases = (
 				55CB7E1818CBD180001EFA1C /* Sources */,
 				55CB7E1918CBD180001EFA1C /* Frameworks */,
@@ -403,14 +403,14 @@
 			);
 			dependencies = (
 			);
-			name = 300;
+			name = "Brick'd";
 			productName = dominoes;
-			productReference = 55CB7E1C18CBD180001EFA1C /* 300.app */;
+			productReference = 55CB7E1C18CBD180001EFA1C /* Brick'd.app */;
 			productType = "com.apple.product-type.application";
 		};
-		55CB7E4618CBD181001EFA1C /* 300Tests */ = {
+		55CB7E4618CBD181001EFA1C /* Brick'dTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 55CB7E5B18CBD181001EFA1C /* Build configuration list for PBXNativeTarget "300Tests" */;
+			buildConfigurationList = 55CB7E5B18CBD181001EFA1C /* Build configuration list for PBXNativeTarget "Brick'dTests" */;
 			buildPhases = (
 				55CB7E4318CBD181001EFA1C /* Sources */,
 				55CB7E4418CBD181001EFA1C /* Frameworks */,
@@ -421,9 +421,9 @@
 			dependencies = (
 				55CB7E4D18CBD181001EFA1C /* PBXTargetDependency */,
 			);
-			name = 300Tests;
+			name = "Brick'dTests";
 			productName = dominoesTests;
-			productReference = 55CB7E4718CBD181001EFA1C /* 300Tests.xctest */;
+			productReference = 55CB7E4718CBD181001EFA1C /* Brick'dTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -449,7 +449,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 55CB7E1718CBD180001EFA1C /* Build configuration list for PBXProject "300" */;
+			buildConfigurationList = 55CB7E1718CBD180001EFA1C /* Build configuration list for PBXProject "Brick'd" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -462,8 +462,8 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				55CB7E1B18CBD180001EFA1C /* 300 */,
-				55CB7E4618CBD181001EFA1C /* 300Tests */,
+				55CB7E1B18CBD180001EFA1C /* Brick'd */,
+				55CB7E4618CBD181001EFA1C /* Brick'dTests */,
 			);
 		};
 /* End PBXProject section */
@@ -546,7 +546,7 @@
 /* Begin PBXTargetDependency section */
 		55CB7E4D18CBD181001EFA1C /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 55CB7E1B18CBD180001EFA1C /* 300 */;
+			target = 55CB7E1B18CBD180001EFA1C /* Brick'd */;
 			targetProxy = 55CB7E4C18CBD181001EFA1C /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -672,10 +672,10 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COMPRESS_PNG_FILES = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "dominoes/300-Prefix.pch";
-				INFOPLIST_FILE = "dominoes/300-Info.plist";
+				GCC_PREFIX_HEADER = "dominoes/Brick'd-Prefix.pch";
+				INFOPLIST_FILE = "dominoes/Brick'd-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
-				PRODUCT_NAME = 300;
+				PRODUCT_NAME = "Brick'd";
 				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos7.1;
 				SPRITEKIT_TEXTURE_ATLAS_OUTPUT = YES;
@@ -693,10 +693,10 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COMPRESS_PNG_FILES = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "dominoes/300-Prefix.pch";
-				INFOPLIST_FILE = "dominoes/300-Info.plist";
+				GCC_PREFIX_HEADER = "dominoes/Brick'd-Prefix.pch";
+				INFOPLIST_FILE = "dominoes/Brick'd-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
-				PRODUCT_NAME = 300;
+				PRODUCT_NAME = "Brick'd";
 				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos7.1;
 				SPRITEKIT_TEXTURE_ATLAS_OUTPUT = YES;
@@ -721,7 +721,7 @@
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = "dominoesTests/Brick'dTests-Info.plist";
-				PRODUCT_NAME = 300Tests;
+				PRODUCT_NAME = "Brick'dTests";
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = xctest;
 			};
@@ -739,7 +739,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "dominoes/dominoes-Prefix.pch";
 				INFOPLIST_FILE = "dominoesTests/Brick'dTests-Info.plist";
-				PRODUCT_NAME = 300Tests;
+				PRODUCT_NAME = "Brick'dTests";
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = xctest;
 			};
@@ -748,7 +748,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		55CB7E1718CBD180001EFA1C /* Build configuration list for PBXProject "300" */ = {
+		55CB7E1718CBD180001EFA1C /* Build configuration list for PBXProject "Brick'd" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				55CB7E5618CBD181001EFA1C /* Debug */,
@@ -757,7 +757,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		55CB7E5818CBD181001EFA1C /* Build configuration list for PBXNativeTarget "300" */ = {
+		55CB7E5818CBD181001EFA1C /* Build configuration list for PBXNativeTarget "Brick'd" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				55CB7E5918CBD181001EFA1C /* Debug */,
@@ -766,7 +766,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		55CB7E5B18CBD181001EFA1C /* Build configuration list for PBXNativeTarget "300Tests" */ = {
+		55CB7E5B18CBD181001EFA1C /* Build configuration list for PBXNativeTarget "Brick'dTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				55CB7E5C18CBD181001EFA1C /* Debug */,
