@@ -10,6 +10,10 @@
 #import "domMenuScene.h"
 #import "clsPlayer.h"
 #import "clsCommon.h"
+#import "AppFlood.h"
+
+
+
 
 ADBannerView *adView;
 int iHeight;
@@ -154,7 +158,14 @@ BOOL showingLeaderboard;
     adView.delegate=self;
     [adView setAlpha:0];
     [self.view addSubview:adView];
-    
+
+
+//initialize AppFlood
+    NSString* AppFloodID = @"EExiDMAjiDU5htiV";  //300 Brick'd Keys for AppFlood Account
+    NSString* AppFloodKey = @"VZY5DL7L3eb1L5365589b";
+    //initialize appflood
+    [AppFlood initializeWithId:AppFloodID key:AppFloodKey adType:APPFLOOD_AD_ALL ];
+
     // Configure the view.
     SKView * skView = (SKView*)self.originalContentView;
     skView.showsFPS = NO;
@@ -186,7 +197,7 @@ BOOL showingLeaderboard;
 
     // Present the Menu scene
     [skView presentScene:scene];
-    
+
 }
 
 //following function called by the iAds if user clicks the ad and ad pops up

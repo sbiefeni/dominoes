@@ -20,6 +20,8 @@ extern BOOL adsShowing;
 extern BOOL bannerIsVisible;
 extern BOOL bannerIsLoaded;
 
+extern int appFloodSceneCount;
+
 extern BOOL gcEnabled;
 
 //to get the scale factor for the current screen (orig size / new size)

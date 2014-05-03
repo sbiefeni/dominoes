@@ -11,6 +11,7 @@
 #import <iAd/iAd.h>
 #import <GameKit/GameKit.h>
 #import "GameCenterManager.h"
+#import "AppFlood.h"
 
 @interface domViewController : UIViewController <GameCenterManagerDelegate>
 

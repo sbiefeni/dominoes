@@ -20,6 +20,9 @@
 #import "clsGameSettings.h"
 #import "GameCenterManager.h"
 
+#import "AppFlood.h"
+
+#define appFloodScenesRandomInterval 3
 
 
 #import "SKEmitterNode+fromFile.h"
@@ -59,7 +62,7 @@
         background.particlePositionRange = CGVectorMake(self.size.width*2, self.size.height*2);
         [background advanceSimulationTime:10];
 
-        background.alpha = .3;
+        background.alpha = .5;
 
         self.backgroundColor = [SKColor blackColor];
         
@@ -74,6 +77,8 @@
         levelHighScore = [self getLevelHighscore];
 
         if (gameStatus != game_Started ) {  //game hasn't started.. show initial screen
+
+
 
                 SKLabelNode *title = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
                 [self createLabel:title text:@"300" fontSize:130 posY:45 color:[SKColor redColor] alpha:.7 sizeDoubler:sizeDoubler];
@@ -105,6 +110,8 @@
         }else if(gameStatus == game_Started && lives > 0)   { // game started...
 
                 //show score screen
+
+            [self showAppFlood:false];
 
                 totalScore += score;
 
@@ -162,6 +169,8 @@
                     }
                 }
 
+            [self showAppFlood:true];
+
                 //draw facebook and twitter buttons
                 [self drawSocialButtonsWithfbX:-40 withfbY:10 withtwX:40 withtwY:10 withAlpha:1];
 
@@ -197,6 +206,20 @@
 
 } //end initwithsize
 
+-(void) showAppFlood:(BOOL)gameEnd {
+
+    if (gameEnd){
+        [AppFlood showInterstitial];
+    }else{
+        //count number of scene changes to intermittently show Ad
+        if (appFloodSceneCount > 1){
+            if ([clsCommon getRanInt:1 maxNumber:appFloodScenesRandomInterval] == 1){
+                [AppFlood showFullscreen];
+            }
+        }
+    }
+    appFloodSceneCount += 1;
+}
 
 - (void)dealloc {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
