@@ -35,14 +35,13 @@
     int levelHighScore;
 
     NSTimer *tapTimer;
-    BOOL areAdsRemoved;
+    
 }
 
 -(instancetype)initWithSize:(CGSize)size
 {
 
-    areAdsRemoved = [[NSUserDefaults standardUserDefaults] boolForKey:@"areAddsRemoved"];
-    [[NSUserDefaults standardUserDefaults] synchronize];
+    areAdsRemoved = (int)[clsCommon getUserSettingForKey: @"areAddsRemoved"];
     //this will load wether or not they bought the in-app purchase
     
     if(self = [super initWithSize:size]) {
@@ -193,7 +192,7 @@
                 SKLabelNode *tot_score2 = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
                 [self createLabel:tot_score2 text:[NSString stringWithFormat:@"%i",totalScore] fontSize:80 posY:-150 color:[SKColor whiteColor] alpha:1 sizeDoubler:sizeDoubler];
             
-                if(!areAdsRemoved){
+                if(areAdsRemoved < 1){
                     [self createBuyGameButton];
                 }
             
@@ -645,13 +644,12 @@
 - (void)doRemoveAds{
     ADBannerView *banner;
     [banner setAlpha:0];
-    areAdsRemoved = YES;
+    areAdsRemoved = 1;
     [[self childNodeWithName:@"buygamebutton"] removeFromParent];
     [[self childNodeWithName:@"buygamelabel"] removeFromParent];
-    
-    [[NSUserDefaults standardUserDefaults] setBool:areAdsRemoved forKey:@"areAdsRemoved"];
-    //use NSUserDefaults so that you can load wether or not they bought it
-    [[NSUserDefaults standardUserDefaults] synchronize];
+
+    //save the ads removed setting
+    [clsCommon storeUserSetting:@"areAdsRemoved" value:[NSString stringWithFormat:@"%i",areAdsRemoved]];
 }
 
 @end

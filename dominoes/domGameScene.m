@@ -586,7 +586,7 @@ CGPoint pointA;
     //scoreLabel.fontSize = 25 * sizeDoubler;;
     scoreLabel.position = CGPointMake(CGRectGetMidX(self.frame),
                                       CGRectGetMidY(self.frame));
-    scoreLabel.alpha = .8;
+    scoreLabel.alpha = 1;
     scoreLabel.zPosition = 100;
 
     if (lives > 1){
@@ -614,6 +614,7 @@ CGPoint pointA;
             break;
         }
     }else{
+        scoreLabel.fontSize = 45 * sizeDoubler;
         scoreLabel.text = @"Game Over!";
     }
 

@@ -16,6 +16,8 @@ BOOL bannerIsLoaded;
 
 int appFloodSceneCount;
 
+int areAdsRemoved;
+
 
 //gamecenter settings
 BOOL gcEnabled;
