@@ -10,8 +10,9 @@
 #import <Foundation/Foundation.h>
 #import <GameKit/GameKit.h>
 #import <Social/Social.h>
+#import <StoreKit/StoreKit.h>
 
-@interface domMenuScene : SKScene
+@interface domMenuScene : SKScene <SKProductsRequestDelegate,SKPaymentTransactionObserver>
 
 -(BOOL)enableGameCenterButton;
 
