@@ -597,7 +597,7 @@ CGPoint pointA;
             scoreLabel.text = @"Don't Crash!";
             break;
         case 2  :
-            scoreLabel.fontSize = 45 * sizeDoubler;
+            scoreLabel.fontSize = 42 * sizeDoubler;
             scoreLabel.text = @"Watch Out!";
             break;
         case 3  :
@@ -614,7 +614,7 @@ CGPoint pointA;
             break;
         }
     }else{
-        scoreLabel.fontSize = 45 * sizeDoubler;
+        scoreLabel.fontSize = 40 * sizeDoubler;
         scoreLabel.text = @"Game Over!";
     }
 
