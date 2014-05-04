@@ -15,6 +15,7 @@ BOOL bannerIsVisible;
 BOOL bannerIsLoaded;
 
 int appFloodSceneCount;
+bool appFloodShowedLastLevel;
 
 int areAdsRemoved;
 
