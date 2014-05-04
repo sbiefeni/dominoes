@@ -21,6 +21,7 @@ extern BOOL bannerIsVisible;
 extern BOOL bannerIsLoaded;
 
 extern int appFloodSceneCount;
+extern bool appFloodShowedLastLevel;
 
 extern int areAdsRemoved;
 

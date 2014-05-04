@@ -41,7 +41,7 @@
 -(instancetype)initWithSize:(CGSize)size
 {
 
-    areAdsRemoved = (int)[clsCommon getUserSettingForKey: @"areAddsRemoved"];
+    areAdsRemoved = [[clsCommon getUserSettingForKey: @"areAdsRemoved"] intValue];
     //this will load wether or not they bought the in-app purchase
     
     if(self = [super initWithSize:size]) {
@@ -214,17 +214,24 @@
 
 -(void) showAppFlood:(BOOL)gameEnd {
 
-    //show a timed intersitial for game end
-    if (gameEnd){
-        [AppFlood showInterstitial];
-    }else{
-        //count number of scene changes to intermittently show Ad
-        if (appFloodSceneCount > 1){
-            if ([clsCommon getRanInt:1 maxNumber:appFloodScenesRandomInterval] == 1){
-                [AppFlood showFullscreen];
+    if (!appFloodShowedLastLevel){
+        //show a timed intersitial for game end
+        if (gameEnd){
+            [AppFlood showFullscreen];
+            appFloodShowedLastLevel = true;
+        }else{
+            //count number of scene changes to intermittently show Ad
+            if (appFloodSceneCount > 1){
+                if ([clsCommon getRanInt:1 maxNumber:appFloodScenesRandomInterval] > 1){
+                    [AppFlood showFullscreen];
+                    appFloodShowedLastLevel = true;
+                }
             }
         }
+    }else{
+        appFloodShowedLastLevel = false;
     }
+
     appFloodSceneCount += 1;
 }
 
