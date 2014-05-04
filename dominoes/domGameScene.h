@@ -42,4 +42,14 @@ typedef enum {
     game_Over = 2
 } game_Status;
 
+typedef enum enmColors : NSUInteger{
+    orange=     1,
+    yellow=     2,
+    Blue=       3,
+    purple=     4,
+    beige=      5,
+    Green=      6,
+    honeydew=   7
+} enmColors;
+
 @end

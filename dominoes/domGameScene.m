@@ -60,12 +60,15 @@
 @property NSTimeInterval fallingAnimationSlowStart;
 @property int sceneChangeDelay;
 
+
 @end
 
 
 @implementation domGameScene
 
 CGPoint pointA;
+int lastBGColor;
+enmColors eColors;
 
 -(id)initWithSize:(CGSize)size {
     if (self = [super initWithSize:size]) {
@@ -363,20 +366,20 @@ CGPoint pointA;
     
     [self runAction:
      [SKAction sequence:@[
-                          [SKAction repeatAction:
-                           [SKAction sequence:@[
-                                                [SKAction runBlock:^{
-                               arrow.alpha = .7;
-                           }],
-                                                [SKAction waitForDuration:.15],
-                                                [SKAction runBlock:^{
-                               arrow.alpha = 0;
-                           }],
-                                                [SKAction waitForDuration:.15],
-                                                ]]
-                                           count:6
-                           ],
-                          [SKAction runBlock:^{
+          [SKAction repeatAction:
+           [SKAction sequence:@[
+                                [SKAction runBlock:^{
+               arrow.alpha = .7;
+           }],
+                                [SKAction waitForDuration:.15],
+                                [SKAction runBlock:^{
+               arrow.alpha = 0;
+           }],
+                                [SKAction waitForDuration:.15],
+                                ]]
+                           count:6
+           ],
+          [SKAction runBlock:^{
          [lblFaster removeFromParent];
          [lblLives removeFromParent];
          [achievPrompt removeFromParent];
@@ -453,10 +456,13 @@ CGPoint pointA;
         
         domino.size = dominoSize;
         domino.zPosition = dominoZPos;
-        
-        //[objectWithOurMethod methodName:int1 withArg2:int2];
+                //[objectWithOurMethod methodName:int1 withArg2:int2];
         domino.position = [self calcDominoPosition:computer.curX withArg2:computer.curY];
         
+        //set color of domino using a mask, based on what color the backgorund is set to
+        SKColor *col=[SKColor cyanColor];
+        domino.color=col;
+        domino.colorBlendFactor=1;
         //temp - highlight when computer is close to a wall
         //        isRunningInIde(
         //            if (Y==0  || Y==rows || X==0 || X==cols) {
@@ -751,8 +757,10 @@ CGPoint pointA;
         //[objectWithOurMethod methodName:int1 withArg2:int2];
         domino.position = [self calcDominoPosition:player.curX withArg2:player.curY];
         domino.direction=player.curDirection;
-        //        domino.color = [SKColor greenColor];
-        //        domino.colorBlendFactor = .4;
+        
+        //here we sould set color intensity based on BG color?
+        domino.color = [SKColor greenColor];
+        domino.colorBlendFactor = 1;
         
         
         [self addChild:domino];
@@ -954,55 +962,69 @@ CGPoint pointA;
 }
 
 -(void) setUpBackgroundFloor{
-    int rndFloor=[clsCommon getRanInt:1 maxNumber:6];
+    
     double red;
     double green;
     double blue;
+    static double lastColor;
+    int rndFloor = 0;
     
-    switch (rndFloor) {
-            
-        case 1:
-            //orange
-            red=255;
-            green=102;
-            blue=0;
-            
-            break;
-        case 2:
-            //yellow
-            red=225;
-            green=255;
-            blue=0;
-            break;
-        case 3:
-            //blue
-            red=7;
-            green=155;
-            blue=176;
-            break;
-        case 4:
-            //purple
-            red=120;
-            green=0;
-            blue=128;
-            break;
-        case 5:
-            //brown/orange?
-            red=224;
-            green=160;
-            blue=84;
-            break;
-        case 6:
-            //green
-            red=50;
-            green=162;
-            blue=20;
-            break;
-        default:
-            red=0;
-            blue=0;
-            green=0;
-            break;
+    do
+     {
+        rndFloor=[clsCommon getRanInt:1 maxNumber:7];
+        
+     }while (rndFloor==lastColor);
+    lastColor=rndFloor;
+    //set the global for use with setting domino colors...
+    lastBGColor=lastColor;
+    switch ((enmColors)rndFloor) {
+        
+    case orange:
+        //orange
+        red=255;
+        green=102;
+        blue=0;
+        break;
+    case yellow:
+        //yellow
+        red=248;
+        green=228;
+        blue=15;
+        break;
+    case Blue:
+        //blue
+        red=7;
+        green=155;
+        blue=176;
+        break;
+    case purple:
+        //purple
+        red=120;
+        green=0;
+        blue=128;
+        break;
+    case beige:
+        //beige
+        red=224;
+        green=160;
+        blue=84;
+        break;
+    case Green:
+        //green
+        red=64;
+        green=128;
+        blue=0;
+        break;
+    case honeydew:
+        red=204;
+        green=255;
+        blue=102;
+        break;
+    default:
+        red=0;
+        blue=0;
+        green=0;
+        break;
     }
     red=(1.0/255)*red;
     green=(1.0/255)*green;
