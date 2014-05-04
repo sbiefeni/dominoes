@@ -96,7 +96,7 @@ BOOL showingLeaderboard;
 +(void)setAdView:(BOOL)showAd ShowOnTop:(BOOL)onTop ChooseRandom:(BOOL)useRandom{
     
 
-    if(bannerIsLoaded){
+    if(bannerIsLoaded && areAdsRemoved==0){
         
         if (showAd) {
             BOOL blOnTop;
