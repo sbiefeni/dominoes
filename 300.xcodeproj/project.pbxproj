@@ -24,8 +24,8 @@
 		3818DCD4191593F00017CA98 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3818DCD3191593F00017CA98 /* MobileCoreServices.framework */; };
 		3818DCD6191594120017CA98 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3818DCD5191594120017CA98 /* QuartzCore.framework */; };
 		3818DCD8191594250017CA98 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3818DCD7191594250017CA98 /* AdSupport.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
-		3818DCDC191595E60017CA98 /* libAppFlood.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3818DCDB191595E60017CA98 /* libAppFlood.a */; };
 		3818DCDE191596A80017CA98 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3818DCDD191596A80017CA98 /* StoreKit.framework */; };
+		3818DCE61915C41C0017CA98 /* libAppFlood.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3818DCE51915C41C0017CA98 /* libAppFlood.a */; };
 		38530A9718F0B07E00FA19CC /* new-arena2.png in Resources */ = {isa = PBXBuildFile; fileRef = 38530A9618F0B07E00FA19CC /* new-arena2.png */; };
 		38530A9D18F0B4A400FA19CC /* new-arena3.png in Resources */ = {isa = PBXBuildFile; fileRef = 38530A9818F0B4A400FA19CC /* new-arena3.png */; };
 		38530A9E18F0B4A400FA19CC /* new-arena4.png in Resources */ = {isa = PBXBuildFile; fileRef = 38530A9918F0B4A400FA19CC /* new-arena4.png */; };
@@ -95,10 +95,9 @@
 		3818DCD3191593F00017CA98 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		3818DCD5191594120017CA98 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		3818DCD7191594250017CA98 /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
-		3818DCD91915948E0017CA98 /* appflood */ = {isa = PBXFileReference; lastKnownFileType = folder; name = appflood; path = dominoes/appflood; sourceTree = "<group>"; };
-		3818DCDB191595E60017CA98 /* libAppFlood.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libAppFlood.a; path = "dominoes/appflood/iOS SDK/libAppFlood.a"; sourceTree = "<group>"; };
 		3818DCDD191596A80017CA98 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		3818DCE41915A2290017CA98 /* AppFlood.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppFlood.h; sourceTree = "<group>"; };
+		3818DCE51915C41C0017CA98 /* libAppFlood.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libAppFlood.a; path = dominoes/appflood/iOS_SDK/libAppFlood.a; sourceTree = "<group>"; };
 		38530A9618F0B07E00FA19CC /* new-arena2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "new-arena2.png"; sourceTree = "<group>"; };
 		38530A9818F0B4A400FA19CC /* new-arena3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "new-arena3.png"; sourceTree = "<group>"; };
 		38530A9918F0B4A400FA19CC /* new-arena4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "new-arena4.png"; sourceTree = "<group>"; };
@@ -150,7 +149,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3818DCDC191595E60017CA98 /* libAppFlood.a in Frameworks */,
 				3818DCD8191594250017CA98 /* AdSupport.framework in Frameworks */,
 				3818DCD6191594120017CA98 /* QuartzCore.framework in Frameworks */,
 				3818DCDE191596A80017CA98 /* StoreKit.framework in Frameworks */,
@@ -159,6 +157,7 @@
 				38FD20541900529700C8461B /* Social.framework in Frameworks */,
 				380B7ACA18FE115100DF6A09 /* Security.framework in Frameworks */,
 				380B7AC818FE114400DF6A09 /* SystemConfiguration.framework in Frameworks */,
+				3818DCE61915C41C0017CA98 /* libAppFlood.a in Frameworks */,
 				34C0142D18D2A4C8007C37AB /* iAd.framework in Frameworks */,
 				34C0142A18D183BF007C37AB /* AudioToolbox.framework in Frameworks */,
 				38E7383118EB4E9400EE0C6E /* GameKit.framework in Frameworks */,
@@ -330,9 +329,8 @@
 		55CB7E1E18CBD180001EFA1C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				3818DCE51915C41C0017CA98 /* libAppFlood.a */,
 				3818DCDD191596A80017CA98 /* StoreKit.framework */,
-				3818DCDB191595E60017CA98 /* libAppFlood.a */,
-				3818DCD91915948E0017CA98 /* appflood */,
 				3818DCD7191594250017CA98 /* AdSupport.framework */,
 				3818DCD5191594120017CA98 /* QuartzCore.framework */,
 				3818DCD3191593F00017CA98 /* MobileCoreServices.framework */,
@@ -690,6 +688,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/dominoes/appflood/iOS",
 					SDK,
+					"$(PROJECT_DIR)/dominoes/appflood/iOS_SDK",
 				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = 300;
@@ -717,6 +716,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/dominoes/appflood/iOS",
 					SDK,
+					"$(PROJECT_DIR)/dominoes/appflood/iOS_SDK",
 				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = 300;

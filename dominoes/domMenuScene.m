@@ -208,6 +208,7 @@
 
 -(void) showAppFlood:(BOOL)gameEnd {
 
+    //show a timed intersitial for game end
     if (gameEnd){
         [AppFlood showInterstitial];
     }else{
