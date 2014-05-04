@@ -583,31 +583,39 @@ CGPoint pointA;
 
     scoreLabel = [[SKLabelNode alloc] initWithFontNamed:@"Chalkduster"];
     scoreLabel.color = [UIColor whiteColor];
-    scoreLabel.fontSize = 45 * sizeDoubler;;
+    //scoreLabel.fontSize = 25 * sizeDoubler;;
     scoreLabel.position = CGPointMake(CGRectGetMidX(self.frame),
                                       CGRectGetMidY(self.frame));
     scoreLabel.alpha = .8;
     scoreLabel.zPosition = 100;
 
-    switch ([clsCommon getRanInt:1 maxNumber:5]) {
+    if (lives > 1){
+        switch ([clsCommon getRanInt:1 maxNumber:5]) {
 
         case 1  :
-            scoreLabel.text = @"You Lose!";
+            scoreLabel.fontSize = 38 * sizeDoubler;
+            scoreLabel.text = @"Don't Crash!";
             break;
         case 2  :
-            scoreLabel.text = @"You Lose!";
+            scoreLabel.fontSize = 45 * sizeDoubler;
+            scoreLabel.text = @"Watch Out!";
             break;
         case 3  :
-            scoreLabel.text = @"You Lose!";
+            scoreLabel.fontSize = 25 * sizeDoubler;
+            scoreLabel.text = @"Remember to turn!";
             break;
         case 4  :
-            scoreLabel.text = @"You Lose!";
+            scoreLabel.fontSize = 38 * sizeDoubler;
+            scoreLabel.text = @"Outlast Him!";
             break;
         case 5  :
-            scoreLabel.text = @"You Lose!";
+            scoreLabel.fontSize = 25 * sizeDoubler;
+            scoreLabel.text = @"You can do better!";
             break;
+        }
+    }else{
+        scoreLabel.text = @"Game Over!";
     }
-
 
 
     [self addChild:scoreLabel];

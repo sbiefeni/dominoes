@@ -22,7 +22,7 @@
 
 #import "AppFlood.h"
 
-#define appFloodScenesRandomInterval 3
+#define appFloodScenesRandomInterval 4
 #define kRemoveAdsProductIDentifier @"300_NoAds"
 
 #import "SKEmitterNode+fromFile.h"
