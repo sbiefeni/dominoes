@@ -580,16 +580,36 @@ CGPoint pointA;
 
 -(void) youLoseMessage{
 
+
     scoreLabel = [[SKLabelNode alloc] initWithFontNamed:@"Chalkduster"];
     scoreLabel.color = [UIColor whiteColor];
     scoreLabel.fontSize = 45 * sizeDoubler;;
     scoreLabel.position = CGPointMake(CGRectGetMidX(self.frame),
                                       CGRectGetMidY(self.frame));
-
-    scoreLabel.text = @"You Lose!";
-    scoreLabel.alpha = .7;
-
+    scoreLabel.alpha = .8;
     scoreLabel.zPosition = 100;
+
+    switch ([clsCommon getRanInt:1 maxNumber:5]) {
+
+        case 1  :
+            scoreLabel.text = @"You Lose!";
+            break;
+        case 2  :
+            scoreLabel.text = @"You Lose!";
+            break;
+        case 3  :
+            scoreLabel.text = @"You Lose!";
+            break;
+        case 4  :
+            scoreLabel.text = @"You Lose!";
+            break;
+        case 5  :
+            scoreLabel.text = @"You Lose!";
+            break;
+    }
+
+
+
     [self addChild:scoreLabel];
 
 }

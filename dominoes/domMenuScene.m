@@ -268,7 +268,7 @@
     [self addChild:buyGameButton];
     
     SKLabelNode *buyGameLabel = [SKLabelNode labelNodeWithFontNamed:@"Avenir-Black"];
-    [self createLabel:buyGameLabel text:@"Want To Disable Ads?" fontSize:30 posY:-((mySize.height/2)/sizeDoubler) color:[SKColor blackColor] alpha:.7 sizeDoubler:1];
+    [self createLabel:buyGameLabel text:@"Disable Ads - $0.99" fontSize:24 posY:-((mySize.height/2)/sizeDoubler) color:[SKColor blackColor] alpha:.7 sizeDoubler:1];
     buyGameLabel.position = buyGameButton.position;
     buyGameLabel.zPosition = 25;
     buyGameLabel.verticalAlignmentMode = SKLabelVerticalAlignmentModeCenter;
@@ -545,7 +545,7 @@
 
         }else if([node.name isEqualToString:@"twitter"]){
             [self postToTwitterWithScore:levelHighScore];
-        }else if([node.name isEqualToString:@"buygame"] || [node.name isEqualToString:@"buygamelabel"]) {
+        }else if([node.name isEqualToString:@"buygamebutton"] || [node.name isEqualToString:@"buygamelabel"]) {
             //PUT BUY GAME CODE HERE
             [self userClickedBuyGame];
         }else if(tapEnabled) {
@@ -566,13 +566,14 @@
 
 -(void)userClickedBuyGame{
     if([SKPaymentQueue canMakePayments]){
-        NSLog(@"User can make payments");
+        //NSLog(@"User can make payments");
         SKProductsRequest *productsRequest=[[SKProductsRequest alloc] initWithProductIdentifiers:[NSSet setWithObject:kRemoveAdsProductIDentifier]];
         productsRequest.delegate=self;
         [productsRequest start];
     }
     else{
-        NSLog(@"User cannot make payments, perhaps due to parental controls");
+        [self showPopupMessage:@"Purchases are disabled for your account" withTitle:@"Disable Ads"];
+        //NSLog(@"User cannot make payments, perhaps due to parental controls");
     }
 }
 
