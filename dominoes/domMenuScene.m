@@ -41,7 +41,7 @@
 -(instancetype)initWithSize:(CGSize)size
 {
 
-    areAdsRemoved = (int)[clsCommon getUserSettingForKey: @"areAddsRemoved"];
+    areAdsRemoved = [[clsCommon getUserSettingForKey: @"areAdsRemoved"] intValue];
     //this will load wether or not they bought the in-app purchase
     
     if(self = [super initWithSize:size]) {
