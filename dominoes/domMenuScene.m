@@ -40,8 +40,11 @@
 
 -(instancetype)initWithSize:(CGSize)size
 {
+    //debug code
+    //  [clsCommon storeUserSetting:@"areAdsRemoved" value:[NSString stringWithFormat:@"%i",0]];
 
     areAdsRemoved = [[clsCommon getUserSettingForKey: @"areAdsRemoved"] intValue];
+
     //this will load wether or not they bought the in-app purchase
     
     if(self = [super initWithSize:size]) {
@@ -79,8 +82,6 @@
         levelHighScore = [self getLevelHighscore];
 
         if (gameStatus != game_Started ) {  //game hasn't started.. show initial screen
-
-
 
             SKLabelNode *title = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
             [self createLabel:title text:@"300" fontSize:130 posY:45 color:[SKColor redColor] alpha:.7 sizeDoubler:sizeDoubler];
@@ -214,25 +215,29 @@
 
 -(void) showAppFlood:(BOOL)gameEnd {
 
-    if (!appFloodShowedLastLevel){
-        //show a timed intersitial for game end
-        if (gameEnd){
-            [AppFlood showFullscreen];
-            appFloodShowedLastLevel = true;
-        }else{
-            //count number of scene changes to intermittently show Ad
-            if (appFloodSceneCount > 1){
-                if ([clsCommon getRanInt:1 maxNumber:appFloodScenesRandomInterval] > 1){
-                    [AppFlood showFullscreen];
-                    appFloodShowedLastLevel = true;
+    if (areAdsRemoved < 1){
+
+        if (!appFloodShowedLastLevel){
+            //show a timed intersitial for game end
+            if (gameEnd){
+                [AppFlood showFullscreen];
+                appFloodShowedLastLevel = true;
+            }else{
+                //count number of scene changes to intermittently show Ad
+                if (appFloodSceneCount > 1){
+                    if ([clsCommon getRanInt:1 maxNumber:appFloodScenesRandomInterval] == 1){
+                        [AppFlood showFullscreen];
+                        appFloodShowedLastLevel = true;
+                    }
                 }
             }
+        }else{
+            appFloodShowedLastLevel = false;
         }
-    }else{
-        appFloodShowedLastLevel = false;
-    }
 
-    appFloodSceneCount += 1;
+        appFloodSceneCount += 1;
+
+    }
 }
 
 - (void)dealloc {
@@ -578,7 +583,7 @@
         [productsRequest start];
     }
     else{
-        [self showPopupMessage:@"Purchases are disabled for your account" withTitle:@"Disable Ads"];
+        [self showPopupMessage:@"Purchases are disabled for your account" withTitle:@"Remove Ads"];
         //NSLog(@"User cannot make payments, perhaps due to parental controls");
     }
 }
