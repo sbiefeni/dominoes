@@ -590,7 +590,7 @@ CGPoint pointA;
     scoreLabel.zPosition = 100;
 
     if (lives > 1){
-        switch ([clsCommon getRanInt:1 maxNumber:5]) {
+        switch ([clsCommon getRanInt:1 maxNumber:7]) {
 
         case 1  :
             scoreLabel.fontSize = 38 * sizeDoubler;
@@ -611,6 +611,14 @@ CGPoint pointA;
         case 5  :
             scoreLabel.fontSize = 25 * sizeDoubler;
             scoreLabel.text = @"You can do better!";
+            break;
+        case 6  :
+            scoreLabel.fontSize = 20 * sizeDoubler;
+            scoreLabel.text = @"Control the opponent!";
+            break;
+        case 7  :
+            scoreLabel.fontSize = 20 * sizeDoubler;
+            scoreLabel.text = @"Contain and Dominate!";
             break;
         }
     }else{

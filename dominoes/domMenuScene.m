@@ -638,7 +638,7 @@
 }
 
 -(void)paymentQueueRestoreCompletedTransactionsFinished:(SKPaymentQueue *)queue{
-    NSLog(@"Received restored transactions: %i", queue.transactions.count);
+    NSLog(@"Received restored transactions: %i", (int)queue.transactions.count);
     for (SKPaymentTransaction *transaction in queue.transactions)
     {
         if(SKPaymentTransactionStateRestored){
