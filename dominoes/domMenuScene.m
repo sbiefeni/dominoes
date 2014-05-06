@@ -219,8 +219,12 @@
 
         if (!appFloodShowedLastLevel){
             //show a timed intersitial for game end
-            if (gameEnd){
-                [AppFlood showFullscreen];
+            if (gameEnd){  //show intersitial 1 out of 3 times
+                if ([clsCommon getRanInt:1 maxNumber:3] == 1){
+                    [AppFlood showInterstitial];
+                }else{
+                    [AppFlood showFullscreen];
+                }
                 appFloodShowedLastLevel = true;
             }else{
                 //count number of scene changes to intermittently show Ad
