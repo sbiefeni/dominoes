@@ -617,8 +617,8 @@ CGPoint pointA;
             scoreLabel.text = @"Control the opponent!";
             break;
         case 7  :
-            scoreLabel.fontSize = 20 * sizeDoubler;
-            scoreLabel.text = @"Contain and Dominate!";
+            scoreLabel.fontSize = 22 * sizeDoubler;
+            scoreLabel.text = @"Contain & Dominate!";
             break;
         }
     }else{
