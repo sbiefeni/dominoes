@@ -598,7 +598,7 @@
 
 -(void)productsRequest:(SKProductsRequest *)request didReceiveResponse:(SKProductsResponse *)response{
     SKProduct *validProduct=nil;
-    int count=[response.products count];
+    NSUInteger count=[response.products count];
     if(count>0){
         validProduct=[response.products objectAtIndex:0];
         
