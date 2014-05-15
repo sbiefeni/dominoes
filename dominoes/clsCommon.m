@@ -33,7 +33,7 @@
                       sound];
     NSURL *filePath = [NSURL fileURLWithPath:path isDirectory:NO];
     soundFile = [[AVAudioPlayer alloc] initWithContentsOfURL:filePath error:nil];
-    [soundFile prepareToPlay];
+    //[soundFile prepareToPlay];
     [soundFile play];
     soundFile.volume = volume;
 }
