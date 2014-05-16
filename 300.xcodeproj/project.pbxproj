@@ -60,7 +60,6 @@
 		55CB7E4B18CBD181001EFA1C /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55CB7E2318CBD180001EFA1C /* UIKit.framework */; };
 		55CB7E5318CBD181001EFA1C /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 55CB7E5118CBD181001EFA1C /* InfoPlist.strings */; };
 		55CB7E5518CBD181001EFA1C /* dominoesTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 55CB7E5418CBD181001EFA1C /* dominoesTests.m */; };
-		7B4CFA7C1925A79100217488 /* localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7B4CFA7E1925A79100217488 /* localizable.strings */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -143,12 +142,6 @@
 		55CB7E5018CBD181001EFA1C /* 300Tests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "300Tests-Info.plist"; sourceTree = "<group>"; };
 		55CB7E5218CBD181001EFA1C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		55CB7E5418CBD181001EFA1C /* dominoesTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = dominoesTests.m; sourceTree = "<group>"; };
-		7B4CFA7D1925A79100217488 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/localizable.strings; sourceTree = "<group>"; };
-		7B4CFA7F1925AD8A00217488 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Main_iPhone.strings; sourceTree = "<group>"; };
-		7B4CFA801925AD8A00217488 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Main_iPad.strings; sourceTree = "<group>"; };
-		7B4CFA811925AD8A00217488 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		7B4CFA821925AD8A00217488 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/localizable.strings; sourceTree = "<group>"; };
-		7B4CFA831925AD8A00217488 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -382,7 +375,6 @@
 				389B9CFA18CFD776004960E5 /* helpers */,
 				55CB7E4118CBD181001EFA1C /* Images.xcassets */,
 				55CB7E2818CBD180001EFA1C /* Supporting Files */,
-				7B4CFA791925A21D00217488 /* localization */,
 			);
 			name = "300 Bricks";
 			path = dominoes;
@@ -415,14 +407,6 @@
 				55CB7E5118CBD181001EFA1C /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		7B4CFA791925A21D00217488 /* localization */ = {
-			isa = PBXGroup;
-			children = (
-				7B4CFA7E1925A79100217488 /* localizable.strings */,
-			);
-			name = localization;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -496,7 +480,6 @@
 			knownRegions = (
 				en,
 				Base,
-				es,
 			);
 			mainGroup = 55CB7E1318CBD180001EFA1C;
 			productRefGroup = 55CB7E1D18CBD180001EFA1C /* Products */;
@@ -515,7 +498,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				55CB7E4218CBD181001EFA1C /* Images.xcassets in Resources */,
-				7B4CFA7C1925A79100217488 /* localizable.strings in Resources */,
 				38530AA018F0B4A400FA19CC /* new-arena6.png in Resources */,
 				38FA7D3618E77F5E00820901 /* floor1.sks in Resources */,
 				389AA04C18DE3EC70089CA98 /* domino-green.atlasc in Resources */,
@@ -591,7 +573,6 @@
 			isa = PBXVariantGroup;
 			children = (
 				55CB7E2B18CBD180001EFA1C /* en */,
-				7B4CFA811925AD8A00217488 /* es */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
@@ -600,7 +581,6 @@
 			isa = PBXVariantGroup;
 			children = (
 				55CB7E3418CBD181001EFA1C /* Base */,
-				7B4CFA7F1925AD8A00217488 /* es */,
 			);
 			name = Main_iPhone.storyboard;
 			sourceTree = "<group>";
@@ -609,7 +589,6 @@
 			isa = PBXVariantGroup;
 			children = (
 				55CB7E3718CBD181001EFA1C /* Base */,
-				7B4CFA801925AD8A00217488 /* es */,
 			);
 			name = Main_iPad.storyboard;
 			sourceTree = "<group>";
@@ -618,18 +597,8 @@
 			isa = PBXVariantGroup;
 			children = (
 				55CB7E5218CBD181001EFA1C /* en */,
-				7B4CFA831925AD8A00217488 /* es */,
 			);
 			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
-		7B4CFA7E1925A79100217488 /* localizable.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				7B4CFA7D1925A79100217488 /* en */,
-				7B4CFA821925AD8A00217488 /* es */,
-			);
-			name = localizable.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
