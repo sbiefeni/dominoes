@@ -60,6 +60,7 @@
 		55CB7E4B18CBD181001EFA1C /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55CB7E2318CBD180001EFA1C /* UIKit.framework */; };
 		55CB7E5318CBD181001EFA1C /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 55CB7E5118CBD181001EFA1C /* InfoPlist.strings */; };
 		55CB7E5518CBD181001EFA1C /* dominoesTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 55CB7E5418CBD181001EFA1C /* dominoesTests.m */; };
+		7BD3012D1925C2FA00D30836 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7BD3012F1925C2FA00D30836 /* Localizable.strings */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -142,6 +143,7 @@
 		55CB7E5018CBD181001EFA1C /* 300Tests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "300Tests-Info.plist"; sourceTree = "<group>"; };
 		55CB7E5218CBD181001EFA1C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		55CB7E5418CBD181001EFA1C /* dominoesTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = dominoesTests.m; sourceTree = "<group>"; };
+		7BD3012E1925C2FA00D30836 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -375,6 +377,7 @@
 				389B9CFA18CFD776004960E5 /* helpers */,
 				55CB7E4118CBD181001EFA1C /* Images.xcassets */,
 				55CB7E2818CBD180001EFA1C /* Supporting Files */,
+				7BD3012F1925C2FA00D30836 /* Localizable.strings */,
 			);
 			name = "300 Bricks";
 			path = dominoes;
@@ -502,6 +505,7 @@
 				38FA7D3618E77F5E00820901 /* floor1.sks in Resources */,
 				389AA04C18DE3EC70089CA98 /* domino-green.atlasc in Resources */,
 				38530A9E18F0B4A400FA19CC /* new-arena4.png in Resources */,
+				7BD3012D1925C2FA00D30836 /* Localizable.strings in Resources */,
 				387B05D218E0053A005C8D1F /* sounds in Resources */,
 				38530A9F18F0B4A400FA19CC /* new-arena5.png in Resources */,
 				55CB7E3818CBD181001EFA1C /* Main_iPad.storyboard in Resources */,
@@ -599,6 +603,14 @@
 				55CB7E5218CBD181001EFA1C /* en */,
 			);
 			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		7BD3012F1925C2FA00D30836 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				7BD3012E1925C2FA00D30836 /* en */,
+			);
+			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

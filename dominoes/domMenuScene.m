@@ -92,15 +92,15 @@
 
             SKLabelNode* hscore = [SKLabelNode labelNodeWithFontNamed:@"Arial"];
             
-            [self createLabel:hscore text:[NSString stringWithFormat:@"High Score: %i",(int)highScore] fontSize:20 posY:150 color:[SKColor whiteColor] alpha:1 sizeDoubler:sizeDoubler];
+            [self createLabel:hscore text:[NSString stringWithFormat:NSLocalizedString(@"High Score: %i",nil),(int)highScore] fontSize:20 posY:150 color:[SKColor whiteColor] alpha:1 sizeDoubler:sizeDoubler];
 
             SKLabelNode* hlscore = [SKLabelNode labelNodeWithFontNamed:@"Avenir-Black"];
-            [self createLabel:hlscore text:[NSString stringWithFormat:@"Best Level: %i",levelHighScore] fontSize:30 posY:180 color:[SKColor whiteColor] alpha:.7 sizeDoubler:sizeDoubler];
+            [self createLabel:hlscore text:[NSString stringWithFormat:NSLocalizedString(@"Best Level: %i",nil),levelHighScore] fontSize:30 posY:180 color:[SKColor whiteColor] alpha:.7 sizeDoubler:sizeDoubler];
 
                 [self addChild: [self instruct:sizeDoubler posY:-135]]; //instructions button, from below
 
                 SKLabelNode *tapToPlay = [SKLabelNode labelNodeWithFontNamed:@"Avenir-Black"];
-                [self createLabel:tapToPlay text:@"Tap to Play" fontSize:40 posY:-52 color:[SKColor whiteColor] alpha:.7 sizeDoubler:sizeDoubler];
+                [self createLabel:tapToPlay text:NSLocalizedString(@"Tap to Play",nil) fontSize:40 posY:-52 color:[SKColor whiteColor] alpha:.7 sizeDoubler:sizeDoubler];
 
             isRunningInIde(gcEnabled=NO)
 
@@ -119,16 +119,16 @@
                 totalScore += score;
 
                 SKLabelNode *cur_score = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
-                [self createLabel:cur_score text:[NSString stringWithFormat:@"Score: %i",score] fontSize:50 posY:0 color:[SKColor whiteColor] alpha:1 sizeDoubler:sizeDoubler];
+                [self createLabel:cur_score text:[NSString stringWithFormat:NSLocalizedString(@"Score: %i",nil),score] fontSize:50 posY:0 color:[SKColor whiteColor] alpha:1 sizeDoubler:sizeDoubler];
 
                 SKLabelNode *tot_score = [SKLabelNode labelNodeWithFontNamed:@"Arial"];
-                [self createLabel:tot_score text:[NSString stringWithFormat:@"Total Score: %i",totalScore] fontSize:30 posY:-60 color:[SKColor whiteColor] alpha:1 sizeDoubler:sizeDoubler];
+                [self createLabel:tot_score text:[NSString stringWithFormat:NSLocalizedString(@"Total Score: %i",nil),totalScore] fontSize:30 posY:-60 color:[SKColor whiteColor] alpha:1 sizeDoubler:sizeDoubler];
 
                 SKLabelNode *Lives = [SKLabelNode labelNodeWithFontNamed:@"Arial"];
-                [self createLabel:Lives text:[NSString stringWithFormat:@"Lives: %i",lives] fontSize:30 posY:-100 color:[SKColor whiteColor] alpha:1 sizeDoubler:sizeDoubler];
+                [self createLabel:Lives text:[NSString stringWithFormat:NSLocalizedString(@"Lives: %i",nil),lives] fontSize:30 posY:-100 color:[SKColor whiteColor] alpha:1 sizeDoubler:sizeDoubler];
 
                 SKLabelNode *tapToPlay = [SKLabelNode labelNodeWithFontNamed:@"Avenir-Black"];
-                [self createLabel:tapToPlay text:@"Tap to continue" fontSize:40 posY:-145 color:[SKColor whiteColor] alpha:.7 sizeDoubler:sizeDoubler];
+                [self createLabel:tapToPlay text:NSLocalizedString(@"Tap to continue",nil) fontSize:40 posY:-145 color:[SKColor whiteColor] alpha:.7 sizeDoubler:sizeDoubler];
 
             //for debugging - to reset the level high score
             isRunningInIde(
@@ -147,11 +147,11 @@
                     levelHighScore = score;
 
                     SKLabelNode *hs = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
-                    [self createLabel:hs text:@"NEW BEST LEVEL!" fontSize:30 posY:120 color:[SKColor whiteColor] alpha:1 sizeDoubler:sizeDoubler];
+                    [self createLabel:hs text:NSLocalizedString(@"NEW BEST LEVEL!",nil) fontSize:30 posY:120 color:[SKColor whiteColor] alpha:1 sizeDoubler:sizeDoubler];
                 }
 
                 SKLabelNode* hlscore = [SKLabelNode labelNodeWithFontNamed:@"Arial"];
-                [self createLabel:hlscore text:[NSString stringWithFormat:@"Best Level: %i",levelHighScore] fontSize:20 posY:80 color:[SKColor whiteColor] alpha:1 sizeDoubler:sizeDoubler];
+                [self createLabel:hlscore text:[NSString stringWithFormat:NSLocalizedString(@"Best Level: %i",nil),levelHighScore] fontSize:20 posY:80 color:[SKColor whiteColor] alpha:1 sizeDoubler:sizeDoubler];
 
         }else{
                 //game over
@@ -169,7 +169,7 @@
                     [self setHighScore:totalScore];
 
                     SKLabelNode *hs = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
-                    [self createLabel:hs text:@"NEW HIGH SCORE!" fontSize:30 posY:200 color:[SKColor whiteColor] alpha:1 sizeDoubler:sizeDoubler];
+                    [self createLabel:hs text:NSLocalizedString(@"NEW HIGH SCORE!",nil) fontSize:30 posY:200 color:[SKColor whiteColor] alpha:1 sizeDoubler:sizeDoubler];
                     if (gcEnabled){
                     //set the gamecenter score
                         [[GameCenterManager sharedManager]highScoreForLeaderboard:@"300hs"];
@@ -188,11 +188,11 @@
                 [self addChild:socialMessage];
 
                 SKLabelNode *title = [SKLabelNode labelNodeWithFontNamed:@"Avenir-Black"];
-                [self createLabel:title text:@"GAME OVER" fontSize:45 posY:155 color:[SKColor whiteColor] alpha:1 sizeDoubler:sizeDoubler];
+                [self createLabel:title text:NSLocalizedString(@"Game over!",nil) fontSize:45 posY:155 color:[SKColor whiteColor] alpha:1 sizeDoubler:sizeDoubler];
 
 
                 SKLabelNode *tot_score = [SKLabelNode labelNodeWithFontNamed:@"Avenir-Black"];
-                [self createLabel:tot_score text:@"Total Score" fontSize:40 posY:-60 color:[SKColor whiteColor] alpha:1 sizeDoubler:sizeDoubler];
+                [self createLabel:tot_score text:NSLocalizedString(@"Total Score",nil) fontSize:40 posY:-60 color:[SKColor whiteColor] alpha:1 sizeDoubler:sizeDoubler];
 
                 SKLabelNode *tot_score2 = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
                 [self createLabel:tot_score2 text:[NSString stringWithFormat:@"%i",totalScore] fontSize:80 posY:-150 color:[SKColor whiteColor] alpha:1 sizeDoubler:sizeDoubler];
@@ -287,7 +287,7 @@
     [self addChild:buyGameButton];
     
     SKLabelNode *buyGameLabel = [SKLabelNode labelNodeWithFontNamed:@"Avenir-Black"];
-    [self createLabel:buyGameLabel text:@"Disable Ads - $0.99" fontSize:24 posY:-((mySize.height/2)/sizeDoubler) color:[SKColor blackColor] alpha:.7 sizeDoubler:1];
+    [self createLabel:buyGameLabel text:NSLocalizedString(@"Disable Ads - $0.99",nil) fontSize:24 posY:-((mySize.height/2)/sizeDoubler) color:[SKColor blackColor] alpha:.7 sizeDoubler:1];
     buyGameLabel.position = buyGameButton.position;
     buyGameLabel.zPosition = 3;
     buyGameLabel.verticalAlignmentMode = SKLabelVerticalAlignmentModeCenter;
@@ -450,10 +450,10 @@
     SLComposeViewController *faceBook = [SLComposeViewController composeViewControllerForServiceType:SLServiceTypeFacebook];
 
     if (score > 0) {
-        [faceBook setInitialText:[NSString stringWithFormat: @"Check out this cool new game. Can you beat my best level of %i Bricks? It's free... get it at:",score]];
+        [faceBook setInitialText:[NSString stringWithFormat: NSLocalizedString(@"Check out this cool new game. Can you beat my best level of %i Bricks? It's free... get it at:",nil),score]];
     }else{
 
-        [faceBook setInitialText:@"Check out this cool new game. It's free... get it at:"];
+        [faceBook setInitialText:NSLocalizedString(@"Check out this cool new game. It's free... get it at:",nil)];
 
     }
 
@@ -468,10 +468,10 @@
         NSString *output;
         switch (result) {
             case SLComposeViewControllerResultCancelled:
-                output = @"Post Cancelled";
+                output = NSLocalizedString(@"Post Cancelled",nil);
                 break;
             case SLComposeViewControllerResultDone:
-                output = @"Post Successful.. 4 Lives Granted!";
+                output = NSLocalizedString(@"Post Successful.. 4 Lives Granted!",nil);
                 [clsCommon storeUserSetting:@"socialFreeLife" value:@"yes"];
                 break;
             
@@ -489,9 +489,9 @@
     SLComposeViewController *tweetSheet = [SLComposeViewController
                                                composeViewControllerForServiceType:SLServiceTypeTwitter];
     if (score > 0) {
-        [tweetSheet setInitialText:[NSString stringWithFormat: @"Check out 300 Brick'd. Can you beat my best level of %i Bricks? It's free... get it at %@",score, itunesURL]];
+        [tweetSheet setInitialText:[NSString stringWithFormat: NSLocalizedString(@"Check out 300 Brick'd. Can you beat my best level of %i Bricks? It's free... get it at %@",nil),score, itunesURL]];
     }else{
-        [tweetSheet setInitialText:@"Check out 300 Brick'd. It's free... get it on the Appstore"];
+        [tweetSheet setInitialText:NSLocalizedString(@"Check out 300 Brick'd. It's free... get it on the Appstore",nil)];
     }
 
     [[self getActiveController] presentViewController:tweetSheet animated:YES completion:nil];
@@ -500,10 +500,10 @@
         NSString *output;
         switch (result) {
             case SLComposeViewControllerResultCancelled:
-                output = @"Post Cancelled";
+                output = NSLocalizedString(@"Post Cancelled",nil);
                 break;
             case SLComposeViewControllerResultDone:
-                output = @"Post Successful.. 4 Lives Granted!";
+                output = NSLocalizedString(@"Post Successful.. 4 Lives Granted!",nil);
                     [clsCommon storeUserSetting:@"socialFreeLife" value:@"yes"];
                 break;
             default:
@@ -517,7 +517,7 @@
 
 -(void)showPopupMessage:(NSString*)message withTitle:(NSString*)title{
 
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title message:message delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil];
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title message:message delegate:nil cancelButtonTitle:NSLocalizedString(@"Ok",nil) otherButtonTitles:nil];
 
     [alert show];
 }
@@ -591,7 +591,7 @@
         [productsRequest start];
     }
     else{
-        [self showPopupMessage:@"Purchases are disabled for your account" withTitle:@"Remove Ads"];
+        [self showPopupMessage:NSLocalizedString(@"Purchases are disabled for your account",nil) withTitle:NSLocalizedString(@"Remove Ads",nil)];
         //NSLog(@"User cannot make payments, perhaps due to parental controls");
     }
 }

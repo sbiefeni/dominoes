@@ -1,0 +1,38 @@
+
+/*
+  Localizable.strings
+  300
+
+  Created by Stefano on 5/15/14.
+  Copyright (c) 2014 Abstractions. All rights reserved.
+*/
+
+"Let's start off slow..." = "Let's start off slow...";
+"A Little Faster!" = "A Little Faster!";
+"%i Lives Remaining" = "%i Lives Remaining";
+"Last Life!" = "Last Life!";
+"Get a badge for %i Bricks!" = "Get a badge for %i Bricks!";
+"Don't Crash!" = "Don't Crash!";
+"Watch Out!" = "Watch Out!";
+"Remember to turn!" = "Remember to turn!";
+"Outlast Him!" = "Outlast Him!";
+"You can do better!" = "You can do better!";
+"Control the opponent!" = "Control the opponent!";
+"Contain & Dominate!" = "Contain & Dominate!";
+"Game Over!" = "Game Over!";
+"High Score: %i" = "Highest Score: %i";
+"Best Level: %i" = "Best Level: %i";
+"Tap to Play" = "Tap to Play";
+"NEW BEST LEVEL!" = "NEW BEST LEVEL!";
+"Best Level: %i" = "Best Level: %i";
+"Total Score" = "Total Score";
+"Disable Ads - $0.99" = "Disable Ads - $0.99";
+"Leaderboard" = "Leaderboard";
+"Log in to Gamecenter to see Leaderboard" = "Log in to Gamecenter to see Leaderboard";
+"Check out this cool new game. Can you beat my best level of %i Bricks? It's free... get it at:" = "Check out this cool new game. Can you beat my best level of %i Bricks? It's free... get it at:";
+"Check out this cool new game. It's free... get it at:" = "Check out this cool new game. It's free... get it at:";
+"Post Cancelled" = "Post Cancelled";
+"Post Successful.. 4 Lives Granted!" = "Post Successful.. 4 Lives Granted!";
+"Ok" = "Ok";
+"Purchases are disabled for your account" = "Purchases are disabled for your account";
+"Remove Ads" = "Remove Ads";

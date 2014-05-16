@@ -297,10 +297,10 @@ CGPoint pointA;
     //faster BOOL is set true
         SKLabelNode *lblFaster = [SKLabelNode labelNodeWithFontNamed:@"Arial"];
     if (level == 1){
-        lblFaster.text = @"Let's start off slow...";
+        lblFaster.text = NSLocalizedString(@"Let's start off slow...",nil);
         lblFaster.fontSize = 30 * sizeDoubler;
     }else{
-        lblFaster.text = @"A Little Faster!";
+        lblFaster.text = NSLocalizedString(@"A Little Faster!",nil);
         lblFaster.fontSize = 40 * sizeDoubler;
     }
 
@@ -320,9 +320,9 @@ CGPoint pointA;
     //show lives remaining
     SKLabelNode *lblLives = [SKLabelNode labelNodeWithFontNamed:@"Arial"];
     if (lives > 1) {
-        lblLives.text = [NSString stringWithFormat:@"%i Lives Remaining", lives];
+        lblLives.text = [NSString stringWithFormat:NSLocalizedString(@"%i Lives Remaining",nil), lives];
     }else{
-        lblLives.text = @"Last Life!";
+        lblLives.text = NSLocalizedString(@"Last Life!",nil);
     }
 
     lblLives.fontSize = 20 * sizeDoubler;
@@ -354,7 +354,7 @@ CGPoint pointA;
         goal = 300;
     }
 
-    achievPrompt.text = [NSString stringWithFormat:@"Get a badge for %i Bricks!",goal];
+    achievPrompt.text = [NSString stringWithFormat:NSLocalizedString(@"Get a badge for %i Bricks!",nil),goal];
 
     achievPrompt.fontSize = 22;
     achievPrompt.alpha = .7;
@@ -594,36 +594,36 @@ CGPoint pointA;
 
         case 1  :
             scoreLabel.fontSize = 38 * sizeDoubler;
-            scoreLabel.text = @"Don't Crash!";
+            scoreLabel.text = NSLocalizedString(@"Don't Crash!",nil);
             break;
         case 2  :
             scoreLabel.fontSize = 42 * sizeDoubler;
-            scoreLabel.text = @"Watch Out!";
+            scoreLabel.text = NSLocalizedString(@"Watch Out!",nil);
             break;
         case 3  :
             scoreLabel.fontSize = 25 * sizeDoubler;
-            scoreLabel.text = @"Remember to turn!";
+            scoreLabel.text = NSLocalizedString(@"Remember to turn!",nil);
             break;
         case 4  :
             scoreLabel.fontSize = 38 * sizeDoubler;
-            scoreLabel.text = @"Outlast Him!";
+            scoreLabel.text = NSLocalizedString(@"Outlast Him!",nil);
             break;
         case 5  :
             scoreLabel.fontSize = 25 * sizeDoubler;
-            scoreLabel.text = @"You can do better!";
+            scoreLabel.text = NSLocalizedString(@"You can do better!",nil);
             break;
         case 6  :
             scoreLabel.fontSize = 20 * sizeDoubler;
-            scoreLabel.text = @"Control the opponent!";
+            scoreLabel.text = NSLocalizedString(@"Control the opponent!",nil);
             break;
         case 7  :
             scoreLabel.fontSize = 22 * sizeDoubler;
-            scoreLabel.text = @"Contain & Dominate!";
+            scoreLabel.text = NSLocalizedString(@"Contain & Dominate!",nil);
             break;
         }
     }else{
         scoreLabel.fontSize = 40 * sizeDoubler;
-        scoreLabel.text = @"Game Over!";
+        scoreLabel.text = NSLocalizedString(@"Game Over!",nil);
     }
 
 
