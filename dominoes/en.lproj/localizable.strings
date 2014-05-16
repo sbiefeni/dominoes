@@ -1,5 +1,4 @@
-
-/*
+/* 
   localizable.strings
   300
 
@@ -8,7 +7,7 @@
 */
 //domGameScene
 "Let's start off slow..." = "Let's start off slow...";
-"A Little Faster!" = "A Little Faster!";
+"A Little Faster!" = "A Little Faster!"
 "%i Lives Remaining" = "%i Lives Remaining";
 "Last Life!" = "Last Life!";
 "Get a badge for %i Bricks!" = "Get a badge for %i Bricks!";
