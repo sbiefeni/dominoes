@@ -23,13 +23,17 @@
 "High Score: %i" = "High Score: %i";
 "Best Level: %i" = "Best Level: %i";
 "Tap to Play" = "Tap to Play";
+"Tap to Continue" = "Tap to Continue";
 "NEW BEST LEVEL!" = "NEW BEST LEVEL!";
 "Total Score" = "Total Score";
+"Total Score: %i" = "Total Score: %i";
+"Lives: %i" = "Lives: %i";
 "Disable Ads - $0.99" = "Disable Ads - $0.99";
 "Leaderboard" = "Leaderboard";
 "Log in to Gamecenter to see Leaderboard" = "Log in to Gamecenter to see Leaderboard";
 "Check out this cool new game. Can you beat my best level of %i Bricks? It's free... get it at:" = "Check out this cool new game. Can you beat my best level of %i Bricks? It's free... get it at:";
 "Check out this cool new game. It's free... get it at:" = "Check out this cool new game. It's free... get it at:";
+"Check out 300 Brick'd. Can you beat my best level of %i Bricks? It's free... get it at %@" = "Check out 300 Brick'd. Can you beat my best level of %i Bricks? It's free... get it at %@";
 "Post Cancelled" = "Post Cancelled";
 "Post Successful.. 4 Lives Granted!" = "Post Successful.. 4 Lives Granted!";
 "Ok" = "Ok";

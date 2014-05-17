@@ -301,7 +301,7 @@ CGPoint pointA;
         lblFaster.fontSize = 30 * sizeDoubler;
     }else{
         lblFaster.text = NSLocalizedString(@"A Little Faster!",nil);
-        lblFaster.fontSize = 40 * sizeDoubler;
+        lblFaster.fontSize = 30 * sizeDoubler;
     }
 
         lblFaster.alpha = .5;

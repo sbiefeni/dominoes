@@ -128,7 +128,7 @@
                 [self createLabel:Lives text:[NSString stringWithFormat:NSLocalizedString(@"Lives: %i",nil),lives] fontSize:30 posY:-100 color:[SKColor whiteColor] alpha:1 sizeDoubler:sizeDoubler];
 
                 SKLabelNode *tapToPlay = [SKLabelNode labelNodeWithFontNamed:@"Avenir-Black"];
-                [self createLabel:tapToPlay text:NSLocalizedString(@"Tap to continue",nil) fontSize:40 posY:-145 color:[SKColor whiteColor] alpha:.7 sizeDoubler:sizeDoubler];
+                [self createLabel:tapToPlay text:NSLocalizedString(@"Tap to Continue",nil) fontSize:35 posY:-145 color:[SKColor whiteColor] alpha:.7 sizeDoubler:sizeDoubler];
 
             //for debugging - to reset the level high score
             isRunningInIde(
@@ -147,7 +147,7 @@
                     levelHighScore = score;
 
                     SKLabelNode *hs = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
-                    [self createLabel:hs text:NSLocalizedString(@"NEW BEST LEVEL!",nil) fontSize:30 posY:120 color:[SKColor whiteColor] alpha:1 sizeDoubler:sizeDoubler];
+                    [self createLabel:hs text:NSLocalizedString(@"NEW BEST LEVEL!",nil) fontSize:25 posY:120 color:[SKColor whiteColor] alpha:1 sizeDoubler:sizeDoubler];
                 }
 
                 SKLabelNode* hlscore = [SKLabelNode labelNodeWithFontNamed:@"Arial"];
@@ -224,7 +224,7 @@
         if (!appFloodShowedLastLevel){
             //show a timed intersitial for game end
             if (gameEnd){  //show intersitial 1 out of 3 times
-                if ([clsCommon getRanInt:1 maxNumber:3] == 1){
+                if ([clsCommon getRanInt:1 maxNumber:3] == 1 && (level > 4)){
                     [AppFlood showInterstitial];
                 }else{
                     [AppFlood showFullscreen];
@@ -331,7 +331,7 @@
     }else{
         if (!didThis) {
             SKLabelNode *gcLabel = [SKLabelNode labelNodeWithFontNamed:@"Avenir-Black"];
-            [self createLabel:gcLabel text:@"Log in to Gamecenter to see Leaderboard" fontSize:12 posY:-((mySize.height/2)/sizeDoubler) color:[SKColor whiteColor] alpha:.7 sizeDoubler:1];
+            [self createLabel:gcLabel text:NSLocalizedString(@"Log in to Gamecenter to see Leaderboard",nil) fontSize:12 posY:-((mySize.height/2)/sizeDoubler) color:[SKColor whiteColor] alpha:.7 sizeDoubler:1];
             gcLabel.position = CGPointMake(CGRectGetMidX(self.frame), 20);
             gcLabel.zPosition = 1;
             gcLabel.verticalAlignmentMode = SKLabelVerticalAlignmentModeCenter;
