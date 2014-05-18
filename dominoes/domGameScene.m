@@ -356,7 +356,7 @@ CGPoint pointA;
 
     achievPrompt.text = [NSString stringWithFormat:NSLocalizedString(@"Get a badge for %i Bricks!",nil),goal];
 
-    achievPrompt.fontSize = 22;
+    achievPrompt.fontSize = 20;
     achievPrompt.alpha = .7;
     achievPrompt.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame)+ (yAdjust * sizeDoubler) - 25 );
     [self addChild:achievPrompt];
