@@ -224,7 +224,7 @@
         if (!appFloodShowedLastLevel){
             //show a timed intersitial for game end
             if (gameEnd){  //show intersitial 1 out of 3 times
-                if ([clsCommon getRanInt:1 maxNumber:3] == 1 && (level > 4)){
+                if ([clsCommon getRanInt:1 maxNumber:3] == 1 && (appFloodSceneCount > 4)){
                     [AppFlood showInterstitial];
                 }else{
                     [AppFlood showFullscreen];
