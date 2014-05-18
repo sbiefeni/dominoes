@@ -309,7 +309,7 @@
         [self addChild:gcButton];
 
         SKLabelNode *gcLabel = [SKLabelNode labelNodeWithFontNamed:@"Avenir-Black"];
-        [self createLabel:gcLabel text:@"Leaderboard" fontSize:30 posY:-((mySize.height/2)/sizeDoubler) color:[SKColor blackColor] alpha:.7 sizeDoubler:1];
+        [self createLabel:gcLabel text:NSLocalizedString(@"Leaderboard",nil) fontSize:30 posY:-((mySize.height/2)/sizeDoubler) color:[SKColor blackColor] alpha:.7 sizeDoubler:1];
         gcLabel.position = gcButton.position;
         gcLabel.zPosition = 5;
         gcLabel.verticalAlignmentMode = SKLabelVerticalAlignmentModeCenter;
