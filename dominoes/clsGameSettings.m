@@ -78,7 +78,7 @@ BOOL didReportPrevHighLevelScore;
 int sizeDoubler;
 
 // actual game settings..
-int score;
+int levelScore;
 int totalScore;
 int highScore;
 int lives;

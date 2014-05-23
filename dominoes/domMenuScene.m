@@ -57,8 +57,7 @@
         mySize = size;
 
 
-        //timer to check for gamecenter button
-        aTimer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(gameCenterButtonTimer) userInfo:nil repeats:YES];
+
 
         //timer to disable tap for a few seconds, to wait for game center
         tapTimer = [NSTimer scheduledTimerWithTimeInterval:5 target:self selector:@selector(enableTapTimer) userInfo:nil repeats:YES];
@@ -107,6 +106,9 @@
             //draw facebook and twitter buttons
             [self drawSocialButtonsWithfbX:-120 withfbY:10 withtwX:120 withtwY:10 withAlpha:.5];
 
+            //timer to check for gamecenter button
+            aTimer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(gameCenterButtonTimer) userInfo:nil repeats:YES];
+            
 
                 gameStatus = reset;
 
@@ -116,10 +118,10 @@
 
             [self showAppFlood:false];
 
-                totalScore += score;
+                totalScore += levelScore;
 
                 SKLabelNode *cur_score = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
-                [self createLabel:cur_score text:[NSString stringWithFormat:NSLocalizedString(@"Score: %i",nil),score] fontSize:50 posY:0 color:[SKColor whiteColor] alpha:1 sizeDoubler:sizeDoubler];
+                [self createLabel:cur_score text:[NSString stringWithFormat:NSLocalizedString(@"Score: %i",nil),levelScore] fontSize:50 posY:0 color:[SKColor whiteColor] alpha:1 sizeDoubler:sizeDoubler];
 
                 SKLabelNode *tot_score = [SKLabelNode labelNodeWithFontNamed:@"Arial"];
                 [self createLabel:tot_score text:[NSString stringWithFormat:NSLocalizedString(@"Total Score: %i",nil),totalScore] fontSize:30 posY:-60 color:[SKColor whiteColor] alpha:1 sizeDoubler:sizeDoubler];
@@ -141,10 +143,10 @@
             }
 
                 //if new best level, give a message and store it!
-                if (score > levelHighScore) {
-                    [self setLevelHighScore: score];
+                if (levelScore > levelHighScore) {
+                    [self setLevelHighScore: levelScore];
 
-                    levelHighScore = score;
+                    levelHighScore = levelScore;
 
                     SKLabelNode *hs = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
                     [self createLabel:hs text:NSLocalizedString(@"NEW BEST LEVEL!",nil) fontSize:25 posY:120 color:[SKColor whiteColor] alpha:1 sizeDoubler:sizeDoubler];
@@ -156,7 +158,7 @@
         }else{
                 //game over
 
-                totalScore += score;
+                totalScore += levelScore;
 
             //debugging - reset the total score
             isRunningInIde(
@@ -203,12 +205,12 @@
             
             gameStatus = game_Over;
 
-                if (score > levelHighScore) {
-                    [self setLevelHighScore: score];
+                if (levelScore > levelHighScore) {
+                    [self setLevelHighScore: levelScore];
                 }
 
                 //reset score to 0 now, for next round
-                score = 0;
+                levelScore = 0;
         
         } // end if gamestatus
 

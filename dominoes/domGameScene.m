@@ -33,7 +33,7 @@
 
 #define _gameSpeed  .25
 #define _maxSpeed   .05
-#define _gameSpeedIncrement  .02
+#define _gameSpeedIncrement  .01
 #define SceneChangeDelay     3
 
 
@@ -219,20 +219,27 @@ CGPoint pointA;
         if([[clsCommon getUserSettingForKey:@"socialFreeLife"] isEqualToString:@"yes"]){
             lives=4;
         }
-
     }
+
+
+    level += 1;
 
     //if won the last round, speed things up a bit
     BOOL isFaster = false;
-    if (score > 0 && gameSpeed > _maxSpeed) { //define max speed
-        gameSpeed -= _gameSpeedIncrement;
-        isFaster = true;
+    if (levelScore > 0 && gameSpeed > _maxSpeed) { //define max speed
+        if  (level <=3){
+            gameSpeed -= _gameSpeedIncrement*2;
+            isFaster = true;
+        }else{
+            if (level % 2) {
+                gameSpeed -= _gameSpeedIncrement;
+                isFaster = true;
+            }
+        }
     }
 
-    score = 0;
-    
-    level += 1;
-
+    //reset the level score
+    levelScore = 0;
 
     isRunningInIde(
         //gameSpeed = .02;
@@ -558,7 +565,7 @@ CGPoint pointA;
 //enabling this draws an auto-updating label using 'score' variable
 -(void) enableScore{
 
-    score = 0;//temp for debugging
+    levelScore = 0;//temp for debugging
 
     scoreLabel = [[SKLabelNode alloc] initWithFontNamed:@"Chalkduster"];
     scoreLabel.color = [UIColor whiteColor];
@@ -570,7 +577,7 @@ CGPoint pointA;
     [self addChild:scoreLabel];
 
     SKAction *tempAction = [SKAction runBlock:^{
-        scoreLabel.text = [NSString stringWithFormat:@"%i", score]; //(score+4-1)/4
+        scoreLabel.text = [NSString stringWithFormat:@"%i", levelScore]; //(score+4-1)/4
     }];
 
     SKAction *waitAction = [SKAction waitForDuration:0.05];

@@ -82,7 +82,7 @@ extern int sizeDoubler;
 
 
 //score, lives, levels
-extern int score;
+extern int levelScore;
 extern int totalScore;
 extern int highScore;
 extern int lives;

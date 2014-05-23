@@ -98,7 +98,7 @@ NSMutableArray* dominoFrames;
             self.zRotation = rotation;
             if ( !(bPlayer || bIsEnd) ) {
                 if (bPlayer !=true && _CountedScore != true) {
-                    score += 1;
+                    levelScore += 1;
                     _CountedScore = true;
                 }
             }
