@@ -102,12 +102,12 @@
             [self createLabel:title2 text:@"Brick'd" fontSize:45 posY:5 color:[SKColor whiteColor] alpha:1 sizeDoubler:sizeDoubler];
 
             SKLabelNode *tapToPlay = [SKLabelNode labelNodeWithFontNamed:@"Avenir-Black"];
-            [self createLabel:tapToPlay text:@"Tap to Play" fontSize:40 posY:-52 color:[SKColor whiteColor] alpha:.7 sizeDoubler:sizeDoubler];
+            [self createLabel:tapToPlay text:@"Tap to Play" fontSize:40 posY:-59 color:[SKColor whiteColor] alpha:.7 sizeDoubler:sizeDoubler];
 
 
-            [self addChild: [self instruct:sizeDoubler posY:-145]]; //instructions button, from below
+            [self addChild: [self instruct:sizeDoubler posY:-140]]; //instructions button, from below
 
-            isRunningInIde(gcEnabled=NO)
+            //isRunningInIde([self enableGameCenterButton])
 
             //draw facebook and twitter buttons
             [self drawSocialButtonsWithfbX:-120 withfbY:10 withtwX:120 withtwY:10 withAlpha:.5];
@@ -215,7 +215,7 @@
                 [self createLabel:tot_score2 text:[NSString stringWithFormat:@"%i",totalScore] fontSize:80 posY:-150 color:[SKColor whiteColor] alpha:1 sizeDoubler:sizeDoubler];
 
                 SKLabelNode *hs = [SKLabelNode labelNodeWithFontNamed:@"Arial"];
-                [self createLabel:hs text:[NSString stringWithFormat:@"Level Reached: %i",level ] fontSize:20 posY:-200 color:[SKColor whiteColor] alpha:1 sizeDoubler:sizeDoubler];
+                [self createLabel:hs text:[NSString stringWithFormat:@"Level Reached: %i",level ] fontSize:20 posY:-180 color:[SKColor whiteColor] alpha:1 sizeDoubler:sizeDoubler];
 
                 if(areAdsRemoved < 1){
                     [self createBuyGameButton];
@@ -482,7 +482,7 @@
 
     SKLabelNode* tapFor=[SKLabelNode labelNodeWithFontNamed:@"Arial"];
     tapFor.name=@"tapFor";
-    [self createLabel:tapFor text:@"Tap for Detailed Instructions" fontSize:12 posY:posY+instruct.frame.size.height/(2.1*sizeDoubler) color:[SKColor whiteColor] alpha:.7 sizeDoubler:sizeDoubler];
+    [self createLabel:tapFor text:@"Tap here for Instructions" fontSize:10 posY:posY+instruct.frame.size.height/(2.62*sizeDoubler) color:[SKColor whiteColor] alpha:1 sizeDoubler:sizeDoubler];
 
     return instruct;
 }
