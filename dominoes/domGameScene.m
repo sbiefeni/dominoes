@@ -209,6 +209,7 @@ CGPoint pointA;
     if (gameStatus != game_Started) {
         gameStatus = game_Started;
         totalScore = 0;
+        maxLevels = 0;
         lives = 3;
         level = 0;
         gameSpeed = _gameSpeed;
@@ -238,8 +239,14 @@ CGPoint pointA;
         }
     }
 
+
     //reset the level score
     levelScore = 0;
+
+    //set the max amount of levels
+    if (level > maxLevels) {
+        maxLevels = level;
+    }
 
     isRunningInIde(
         //gameSpeed = .02;

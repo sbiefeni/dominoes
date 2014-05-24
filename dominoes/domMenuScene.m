@@ -34,6 +34,7 @@
     NSTimer *aTimer;
     int levelHighScore;
 
+
     NSTimer *tapTimer;
     
 }
@@ -79,8 +80,19 @@
 
         int highScore = [self getHighScore];
         levelHighScore = [self getLevelHighscore];
+        maxLevels = [self getMaxLevels];
 
         if (gameStatus != game_Started ) {  //game hasn't started.. show initial screen
+
+
+            SKLabelNode* hlscore = [SKLabelNode labelNodeWithFontNamed:@"Avenir-Black"];
+            [self createLabel:hlscore text:[NSString stringWithFormat:NSLocalizedString(@"Best Level: %i",nil),levelHighScore] fontSize:30 posY:210 color:[SKColor whiteColor] alpha:.7 sizeDoubler:sizeDoubler];
+
+            SKLabelNode* mLevels = [SKLabelNode labelNodeWithFontNamed:@"Arial"];
+            [self createLabel:mLevels text:[NSString stringWithFormat:NSLocalizedString(@"Most Levels: %i",nil),(int)maxLevels] fontSize:20 posY:180 color:[SKColor whiteColor] alpha:1 sizeDoubler:sizeDoubler];
+
+            SKLabelNode* hscore = [SKLabelNode labelNodeWithFontNamed:@"Arial"];
+            [self createLabel:hscore text:[NSString stringWithFormat:NSLocalizedString(@"High Score: %i",nil),(int)highScore] fontSize:20 posY:150 color:[SKColor whiteColor] alpha:1 sizeDoubler:sizeDoubler];
 
             SKLabelNode *title = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
             [self createLabel:title text:@"300" fontSize:130 posY:45 color:[SKColor redColor] alpha:.7 sizeDoubler:sizeDoubler];
@@ -89,17 +101,11 @@
             title2.fontName = [UIFont italicSystemFontOfSize:45].fontName;
             [self createLabel:title2 text:@"Brick'd" fontSize:45 posY:5 color:[SKColor whiteColor] alpha:1 sizeDoubler:sizeDoubler];
 
-            SKLabelNode* hscore = [SKLabelNode labelNodeWithFontNamed:@"Arial"];
-            
-            [self createLabel:hscore text:[NSString stringWithFormat:NSLocalizedString(@"High Score: %i",nil),(int)highScore] fontSize:20 posY:150 color:[SKColor whiteColor] alpha:1 sizeDoubler:sizeDoubler];
+            SKLabelNode *tapToPlay = [SKLabelNode labelNodeWithFontNamed:@"Avenir-Black"];
+            [self createLabel:tapToPlay text:NSLocalizedString(@"Tap to Play",nil) fontSize:40 posY:-52 color:[SKColor whiteColor] alpha:.7 sizeDoubler:sizeDoubler];
 
-            SKLabelNode* hlscore = [SKLabelNode labelNodeWithFontNamed:@"Avenir-Black"];
-            [self createLabel:hlscore text:[NSString stringWithFormat:NSLocalizedString(@"Best Level: %i",nil),levelHighScore] fontSize:30 posY:180 color:[SKColor whiteColor] alpha:.7 sizeDoubler:sizeDoubler];
 
-                [self addChild: [self instruct:sizeDoubler posY:-135]]; //instructions button, from below
-
-                SKLabelNode *tapToPlay = [SKLabelNode labelNodeWithFontNamed:@"Avenir-Black"];
-                [self createLabel:tapToPlay text:NSLocalizedString(@"Tap to Play",nil) fontSize:40 posY:-52 color:[SKColor whiteColor] alpha:.7 sizeDoubler:sizeDoubler];
+            [self addChild: [self instruct:sizeDoubler posY:-145]]; //instructions button, from below
 
             isRunningInIde(gcEnabled=NO)
 
@@ -116,21 +122,36 @@
 
                 //show score screen
 
+            totalScore += levelScore;
+
             [self showAppFlood:false];
 
-                totalScore += levelScore;
+            //if new best level, give a message and store it!
+            if (levelScore > levelHighScore) {
+                [self setLevelHighScore: levelScore];
 
-                SKLabelNode *cur_score = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
-                [self createLabel:cur_score text:[NSString stringWithFormat:NSLocalizedString(@"Score: %i",nil),levelScore] fontSize:50 posY:0 color:[SKColor whiteColor] alpha:1 sizeDoubler:sizeDoubler];
+                levelHighScore = levelScore;
 
-                SKLabelNode *tot_score = [SKLabelNode labelNodeWithFontNamed:@"Arial"];
-                [self createLabel:tot_score text:[NSString stringWithFormat:NSLocalizedString(@"Total Score: %i",nil),totalScore] fontSize:30 posY:-60 color:[SKColor whiteColor] alpha:1 sizeDoubler:sizeDoubler];
+                SKLabelNode *hs = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
+                [self createLabel:hs text:NSLocalizedString(@"NEW BEST LEVEL!",nil) fontSize:25 posY:120 color:[SKColor whiteColor] alpha:1 sizeDoubler:sizeDoubler];
+            }
 
-                SKLabelNode *Lives = [SKLabelNode labelNodeWithFontNamed:@"Arial"];
-                [self createLabel:Lives text:[NSString stringWithFormat:NSLocalizedString(@"Lives: %i",nil),lives] fontSize:30 posY:-100 color:[SKColor whiteColor] alpha:1 sizeDoubler:sizeDoubler];
 
-                SKLabelNode *tapToPlay = [SKLabelNode labelNodeWithFontNamed:@"Avenir-Black"];
-                [self createLabel:tapToPlay text:NSLocalizedString(@"Tap to Continue",nil) fontSize:35 posY:-145 color:[SKColor whiteColor] alpha:.7 sizeDoubler:sizeDoubler];
+            SKLabelNode* hlscore = [SKLabelNode labelNodeWithFontNamed:@"Arial"];
+            [self createLabel:hlscore text:[NSString stringWithFormat:NSLocalizedString(@"Best Level: %i",nil),levelHighScore] fontSize:20 posY:80 color:[SKColor whiteColor] alpha:1 sizeDoubler:sizeDoubler];
+
+
+            SKLabelNode *cur_score = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
+            [self createLabel:cur_score text:[NSString stringWithFormat:NSLocalizedString(@"Score: %i",nil),levelScore] fontSize:50 posY:0 color:[SKColor whiteColor] alpha:1 sizeDoubler:sizeDoubler];
+
+            SKLabelNode *tot_score = [SKLabelNode labelNodeWithFontNamed:@"Arial"];
+            [self createLabel:tot_score text:[NSString stringWithFormat:NSLocalizedString(@"Total Score: %i",nil),totalScore] fontSize:30 posY:-60 color:[SKColor whiteColor] alpha:1 sizeDoubler:sizeDoubler];
+
+            SKLabelNode *Lives = [SKLabelNode labelNodeWithFontNamed:@"Arial"];
+            [self createLabel:Lives text:[NSString stringWithFormat:NSLocalizedString(@"Lives: %i",nil),lives] fontSize:30 posY:-100 color:[SKColor whiteColor] alpha:1 sizeDoubler:sizeDoubler];
+
+            SKLabelNode *tapToPlay = [SKLabelNode labelNodeWithFontNamed:@"Avenir-Black"];
+            [self createLabel:tapToPlay text:NSLocalizedString(@"Tap to Continue",nil) fontSize:35 posY:-145 color:[SKColor whiteColor] alpha:.7 sizeDoubler:sizeDoubler];
 
             //for debugging - to reset the level high score
             isRunningInIde(
@@ -142,18 +163,7 @@
                 [self createBuyGameButton];
             }
 
-                //if new best level, give a message and store it!
-                if (levelScore > levelHighScore) {
-                    [self setLevelHighScore: levelScore];
 
-                    levelHighScore = levelScore;
-
-                    SKLabelNode *hs = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
-                    [self createLabel:hs text:NSLocalizedString(@"NEW BEST LEVEL!",nil) fontSize:25 posY:120 color:[SKColor whiteColor] alpha:1 sizeDoubler:sizeDoubler];
-                }
-
-                SKLabelNode* hlscore = [SKLabelNode labelNodeWithFontNamed:@"Arial"];
-                [self createLabel:hlscore text:[NSString stringWithFormat:NSLocalizedString(@"Best Level: %i",nil),levelHighScore] fontSize:20 posY:80 color:[SKColor whiteColor] alpha:1 sizeDoubler:sizeDoubler];
 
         }else{
                 //game over
@@ -178,6 +188,11 @@
                     }
                 }
 
+                //if new maxLevels, store it
+            if (level > maxLevels) {
+                [self setMaxLevels:level];
+            }
+
             [self showAppFlood:true];
 
                 //draw facebook and twitter buttons
@@ -198,7 +213,10 @@
 
                 SKLabelNode *tot_score2 = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
                 [self createLabel:tot_score2 text:[NSString stringWithFormat:@"%i",totalScore] fontSize:80 posY:-150 color:[SKColor whiteColor] alpha:1 sizeDoubler:sizeDoubler];
-            
+
+                SKLabelNode *hs = [SKLabelNode labelNodeWithFontNamed:@"Arial"];
+                [self createLabel:hs text:[NSString stringWithFormat:@"Level Reached: %i",level ] fontSize:20 posY:-200 color:[SKColor whiteColor] alpha:1 sizeDoubler:sizeDoubler];
+
                 if(areAdsRemoved < 1){
                     [self createBuyGameButton];
                 }
@@ -327,6 +345,10 @@
             [self setLevelHighScore:[self getLevelHighscore]];
             didReportPrevHighLevelScore = true;
         }
+        if (!didReportMaxLevels) {
+            [self setMaxLevels:[self getMaxLevels]];
+            didReportMaxLevels = true;
+        }
 
 
         return true;
@@ -361,6 +383,11 @@
         [self addChild:twButton];
 }
 
+-(void) setMaxLevels:(int)levels {
+    NSString* _levels = [NSString stringWithFormat:@"%i",level];
+    [clsCommon storeUserSetting:@"maxLevels" value:_levels];
+    [[GameCenterManager sharedManager] saveAndReportScore:levels leaderboard:@"300ml"  sortOrder:GameCenterSortOrderHighToLow];
+}
 
 -(void) setHighScore:(int)score {
     NSString* _score = [NSString stringWithFormat:@"%i",score];
@@ -424,6 +451,13 @@
     return value;
 }
 
+-(int) getMaxLevels {
+    NSString* _levels;
+    _levels = [clsCommon getUserSettingForKey:@"maxLevels"];
+    int value = [_levels intValue];
+    return value;
+}
+
 -(void) createLabel:(SKLabelNode*)label text:(NSString*)text fontSize:(int)fontSize posY:(int)posY color:(SKColor*)color alpha:(float)alpha sizeDoubler:(int)sizeDoubler {
 
     label.text = text;
@@ -431,6 +465,7 @@
     label.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame) + posY * sizeDoubler);
     label.fontColor = color;
     label.alpha = alpha;
+    label.zPosition = 500;
 
     [self addChild:label];
 
@@ -444,6 +479,10 @@
     instruct.name = @"instructions";//how the node is identified later
     instruct.zPosition = 10;
     instruct.alpha = .7;
+    SKLabelNode* tapFor=[SKLabelNode labelNodeWithFontNamed:@"Arial"];
+    tapFor.name=@"tapFor";
+    [self createLabel:tapFor text:@"Tap for Detailed Instructions" fontSize:12 posY:posY color:[SKColor whiteColor] alpha:.7 sizeDoubler:sizeDoubler];
+
     return instruct;
 }
 
@@ -569,6 +608,15 @@
         }else if([node.name isEqualToString:@"buygamebutton"] || [node.name isEqualToString:@"buygamelabel"]) {
             //PUT BUY GAME CODE HERE
             [self userClickedBuyGame];
+        }else if([node.name isEqualToString:@"instructions"] || [node.name isEqualToString:@"tapFor"] ){
+            UIAlertView *alert = [[UIAlertView alloc]initWithTitle:NSLocalizedString(@"How to Play",nil)
+                message: NSLocalizedString(@"how to play instructions",nil)
+                delegate: nil
+                cancelButtonTitle:@"Ok"
+                otherButtonTitles: nil];
+            
+            [alert show];
+
         }else if(tapEnabled) {
             [aTimer invalidate];
             aTimer = nil;

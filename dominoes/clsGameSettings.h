@@ -77,6 +77,7 @@ extern BOOL floorOn;
 extern BOOL gameCenterEnabled;
 extern BOOL didReportPrevHighScore;
 extern BOOL didReportPrevHighLevelScore;
+extern BOOL didReportMaxLevels;
 
 extern int sizeDoubler;
 
@@ -85,10 +86,11 @@ extern int sizeDoubler;
 extern int levelScore;
 extern int totalScore;
 extern int highScore;
+extern int maxLevels;
 extern int lives;
 extern int level;
 
-extern float gameSpeed;
+extern double gameSpeed;
 
 
 //tmp swipe direction

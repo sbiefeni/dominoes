@@ -9,9 +9,27 @@
 #import "domAppDelegate.h"
 #import <iAd/iAd.h>
 #import "GameCenterManager.h"
+#import "iRate.h"
 
 @implementation domAppDelegate
 
++ (void)initialize
+{
+    //configure iRate
+    [iRate sharedInstance].appStoreID = 859320677;
+    [iRate sharedInstance].daysUntilPrompt = 1;
+    [iRate sharedInstance].usesUntilPrompt = 10;
+
+    //[iRate sharedInstance].ratingsURL = [NSURL URLWithString:@"itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?type=Purple+Software&id=859320677"];
+
+    [iRate sharedInstance].message = @"Hey You! Help us by rating 300 Brick'd, It won’t take more than a minute. Thanks for your support!";
+
+
+//    NSString *str = [NSString stringWithFormat:
+//                     @"itms-apps://ax.itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?type=Purple+Software&id=%i",859320677];
+//    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:str]];
+
+}
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {

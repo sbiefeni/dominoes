@@ -74,6 +74,7 @@ BOOL floorOn;
 BOOL gameCenterEnabled;
 BOOL didReportPrevHighScore;
 BOOL didReportPrevHighLevelScore;
+BOOL didReportMaxLevels;
 
 int sizeDoubler;
 
@@ -81,10 +82,11 @@ int sizeDoubler;
 int levelScore;
 int totalScore;
 int highScore;
+int maxLevels;
 int lives;
 int level;
 
-float gameSpeed;
+double gameSpeed;
 
 
 //temp swipe direction
