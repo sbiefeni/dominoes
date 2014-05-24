@@ -81,18 +81,18 @@
         int highScore = [self getHighScore];
         levelHighScore = [self getLevelHighscore];
         maxLevels = [self getMaxLevels];
-
+#pragma mark - Opening Screen
         if (gameStatus != game_Started ) {  //game hasn't started.. show initial screen
 
 
             SKLabelNode* hlscore = [SKLabelNode labelNodeWithFontNamed:@"Avenir-Black"];
-            [self createLabel:hlscore text:[NSString stringWithFormat:NSLocalizedString(@"Best Level: %i",nil),levelHighScore] fontSize:30 posY:210 color:[SKColor whiteColor] alpha:.7 sizeDoubler:sizeDoubler];
+            [self createLabel:hlscore text:[NSString stringWithFormat:@"Best Level: %i",levelHighScore] fontSize:30 posY:210 color:[SKColor whiteColor] alpha:.7 sizeDoubler:sizeDoubler];
 
             SKLabelNode* mLevels = [SKLabelNode labelNodeWithFontNamed:@"Arial"];
-            [self createLabel:mLevels text:[NSString stringWithFormat:NSLocalizedString(@"Most Levels: %i",nil),(int)maxLevels] fontSize:20 posY:180 color:[SKColor whiteColor] alpha:1 sizeDoubler:sizeDoubler];
+            [self createLabel:mLevels text:[NSString stringWithFormat:@"Most Levels: %i",(int)maxLevels] fontSize:20 posY:180 color:[SKColor whiteColor] alpha:1 sizeDoubler:sizeDoubler];
 
             SKLabelNode* hscore = [SKLabelNode labelNodeWithFontNamed:@"Arial"];
-            [self createLabel:hscore text:[NSString stringWithFormat:NSLocalizedString(@"High Score: %i",nil),(int)highScore] fontSize:20 posY:150 color:[SKColor whiteColor] alpha:1 sizeDoubler:sizeDoubler];
+            [self createLabel:hscore text:[NSString stringWithFormat:@"High Score: %i",(int)highScore] fontSize:20 posY:150 color:[SKColor whiteColor] alpha:1 sizeDoubler:sizeDoubler];
 
             SKLabelNode *title = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
             [self createLabel:title text:@"300" fontSize:130 posY:45 color:[SKColor redColor] alpha:.7 sizeDoubler:sizeDoubler];
@@ -102,7 +102,7 @@
             [self createLabel:title2 text:@"Brick'd" fontSize:45 posY:5 color:[SKColor whiteColor] alpha:1 sizeDoubler:sizeDoubler];
 
             SKLabelNode *tapToPlay = [SKLabelNode labelNodeWithFontNamed:@"Avenir-Black"];
-            [self createLabel:tapToPlay text:NSLocalizedString(@"Tap to Play",nil) fontSize:40 posY:-52 color:[SKColor whiteColor] alpha:.7 sizeDoubler:sizeDoubler];
+            [self createLabel:tapToPlay text:@"Tap to Play" fontSize:40 posY:-52 color:[SKColor whiteColor] alpha:.7 sizeDoubler:sizeDoubler];
 
 
             [self addChild: [self instruct:sizeDoubler posY:-145]]; //instructions button, from below
@@ -119,7 +119,7 @@
                 gameStatus = reset;
 
         }else if(gameStatus == game_Started && lives > 0)   { // game started...
-
+#pragma mark - In Between Rounds Screen
                 //show score screen
 
             totalScore += levelScore;
@@ -133,25 +133,25 @@
                 levelHighScore = levelScore;
 
                 SKLabelNode *hs = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
-                [self createLabel:hs text:NSLocalizedString(@"NEW BEST LEVEL!",nil) fontSize:25 posY:120 color:[SKColor whiteColor] alpha:1 sizeDoubler:sizeDoubler];
+                [self createLabel:hs text:@"NEW BEST LEVEL!" fontSize:25 posY:120 color:[SKColor whiteColor] alpha:1 sizeDoubler:sizeDoubler];
             }
 
 
             SKLabelNode* hlscore = [SKLabelNode labelNodeWithFontNamed:@"Arial"];
-            [self createLabel:hlscore text:[NSString stringWithFormat:NSLocalizedString(@"Best Level: %i",nil),levelHighScore] fontSize:20 posY:80 color:[SKColor whiteColor] alpha:1 sizeDoubler:sizeDoubler];
+            [self createLabel:hlscore text:[NSString stringWithFormat:@"Best Level: %i",levelHighScore] fontSize:20 posY:80 color:[SKColor whiteColor] alpha:1 sizeDoubler:sizeDoubler];
 
 
             SKLabelNode *cur_score = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
-            [self createLabel:cur_score text:[NSString stringWithFormat:NSLocalizedString(@"Score: %i",nil),levelScore] fontSize:50 posY:0 color:[SKColor whiteColor] alpha:1 sizeDoubler:sizeDoubler];
+            [self createLabel:cur_score text:[NSString stringWithFormat:@"Score: %i",levelScore] fontSize:50 posY:0 color:[SKColor whiteColor] alpha:1 sizeDoubler:sizeDoubler];
 
             SKLabelNode *tot_score = [SKLabelNode labelNodeWithFontNamed:@"Arial"];
-            [self createLabel:tot_score text:[NSString stringWithFormat:NSLocalizedString(@"Total Score: %i",nil),totalScore] fontSize:30 posY:-60 color:[SKColor whiteColor] alpha:1 sizeDoubler:sizeDoubler];
+            [self createLabel:tot_score text:[NSString stringWithFormat:@"Total Score: %i",totalScore] fontSize:30 posY:-60 color:[SKColor whiteColor] alpha:1 sizeDoubler:sizeDoubler];
 
             SKLabelNode *Lives = [SKLabelNode labelNodeWithFontNamed:@"Arial"];
-            [self createLabel:Lives text:[NSString stringWithFormat:NSLocalizedString(@"Lives: %i",nil),lives] fontSize:30 posY:-100 color:[SKColor whiteColor] alpha:1 sizeDoubler:sizeDoubler];
+            [self createLabel:Lives text:[NSString stringWithFormat:@"Lives: %i",lives] fontSize:30 posY:-100 color:[SKColor whiteColor] alpha:1 sizeDoubler:sizeDoubler];
 
             SKLabelNode *tapToPlay = [SKLabelNode labelNodeWithFontNamed:@"Avenir-Black"];
-            [self createLabel:tapToPlay text:NSLocalizedString(@"Tap to Continue",nil) fontSize:35 posY:-145 color:[SKColor whiteColor] alpha:.7 sizeDoubler:sizeDoubler];
+            [self createLabel:tapToPlay text:@"Tap to Continue" fontSize:35 posY:-145 color:[SKColor whiteColor] alpha:.7 sizeDoubler:sizeDoubler];
 
             //for debugging - to reset the level high score
             isRunningInIde(
@@ -167,7 +167,7 @@
 
         }else{
                 //game over
-
+#pragma mark - Game Over Screen
                 totalScore += levelScore;
 
             //debugging - reset the total score
@@ -181,7 +181,7 @@
                     [self setHighScore:totalScore];
 
                     SKLabelNode *hs = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
-                    [self createLabel:hs text:NSLocalizedString(@"NEW HIGH SCORE!",nil) fontSize:30 posY:200 color:[SKColor whiteColor] alpha:1 sizeDoubler:sizeDoubler];
+                    [self createLabel:hs text:@"NEW HIGH SCORE!" fontSize:30 posY:200 color:[SKColor whiteColor] alpha:1 sizeDoubler:sizeDoubler];
                     if (gcEnabled){
                     //set the gamecenter score
                         [[GameCenterManager sharedManager]highScoreForLeaderboard:@"300hs"];
@@ -205,11 +205,11 @@
                 [self addChild:socialMessage];
 
                 SKLabelNode *title = [SKLabelNode labelNodeWithFontNamed:@"Avenir-Black"];
-                [self createLabel:title text:NSLocalizedString(@"Game over!",nil) fontSize:45 posY:155 color:[SKColor whiteColor] alpha:1 sizeDoubler:sizeDoubler];
+                [self createLabel:title text:@"Game over!" fontSize:45 posY:155 color:[SKColor whiteColor] alpha:1 sizeDoubler:sizeDoubler];
 
 
                 SKLabelNode *tot_score = [SKLabelNode labelNodeWithFontNamed:@"Avenir-Black"];
-                [self createLabel:tot_score text:NSLocalizedString(@"Total Score",nil) fontSize:40 posY:-60 color:[SKColor whiteColor] alpha:1 sizeDoubler:sizeDoubler];
+                [self createLabel:tot_score text:@"Total Score" fontSize:40 posY:-60 color:[SKColor whiteColor] alpha:1 sizeDoubler:sizeDoubler];
 
                 SKLabelNode *tot_score2 = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
                 [self createLabel:tot_score2 text:[NSString stringWithFormat:@"%i",totalScore] fontSize:80 posY:-150 color:[SKColor whiteColor] alpha:1 sizeDoubler:sizeDoubler];
@@ -307,7 +307,7 @@
     [self addChild:buyGameButton];
     
     SKLabelNode *buyGameLabel = [SKLabelNode labelNodeWithFontNamed:@"Avenir-Black"];
-    [self createLabel:buyGameLabel text:NSLocalizedString(@"Disable Ads - $0.99",nil) fontSize:24 posY:-((mySize.height/2)/sizeDoubler) color:[SKColor blackColor] alpha:.7 sizeDoubler:1];
+    [self createLabel:buyGameLabel text:@"Disable Ads - $0.99" fontSize:24 posY:-((mySize.height/2)/sizeDoubler) color:[SKColor blackColor] alpha:.7 sizeDoubler:1];
     buyGameLabel.position = buyGameButton.position;
     buyGameLabel.zPosition = 3;
     buyGameLabel.verticalAlignmentMode = SKLabelVerticalAlignmentModeCenter;
@@ -329,7 +329,7 @@
         [self addChild:gcButton];
 
         SKLabelNode *gcLabel = [SKLabelNode labelNodeWithFontNamed:@"Avenir-Black"];
-        [self createLabel:gcLabel text:NSLocalizedString(@"Leaderboard",nil) fontSize:30 posY:-((mySize.height/2)/sizeDoubler) color:[SKColor blackColor] alpha:.7 sizeDoubler:1];
+        [self createLabel:gcLabel text:@"Leaderboard" fontSize:30 posY:-((mySize.height/2)/sizeDoubler) color:[SKColor blackColor] alpha:.7 sizeDoubler:1];
         gcLabel.position = gcButton.position;
         gcLabel.zPosition = 5;
         gcLabel.verticalAlignmentMode = SKLabelVerticalAlignmentModeCenter;
@@ -355,7 +355,7 @@
     }else{
         if (!didThis) {
             SKLabelNode *gcLabel = [SKLabelNode labelNodeWithFontNamed:@"Avenir-Black"];
-            [self createLabel:gcLabel text:NSLocalizedString(@"Log in to Gamecenter to see Leaderboard",nil) fontSize:12 posY:-((mySize.height/2)/sizeDoubler) color:[SKColor whiteColor] alpha:.7 sizeDoubler:1];
+            [self createLabel:gcLabel text:@"Log in to Gamecenter to see Leaderboard" fontSize:12 posY:-((mySize.height/2)/sizeDoubler) color:[SKColor whiteColor] alpha:.7 sizeDoubler:1];
             gcLabel.position = CGPointMake(CGRectGetMidX(self.frame), 20);
             gcLabel.zPosition = 1;
             gcLabel.verticalAlignmentMode = SKLabelVerticalAlignmentModeCenter;
@@ -460,7 +460,7 @@
 
 -(void) createLabel:(SKLabelNode*)label text:(NSString*)text fontSize:(int)fontSize posY:(int)posY color:(SKColor*)color alpha:(float)alpha sizeDoubler:(int)sizeDoubler {
 
-    label.text = text;
+    label.text = NSLocalizedString(text,nil);
     label.fontSize = fontSize * sizeDoubler;
     label.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame) + posY * sizeDoubler);
     label.fontColor = color;
@@ -479,9 +479,10 @@
     instruct.name = @"instructions";//how the node is identified later
     instruct.zPosition = 10;
     instruct.alpha = .7;
+
     SKLabelNode* tapFor=[SKLabelNode labelNodeWithFontNamed:@"Arial"];
     tapFor.name=@"tapFor";
-    [self createLabel:tapFor text:@"Tap for Detailed Instructions" fontSize:12 posY:posY color:[SKColor whiteColor] alpha:.7 sizeDoubler:sizeDoubler];
+    [self createLabel:tapFor text:@"Tap for Detailed Instructions" fontSize:12 posY:posY+instruct.frame.size.height/(2.1*sizeDoubler) color:[SKColor whiteColor] alpha:.7 sizeDoubler:sizeDoubler];
 
     return instruct;
 }

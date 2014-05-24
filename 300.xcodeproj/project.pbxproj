@@ -77,7 +77,7 @@
 
 /* Begin PBXFileReference section */
 		344B5BC418D3FA9500E43D82 /* domMenuScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = domMenuScene.h; sourceTree = "<group>"; };
-		344B5BC518D3FA9500E43D82 /* domMenuScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = domMenuScene.m; sourceTree = "<group>"; };
+		344B5BC518D3FA9500E43D82 /* domMenuScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = domMenuScene.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		344B5BC918D4A4EF00E43D82 /* Background_Stars.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Background_Stars.sks; sourceTree = "<group>"; };
 		344B5BCB18D4A6DC00E43D82 /* SKEmitterNode+fromFile.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SKEmitterNode+fromFile.h"; sourceTree = "<group>"; };
 		344B5BCC18D4A70300E43D82 /* SKEmitterNode+fromFile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "SKEmitterNode+fromFile.m"; sourceTree = "<group>"; };
