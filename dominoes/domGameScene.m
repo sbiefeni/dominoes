@@ -1121,7 +1121,7 @@ CGPoint pointA;
     //backGround.colorBlendFactor = 1;
 
     //pick a random floor tile
-    int rndTile = [clsCommon getRanInt:1 maxNumber:5];
+    int rndTile = [clsCommon getRanInt:1 maxNumber:6];
     [self makeBackgroundFloorSizeOf:backGround withTile:[NSString stringWithFormat:@"floortile%i.png",rndTile]];
 
     [self addChild:backGround];
