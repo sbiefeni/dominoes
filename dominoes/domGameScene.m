@@ -1046,6 +1046,8 @@ CGPoint pointA;
     floor.particleColorBlendFactor = 1.0;
 
     floor.particleColor = color;
+    floor.alpha = .8;
+
 
 
 
@@ -1118,9 +1120,31 @@ CGPoint pointA;
     self.backgroundColor = [SKColor blackColor];
     //backGround.colorBlendFactor = 1;
 
+    //pick a random floor tile
+    int rndTile = [clsCommon getRanInt:1 maxNumber:5];
+    [self makeBackgroundFloorSizeOf:backGround withTile:[NSString stringWithFormat:@"floortile%i.png",rndTile]];
 
     [self addChild:backGround];
-    
+
+}
+
+#pragma mark - Floor Tiles
+-(void)makeBackgroundFloorSizeOf:(SKSpriteNode*)area withTile:(NSString*)tileName {
+    CGSize coverageSize = area.size; //the size of the entire image you want tiled
+    SKSpriteNode* tile = [SKSpriteNode spriteNodeWithImageNamed:tileName];
+    CGRect textureSize = tile.frame; //the size of the tile.
+    CGImageRef backgroundCGImage = [UIImage imageNamed:tileName].CGImage; //change the string to your image name
+    UIGraphicsBeginImageContext(CGSizeMake(coverageSize.width, coverageSize.height));
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    CGContextDrawTiledImage(context, textureSize, backgroundCGImage);
+    UIImage *tiledBackground = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    SKTexture *backgroundTexture = [SKTexture textureWithCGImage:tiledBackground.CGImage];
+    SKSpriteNode *backgroundTiles = [SKSpriteNode spriteNodeWithTexture:backgroundTexture];
+    backgroundTiles.yScale = -1; //upon closer inspection, I noticed my source tile was flipped vertically, so this just flipped it back.
+    backgroundTiles.position = area.position; // CGPointMake(0,0);
+    backgroundTiles.zPosition = 0;
+    [self addChild:backgroundTiles];
 }
 
 //-(void) setUpDoors:(CGSize) size{
