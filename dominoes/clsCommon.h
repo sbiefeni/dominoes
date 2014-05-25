@@ -25,6 +25,8 @@
 
 + (int)getRanInt:(int)min maxNumber:(int)max;
 
++ (int)getRanInt:(int)min maxNumber:(int)max butNot:(int)notNum;
+
 + (int) maxInArray:(int*)Array size:(int) array_size;
 
 + (void) storeUserSetting:(NSString*)key value:(NSObject*)value;

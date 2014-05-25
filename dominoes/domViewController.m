@@ -12,7 +12,7 @@
 #import "clsCommon.h"
 #import "AppFlood.h"
 
-
+#define isRunningInIde(x) if ([[[UIDevice currentDevice].model lowercaseString] rangeOfString:@"simulator"].location != NSNotFound){x;}
 
 
 ADBannerView *adView;
@@ -152,6 +152,7 @@ BOOL showingLeaderboard;
     //CGFloat width =
     //CGFloat height = CGRectGetHeight(self.view.bounds);
 
+    
     CGRect aRect=CGRectMake(0, CGRectGetHeight(self.view.bounds)-iWidth==320? 50:66, iWidth, iWidth==320? 50:66);
     
     adView=[[ADBannerView alloc]initWithFrame:aRect];
@@ -166,10 +167,15 @@ BOOL showingLeaderboard;
     //initialize appflood
     [AppFlood initializeWithId:AppFloodID key:AppFloodKey adType:APPFLOOD_AD_ALL ];
 
-    // Configure the view.
     SKView * skView = (SKView*)self.originalContentView;
     skView.showsFPS = NO;
     skView.showsNodeCount = NO;
+
+isRunningInIde(
+    // Configure the view.
+    skView.showsFPS = YES;
+    skView.showsNodeCount = YES;
+);
     
     // Create and configure the scene.
     SKScene * scene = [domMenuScene sceneWithSize:skView.bounds.size];

@@ -65,6 +65,18 @@
     
 }
 
++ (int)getRanInt:(int)min maxNumber:(int)max butNot:(int)notNum
+{
+    int num;
+    do
+    {
+        num = min + arc4random() % (max - min + 1);
+    }
+    while (num == notNum);
+
+    return num;
+}
+
 //get the max moves of any object in the array
 +(int) maxInArray:(int*)Array size:(int) array_size
 {

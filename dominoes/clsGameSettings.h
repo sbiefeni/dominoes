@@ -15,6 +15,7 @@
 @interface clsGameSettings : NSObject
 
 extern SKSpriteNode* backGround;
+extern int lastTile;
 
 extern BOOL adsShowing;
 extern BOOL bannerIsVisible;
