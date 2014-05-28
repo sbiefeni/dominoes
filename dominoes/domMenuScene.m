@@ -159,9 +159,9 @@
                 //[self setLevelHighScore: 0];
             );
 
-            //if(areAdsRemoved < 1){
+            if(areAdsRemoved < 1){
                 [self createBuyGameButton];
-            //}
+            }
 
 
 
@@ -217,9 +217,9 @@
                 SKLabelNode *hs = [SKLabelNode labelNodeWithFontNamed:@"Arial"];
                 [self createLabel:hs text:[NSString stringWithFormat:@"Level Reached: %i",level ] fontSize:20 posY:-180 color:[SKColor whiteColor] alpha:1 sizeDoubler:sizeDoubler];
 
-                //if(areAdsRemoved < 1){
+                if(areAdsRemoved < 1){
                     [self createBuyGameButton];
-                //}
+                }
             
             gameStatus = game_Over;
 
