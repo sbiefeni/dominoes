@@ -99,7 +99,7 @@
 
             SKLabelNode *title2 = [SKLabelNode labelNodeWithFontNamed:@"Avenir-Black"];
             title2.fontName = [UIFont italicSystemFontOfSize:45].fontName;
-            [self createLabel:title2 text:@"Brick'd" fontSize:45 posY:5 color:[SKColor whiteColor] alpha:1 sizeDoubler:sizeDoubler];
+            [self createLabel:title2 text:@"Brickd" fontSize:45 posY:5 color:[SKColor whiteColor] alpha:1 sizeDoubler:sizeDoubler];
 
             SKLabelNode *tapToPlay = [SKLabelNode labelNodeWithFontNamed:@"Avenir-Black"];
             [self createLabel:tapToPlay text:@"Tap to Play" fontSize:40 posY:-59 color:[SKColor whiteColor] alpha:.7 sizeDoubler:sizeDoubler];
@@ -159,9 +159,9 @@
                 //[self setLevelHighScore: 0];
             );
 
-            if(areAdsRemoved < 1){
+            //if(areAdsRemoved < 1){
                 [self createBuyGameButton];
-            }
+            //}
 
 
 
@@ -217,9 +217,9 @@
                 SKLabelNode *hs = [SKLabelNode labelNodeWithFontNamed:@"Arial"];
                 [self createLabel:hs text:[NSString stringWithFormat:@"Level Reached: %i",level ] fontSize:20 posY:-180 color:[SKColor whiteColor] alpha:1 sizeDoubler:sizeDoubler];
 
-                if(areAdsRemoved < 1){
+                //if(areAdsRemoved < 1){
                     [self createBuyGameButton];
-                }
+                //}
             
             gameStatus = game_Over;
 
@@ -301,7 +301,7 @@
 
 -(BOOL)createBuyGameButton{
     SKSpriteNode *buyGameButton = [SKSpriteNode spriteNodeWithImageNamed:@"green_button.png"];
-    buyGameButton.position = CGPointMake(CGRectGetMidX(self.frame), 30);
+    buyGameButton.position = CGPointMake(CGRectGetMidX(self.frame), 65);
     buyGameButton.name = @"buygamebutton";
     buyGameButton.zPosition = 2;
     [self addChild:buyGameButton];
@@ -312,6 +312,21 @@
     buyGameLabel.zPosition = 3;
     buyGameLabel.verticalAlignmentMode = SKLabelVerticalAlignmentModeCenter;
     buyGameLabel.name = @"buygamelabel";
+
+    SKSpriteNode *restoreGameButton = [SKSpriteNode spriteNodeWithImageNamed:@"green_button.png"];
+    restoreGameButton.position = CGPointMake(CGRectGetMidX(self.frame), 25);
+    restoreGameButton.name = @"restoreButton";
+    restoreGameButton.yScale = .5;
+    restoreGameButton.xScale = .65;
+    restoreGameButton.zPosition = 2;
+    [self addChild:restoreGameButton];
+
+    SKLabelNode *restoreGameLabel = [SKLabelNode labelNodeWithFontNamed:@"Avenir-Black"];
+    [self createLabel:restoreGameLabel text:@"Restore Purchase" fontSize:16 posY:-((mySize.height/2)/sizeDoubler) color:[SKColor blackColor] alpha:.7 sizeDoubler:1];
+    restoreGameLabel.position = restoreGameButton.position;
+    restoreGameLabel.zPosition = 3;
+    restoreGameLabel.verticalAlignmentMode = SKLabelVerticalAlignmentModeCenter;
+    restoreGameLabel.name = @"restoreLabel";
     return true;
 }
 
@@ -531,9 +546,9 @@
     SLComposeViewController *tweetSheet = [SLComposeViewController
                                                composeViewControllerForServiceType:SLServiceTypeTwitter];
     if (score > 0) {
-        [tweetSheet setInitialText:[NSString stringWithFormat: NSLocalizedString(@"Check out 300 Brick'd. Can you beat my best level of %i Bricks? It's free... get it at %@",nil),score, itunesURL]];
+        [tweetSheet setInitialText:[NSString stringWithFormat: NSLocalizedString(@"Check out 300 Brickd. Can you beat my best level of %i Bricks? It's free... get it at %@",nil),score, itunesURL]];
     }else{
-        [tweetSheet setInitialText:NSLocalizedString(@"Check out 300 Brick'd. It's free... get it on the Appstore",nil)];
+        [tweetSheet setInitialText:NSLocalizedString(@"Check out 300 Brickd. It's free... get it on the Appstore",nil)];
     }
 
     [[self getActiveController] presentViewController:tweetSheet animated:YES completion:nil];
@@ -609,6 +624,9 @@
         }else if([node.name isEqualToString:@"buygamebutton"] || [node.name isEqualToString:@"buygamelabel"]) {
             //PUT BUY GAME CODE HERE
             [self userClickedBuyGame];
+        }else if([node.name isEqualToString:@"restoreButton"] || [node.name isEqualToString:@"restoreLabel"]) {
+            //PUT RESTORE GAME CODE HERE
+            [self checkPurchasedItems];
         }else if([node.name isEqualToString:@"instructions"] || [node.name isEqualToString:@"tapFor"] ){
             UIAlertView *alert = [[UIAlertView alloc]initWithTitle:NSLocalizedString(@"How to Play",nil)
                 message: NSLocalizedString(@"how to play instructions",nil)
@@ -696,6 +714,13 @@
     }
 }
 
+// Call This Function...
+- (void) checkPurchasedItems
+{
+    [[SKPaymentQueue defaultQueue] restoreCompletedTransactions];
+}
+
+////...Then this delegate Function Will be fired
 -(void)paymentQueueRestoreCompletedTransactionsFinished:(SKPaymentQueue *)queue{
     NSLog(@"Received restored transactions: %i", (int)queue.transactions.count);
     for (SKPaymentTransaction *transaction in queue.transactions)
@@ -705,11 +730,18 @@
             //called when the user successfully restores a purchase
             [self doRemoveAds];
             [[SKPaymentQueue defaultQueue] finishTransaction:transaction];
+
+            UIAlertView *alert = [[UIAlertView alloc]initWithTitle:NSLocalizedString(@"How to Play",nil)
+                    message: NSLocalizedString(@"Purchase was restored",nil)
+                    delegate: nil
+                    cancelButtonTitle:@"Ok"
+                    otherButtonTitles: nil];
+
+            [alert show];
+
             break;
         }
-        
     }
-
 }
 
 - (void)doRemoveAds{
@@ -718,6 +750,8 @@
     areAdsRemoved = 1;
     [[self childNodeWithName:@"buygamebutton"] removeFromParent];
     [[self childNodeWithName:@"buygamelabel"] removeFromParent];
+    [[self childNodeWithName:@"restoreButton"] removeFromParent];
+    [[self childNodeWithName:@"restoreLabel"] removeFromParent];
 
     //save the ads removed setting
     [clsCommon storeUserSetting:@"areAdsRemoved" value:[NSString stringWithFormat:@"%i",areAdsRemoved]];

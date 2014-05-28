@@ -162,10 +162,14 @@ BOOL showingLeaderboard;
 
 
 //initialize AppFlood
-    NSString* AppFloodID = @"EExiDMAjiDU5htiV";  //300 Brick'd Keys for AppFlood Account
+    NSString* AppFloodID = @"EExiDMAjiDU5htiV";  //300 Brickd Keys for AppFlood Account
     NSString* AppFloodKey = @"VZY5DL7L3eb1L5365589b";
     //initialize appflood
     [AppFlood initializeWithId:AppFloodID key:AppFloodKey adType:APPFLOOD_AD_ALL ];
+
+    //for ad exchange?
+   // App Key	Secret Key
+    //6JOMMTGRQUAZCJBE	v4sOW4yW41dfL53825d51
 
     SKView * skView = (SKView*)self.originalContentView;
     skView.showsFPS = NO;
@@ -197,6 +201,9 @@ isRunningInIde(
     swipeGesture =[[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(swipeRecognized:)];
     [swipeGesture setDirection:UISwipeGestureRecognizerDirectionDown];
     [self.view addGestureRecognizer:swipeGesture];
+
+    
+
 
     // Set GameCenter Manager Delegate
     [[GameCenterManager sharedManager] setDelegate:self];

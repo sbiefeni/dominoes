@@ -22,7 +22,7 @@
 
     //[iRate sharedInstance].ratingsURL = [NSURL URLWithString:@"itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?type=Purple+Software&id=859320677"];
 
-    [iRate sharedInstance].message = @"Hey You! Help us by rating 300 Brick'd, It won’t take more than a minute. Thanks for your support!";
+    [iRate sharedInstance].message = @"Hey You! Help us by rating 300 Brickd, It won’t take more than a minute. Thanks for your support!";
 
 
 //    NSString *str = [NSString stringWithFormat:
