@@ -533,7 +533,7 @@
     SLComposeViewController *faceBook = [SLComposeViewController composeViewControllerForServiceType:SLServiceTypeFacebook];
 
     if (score > 0) {
-        [faceBook setInitialText:[NSString stringWithFormat: NSLocalizedString(@"Check out this cool new game. Can you beat my best level of %i Bricks? It's free... get it at:",nil),score]];
+        [faceBook setInitialText:[NSString stringWithFormat: NSLocalizedString(@"Check out the new 300 Brickd for iOS. Can you beat my best level of %i Bricks? #300brickd It's free... get it at:",nil),score]];
     }else{
 
         [faceBook setInitialText:NSLocalizedString(@"Check out this cool new game. It's free... get it at:",nil)];
@@ -572,9 +572,9 @@
     SLComposeViewController *tweetSheet = [SLComposeViewController
                                                composeViewControllerForServiceType:SLServiceTypeTwitter];
     if (score > 0) {
-        [tweetSheet setInitialText:[NSString stringWithFormat: NSLocalizedString(@"Check out 300 Brickd. Can you beat my best level of %i Bricks? It's free... get it at %@",nil),score, itunesURL]];
+        [tweetSheet setInitialText:[NSString stringWithFormat: NSLocalizedString(@"Check out the new 300 Brickd for iOS. Can you beat my best level of %i Bricks? #300brickd It's free... get it at: %@",nil),score, itunesURL]];
     }else{
-        [tweetSheet setInitialText:NSLocalizedString(@"Check out 300 Brickd. It's free... get it on the Appstore",nil)];
+        [tweetSheet setInitialText:NSLocalizedString(@"Check out 300 Brickd for iOS. It's free... get it on the Appstore",nil)];
     }
 
     [[self getActiveController] presentViewController:tweetSheet animated:YES completion:nil];
