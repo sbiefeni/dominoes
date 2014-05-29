@@ -112,8 +112,11 @@
             //draw facebook and twitter buttons
             [self drawSocialButtonsWithfbX:-120 withfbY:10 withtwX:120 withtwY:10 withAlpha:.5];
 
+            if (!areAdsRemoved) {
+                [self createRestoreButton];
+            }
             //timer to check for gamecenter button
-            aTimer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(gameCenterButtonTimer) userInfo:nil repeats:YES];
+            aTimer = [NSTimer scheduledTimerWithTimeInterval:5 target:self selector:@selector(gameCenterButtonTimer) userInfo:nil repeats:YES];
             
 
                 gameStatus = reset;
@@ -160,7 +163,7 @@
             );
 
             if(areAdsRemoved < 1){
-                [self createBuyGameButton];
+                [self createBuyGameButton:true];
             }
 
 
@@ -218,7 +221,7 @@
                 [self createLabel:hs text:[NSString stringWithFormat:@"Level Reached: %i",level ] fontSize:20 posY:-180 color:[SKColor whiteColor] alpha:1 sizeDoubler:sizeDoubler];
 
                 if(areAdsRemoved < 1){
-                    [self createBuyGameButton];
+                    [self createBuyGameButton:true];
                 }
             
             gameStatus = game_Over;
@@ -276,19 +279,23 @@
 //check for gamecenter availability, draw the button, then disable the timer
     NSLog(@"timer called");
 
-    //if([GKLocalPlayer localPlayer].isAuthenticated){
 
-        if ([self enableGameCenterButton]) {
+    [self enableTapTimer];
 
-            [self enableTapTimer];
+    if (![self enableGameCenterButton]) {
 
-            if(aTimer)
-            {
-                [aTimer invalidate];
-                aTimer = nil;
-            }
+        if (!areAdsRemoved) {
+            [self createBuyGameButton:false];
         }
-    //}
+    }
+
+
+    if(aTimer)
+    {
+        [aTimer invalidate];
+        aTimer = nil;
+    }
+
 }
 
 -(void) enableTapTimer {
@@ -299,7 +306,7 @@
     tapTimer = nil;
 }
 
--(BOOL)createBuyGameButton{
+-(BOOL)createBuyGameButton:(BOOL)doRestore{
     SKSpriteNode *buyGameButton = [SKSpriteNode spriteNodeWithImageNamed:@"green_button.png"];
     buyGameButton.position = CGPointMake(CGRectGetMidX(self.frame), 65);
     buyGameButton.name = @"buygamebutton";
@@ -313,35 +320,54 @@
     buyGameLabel.verticalAlignmentMode = SKLabelVerticalAlignmentModeCenter;
     buyGameLabel.name = @"buygamelabel";
 
+    if (doRestore) {
+        [self createRestoreButton];
+    }
+
+    return true;
+}
+
+-(void) createRestoreButton{
+
     SKSpriteNode *restoreGameButton = [SKSpriteNode spriteNodeWithImageNamed:@"green_button.png"];
-    restoreGameButton.position = CGPointMake(CGRectGetMidX(self.frame), 25);
     restoreGameButton.name = @"restoreButton";
-    restoreGameButton.yScale = .5;
-    restoreGameButton.xScale = .65;
     restoreGameButton.zPosition = 2;
-    [self addChild:restoreGameButton];
 
     SKLabelNode *restoreGameLabel = [SKLabelNode labelNodeWithFontNamed:@"Avenir-Black"];
     [self createLabel:restoreGameLabel text:@"Restore Purchase" fontSize:16 posY:-((mySize.height/2)/sizeDoubler) color:[SKColor blackColor] alpha:.7 sizeDoubler:1];
-    restoreGameLabel.position = restoreGameButton.position;
+    restoreGameLabel.name = @"restoreLabel";
     restoreGameLabel.zPosition = 3;
     restoreGameLabel.verticalAlignmentMode = SKLabelVerticalAlignmentModeCenter;
-    restoreGameLabel.name = @"restoreLabel";
-    return true;
+
+    //if ([self childNodeWithName:@"buygamebutton"]) {
+        restoreGameButton.position = CGPointMake(CGRectGetMidX(self.frame), 25);
+        restoreGameButton.yScale = .5;
+        //restoreGameButton.xScale = .65;
+   // }else{
+        //restoreGameButton.position = CGPointMake(CGRectGetMidX(self.frame), 50);
+   // }
+
+    restoreGameLabel.position = restoreGameButton.position;
+
+    [self addChild:restoreGameButton];
+
 }
 
 -(BOOL)enableGameCenterButton {
     static BOOL didThis;
+    //isRunningInIde(return false);
     if(gameStatus == game_Over){
         return true;
     }
     if([GKLocalPlayer localPlayer].isAuthenticated){
 
         SKSpriteNode *gcButton = [SKSpriteNode spriteNodeWithImageNamed:@"stretch_button.png"];
-        gcButton.position = CGPointMake(CGRectGetMidX(self.frame), 30);
+        gcButton.position = CGPointMake(CGRectGetMidX(self.frame), 65);
         gcButton.name = @"gamecenter";
         gcButton.zPosition = 4;
         [self addChild:gcButton];
+
+
 
         SKLabelNode *gcLabel = [SKLabelNode labelNodeWithFontNamed:@"Avenir-Black"];
         [self createLabel:gcLabel text:@"Leaderboard" fontSize:30 posY:-((mySize.height/2)/sizeDoubler) color:[SKColor blackColor] alpha:.7 sizeDoubler:1];
@@ -731,8 +757,8 @@
             [self doRemoveAds];
             [[SKPaymentQueue defaultQueue] finishTransaction:transaction];
 
-            UIAlertView *alert = [[UIAlertView alloc]initWithTitle:NSLocalizedString(@"How to Play",nil)
-                    message: NSLocalizedString(@"Purchase was restored",nil)
+            UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"Disable Ads"
+                    message: @"Purchase was restored"
                     delegate: nil
                     cancelButtonTitle:@"Ok"
                     otherButtonTitles: nil];
