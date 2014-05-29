@@ -215,10 +215,10 @@
                 [self createLabel:tot_score text:@"Total Score" fontSize:40 posY:-60 color:[SKColor whiteColor] alpha:1 sizeDoubler:sizeDoubler];
 
                 SKLabelNode *tot_score2 = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
-                [self createLabel:tot_score2 text:[NSString stringWithFormat:@"%i",totalScore] fontSize:80 posY:-150 color:[SKColor whiteColor] alpha:1 sizeDoubler:sizeDoubler];
+                [self createLabel:tot_score2 text:[NSString stringWithFormat:@"%i",totalScore] fontSize:80 posY:-130 color:[SKColor whiteColor] alpha:1 sizeDoubler:sizeDoubler];
 
                 SKLabelNode *hs = [SKLabelNode labelNodeWithFontNamed:@"Arial"];
-                [self createLabel:hs text:[NSString stringWithFormat:@"Level Reached: %i",level ] fontSize:20 posY:-180 color:[SKColor whiteColor] alpha:1 sizeDoubler:sizeDoubler];
+                [self createLabel:hs text:[NSString stringWithFormat:@"Level Reached: %i",level ] fontSize:20 posY:-150 color:[SKColor whiteColor] alpha:1 sizeDoubler:sizeDoubler];
 
                 if(areAdsRemoved < 1){
                     [self createBuyGameButton:true];
