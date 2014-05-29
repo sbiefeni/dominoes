@@ -680,6 +680,7 @@
 
 -(void)userClickedBuyGame{
     if([SKPaymentQueue canMakePayments]){
+        [self changeButtonColor:(SKSpriteNode*)[self childNodeWithName:@"buygamebutton"]];
         //NSLog(@"User can make payments");
         SKProductsRequest *productsRequest=[[SKProductsRequest alloc] initWithProductIdentifiers:[NSSet setWithObject:kRemoveAdsProductIDentifier]];
         productsRequest.delegate=self;
@@ -689,6 +690,17 @@
         [self showPopupMessage:NSLocalizedString(@"Purchases are disabled for your account",nil) withTitle:NSLocalizedString(@"Remove Ads",nil)];
         //NSLog(@"User cannot make payments, perhaps due to parental controls");
     }
+}
+
+-(void)changeButtonColor:(SKSpriteNode*)button{
+
+    SKAction* a = [SKAction sequence:@[
+        [SKAction runBlock:^{button.color = [SKColor redColor]; button.colorBlendFactor = .7;  }],
+        [SKAction waitForDuration:3],
+        [SKAction runBlock:^{button.colorBlendFactor = 0; }]
+    ]];
+
+    [self runAction:a];
 }
 
 -(void)productsRequest:(SKProductsRequest *)request didReceiveResponse:(SKProductsResponse *)response{
@@ -743,6 +755,7 @@
 // Call This Function...
 - (void) checkPurchasedItems
 {
+    [self changeButtonColor:(SKSpriteNode*)[self childNodeWithName:@"restoreButton"]];
     [[SKPaymentQueue defaultQueue] restoreCompletedTransactions];
 }
 
