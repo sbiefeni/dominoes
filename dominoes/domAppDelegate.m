@@ -18,7 +18,7 @@
     //configure iRate
     [iRate sharedInstance].appStoreID = 859320677;
     [iRate sharedInstance].daysUntilPrompt = 1;
-    [iRate sharedInstance].usesUntilPrompt = 10;
+    [iRate sharedInstance].usesUntilPrompt = 5;
 
     //[iRate sharedInstance].ratingsURL = [NSURL URLWithString:@"itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?type=Purple+Software&id=859320677"];
 
