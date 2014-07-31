@@ -10,19 +10,19 @@
 #import "domMenuScene.h"
 #import "clsPlayer.h"
 #import "clsCommon.h"
-#import "AppFlood.h"
+//#import "AppFlood.h"
 
 #define isRunningInIde(x) if ([[[UIDevice currentDevice].model lowercaseString] rangeOfString:@"simulator"].location != NSNotFound){x;}
 
 
-ADBannerView *adView;
-int iHeight;
-int iWidth;
+//ADBannerView *adView;
+//int iHeight;
+//int iWidth;
 BOOL bOnTop;
 GKLocalPlayer *gcPlayer;
 BOOL showingLeaderboard;
 
-@interface domViewController () <ADBannerViewDelegate>
+@interface domViewController ()
 
 @end
 
@@ -93,49 +93,49 @@ BOOL showingLeaderboard;
 }
 
 
-+(void)setAdView:(BOOL)showAd ShowOnTop:(BOOL)onTop ChooseRandom:(BOOL)useRandom{
-    
-
-    if(bannerIsLoaded && areAdsRemoved==0){
-        
-        if (showAd) {
-            BOOL blOnTop;
-            if(useRandom){
-                if([clsCommon getRanInt:0 maxNumber:1]==0){
-                    blOnTop=NO;
-                }
-                else {
-                    blOnTop=YES;
-                }
-            }
-            else{
-                blOnTop=onTop;
-            }
-
-            if (blOnTop) {
-                ceilingOn = 1;
-                floorOn = 0;
-                adView.frame=CGRectMake(0,0, iWidth, iWidth==320? 50:66);
-            }
-            else{
-                ceilingOn = 0;
-                floorOn = 1;
-                adView.frame=CGRectMake(0,iHeight-50, iWidth, iWidth==320? 50:66);
-            }
-        }
-        [UIView beginAnimations:nil context:NULL];
-        [UIView setAnimationDuration:showAd==YES?3:0];
-        [adView setAlpha:showAd==YES?1:0];
-        
-        [UIView commitAnimations];
-        //bannerIsVisible=showAd;
-    }else{
-        [adView setAlpha:0];
-        bannerIsVisible=NO;
-        ceilingOn=0;
-        floorOn=0;
-    }
-}
+//+(void)setAdView:(BOOL)showAd ShowOnTop:(BOOL)onTop ChooseRandom:(BOOL)useRandom{
+//    
+//
+//    if(bannerIsLoaded && areAdsRemoved==0){
+//        
+//        if (showAd) {
+//            BOOL blOnTop;
+//            if(useRandom){
+//                if([clsCommon getRanInt:0 maxNumber:1]==0){
+//                    blOnTop=NO;
+//                }
+//                else {
+//                    blOnTop=YES;
+//                }
+//            }
+//            else{
+//                blOnTop=onTop;
+//            }
+//
+//            if (blOnTop) {
+//                ceilingOn = 1;
+//                floorOn = 0;
+//                adView.frame=CGRectMake(0,0, iWidth, iWidth==320? 50:66);
+//            }
+//            else{
+//                ceilingOn = 0;
+//                floorOn = 1;
+//                adView.frame=CGRectMake(0,iHeight-50, iWidth, iWidth==320? 50:66);
+//            }
+//        }
+//        [UIView beginAnimations:nil context:NULL];
+//        [UIView setAnimationDuration:showAd==YES?3:0];
+//        [adView setAlpha:showAd==YES?1:0];
+//        
+//        [UIView commitAnimations];
+//        //bannerIsVisible=showAd;
+//    }else{
+//        [adView setAlpha:0];
+//        bannerIsVisible=NO;
+//        ceilingOn=0;
+//        floorOn=0;
+//    }
+//}
 //-(void)showLeaderBoard:(BOOL)shouldShowLeaderboard{
 //    domViewController *dv;
 //    [dv showLeaderboardAndAchievements:shouldShowLeaderboard];
@@ -147,31 +147,33 @@ BOOL showingLeaderboard;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    iHeight=CGRectGetHeight(self.view.bounds);
-    iWidth=CGRectGetWidth(self.view.bounds);
+//    iHeight=CGRectGetHeight(self.view.bounds);
+//    iWidth=CGRectGetWidth(self.view.bounds);
     //CGFloat width =
     //CGFloat height = CGRectGetHeight(self.view.bounds);
 
     
-    CGRect aRect=CGRectMake(0, CGRectGetHeight(self.view.bounds)-iWidth==320? 50:66, iWidth, iWidth==320? 50:66);
+    //CGRect aRect=CGRectMake(0, CGRectGetHeight(self.view.bounds)-iWidth==320? 50:66, iWidth, iWidth==320? 50:66);
     
-    adView=[[ADBannerView alloc]initWithFrame:aRect];
-    adView.delegate=self;
-    [adView setAlpha:0];
-    [self.view addSubview:adView];
+    //adView=[[ADBannerView alloc]initWithFrame:aRect];
+    //adView.delegate=self;
+    //[adView setAlpha:0];
+    //[self.view addSubview:adView];
 
 
 //initialize AppFlood
-    NSString* AppFloodID = @"EExiDMAjiDU5htiV";  //300 Brickd Keys for AppFlood Account
-    NSString* AppFloodKey = @"VZY5DL7L3eb1L5365589b";
+    //NSString* AppFloodID = @"EExiDMAjiDU5htiV";  //300 Brickd Keys for AppFlood Account
+    //NSString* AppFloodKey = @"VZY5DL7L3eb1L5365589b";
     //initialize appflood
-    [AppFlood initializeWithId:AppFloodID key:AppFloodKey adType:APPFLOOD_AD_ALL ];
+    //[AppFlood initializeWithId:AppFloodID key:AppFloodKey adType:APPFLOOD_AD_ALL ];
 
     //for ad exchange?
    // App Key	Secret Key
     //6JOMMTGRQUAZCJBE	v4sOW4yW41dfL53825d51
 
-    SKView * skView = (SKView*)self.originalContentView;
+    //SKView * skView = (SKView*)self.originalContentView;
+
+    SKView * skView = (SKView *)self.view;
     skView.showsFPS = NO;
     skView.showsNodeCount = NO;
 
@@ -230,7 +232,7 @@ isRunningInIde(
 -(void)bannerView:(ADBannerView *)banner didFailToReceiveAdWithError:(NSError *)error{
     //hide the ad banner as error detected
     //[domViewController setAdView:NO ShowOnTop:NO ChooseRandom:NO];
-    [adView setAlpha:0];
+    //[adView setAlpha:0];
 
     //show the error in NSLog
     NSLog(@"Failed to receive banner with error '%@'",error.description);

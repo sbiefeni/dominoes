@@ -8,14 +8,14 @@
 
 #import <UIKit/UIKit.h>
 #import <SpriteKit/SpriteKit.h>
-#import <iAd/iAd.h>
+//#import <iAd/iAd.h>
 #import <GameKit/GameKit.h>
 #import "GameCenterManager.h"
-#import "AppFlood.h"
+//#import "AppFlood.h"
 
 @interface domViewController : UIViewController <GameCenterManagerDelegate>
 
-+(void)setAdView:(BOOL)showAd ShowOnTop:(BOOL)onTop ChooseRandom:(BOOL)useRandom;
+//+(void)setAdView:(BOOL)showAd ShowOnTop:(BOOL)onTop ChooseRandom:(BOOL)useRandom;
 
 
 @end

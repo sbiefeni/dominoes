@@ -12,7 +12,6 @@
 		344B5BCD18D4A70300E43D82 /* SKEmitterNode+fromFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 344B5BCC18D4A70300E43D82 /* SKEmitterNode+fromFile.m */; };
 		344B5BCF18D4AE7500E43D82 /* Background_Fire.sks in Resources */ = {isa = PBXBuildFile; fileRef = 344B5BCE18D4AE7500E43D82 /* Background_Fire.sks */; };
 		34C0142A18D183BF007C37AB /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 34C0142918D183BF007C37AB /* AudioToolbox.framework */; };
-		34C0142D18D2A4C8007C37AB /* iAd.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 34C0142C18D2A4C8007C37AB /* iAd.framework */; };
 		380B7AC418FE0F6900DF6A09 /* GameCenterManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 380B7ABF18FE0F6900DF6A09 /* GameCenterManager.m */; };
 		380B7AC518FE0F6900DF6A09 /* NSDataAES256.m in Sources */ = {isa = PBXBuildFile; fileRef = 380B7AC118FE0F6900DF6A09 /* NSDataAES256.m */; };
 		380B7AC618FE0F6900DF6A09 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 380B7AC318FE0F6900DF6A09 /* Reachability.m */; };
@@ -23,7 +22,6 @@
 		3818DCD2191593D20017CA98 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3818DCD1191593D20017CA98 /* libz.dylib */; };
 		3818DCD4191593F00017CA98 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3818DCD3191593F00017CA98 /* MobileCoreServices.framework */; };
 		3818DCD6191594120017CA98 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3818DCD5191594120017CA98 /* QuartzCore.framework */; };
-		3818DCD8191594250017CA98 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3818DCD7191594250017CA98 /* AdSupport.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		3818DCDE191596A80017CA98 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3818DCDD191596A80017CA98 /* StoreKit.framework */; };
 		38530A9718F0B07E00FA19CC /* new-arena2.png in Resources */ = {isa = PBXBuildFile; fileRef = 38530A9618F0B07E00FA19CC /* new-arena2.png */; };
 		38530A9D18F0B4A400FA19CC /* new-arena3.png in Resources */ = {isa = PBXBuildFile; fileRef = 38530A9818F0B4A400FA19CC /* new-arena3.png */; };
@@ -31,7 +29,6 @@
 		38530A9F18F0B4A400FA19CC /* new-arena5.png in Resources */ = {isa = PBXBuildFile; fileRef = 38530A9A18F0B4A400FA19CC /* new-arena5.png */; };
 		38530AA018F0B4A400FA19CC /* new-arena6.png in Resources */ = {isa = PBXBuildFile; fileRef = 38530A9B18F0B4A400FA19CC /* new-arena6.png */; };
 		38530AA118F0B4A400FA19CC /* new-arena7.png in Resources */ = {isa = PBXBuildFile; fileRef = 38530A9C18F0B4A400FA19CC /* new-arena7.png */; };
-		3863CE77192567CC0014490D /* libAppFlood.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3863CE76192567CC0014490D /* libAppFlood.a */; };
 		387B05D218E0053A005C8D1F /* sounds in Resources */ = {isa = PBXBuildFile; fileRef = 387B05D118E0053A005C8D1F /* sounds */; };
 		387B05D518E0A6EE005C8D1F /* clsCommon.m in Sources */ = {isa = PBXBuildFile; fileRef = 387B05D418E0A6EE005C8D1F /* clsCommon.m */; };
 		389AA04C18DE3EC70089CA98 /* domino-green.atlasc in Resources */ = {isa = PBXBuildFile; fileRef = 389AA04B18DE3EC70089CA98 /* domino-green.atlasc */; };
@@ -105,8 +102,6 @@
 		38530A9A18F0B4A400FA19CC /* new-arena5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "new-arena5.png"; sourceTree = "<group>"; };
 		38530A9B18F0B4A400FA19CC /* new-arena6.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "new-arena6.png"; sourceTree = "<group>"; };
 		38530A9C18F0B4A400FA19CC /* new-arena7.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "new-arena7.png"; sourceTree = "<group>"; };
-		3863CE75192567C30014490D /* AppFlood.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = AppFlood.h; path = appflood/iOS/AppFlood.h; sourceTree = "<group>"; };
-		3863CE76192567CC0014490D /* libAppFlood.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libAppFlood.a; path = dominoes/appflood/iOS/libAppFlood.a; sourceTree = "<group>"; };
 		387B05D118E0053A005C8D1F /* sounds */ = {isa = PBXFileReference; lastKnownFileType = folder; path = sounds; sourceTree = "<group>"; };
 		387B05D318E0A6EE005C8D1F /* clsCommon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = clsCommon.h; sourceTree = "<group>"; };
 		387B05D418E0A6EE005C8D1F /* clsCommon.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = clsCommon.m; sourceTree = "<group>"; };
@@ -164,7 +159,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3818DCD8191594250017CA98 /* AdSupport.framework in Frameworks */,
 				3818DCD6191594120017CA98 /* QuartzCore.framework in Frameworks */,
 				3818DCDE191596A80017CA98 /* StoreKit.framework in Frameworks */,
 				3818DCD4191593F00017CA98 /* MobileCoreServices.framework in Frameworks */,
@@ -172,13 +166,11 @@
 				38FD20541900529700C8461B /* Social.framework in Frameworks */,
 				380B7ACA18FE115100DF6A09 /* Security.framework in Frameworks */,
 				380B7AC818FE114400DF6A09 /* SystemConfiguration.framework in Frameworks */,
-				34C0142D18D2A4C8007C37AB /* iAd.framework in Frameworks */,
 				34C0142A18D183BF007C37AB /* AudioToolbox.framework in Frameworks */,
 				38E7383118EB4E9400EE0C6E /* GameKit.framework in Frameworks */,
 				55CB7E2218CBD180001EFA1C /* CoreGraphics.framework in Frameworks */,
 				55CB7E2418CBD180001EFA1C /* UIKit.framework in Frameworks */,
 				55CB7E2618CBD180001EFA1C /* SpriteKit.framework in Frameworks */,
-				3863CE77192567CC0014490D /* libAppFlood.a in Frameworks */,
 				55CB7E2018CBD180001EFA1C /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -222,22 +214,6 @@
 				38FA7D3518E77F5E00820901 /* floor1.sks */,
 			);
 			name = particles;
-			sourceTree = "<group>";
-		};
-		3818DCE01915A0800017CA98 /* AppFlood */ = {
-			isa = PBXGroup;
-			children = (
-				3863CE73192564AC0014490D /* iOS */,
-			);
-			name = AppFlood;
-			sourceTree = "<group>";
-		};
-		3863CE73192564AC0014490D /* iOS */ = {
-			isa = PBXGroup;
-			children = (
-				3863CE75192567C30014490D /* AppFlood.h */,
-			);
-			name = iOS;
 			sourceTree = "<group>";
 		};
 		386EB9E618D5294D0040B560 /* Menus */ = {
@@ -352,7 +328,6 @@
 		55CB7E1E18CBD180001EFA1C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				3863CE76192567CC0014490D /* libAppFlood.a */,
 				3818DCDD191596A80017CA98 /* StoreKit.framework */,
 				3818DCD7191594250017CA98 /* AdSupport.framework */,
 				3818DCD5191594120017CA98 /* QuartzCore.framework */,
@@ -377,7 +352,6 @@
 			isa = PBXGroup;
 			children = (
 				7B3701BA193011B000B284D1 /* iRate */,
-				3818DCE01915A0800017CA98 /* AppFlood */,
 				380B7ABD18FE0F6900DF6A09 /* GC Manager */,
 				38B7A81218E5043000F51451 /* iPad */,
 				387B05D118E0053A005C8D1F /* sounds */,
@@ -734,8 +708,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Stefano Biefeni (74C8KUCR2R)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Stefano Biefeni (JP43X6H6PR)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COMPRESS_PNG_FILES = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "dominoes/300-Prefix.pch";
@@ -748,7 +722,7 @@
 				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = 300;
-				PROVISIONING_PROFILE = "5F7D744B-E326-4876-8B7C-6997CABB0BEF";
+				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos7.1;
 				SPRITEKIT_TEXTURE_ATLAS_OUTPUT = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -761,8 +735,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Stefano Biefeni (74C8KUCR2R)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Stefano Biefeni (JP43X6H6PR)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COMPRESS_PNG_FILES = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "dominoes/300-Prefix.pch";
@@ -775,7 +749,7 @@
 				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = 300;
-				PROVISIONING_PROFILE = "5F7D744B-E326-4876-8B7C-6997CABB0BEF";
+				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos7.1;
 				SPRITEKIT_TEXTURE_ATLAS_OUTPUT = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";

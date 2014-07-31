@@ -20,7 +20,7 @@
 #import "clsGameSettings.h"
 #import "GameCenterManager.h"
 
-#import "AppFlood.h"
+//#import "AppFlood.h"
 
 #define appFloodScenesRandomInterval 4
 #define kRemoveAdsProductIDentifier @"300_NoAds"
@@ -52,7 +52,7 @@
 
 
         //start the background music track playing
-        [domViewController setAdView:NO ShowOnTop:NO ChooseRandom:YES];
+        //[domViewController setAdView:NO ShowOnTop:NO ChooseRandom:YES];
         [clsCommon playBackgroundMusicWithVolume:.2];
 
         mySize = size;
@@ -127,7 +127,7 @@
 
             totalScore += levelScore;
 
-            [self showAppFlood:false];
+            //[self showAppFlood:false];
 
             //if new best level, give a message and store it!
             if (levelScore > levelHighScore) {
@@ -196,7 +196,7 @@
                 [self setMaxLevels:level];
             }
 
-            [self showAppFlood:true];
+            //[self showAppFlood:true];
 
                 //draw facebook and twitter buttons
                 [self drawSocialButtonsWithfbX:-40 withfbY:10 withtwX:40 withtwY:10 withAlpha:1];
@@ -240,36 +240,36 @@
 
 } //end initwithsize
 
--(void) showAppFlood:(BOOL)gameEnd {
-
-    if (areAdsRemoved < 1){
-
-        if (!appFloodShowedLastLevel){
-            //show a timed intersitial for game end
-            if (gameEnd){  //show intersitial 1 out of 3 times
-                if ([clsCommon getRanInt:1 maxNumber:3] == 1 && (appFloodSceneCount > 4)){
-                    [AppFlood showInterstitial];
-                }else{
-                    [AppFlood showFullscreen];
-                }
-                appFloodShowedLastLevel = true;
-            }else{
-                //count number of scene changes to intermittently show Ad
-                if (appFloodSceneCount > 1){
-                    if ([clsCommon getRanInt:1 maxNumber:appFloodScenesRandomInterval] == 1){
-                        [AppFlood showFullscreen];
-                        appFloodShowedLastLevel = true;
-                    }
-                }
-            }
-        }else{
-            appFloodShowedLastLevel = false;
-        }
-
-        appFloodSceneCount += 1;
-
-    }
-}
+//-(void) showAppFlood:(BOOL)gameEnd {
+//
+//    if (areAdsRemoved < 1){
+//
+//        if (!appFloodShowedLastLevel){
+//            //show a timed intersitial for game end
+//            if (gameEnd){  //show intersitial 1 out of 3 times
+//                if ([clsCommon getRanInt:1 maxNumber:3] == 1 && (appFloodSceneCount > 4)){
+//                    [AppFlood showInterstitial];
+//                }else{
+//                    [AppFlood showFullscreen];
+//                }
+//                appFloodShowedLastLevel = true;
+//            }else{
+//                //count number of scene changes to intermittently show Ad
+//                if (appFloodSceneCount > 1){
+//                    if ([clsCommon getRanInt:1 maxNumber:appFloodScenesRandomInterval] == 1){
+//                        [AppFlood showFullscreen];
+//                        appFloodShowedLastLevel = true;
+//                    }
+//                }
+//            }
+//        }else{
+//            appFloodShowedLastLevel = false;
+//        }
+//
+//        appFloodSceneCount += 1;
+//
+//    }
+//}
 
 - (void)dealloc {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
