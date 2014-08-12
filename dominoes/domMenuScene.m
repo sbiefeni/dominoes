@@ -44,7 +44,7 @@
     //debug code
     //  [clsCommon storeUserSetting:@"areAdsRemoved" value:[NSString stringWithFormat:@"%i",0]];
 
-    areAdsRemoved = [[clsCommon getUserSettingForKey: @"areAdsRemoved"] intValue];
+    //areAdsRemoved = [[clsCommon getUserSettingForKey: @"areAdsRemoved"] intValue];
 
     //this will load wether or not they bought the in-app purchase
     
@@ -111,10 +111,11 @@
 
             //draw facebook and twitter buttons
             [self drawSocialButtonsWithfbX:-120 withfbY:30 withtwX:120 withtwY:30 withAlpha:.5];
+//
+//            if (!areAdsRemoved) {
+//                [self createRestoreButton];
+//            }
 
-            if (!areAdsRemoved) {
-                [self createRestoreButton];
-            }
             //timer to check for gamecenter button
             aTimer = [NSTimer scheduledTimerWithTimeInterval:5 target:self selector:@selector(gameCenterButtonTimer) userInfo:nil repeats:YES];
             
@@ -162,9 +163,9 @@
                 //[self setLevelHighScore: 0];
             );
 
-            if(areAdsRemoved < 1){
-                [self createBuyGameButton:true];
-            }
+//            if(areAdsRemoved < 1){
+//                [self createBuyGameButton:true];
+//            }
 
 
 
@@ -220,10 +221,10 @@
                 SKLabelNode *hs = [SKLabelNode labelNodeWithFontNamed:@"Arial"];
                 [self createLabel:hs text:[NSString stringWithFormat:@"Level Reached: %i",level ] fontSize:20 posY:-150 color:[SKColor whiteColor] alpha:1 sizeDoubler:sizeDoubler];
 
-                if(areAdsRemoved < 1){
-                    [self createBuyGameButton:true];
-                }
-            
+//                if(areAdsRemoved < 1){
+//                    [self createBuyGameButton:true];
+//                }
+
             gameStatus = game_Over;
 
                 if (levelScore > levelHighScore) {
@@ -284,9 +285,9 @@
 
     if (![self enableGameCenterButton]) {
 
-        if (!areAdsRemoved) {
-            [self createBuyGameButton:false];
-        }
+//        if (!areAdsRemoved) {
+//            [self createBuyGameButton:false];
+//        }
     }
 
 
@@ -307,52 +308,52 @@
 }
 
 #pragma mark - buy game button
--(BOOL)createBuyGameButton:(BOOL)doRestore{
-    SKSpriteNode *buyGameButton = [SKSpriteNode spriteNodeWithImageNamed:@"green_button.png"];
-    buyGameButton.position = CGPointMake(CGRectGetMidX(self.frame), 55);
-    buyGameButton.name = @"buygamebutton";
-    buyGameButton.zPosition = 2;
-    [self addChild:buyGameButton];
-    
-    SKLabelNode *buyGameLabel = [SKLabelNode labelNodeWithFontNamed:@"Avenir-Black"];
-    [self createLabel:buyGameLabel text:@"Disable Ads - $0.99" fontSize:24 posY:-((mySize.height/2)/sizeDoubler) color:[SKColor blackColor] alpha:.7 sizeDoubler:1];
-    buyGameLabel.position = buyGameButton.position;
-    buyGameLabel.zPosition = 3;
-    buyGameLabel.verticalAlignmentMode = SKLabelVerticalAlignmentModeCenter;
-    buyGameLabel.name = @"buygamelabel";
+//-(BOOL)createBuyGameButton:(BOOL)doRestore{
+//    SKSpriteNode *buyGameButton = [SKSpriteNode spriteNodeWithImageNamed:@"green_button.png"];
+//    buyGameButton.position = CGPointMake(CGRectGetMidX(self.frame), 55);
+//    buyGameButton.name = @"buygamebutton";
+//    buyGameButton.zPosition = 2;
+//    [self addChild:buyGameButton];
+//    
+//    SKLabelNode *buyGameLabel = [SKLabelNode labelNodeWithFontNamed:@"Avenir-Black"];
+//    [self createLabel:buyGameLabel text:@"Disable Ads - $0.99" fontSize:24 posY:-((mySize.height/2)/sizeDoubler) color:[SKColor blackColor] alpha:.7 sizeDoubler:1];
+//    buyGameLabel.position = buyGameButton.position;
+//    buyGameLabel.zPosition = 3;
+//    buyGameLabel.verticalAlignmentMode = SKLabelVerticalAlignmentModeCenter;
+//    buyGameLabel.name = @"buygamelabel";
+//
+//    if (doRestore) {
+//        [self createRestoreButton];
+//    }
+//
+//    return true;
+//}
 
-    if (doRestore) {
-        [self createRestoreButton];
-    }
-
-    return true;
-}
-
--(void) createRestoreButton{
-
-    SKSpriteNode *restoreGameButton = [SKSpriteNode spriteNodeWithImageNamed:@"green_button.png"];
-    restoreGameButton.name = @"restoreButton";
-    restoreGameButton.zPosition = 2;
-
-    SKLabelNode *restoreGameLabel = [SKLabelNode labelNodeWithFontNamed:@"Avenir-Black"];
-    [self createLabel:restoreGameLabel text:@"Restore Purchase" fontSize:16 posY:-((mySize.height/2)/sizeDoubler) color:[SKColor blackColor] alpha:.7 sizeDoubler:1];
-    restoreGameLabel.name = @"restoreLabel";
-    restoreGameLabel.zPosition = 3;
-    restoreGameLabel.verticalAlignmentMode = SKLabelVerticalAlignmentModeCenter;
-
-    //if ([self childNodeWithName:@"buygamebutton"]) {
-        restoreGameButton.position = CGPointMake(CGRectGetMidX(self.frame), 15);
-        restoreGameButton.yScale = .5;
-        //restoreGameButton.xScale = .65;
-   // }else{
-        //restoreGameButton.position = CGPointMake(CGRectGetMidX(self.frame), 50);
-   // }
-
-    restoreGameLabel.position = restoreGameButton.position;
-
-    [self addChild:restoreGameButton];
-
-}
+//-(void) createRestoreButton{
+//
+//    SKSpriteNode *restoreGameButton = [SKSpriteNode spriteNodeWithImageNamed:@"green_button.png"];
+//    restoreGameButton.name = @"restoreButton";
+//    restoreGameButton.zPosition = 2;
+//
+//    SKLabelNode *restoreGameLabel = [SKLabelNode labelNodeWithFontNamed:@"Avenir-Black"];
+//    [self createLabel:restoreGameLabel text:@"Restore Purchase" fontSize:16 posY:-((mySize.height/2)/sizeDoubler) color:[SKColor blackColor] alpha:.7 sizeDoubler:1];
+//    restoreGameLabel.name = @"restoreLabel";
+//    restoreGameLabel.zPosition = 3;
+//    restoreGameLabel.verticalAlignmentMode = SKLabelVerticalAlignmentModeCenter;
+//
+//    //if ([self childNodeWithName:@"buygamebutton"]) {
+//        restoreGameButton.position = CGPointMake(CGRectGetMidX(self.frame), 15);
+//        restoreGameButton.yScale = .5;
+//        //restoreGameButton.xScale = .65;
+//   // }else{
+//        //restoreGameButton.position = CGPointMake(CGRectGetMidX(self.frame), 50);
+//   // }
+//
+//    restoreGameLabel.position = restoreGameButton.position;
+//
+//    [self addChild:restoreGameButton];
+//
+//}
 
 #pragma mark - Game center button
 -(BOOL)enableGameCenterButton {
@@ -650,12 +651,12 @@
 
         }else if([node.name isEqualToString:@"twitter"]){
             [self postToTwitterWithScore:levelHighScore];
-        }else if([node.name isEqualToString:@"buygamebutton"] || [node.name isEqualToString:@"buygamelabel"]) {
-            //PUT BUY GAME CODE HERE
-            [self userClickedBuyGame];
-        }else if([node.name isEqualToString:@"restoreButton"] || [node.name isEqualToString:@"restoreLabel"]) {
-            //PUT RESTORE GAME CODE HERE
-            [self checkPurchasedItems];
+//        }else if([node.name isEqualToString:@"buygamebutton"] || [node.name isEqualToString:@"buygamelabel"]) {
+//            //PUT BUY GAME CODE HERE
+//            [self userClickedBuyGame];
+//        }else if([node.name isEqualToString:@"restoreButton"] || [node.name isEqualToString:@"restoreLabel"]) {
+//            //PUT RESTORE GAME CODE HERE
+//            [self checkPurchasedItems];
         }else if([node.name isEqualToString:@"instructions"] || [node.name isEqualToString:@"tapFor"] ){
             UIAlertView *alert = [[UIAlertView alloc]initWithTitle:NSLocalizedString(@"How to Play",nil)
                 message: NSLocalizedString(@"how to play instructions",nil)
@@ -681,19 +682,19 @@
 
 }
 
--(void)userClickedBuyGame{
-    if([SKPaymentQueue canMakePayments]){
-        [self changeButtonColor:(SKSpriteNode*)[self childNodeWithName:@"buygamebutton"]];
-        //NSLog(@"User can make payments");
-        SKProductsRequest *productsRequest=[[SKProductsRequest alloc] initWithProductIdentifiers:[NSSet setWithObject:kRemoveAdsProductIDentifier]];
-        productsRequest.delegate=self;
-        [productsRequest start];
-    }
-    else{
-        [self showPopupMessage:NSLocalizedString(@"Purchases are disabled for your account",nil) withTitle:NSLocalizedString(@"Remove Ads",nil)];
-        //NSLog(@"User cannot make payments, perhaps due to parental controls");
-    }
-}
+//-(void)userClickedBuyGame{
+//    if([SKPaymentQueue canMakePayments]){
+//        [self changeButtonColor:(SKSpriteNode*)[self childNodeWithName:@"buygamebutton"]];
+//        //NSLog(@"User can make payments");
+//        SKProductsRequest *productsRequest=[[SKProductsRequest alloc] initWithProductIdentifiers:[NSSet setWithObject:kRemoveAdsProductIDentifier]];
+//        productsRequest.delegate=self;
+//        [productsRequest start];
+//    }
+//    else{
+//        [self showPopupMessage:NSLocalizedString(@"Purchases are disabled for your account",nil) withTitle:NSLocalizedString(@"Remove Ads",nil)];
+//        //NSLog(@"User cannot make payments, perhaps due to parental controls");
+//    }
+//}
 
 -(void)changeButtonColor:(SKSpriteNode*)button{
 
@@ -706,97 +707,97 @@
     [self runAction:a];
 }
 
--(void)productsRequest:(SKProductsRequest *)request didReceiveResponse:(SKProductsResponse *)response{
-    SKProduct *validProduct=nil;
-    NSUInteger count=[response.products count];
-    if(count>0){
-        validProduct=[response.products objectAtIndex:0];
-        
-        NSLog(@"Products Available");
-        [self purchaseGame:validProduct];
-    }
-    else if(!validProduct){
-        NSLog(@"No products available");
-    }
-}
+//-(void)productsRequest:(SKProductsRequest *)request didReceiveResponse:(SKProductsResponse *)response{
+//    SKProduct *validProduct=nil;
+//    NSUInteger count=[response.products count];
+//    if(count>0){
+//        validProduct=[response.products objectAtIndex:0];
+//        
+//        NSLog(@"Products Available");
+//        [self purchaseGame:validProduct];
+//    }
+//    else if(!validProduct){
+//        NSLog(@"No products available");
+//    }
+//}
 
--(void)purchaseGame:(SKProduct *)product{
-    SKPayment *payment=[SKPayment paymentWithProduct:product];
-    [[SKPaymentQueue defaultQueue] addTransactionObserver:self];
-    [[SKPaymentQueue defaultQueue] addPayment:payment];
-}
+//-(void)purchaseGame:(SKProduct *)product{
+//    SKPayment *payment=[SKPayment paymentWithProduct:product];
+//    [[SKPaymentQueue defaultQueue] addTransactionObserver:self];
+//    [[SKPaymentQueue defaultQueue] addPayment:payment];
+//}
 
--(void)paymentQueue:(SKPayment *)queue updatedTransactions:(NSArray *)transactions{
-    for(SKPaymentTransaction *transaction in transactions){
-        switch (transaction.transactionState){
-            case SKPaymentTransactionStatePurchasing: NSLog(@"Transaction state -> Purchasing");
-                //called when the user is in the process of purchasing, do not add any of your own code here.
-                break;
-            case SKPaymentTransactionStatePurchased:
-                //this is called when the user has successfully purchased the package (Cha-Ching!)
-                [self doRemoveAds]; //you can add your code for what you want to happen when the user buys the purchase here, for this tutorial we use removing ads
-                [[SKPaymentQueue defaultQueue] finishTransaction:transaction];
-                NSLog(@"Transaction state -> Purchased");
-                break;
-            case SKPaymentTransactionStateRestored:
-                NSLog(@"Transaction state -> Restored");
-                //add the same code as you did from SKPaymentTransactionStatePurchased here
-                [[SKPaymentQueue defaultQueue] finishTransaction:transaction];
-                break;
-            case SKPaymentTransactionStateFailed:
-                //called when the transaction does not finnish
-                if(transaction.error.code != SKErrorPaymentCancelled){
-                    NSLog(@"Transaction state -> Cancelled");
-                    //the user cancelled the payment ;(
-                }
-                [[SKPaymentQueue defaultQueue] finishTransaction:transaction];
-                break;
-        }
-    }
-}
+//-(void)paymentQueue:(SKPayment *)queue updatedTransactions:(NSArray *)transactions{
+//    for(SKPaymentTransaction *transaction in transactions){
+//        switch (transaction.transactionState){
+//            case SKPaymentTransactionStatePurchasing: NSLog(@"Transaction state -> Purchasing");
+//                //called when the user is in the process of purchasing, do not add any of your own code here.
+//                break;
+//            case SKPaymentTransactionStatePurchased:
+//                //this is called when the user has successfully purchased the package (Cha-Ching!)
+//                //[self doRemoveAds]; //you can add your code for what you want to happen when the user buys the purchase here, for this tutorial we use removing ads
+//                [[SKPaymentQueue defaultQueue] finishTransaction:transaction];
+//                NSLog(@"Transaction state -> Purchased");
+//                break;
+//            case SKPaymentTransactionStateRestored:
+//                NSLog(@"Transaction state -> Restored");
+//                //add the same code as you did from SKPaymentTransactionStatePurchased here
+//                [[SKPaymentQueue defaultQueue] finishTransaction:transaction];
+//                break;
+//            case SKPaymentTransactionStateFailed:
+//                //called when the transaction does not finnish
+//                if(transaction.error.code != SKErrorPaymentCancelled){
+//                    NSLog(@"Transaction state -> Cancelled");
+//                    //the user cancelled the payment ;(
+//                }
+//                [[SKPaymentQueue defaultQueue] finishTransaction:transaction];
+//                break;
+//        }
+//    }
+//}
 
 // Call This Function...
-- (void) checkPurchasedItems
-{
-    [self changeButtonColor:(SKSpriteNode*)[self childNodeWithName:@"restoreButton"]];
-    [[SKPaymentQueue defaultQueue] restoreCompletedTransactions];
-}
+//- (void) checkPurchasedItems
+//{
+//    [self changeButtonColor:(SKSpriteNode*)[self childNodeWithName:@"restoreButton"]];
+//    [[SKPaymentQueue defaultQueue] restoreCompletedTransactions];
+//}
 
 ////...Then this delegate Function Will be fired
--(void)paymentQueueRestoreCompletedTransactionsFinished:(SKPaymentQueue *)queue{
-    NSLog(@"Received restored transactions: %i", (int)queue.transactions.count);
-    for (SKPaymentTransaction *transaction in queue.transactions)
-    {
-        if(SKPaymentTransactionStateRestored){
-            NSLog(@"Transaction state -> Restored");
-            //called when the user successfully restores a purchase
-            [self doRemoveAds];
-            [[SKPaymentQueue defaultQueue] finishTransaction:transaction];
+//-(void)paymentQueueRestoreCompletedTransactionsFinished:(SKPaymentQueue *)queue{
+//    NSLog(@"Received restored transactions: %i", (int)queue.transactions.count);
+//    for (SKPaymentTransaction *transaction in queue.transactions)
+//    {
+//        if(SKPaymentTransactionStateRestored){
+//            NSLog(@"Transaction state -> Restored");
+//            //called when the user successfully restores a purchase
+//            //[self doRemoveAds];
+//            [[SKPaymentQueue defaultQueue] finishTransaction:transaction];
+//
+//            UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"Disable Ads"
+//                    message: @"Purchase was restored"
+//                    delegate: nil
+//                    cancelButtonTitle:@"Ok"
+//                    otherButtonTitles: nil];
+//
+//            [alert show];
+//
+//            break;
+//        }
+//    }
+//}
 
-            UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"Disable Ads"
-                    message: @"Purchase was restored"
-                    delegate: nil
-                    cancelButtonTitle:@"Ok"
-                    otherButtonTitles: nil];
-
-            [alert show];
-
-            break;
-        }
-    }
-}
-
-- (void)doRemoveAds{
-    ADBannerView *banner;
-    [banner setAlpha:0];
-    areAdsRemoved = 1;
-    [[self childNodeWithName:@"buygamebutton"] removeFromParent];
-    [[self childNodeWithName:@"buygamelabel"] removeFromParent];
-    [[self childNodeWithName:@"restoreButton"] removeFromParent];
-    [[self childNodeWithName:@"restoreLabel"] removeFromParent];
-
-    //save the ads removed setting
-    [clsCommon storeUserSetting:@"areAdsRemoved" value:[NSString stringWithFormat:@"%i",areAdsRemoved]];
-}
+//- (void)doRemoveAds{
+//    ADBannerView *banner;
+//    [banner setAlpha:0];
+//    areAdsRemoved = 1;
+//    [[self childNodeWithName:@"buygamebutton"] removeFromParent];
+//    [[self childNodeWithName:@"buygamelabel"] removeFromParent];
+//    [[self childNodeWithName:@"restoreButton"] removeFromParent];
+//    [[self childNodeWithName:@"restoreLabel"] removeFromParent];
+//
+//    //save the ads removed setting
+//    [clsCommon storeUserSetting:@"areAdsRemoved" value:[NSString stringWithFormat:@"%i",areAdsRemoved]];
+//}
 
 @end
