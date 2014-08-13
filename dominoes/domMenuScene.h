@@ -12,7 +12,7 @@
 #import <Social/Social.h>
 #import <StoreKit/StoreKit.h>
 
-@interface domMenuScene : SKScene //<SKProductsRequestDelegate,SKPaymentTransactionObserver>
+@interface domMenuScene : SKScene <SKProductsRequestDelegate,SKPaymentTransactionObserver>
 
 -(BOOL)enableGameCenterButton;
 

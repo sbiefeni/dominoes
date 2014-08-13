@@ -78,7 +78,7 @@ CGPoint pointA;
 
         arenaSize = size;
 
-        //[domViewController setAdView:YES ShowOnTop:YES ChooseRandom:YES];
+        [domViewController setAdView:YES ShowOnTop:YES ChooseRandom:YES];
 
         //NSOperationQueue mainQueue] addOperationWithBlock:^{
             // Insert code from doTaskWithContextData: here

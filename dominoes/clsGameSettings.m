@@ -12,14 +12,14 @@ SKSpriteNode* backGround;
 
 int lastTile = 0;  //store the last tile, so we don't choose it twice in a row.
 
-//BOOL adsShowing;
-//BOOL bannerIsVisible;
-//BOOL bannerIsLoaded;
+BOOL adsShowing;
+BOOL bannerIsVisible;
+BOOL bannerIsLoaded;
 
-//int appFloodSceneCount;
-//bool appFloodShowedLastLevel;
+int appFloodSceneCount;
+bool appFloodShowedLastLevel;
 
-//int areAdsRemoved;
+int areAdsRemoved;
 
 
 //gamecenter settings
