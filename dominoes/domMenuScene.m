@@ -58,6 +58,8 @@
         mySize = size;
 
 
+        //self.scaleMode = SKSceneScaleMode.ResizeFill;
+        //self.scaleMode = SKSceneScaleModeAspectFill;
 
 
         //timer to disable tap for a few seconds, to wait for game center
@@ -69,7 +71,7 @@
 
         background.alpha = .5;
 
-        self.backgroundColor = [SKColor blackColor];
+        self.backgroundColor = [SKColor whiteColor];
         
         [self addChild:background];
 
@@ -86,31 +88,60 @@
 
 
             SKLabelNode* hlscore = [SKLabelNode labelNodeWithFontNamed:@"Avenir-Black"];
-            [self createLabel:hlscore text:[NSString stringWithFormat:@"Best Level: %i",levelHighScore] fontSize:25 posY:215 color:[SKColor whiteColor] alpha:.7 sizeDoubler:sizeDoubler];
+            [self createLabel:hlscore text:[NSString stringWithFormat:@"Best Level: %i",levelHighScore] fontSize:25 posY:200 color:[SKColor blackColor] alpha:.7 sizeDoubler:sizeDoubler];
 
             SKLabelNode* mLevels = [SKLabelNode labelNodeWithFontNamed:@"Arial"];
-            [self createLabel:mLevels text:[NSString stringWithFormat:@"Most Levels: %i",(int)maxLevels] fontSize:20 posY:190 color:[SKColor whiteColor] alpha:1 sizeDoubler:sizeDoubler];
+            [self createLabel:mLevels text:[NSString stringWithFormat:@"Most Levels: %i",(int)maxLevels] fontSize:20 posY:175 color:[SKColor blackColor] alpha:1 sizeDoubler:sizeDoubler];
 
             SKLabelNode* hscore = [SKLabelNode labelNodeWithFontNamed:@"Arial"];
-            [self createLabel:hscore text:[NSString stringWithFormat:@"High Score: %i",(int)highScore] fontSize:20 posY:165 color:[SKColor whiteColor] alpha:1 sizeDoubler:sizeDoubler];
+            [self createLabel:hscore text:[NSString stringWithFormat:@"High Score: %i",(int)highScore] fontSize:20 posY:150 color:[SKColor blackColor] alpha:1 sizeDoubler:sizeDoubler];
 
-            SKLabelNode *title = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
-            [self createLabel:title text:@"300" fontSize:130 posY:65 color:[SKColor redColor] alpha:.7 sizeDoubler:sizeDoubler];
+            //SKLabelNode *title = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
+            //[self createLabel:title text:@"300" fontSize:130 posY:65 color:[SKColor redColor] alpha:.7 sizeDoubler:sizeDoubler];
 
-            SKLabelNode *title2 = [SKLabelNode labelNodeWithFontNamed:@"Avenir-Black"];
-            title2.fontName = [UIFont italicSystemFontOfSize:45].fontName;
-            [self createLabel:title2 text:@"Brickd" fontSize:45 posY:25 color:[SKColor whiteColor] alpha:1 sizeDoubler:sizeDoubler];
-
-            SKLabelNode *tapToPlay = [SKLabelNode labelNodeWithFontNamed:@"Avenir-Black"];
-            [self createLabel:tapToPlay text:@"Tap to Play" fontSize:40 posY:-30 color:[SKColor whiteColor] alpha:.7 sizeDoubler:sizeDoubler];
-
-
-            [self addChild: [self instruct:sizeDoubler posY:-110]]; //instructions button, from below
+//            SKLabelNode *title2 = [SKLabelNode labelNodeWithFontNamed:@"Avenir-Black"];
+//            title2.fontName = [UIFont italicSystemFontOfSize:45].fontName;
+//            [self createLabel:title2 text:@"Brickd" fontSize:45 posY:25 color:[SKColor whiteColor] alpha:1 sizeDoubler:sizeDoubler];
+//
+//            SKLabelNode *tapToPlay = [SKLabelNode labelNodeWithFontNamed:@"Avenir-Black"];
+//            [self createLabel:tapToPlay text:@"Tap to Play" fontSize:40 posY:-30 color:[SKColor whiteColor] alpha:.7 sizeDoubler:sizeDoubler];
+//
+//
+//            [self addChild: [self instruct:sizeDoubler posY:-110]]; //instructions button, from below
 
             //isRunningInIde([self enableGameCenterButton])
 
+            //make frame
+            SKSpriteNode *frame = [SKSpriteNode spriteNodeWithImageNamed:@"frame.png"];
+            frame.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame) + 25*sizeDoubler );
+            frame.name = @"frame";
+            frame.xScale = .65*sizeDoubler;
+            frame.yScale = .65*sizeDoubler;
+            [self addChild:frame];
+
+
+            //make logo
+            SKSpriteNode *logo = [SKSpriteNode spriteNodeWithImageNamed:@"logo.png"];
+            logo.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame) + 50*sizeDoubler );
+            logo.name = @"logo";
+            logo.xScale = .28*sizeDoubler;
+            logo.yScale = .28*sizeDoubler;
+            [self addChild:logo];
+
+            //make Play Button
+            SKSpriteNode *Play = [SKSpriteNode spriteNodeWithImageNamed:@"play.png"];
+            Play.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame) - 65*sizeDoubler );
+            Play.name = @"logo";
+            Play.xScale = 1*sizeDoubler;
+            Play.yScale = 1*sizeDoubler;
+            [self addChild:Play];
+            //make Help Button
+
             //draw facebook and twitter buttons
-            [self drawSocialButtonsWithfbX:-120 withfbY:30 withtwX:120 withtwY:30 withAlpha:.5];
+            //[self drawSocialButtonsWithfbX:-100 withfbY:100 withtwX:100 withtwY:100 withAlpha:.5];
+
+            int sY = 140;
+            [self drawSocialButtonsWithfbX:0 withfbY:sY withtwX:100 withtwY:sY withHX:-100 withHY:sY HwithAlpha:.5 withScale:.85*sizeDoubler];
 
             if (!areAdsRemoved) {
                 [self createRestoreButton];
@@ -135,26 +166,26 @@
 
                 levelHighScore = levelScore;
 
-                SKLabelNode *hs = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
-                [self createLabel:hs text:@"NEW BEST LEVEL!" fontSize:25 posY:120 color:[SKColor whiteColor] alpha:1 sizeDoubler:sizeDoubler];
+                SKLabelNode *hs = [SKLabelNode labelNodeWithFontNamed:@"Arial"];
+                [self createLabel:hs text:@"NEW BEST LEVEL!" fontSize:25 posY:120 color:[SKColor blackColor] alpha:1 sizeDoubler:sizeDoubler];
             }
 
 
             SKLabelNode* hlscore = [SKLabelNode labelNodeWithFontNamed:@"Arial"];
-            [self createLabel:hlscore text:[NSString stringWithFormat:@"Best Level: %i",levelHighScore] fontSize:20 posY:80 color:[SKColor whiteColor] alpha:1 sizeDoubler:sizeDoubler];
+            [self createLabel:hlscore text:[NSString stringWithFormat:@"Best Level: %i",levelHighScore] fontSize:20 posY:80 color:[SKColor blackColor] alpha:1 sizeDoubler:sizeDoubler];
 
 
-            SKLabelNode *cur_score = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
-            [self createLabel:cur_score text:[NSString stringWithFormat:@"Score: %i",levelScore] fontSize:50 posY:0 color:[SKColor whiteColor] alpha:1 sizeDoubler:sizeDoubler];
+            SKLabelNode *cur_score = [SKLabelNode labelNodeWithFontNamed:@"Arial"];
+            [self createLabel:cur_score text:[NSString stringWithFormat:@"Score: %i",levelScore] fontSize:50 posY:0 color:[SKColor blackColor] alpha:1 sizeDoubler:sizeDoubler];
 
             SKLabelNode *tot_score = [SKLabelNode labelNodeWithFontNamed:@"Arial"];
-            [self createLabel:tot_score text:[NSString stringWithFormat:@"Total Score: %i",totalScore] fontSize:30 posY:-60 color:[SKColor whiteColor] alpha:1 sizeDoubler:sizeDoubler];
+            [self createLabel:tot_score text:[NSString stringWithFormat:@"Total Score: %i",totalScore] fontSize:30 posY:-60 color:[SKColor blackColor] alpha:1 sizeDoubler:sizeDoubler];
 
             SKLabelNode *Lives = [SKLabelNode labelNodeWithFontNamed:@"Arial"];
-            [self createLabel:Lives text:[NSString stringWithFormat:@"Lives: %i",lives] fontSize:30 posY:-100 color:[SKColor whiteColor] alpha:1 sizeDoubler:sizeDoubler];
+            [self createLabel:Lives text:[NSString stringWithFormat:@"Lives: %i",lives] fontSize:30 posY:-100 color:[SKColor blackColor] alpha:1 sizeDoubler:sizeDoubler];
 
-            SKLabelNode *tapToPlay = [SKLabelNode labelNodeWithFontNamed:@"Avenir-Black"];
-            [self createLabel:tapToPlay text:@"Tap to Continue" fontSize:35 posY:-145 color:[SKColor whiteColor] alpha:.7 sizeDoubler:sizeDoubler];
+//            SKLabelNode *tapToPlay = [SKLabelNode labelNodeWithFontNamed:@"Avenir-Black"];
+//            [self createLabel:tapToPlay text:@"Tap to Continue" fontSize:35 posY:-145 color:[SKColor blackColor] alpha:.7 sizeDoubler:sizeDoubler];
 
             //for debugging - to reset the level high score
             isRunningInIde(
@@ -199,7 +230,9 @@
             [self showAppFlood:true];
 
                 //draw facebook and twitter buttons
-                [self drawSocialButtonsWithfbX:-40 withfbY:10 withtwX:40 withtwY:10 withAlpha:1];
+                //[self drawSocialButtonsWithfbX:-40 withfbY:10 withtwX:40 withtwY:10 withAlpha:1];
+            [self drawSocialButtonsWithfbX:-40 withfbY:10 withtwX:40 withtwY:10 withHX:-500 withHY:10 HwithAlpha:1 withScale:.85];
+
 
                 //draw social share message
                 SKSpriteNode *socialMessage = [SKSpriteNode spriteNodeWithImageNamed:@"social_share_message"];
@@ -308,18 +341,26 @@
 
 #pragma mark - buy game button
 -(BOOL)createBuyGameButton:(BOOL)doRestore{
-    SKSpriteNode *buyGameButton = [SKSpriteNode spriteNodeWithImageNamed:@"green_button.png"];
-    buyGameButton.position = CGPointMake(CGRectGetMidX(self.frame), 55);
-    buyGameButton.name = @"buygamebutton";
-    buyGameButton.zPosition = 2;
-    [self addChild:buyGameButton];
-    
-    SKLabelNode *buyGameLabel = [SKLabelNode labelNodeWithFontNamed:@"Avenir-Black"];
-    [self createLabel:buyGameLabel text:@"Disable Ads - $0.99" fontSize:24 posY:-((mySize.height/2)/sizeDoubler) color:[SKColor blackColor] alpha:.7 sizeDoubler:1];
-    buyGameLabel.position = buyGameButton.position;
-    buyGameLabel.zPosition = 3;
-    buyGameLabel.verticalAlignmentMode = SKLabelVerticalAlignmentModeCenter;
-    buyGameLabel.name = @"buygamelabel";
+//    SKSpriteNode *buyGameButton = [SKSpriteNode spriteNodeWithImageNamed:@"rect_l.png"];
+//    buyGameButton.position = CGPointMake(CGRectGetMidX(self.frame)-65*sizeDoubler, 45);
+//    buyGameButton.name = @"buygamebutton";
+//    buyGameButton.zPosition = 2;
+//    buyGameButton.xScale = sizeDoubler;
+//    buyGameButton.yScale = sizeDoubler;
+//
+//    [self addChild:buyGameButton];
+//    
+//    SKLabelNode *buyGameLabel = [SKLabelNode labelNodeWithFontNamed:@"Avenir-Black"];
+//    [self createLabel:buyGameLabel text:@"Disable Ads - $0.99" fontSize:16 * sizeDoubler posY:-((mySize.height/2)/sizeDoubler) color:[SKColor whiteColor] alpha:.7 sizeDoubler:1];
+//    buyGameLabel.position = buyGameButton.position;
+//    buyGameLabel.zPosition = 3;
+//    buyGameLabel.verticalAlignmentMode = SKLabelVerticalAlignmentModeCenter;
+//    buyGameLabel.name = @"buygamelabel";
+//    buyGameButton.xScale = .25 * sizeDoubler;
+//    buyGameButton.yScale = .25 * sizeDoubler;
+
+
+    [self makeButtonNamed:@"buygame" withImage:@"rect_l.png" withText1:@"Disable Ads - $0.99" Text2:nil xPOS:-60 yPOS:45 fontName:@"Avenir-Black" fontSize:16 withScale:.25];
 
     if (doRestore) {
         [self createRestoreButton];
@@ -330,28 +371,64 @@
 
 -(void) createRestoreButton{
 
-    SKSpriteNode *restoreGameButton = [SKSpriteNode spriteNodeWithImageNamed:@"green_button.png"];
-    restoreGameButton.name = @"restoreButton";
-    restoreGameButton.zPosition = 2;
+    [self makeButtonNamed:@"restore" withImage:@"rect_s.png" withText1:@"Restore" Text2:@"Purchases"  xPOS:100 yPOS:45 fontName:@"Avenir-Black" fontSize:11 withScale:.25];
 
-    SKLabelNode *restoreGameLabel = [SKLabelNode labelNodeWithFontNamed:@"Avenir-Black"];
-    [self createLabel:restoreGameLabel text:@"Restore Purchase" fontSize:16 posY:-((mySize.height/2)/sizeDoubler) color:[SKColor blackColor] alpha:.7 sizeDoubler:1];
-    restoreGameLabel.name = @"restoreLabel";
-    restoreGameLabel.zPosition = 3;
-    restoreGameLabel.verticalAlignmentMode = SKLabelVerticalAlignmentModeCenter;
+}
 
-    //if ([self childNodeWithName:@"buygamebutton"]) {
-        restoreGameButton.position = CGPointMake(CGRectGetMidX(self.frame), 15);
-        restoreGameButton.yScale = .5;
-        //restoreGameButton.xScale = .65;
-   // }else{
-        //restoreGameButton.position = CGPointMake(CGRectGetMidX(self.frame), 50);
-   // }
+-(void) makeButtonNamed:(NSString*)name withImage:(NSString*)image withText1:(NSString*)text Text2:(NSString*)text2 xPOS:(int)Xpos yPOS:(int)Ypos fontName:(NSString*)fontName fontSize:(double) fontSize withScale:(double)scale{
 
-    restoreGameLabel.position = restoreGameButton.position;
+    SKSpriteNode *button = [SKSpriteNode spriteNodeWithImageNamed:image];
+    CGPoint location;
 
-    [self addChild:restoreGameButton];
+    Xpos = CGRectGetMidX(self.frame) + Xpos * sizeDoubler;
+    //Ypos = Ypos * sizeDoubler;
+    fontSize = fontSize * (1/scale);
 
+    location = CGPointMake(Xpos, Ypos);
+
+    [button setPosition:location];
+    [button setXScale:scale * sizeDoubler];
+    [button setYScale:scale * sizeDoubler];
+
+    [button setName: name];
+
+
+    [self addChild:button];
+
+    // add labels --------------------------------------------------------
+
+    SKLabelNode *label = [SKLabelNode labelNodeWithFontNamed:fontName];
+    label.name = name;
+
+    SKLabelNode* label2 = [SKLabelNode labelNodeWithFontNamed:fontName];
+    label2.name  = name;
+
+    //location = CGPointMake(button.frame.size.width/2, button.frame.size.height/2);
+
+    double yPos1;
+    double yPos2;
+
+    if (text2 != nil) {
+        yPos1 = 5 ;
+        yPos2 = - fontSize + 5;
+        [self makeLabelOnNode:button withLabel:label2 text:text2 fontSize:fontSize posX:0 posY:yPos2 color:[SKColor whiteColor] alpha:1 dontAdd:NO];
+    }else{
+        yPos1 = - fontSize/3;
+    }
+    [self makeLabelOnNode:button withLabel:label text:text fontSize:fontSize posX:0 posY:yPos1 color:[SKColor whiteColor] alpha:1 dontAdd:NO];
+
+}
+
+-(void) makeLabelOnNode:(SKSpriteNode*)button withLabel:(SKLabelNode*)label text:(NSString*)text fontSize:(int)fontSize posX:(int)posX posY:(int)posY color:(SKColor*)color alpha:(float)alpha dontAdd:(BOOL)dontAdd{
+
+    label.text = NSLocalizedString(text,nil);
+    label.fontSize = fontSize;
+    label.position = CGPointMake(posX, posY);
+    label.fontColor = color;
+    label.alpha = alpha;
+    if (!dontAdd) {
+        [button addChild:label];
+    }
 }
 
 #pragma mark - Game center button
@@ -411,18 +488,31 @@
 
 }
 
--(void)drawSocialButtonsWithfbX:(int)fbX withfbY:(int)fbY withtwX:(int)twX withtwY:(int)twY withAlpha:(float)alpha{
+-(void)drawSocialButtonsWithfbX:(int)fbX withfbY:(int)fbY withtwX:(int)twX withtwY:(int)twY withHX:(int)HX withHY:(int)HY HwithAlpha:(float)alpha withScale:(double)scale{
+
+
+    SKSpriteNode *hButton = [SKSpriteNode spriteNodeWithImageNamed:@"help.png"];
+        hButton.position = CGPointMake(CGRectGetMidX(self.frame) + HX * sizeDoubler,  CGRectGetMidY(self.frame) - HY * sizeDoubler );
+        hButton.alpha = alpha;
+        hButton.name = @"help";
+        hButton.xScale = scale*1.15;
+        hButton.yScale = scale*1.15;
+        [self addChild:hButton];
 
     SKSpriteNode *fbButton = [SKSpriteNode spriteNodeWithImageNamed:@"facebook.png"];
-        fbButton.position = CGPointMake(CGRectGetMidX(self.frame) + fbX * sizeDoubler, CGRectGetMidY(self.frame) + fbY * sizeDoubler );
+        fbButton.position = CGPointMake(CGRectGetMidX(self.frame) + fbX * sizeDoubler,  CGRectGetMidY(self.frame) - fbY * sizeDoubler );
         fbButton.alpha = alpha;
         fbButton.name = @"facebook";
+        fbButton.xScale = scale;
+        fbButton.yScale = scale;
         [self addChild:fbButton];
 
     SKSpriteNode *twButton = [SKSpriteNode spriteNodeWithImageNamed:@"twitter.png"];
-        twButton.position = CGPointMake(CGRectGetMidX(self.frame)+twX*sizeDoubler, CGRectGetMidY(self.frame)+twY*sizeDoubler);
+        twButton.position = CGPointMake(CGRectGetMidX(self.frame)+twX*sizeDoubler, CGRectGetMidY(self.frame) - twY*sizeDoubler);
         twButton.alpha=alpha;
         twButton.name = @"twitter";
+        twButton.xScale = scale;
+        twButton.yScale = scale;
         [self addChild:twButton];
 }
 
@@ -544,7 +634,7 @@
 
         [faceBook addURL:[NSURL URLWithString:itunesURL]];
 
-        [faceBook addImage:[UIImage imageNamed:@"300_logo"]];
+        [faceBook addImage:[UIImage imageNamed:@"300_social_logo"]];
         [faceBook setEditing:false];
 
         [[self getActiveController] presentViewController:faceBook animated:YES completion:Nil];
@@ -650,10 +740,10 @@
 
         }else if([node.name isEqualToString:@"twitter"]){
             [self postToTwitterWithScore:levelHighScore];
-        }else if([node.name isEqualToString:@"buygamebutton"] || [node.name isEqualToString:@"buygamelabel"]) {
+        }else if([node.name isEqualToString:@"buygame"]) {
             //PUT BUY GAME CODE HERE
             [self userClickedBuyGame];
-        }else if([node.name isEqualToString:@"restoreButton"] || [node.name isEqualToString:@"restoreLabel"]) {
+        }else if([node.name isEqualToString:@"restore"]) {
             //PUT RESTORE GAME CODE HERE
             [self checkPurchasedItems];
         }else if([node.name isEqualToString:@"instructions"] || [node.name isEqualToString:@"tapFor"] ){

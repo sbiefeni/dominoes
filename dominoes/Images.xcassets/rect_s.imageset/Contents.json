@@ -2,13 +2,12 @@
   "images" : [
     {
       "idiom" : "universal",
-      "scale" : "1x",
-      "filename" : "domino-green-fallen-u.png"
+      "scale" : "1x"
     },
     {
       "idiom" : "universal",
       "scale" : "2x",
-      "filename" : "domino-green-fallen-u-1.png"
+      "filename" : "rect_s.png"
     },
     {
       "idiom" : "universal",

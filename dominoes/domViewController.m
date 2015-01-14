@@ -175,12 +175,12 @@ BOOL showingLeaderboard;
     skView.showsFPS = NO;
     skView.showsNodeCount = NO;
 
-isRunningInIde(
-    // Configure the view.
-    skView.showsFPS = YES;
-    skView.showsNodeCount = YES;
-);
-    
+//isRunningInIde(
+//    // Configure the view.
+//    skView.showsFPS = YES;
+//    skView.showsNodeCount = YES;
+//);
+
     // Create and configure the scene.
     SKScene * scene = [domMenuScene sceneWithSize:skView.bounds.size];
     scene.scaleMode = SKSceneScaleModeAspectFill;
