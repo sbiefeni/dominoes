@@ -309,13 +309,13 @@ CGPoint pointA;
 
     ///show "A little bit faster now!" label if
     //faster BOOL is set true
-        SKLabelNode *lblFaster = [SKLabelNode labelNodeWithFontNamed:@"Arial"];
+        SKLabelNode *lblFaster = [SKLabelNode labelNodeWithFontNamed:@"Komika Axis"];
     if (level == 1){
         lblFaster.text = NSLocalizedString(@"Let's start off slow...",nil);
-        lblFaster.fontSize = 30 * sizeDoubler;
+        lblFaster.fontSize = 15 * sizeDoubler;
     }else{
         lblFaster.text = NSLocalizedString(@"A Little Faster!",nil);
-        lblFaster.fontSize = 30 * sizeDoubler;
+        lblFaster.fontSize = 15 * sizeDoubler;
     }
 
         lblFaster.alpha = .5;
@@ -332,14 +332,14 @@ CGPoint pointA;
 
 
     //show lives remaining
-    SKLabelNode *lblLives = [SKLabelNode labelNodeWithFontNamed:@"Arial"];
+    SKLabelNode *lblLives = [SKLabelNode labelNodeWithFontNamed:@"Komika Axis"];
     if (lives > 1) {
         lblLives.text = [NSString stringWithFormat:NSLocalizedString(@"%i Lives Remaining",nil), lives];
     }else{
         lblLives.text = NSLocalizedString(@"Last Life!",nil);
     }
 
-    lblLives.fontSize = 20 * sizeDoubler;
+    lblLives.fontSize = 25 * sizeDoubler;
     lblLives.alpha = .7;
     int yAdjust = 200;
     if (ceilingOn) {
@@ -350,7 +350,7 @@ CGPoint pointA;
 
     //add a message to prompt user to get next achievement
     int levelHighScore = [self getLevelHighscore];
-    SKLabelNode* achievPrompt = [SKLabelNode labelNodeWithFontNamed:@"Arial"];
+    SKLabelNode* achievPrompt = [SKLabelNode labelNodeWithFontNamed:@"Komika Axis"];
     int goal = 100;
 
     //figure out what the next goal level is
@@ -370,9 +370,9 @@ CGPoint pointA;
 
     achievPrompt.text = [NSString stringWithFormat:NSLocalizedString(@"Get a badge for %i Bricks!",nil),goal];
 
-    achievPrompt.fontSize = 20;
+    achievPrompt.fontSize = 15;
     achievPrompt.alpha = .7;
-    achievPrompt.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame)+ (yAdjust * sizeDoubler) - 25 );
+    achievPrompt.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame)+ (yAdjust * sizeDoubler) - 35 );
     [self addChild:achievPrompt];
 
     [self runAction:
@@ -574,7 +574,7 @@ CGPoint pointA;
 
     levelScore = 0;//temp for debugging
 
-    scoreLabel = [[SKLabelNode alloc] initWithFontNamed:@"Chalkduster"];
+    scoreLabel = [[SKLabelNode alloc] initWithFontNamed:@"Komika Axis"];
     scoreLabel.color = [UIColor whiteColor];
     scoreLabel.fontSize = 120 * sizeDoubler;;
     scoreLabel.position = CGPointMake(CGRectGetMidX(self.frame),
@@ -595,7 +595,7 @@ CGPoint pointA;
 -(void) youLoseMessage{
 
 
-    scoreLabel = [[SKLabelNode alloc] initWithFontNamed:@"Chalkduster"];
+    scoreLabel = [[SKLabelNode alloc] initWithFontNamed:@"Komika Axis"];
     scoreLabel.color = [UIColor whiteColor];
     //scoreLabel.fontSize = 25 * sizeDoubler;;
     scoreLabel.position = CGPointMake(CGRectGetMidX(self.frame),
