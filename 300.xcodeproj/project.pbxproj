@@ -64,6 +64,7 @@
 		7B3701BF193011B000B284D1 /* iRate.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B3701BD193011B000B284D1 /* iRate.m */; };
 		7BC2EF4D1A68598E005939D8 /* KOMIKAX.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7BC2EF4C1A68598E005939D8 /* KOMIKAX.ttf */; };
 		7BD3012D1925C2FA00D30836 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7BD3012F1925C2FA00D30836 /* Localizable.strings */; };
+		7BF140851A69C02500DD3BAF /* bounce.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 7BF140841A69C02500DD3BAF /* bounce.mp3 */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -159,6 +160,7 @@
 		7BB34A65192868E30037D404 /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/Localizable.strings; sourceTree = "<group>"; };
 		7BC2EF4C1A68598E005939D8 /* KOMIKAX.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = KOMIKAX.ttf; sourceTree = "<group>"; };
 		7BD3012E1925C2FA00D30836 /* en */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		7BF140841A69C02500DD3BAF /* bounce.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = bounce.mp3; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -335,6 +337,7 @@
 		55CB7E1318CBD180001EFA1C = {
 			isa = PBXGroup;
 			children = (
+				7BF140841A69C02500DD3BAF /* bounce.mp3 */,
 				55CB7E2718CBD180001EFA1C /* 300 Bricks */,
 				55CB7E4E18CBD181001EFA1C /* dominoesTests */,
 				55CB7E1E18CBD180001EFA1C /* Frameworks */,
@@ -542,6 +545,7 @@
 				38530AA118F0B4A400FA19CC /* new-arena7.png in Resources */,
 				389AA04E18DE67340089CA98 /* new-arena1.png in Resources */,
 				380DC21C18D0ED9200545962 /* spark.png in Resources */,
+				7BF140851A69C02500DD3BAF /* bounce.mp3 in Resources */,
 				38530A9D18F0B4A400FA19CC /* new-arena3.png in Resources */,
 				344B5BCF18D4AE7500E43D82 /* Background_Fire.sks in Resources */,
 				55CB7E3518CBD181001EFA1C /* Main_iPhone.storyboard in Resources */,

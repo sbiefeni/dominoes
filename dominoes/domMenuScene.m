@@ -9,6 +9,8 @@
 
 #define itunesURL   @"http://goo.gl/EZPeMw"
 
+#define runAfter(X,After)    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, After * NSEC_PER_SEC), dispatch_get_main_queue(), ^{X});
+
 //shortened with google URL shortener service
 //@"https://itunes.apple.com/us/app/300-brickd/id859320677?ls=1&mt=8"
 
@@ -70,15 +72,15 @@
 //            [self createRestoreButton];
 //        }
 
-        SKEmitterNode *background = [SKEmitterNode dom_emitterNamed:@"Background_Stars"];
-        background.particlePositionRange = CGVectorMake(self.size.width*2, self.size.height*2);
-        [background advanceSimulationTime:10];
-
-        background.alpha = .5;
-
+//        SKEmitterNode *background = [SKEmitterNode dom_emitterNamed:@"Background_Stars"];
+//        background.particlePositionRange = CGVectorMake(self.size.width*2, self.size.height*2);
+//        [background advanceSimulationTime:10];
+//
+//        background.alpha = .5;
+//
         self.backgroundColor = [SKColor whiteColor];
         
-        [self addChild:background];
+        //[self addChild:background];
 
 
         sizeDoubler = 1;
@@ -96,11 +98,12 @@
 
         //make logo
         SKSpriteNode *logo = [SKSpriteNode spriteNodeWithImageNamed:@"logo.png"];
-        logo.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame) + 110*sizeDoubler );
+        logo.position = CGPointMake(0, 110   );
         logo.name = @"logo";
-        logo.xScale = .28*sizeDoubler;
-        logo.yScale = .28*sizeDoubler;
-        [self addChild:logo];
+        logo.xScale = (.28 / frame.xScale) *sizeDoubler;
+        logo.yScale = (.28 / frame.xScale) *sizeDoubler;
+
+        [frame addChild:logo];
 
         int highScore = [self getHighScore];
         levelHighScore = [self getLevelHighscore];
@@ -115,67 +118,43 @@
 
 
             SKLabelNode* hlscore = [SKLabelNode labelNodeWithFontNamed:@"Komika Axis"];
-            [self createLabel:hlscore text:[NSString stringWithFormat:@"Best Level: %i",levelHighScore] fontSize:25 posY:-10 color:[SKColor blackColor] alpha:.7 sizeDoubler:sizeDoubler];
+            [self createLabel:hlscore text:[NSString stringWithFormat:@"Best Level: %i",levelHighScore] fontSize:25 posY:-30 color:[SKColor blackColor] alpha:.7 sizeDoubler:sizeDoubler onObject:frame];
 
             SKLabelNode* mLevels = [SKLabelNode labelNodeWithFontNamed:@"Komika Axis"];
-            [self createLabel:mLevels text:[NSString stringWithFormat:@"Most Levels: %i",(int)maxLevels] fontSize:15 posY:-35 color:[SKColor blackColor] alpha:.7 sizeDoubler:sizeDoubler];
+            [self createLabel:mLevels text:[NSString stringWithFormat:@"Most Levels: %i",(int)maxLevels] fontSize:15 posY:-55 color:[SKColor blackColor] alpha:.7 sizeDoubler:sizeDoubler onObject:frame];
 
             SKLabelNode* hscore = [SKLabelNode labelNodeWithFontNamed:@"Komika Axis"];
-            [self createLabel:hscore text:[NSString stringWithFormat:@"High Score: %i",(int)highScore] fontSize:15 posY:-55 color:[SKColor blackColor] alpha:.7 sizeDoubler:sizeDoubler];
+            [self createLabel:hscore text:[NSString stringWithFormat:@"High Score: %i",(int)highScore] fontSize:15 posY:-75 color:[SKColor blackColor] alpha:.7 sizeDoubler:sizeDoubler onObject:frame];
 
-            //SKLabelNode *title = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
-            //[self createLabel:title text:@"300" fontSize:130 posY:65 color:[SKColor redColor] alpha:.7 sizeDoubler:sizeDoubler];
-
-//            SKLabelNode *title2 = [SKLabelNode labelNodeWithFontNamed:@"Avenir-Black"];
-//            title2.fontName = [UIFont italicSystemFontOfSize:45].fontName;
-//            [self createLabel:title2 text:@"Brickd" fontSize:45 posY:25 color:[SKColor whiteColor] alpha:1 sizeDoubler:sizeDoubler];
-//
-//            SKLabelNode *tapToPlay = [SKLabelNode labelNodeWithFontNamed:@"Avenir-Black"];
-//            [self createLabel:tapToPlay text:@"Tap to Play" fontSize:40 posY:-30 color:[SKColor whiteColor] alpha:.7 sizeDoubler:sizeDoubler];
-//
-//
-//            [self addChild: [self instruct:sizeDoubler posY:-110]]; //instructions button, from below
-
-            //isRunningInIde([self enableGameCenterButton])
-
-//            //make frame
-//            SKSpriteNode *frame = [SKSpriteNode spriteNodeWithImageNamed:@"frame.png"];
-//            frame.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame) + 25*sizeDoubler );
-//            frame.name = @"frame";
-//            frame.xScale = .65*sizeDoubler;
-//            frame.yScale = .65*sizeDoubler;
-//            [self addChild:frame];
-
-
-//            //make logo
-//            SKSpriteNode *logo = [SKSpriteNode spriteNodeWithImageNamed:@"logo.png"];
-//            logo.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame) + 50*sizeDoubler );
-//            logo.name = @"logo";
-//            logo.xScale = .28*sizeDoubler;
-//            logo.yScale = .28*sizeDoubler;
-//            [self addChild:logo];
 
             //make Play Button
             SKSpriteNode *Play = [SKSpriteNode spriteNodeWithImageNamed:@"play.png"];
-            Play.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame) - 115*sizeDoubler );
-            Play.name = @"logo";
-            Play.xScale = 1*sizeDoubler;
-            Play.yScale = 1*sizeDoubler;
-            [self addChild:Play];
+            Play.position = CGPointMake(0,  - 210 );
+            Play.name = @"play";
+            Play.xScale = 1*sizeDoubler  / [self childNodeWithName:@"frame"].xScale;
+            Play.yScale = 1*sizeDoubler  / [self childNodeWithName:@"frame"].xScale;
+            [[self childNodeWithName:@"frame"] addChild:Play];
             //make Help Button
 
             //draw facebook and twitter buttons
             //[self drawSocialButtonsWithfbX:-100 withfbY:100 withtwX:100 withtwY:100 withAlpha:.5];
 
-            int sY = 140;
-            [self drawSocialButtonsWithfbX:100 withfbY:sY-60 withtwX:100 withtwY:sY withHX:-100 withHY:sY-5 HwithAlpha:.5 withScale:.85];
+            int sY = -160;
+            [self drawSocialButtonsWithfbX:150 withfbY: sY
+                                   withtwX:150 withtwY: sY-90
+                                    withHX:-150 withHY: sY-60
+                              HwithAlpha:.5 withScale: .85];
 
+            gameStatus = reset;
 
             //timer to check for gamecenter button
-            aTimer = [NSTimer scheduledTimerWithTimeInterval:5 target:self selector:@selector(gameCenterButtonTimer) userInfo:nil repeats:YES];
-            
+           if([GKLocalPlayer localPlayer].isAuthenticated){
+               [self gameCenterButtonTimer];
+           }else{
+               aTimer = [NSTimer scheduledTimerWithTimeInterval:5 target:self selector:@selector(gameCenterButtonTimer) userInfo:nil repeats:YES];
+           }
 
-                gameStatus = reset;
+
 
         }else if(gameStatus == game_Started && lives > 0)   { // game started...
 #pragma mark - In Between Rounds Screen
@@ -186,32 +165,29 @@
             [self showAppFlood:false];
 
             //if new best level, give a message and store it!
-            //if (levelScore > levelHighScore) {
+            if (levelScore > levelHighScore) {
                 [self setLevelHighScore: levelScore];
 
                 levelHighScore = levelScore;
 
                 SKLabelNode *hs = [SKLabelNode labelNodeWithFontNamed:@"Komika Axis"];
-                [self createLabel:hs text:@"NEW BEST LEVEL!" fontSize:25 posY:-10 color:[SKColor blackColor] alpha:.7 sizeDoubler:sizeDoubler];
-            //}
+                [self createLabel:hs text:@"NEW BEST LEVEL!" fontSize:25 posY:-50 color:[SKColor redColor] alpha:.7 sizeDoubler:sizeDoubler onObject:frame];
+            }
 
-            //logo.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame) + 110*sizeDoubler );
 
             SKLabelNode* hlscore = [SKLabelNode labelNodeWithFontNamed:@"Komika Axis"];
-            [self createLabel:hlscore text:[NSString stringWithFormat:@"Best Level: %i",levelHighScore] fontSize:20 posY:-40 color:[SKColor blackColor] alpha:.7 sizeDoubler:sizeDoubler];
+            [self createLabel:hlscore text:[NSString stringWithFormat:@"Best Level: %i",levelHighScore] fontSize:20 posY:-75 color:[SKColor blackColor] alpha:.7 sizeDoubler:sizeDoubler onObject:frame];
 
 
             SKLabelNode *cur_score = [SKLabelNode labelNodeWithFontNamed:@"Komika Axis"];
-            [self createLabel:cur_score text:[NSString stringWithFormat:@"Score: %i",levelScore] fontSize:35 posY:-90 color:[SKColor blackColor] alpha:.7 sizeDoubler:sizeDoubler];
+            [self createLabel:cur_score text:[NSString stringWithFormat:@"Score: %i",levelScore] fontSize:35 posY:-120 color:[SKColor blackColor] alpha:.7 sizeDoubler:sizeDoubler onObject:frame];
 
             SKLabelNode *tot_score = [SKLabelNode labelNodeWithFontNamed:@"Komika Axis"];
-            [self createLabel:tot_score text:[NSString stringWithFormat:@"Total Score: %i",totalScore] fontSize:25 posY:-130 color:[SKColor blackColor] alpha:.7 sizeDoubler:sizeDoubler];
+            [self createLabel:tot_score text:[NSString stringWithFormat:@"Total Score: %i",totalScore] fontSize:25 posY:-160 color:[SKColor blackColor] alpha:.7 sizeDoubler:sizeDoubler onObject:frame];
 
             SKLabelNode *Lives = [SKLabelNode labelNodeWithFontNamed:@"Komika Axis"];
-            [self createLabel:Lives text:[NSString stringWithFormat:@"Lives: %i",lives] fontSize:25 posY:-160 color:[SKColor blackColor] alpha:.7 sizeDoubler:sizeDoubler];
+            [self createLabel:Lives text:[NSString stringWithFormat:@"Lives: %i",lives] fontSize:25 posY:-190 color:[SKColor blackColor] alpha:.7 sizeDoubler:sizeDoubler onObject:frame];
 
-//            SKLabelNode *tapToPlay = [SKLabelNode labelNodeWithFontNamed:@"Avenir-Black"];
-//            [self createLabel:tapToPlay text:@"Tap to Continue" fontSize:35 posY:-145 color:[SKColor blackColor] alpha:.7 sizeDoubler:sizeDoubler];
 
             //for debugging - to reset the level high score
             isRunningInIde(
@@ -230,6 +206,8 @@
 #pragma mark - Game Over Screen
                 totalScore += levelScore;
 
+            SKLabelNode *hs = [SKLabelNode labelNodeWithFontNamed:@"Komika Axis"];
+
             //debugging - reset the total score
             isRunningInIde(
                // highScore=0;
@@ -240,8 +218,8 @@
                 if (totalScore > highScore) {
                     [self setHighScore:totalScore];
 
-                    SKLabelNode *hs = [SKLabelNode labelNodeWithFontNamed:@"Komika Axis"];
-                    [self createLabel:hs text:@"NEW HIGH SCORE!" fontSize:30 posY:200 color:[SKColor blackColor] alpha:.7 sizeDoubler:sizeDoubler];
+
+                    [self createLabel:hs text:@"NEW HIGH SCORE!" fontSize:30 posY:200 color:[SKColor blackColor] alpha:.7 sizeDoubler:sizeDoubler onObject:[self childNodeWithName:@"frame"]];
                     if (gcEnabled){
                     //set the gamecenter score
                         [[GameCenterManager sharedManager]highScoreForLeaderboard:@"300hs"];
@@ -259,35 +237,35 @@
 
                 //draw facebook and twitter buttons
                 //[self drawSocialButtonsWithfbX:-40 withfbY:10 withtwX:40 withtwY:10 withAlpha:1];
-            [self drawSocialButtonsWithfbX:-110 withfbY:-50 withtwX:110 withtwY:-50 withHX:-500 withHY:40 HwithAlpha:1 withScale:.85];
+            [self drawSocialButtonsWithfbX:-110 withfbY:20 withtwX:110 withtwY:20 withHX:-500 withHY:40 HwithAlpha:1 withScale:.85];
 
 
 
                 //draw social share message
                 SKSpriteNode *socialMessage = [SKSpriteNode spriteNodeWithImageNamed:@"social_share_message"];
-                socialMessage.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame) + 140 * sizeDoubler );
-                socialMessage.xScale = sizeDoubler;
-                socialMessage.yScale = sizeDoubler;
+                socialMessage.position = CGPointMake(0, 160 );
+                socialMessage.xScale = sizeDoubler / [self childNodeWithName:@"frame"].xScale ;
+                socialMessage.yScale = sizeDoubler / [self childNodeWithName:@"frame"].yScale;
 
                 //socialMessage.alpha = .7;
 
                 socialMessage.colorBlendFactor = 1;
                 socialMessage.color = [SKColor blackColor];
                 socialMessage.name = @"socialMessage";
-                [self addChild:socialMessage];
+                [[self childNodeWithName:@"frame"] addChild:socialMessage];
 
                 SKLabelNode *title = [SKLabelNode labelNodeWithFontNamed:@"Komika Axis"];
-                [self createLabel:title text:@"Game over!" fontSize:35 posY:-20 color:[SKColor blackColor] alpha:.7 sizeDoubler:sizeDoubler];
+                [self createLabel:title text:@"Game over!" fontSize:35 posY:-50 color:[SKColor blackColor] alpha:.7 sizeDoubler:sizeDoubler onObject:[self childNodeWithName:@"frame"]];
 
 
                 SKLabelNode *tot_score = [SKLabelNode labelNodeWithFontNamed:@"Komika Axis"];
-                [self createLabel:tot_score text:@"Total Score" fontSize:30 posY:-60 color:[SKColor blackColor] alpha:.7 sizeDoubler:sizeDoubler];
+                [self createLabel:tot_score text:@"Total Score" fontSize:30 posY:-90 color:[SKColor blackColor] alpha:.7 sizeDoubler:sizeDoubler onObject:[self childNodeWithName:@"frame"]];
 
                 SKLabelNode *tot_score2 = [SKLabelNode labelNodeWithFontNamed:@"Komika Axis"];
-                [self createLabel:tot_score2 text:[NSString stringWithFormat:@"%i",totalScore] fontSize:60 posY:-120 color:[SKColor blackColor] alpha:.7 sizeDoubler:sizeDoubler];
+                [self createLabel:tot_score2 text:[NSString stringWithFormat:@"%i",totalScore] fontSize:60 posY:-150 color:[SKColor blackColor] alpha:.7 sizeDoubler:sizeDoubler onObject:[self childNodeWithName:@"frame"]];
 
-                SKLabelNode *hs = [SKLabelNode labelNodeWithFontNamed:@"Komika Axis"];
-                [self createLabel:hs text:[NSString stringWithFormat:@"Level Reached: %i",level ] fontSize:20 posY:-155 color:[SKColor blackColor] alpha:.7 sizeDoubler:sizeDoubler];
+                //SKLabelNode *hs = [SKLabelNode labelNodeWithFontNamed:@"Komika Axis"];
+                [self createLabel:hs text:[NSString stringWithFormat:@"Level Reached: %i",level ] fontSize:20 posY:-185 color:[SKColor blackColor] alpha:.7 sizeDoubler:sizeDoubler onObject:[self childNodeWithName:@"frame"]];
 
                 if(areAdsRemoved < 1){
                     [self createBuyGameButton:true];
@@ -378,7 +356,9 @@
 #pragma mark - buy game button
 -(BOOL)createBuyGameButton:(BOOL)doRestore{
 
-    [self makeButtonNamed:@"buygame" withImage:@"rect_l.png" withText1:@"Disable Ads - $0.99" Text2:nil xPOS:-60 yPOS:45 fontName:@"Avenir-Black" fontSize:14 withScale:.25];
+    int yPos = [self childNodeWithName:@"frame"].position.y - [self childNodeWithName:@"frame"].frame.size.height/2 - 16*sizeDoubler;
+
+    [self makeButtonNamed:@"buygame" withImage:@"rect_l.png" withText1:@"Disable Ads - $0.99" Text2:nil xPOS:-60 yPOS:yPos fontName:@"Avenir-Black" fontSize:14 withScale:.25];
 
     if (doRestore) {
         [self createRestoreButton];
@@ -389,7 +369,9 @@
 
 -(void) createRestoreButton{
 
-    [self makeButtonNamed:@"restore" withImage:@"rect_s.png" withText1:@"Restore" Text2:@"Purchases"  xPOS:100 yPOS:45 fontName:@"Avenir-Black" fontSize:11 withScale:.25];
+    int yPos = [self childNodeWithName:@"frame"].position.y - [self childNodeWithName:@"frame"].frame.size.height/2 - 16*sizeDoubler;
+
+    [self makeButtonNamed:@"restore" withImage:@"rect_s.png" withText1:@"Restore" Text2:@"Purchases"  xPOS:100 yPOS:yPos fontName:@"Avenir-Black" fontSize:11 withScale:.25];
 
 }
 
@@ -459,24 +441,12 @@
 
     if([GKLocalPlayer localPlayer].isAuthenticated){
 
-//        SKSpriteNode *gcButton = [SKSpriteNode spriteNodeWithImageNamed:@"rect_l.png"];
-//        gcButton.position = CGPointMake(CGRectGetMidX(self.frame), 55);
-//        gcButton.name = @"gamecenter";
-//        gcButton.zPosition = 4;
-//        [self addChild:gcButton];
-//
-//        SKLabelNode *gcLabel = [SKLabelNode labelNodeWithFontNamed:@"Avenir-Black"];
-//        [self createLabel:gcLabel text:@"Leaderboard" fontSize:30 posY:-((mySize.height/2)/sizeDoubler) color:[SKColor blackColor] alpha:.7 sizeDoubler:1];
-//        gcLabel.position = gcButton.position;
-//        gcLabel.zPosition = 5;
-//        gcLabel.verticalAlignmentMode = SKLabelVerticalAlignmentModeCenter;
-//        gcLabel.name = @"gamecenterlabel";
-
+        int yPos = [self childNodeWithName:@"frame"].position.y - [self childNodeWithName:@"frame"].frame.size.height/2 - 16*sizeDoubler;
         if(!areAdsRemoved){
-            [self makeButtonNamed:@"gamecenter" withImage:@"rect_l.png" withText1:@"Leaderboard" Text2:nil xPOS:-60 yPOS:12 fontName:@"Avenir-Black" fontSize:15 withScale:.25];
-        }else{
-            [self makeButtonNamed:@"gamecenter" withImage:@"rect_l.png" withText1:@"Leaderboard" Text2:nil xPOS:-60 yPOS:45 fontName:@"Avenir-Black" fontSize:15 withScale:.25];
+            yPos = yPos - 32*sizeDoubler;
         }
+
+            [self makeButtonNamed:@"gamecenter" withImage:@"rect_l.png" withText1:@"Leaderboard" Text2:nil xPOS:-60 yPOS:yPos fontName:@"Avenir-Black" fontSize:15 withScale:.25];
 
         // report previous scores to gamecenter as a backup in case they weren't
         if (!didReportPrevHighScore) {
@@ -497,7 +467,7 @@
     }else{
         if (!didThis) {
             SKLabelNode *gcLabel = [SKLabelNode labelNodeWithFontNamed:@"Avenir-Black"];
-            [self createLabel:gcLabel text:@"Log in to Gamecenter to see Leaderboard" fontSize:12 posY:-((mySize.height/2)/sizeDoubler) color:[SKColor blackColor] alpha:.7 sizeDoubler:1];
+            [self createLabel:gcLabel text:@"Log in to Gamecenter to see Leaderboard" fontSize:12 posY:-((mySize.height/2)/sizeDoubler) color:[SKColor blackColor] alpha:.7 sizeDoubler:1 onObject:self];
             gcLabel.position = CGPointMake(CGRectGetMidX(self.frame), 20);
             gcLabel.zPosition = 1;
             gcLabel.verticalAlignmentMode = SKLabelVerticalAlignmentModeCenter;
@@ -515,28 +485,28 @@
     scale = scale *sizeDoubler;
 
     SKSpriteNode *hButton = [SKSpriteNode spriteNodeWithImageNamed:@"help.png"];
-        hButton.position = CGPointMake(CGRectGetMidX(self.frame) + HX * sizeDoubler,  CGRectGetMidY(self.frame) - HY * sizeDoubler );
+        hButton.position = CGPointMake( HX ,   HY  );
         hButton.alpha = alpha;
         hButton.name = @"help";
-        hButton.xScale = scale*1.15;
-        hButton.yScale = scale*1.15;
-        [self addChild:hButton];
+        hButton.xScale = scale*1.15  / [self childNodeWithName:@"frame"].xScale;
+        hButton.yScale = scale*1.15  / [self childNodeWithName:@"frame"].xScale;
+        [[self childNodeWithName:@"frame"] addChild:hButton];
 
     SKSpriteNode *fbButton = [SKSpriteNode spriteNodeWithImageNamed:@"facebook.png"];
-        fbButton.position = CGPointMake(CGRectGetMidX(self.frame) + fbX * sizeDoubler,  CGRectGetMidY(self.frame) - fbY * sizeDoubler );
+        fbButton.position = CGPointMake( fbX ,  fbY  );
         fbButton.alpha = alpha;
         fbButton.name = @"facebook";
-        fbButton.xScale = scale;
-        fbButton.yScale = scale;
-        [self addChild:fbButton];
+        fbButton.xScale = scale / [self childNodeWithName:@"frame"].xScale;
+        fbButton.yScale = scale / [self childNodeWithName:@"frame"].yScale;
+        [[self childNodeWithName:@"frame"] addChild:fbButton];
 
     SKSpriteNode *twButton = [SKSpriteNode spriteNodeWithImageNamed:@"twitter.png"];
-        twButton.position = CGPointMake(CGRectGetMidX(self.frame)+twX*sizeDoubler, CGRectGetMidY(self.frame) - twY*sizeDoubler);
+        twButton.position = CGPointMake(twX,  twY);
         twButton.alpha=alpha;
         twButton.name = @"twitter";
-        twButton.xScale = scale;
-        twButton.yScale = scale;
-        [self addChild:twButton];
+        twButton.xScale = scale / [self childNodeWithName:@"frame"].xScale;
+        twButton.yScale = scale / [self childNodeWithName:@"frame"].yScale;
+        [[self childNodeWithName:@"frame"] addChild:twButton];
 }
 
 -(void) setMaxLevels:(int)levels {
@@ -614,16 +584,16 @@
     return value;
 }
 
--(void) createLabel:(SKLabelNode*)label text:(NSString*)text fontSize:(int)fontSize posY:(int)posY color:(SKColor*)color alpha:(float)alpha sizeDoubler:(int)sizeDoubler {
+-(void) createLabel:(SKLabelNode*)label text:(NSString*)text fontSize:(int)fontSize posY:(int)posY color:(SKColor*)color alpha:(float)alpha sizeDoubler:(int)sizeDoubler onObject:(SKNode*)object{
 
     label.text = NSLocalizedString(text,nil);
-    label.fontSize = fontSize * sizeDoubler;
-    label.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame) + posY * sizeDoubler);
+    label.fontSize = (fontSize / object.xScale) * sizeDoubler ;
+    label.position = CGPointMake(0,  (posY / object.xScale) * sizeDoubler);
     label.fontColor = color;
     label.alpha = alpha;
     label.zPosition = 500;
 
-    [self addChild:label];
+    [object addChild:label];
 
 }
 
@@ -638,7 +608,7 @@
 
     SKLabelNode* tapFor=[SKLabelNode labelNodeWithFontNamed:@"Arial"];
     tapFor.name=@"tapFor";
-    [self createLabel:tapFor text:@"Tap here for Instructions" fontSize:10 posY:posY+instruct.frame.size.height/(2.62*sizeDoubler) color:[SKColor whiteColor] alpha:1 sizeDoubler:sizeDoubler];
+    [self createLabel:tapFor text:@"Tap here for Instructions" fontSize:10 posY:posY+instruct.frame.size.height/(2.62*sizeDoubler) color:[SKColor whiteColor] alpha:1 sizeDoubler:sizeDoubler onObject:self];
 
     return instruct;
 }
@@ -748,7 +718,7 @@
         // if gamecenter button touched, launch it
         if ([node.name isEqualToString:@"gamecenter"]) {
             NSLog(@"GameCenter Button pressed");
-
+            [self bounceButton:[self childNodeWithName:@"gamecenter"] forever:false sound:true ];
             if([GKLocalPlayer localPlayer].isAuthenticated){
                 //show leaderboard
                 [[GameCenterManager sharedManager] presentLeaderboardsOnViewController:[self getActiveController]];
@@ -759,19 +729,23 @@
             }
 
         }else if([node.name isEqualToString:@"facebook"]){
-            [self postToFacebookWithScore:levelHighScore];
+            [self bounceButton:node forever:false sound:true ];
+            runAfter([self postToFacebookWithScore:levelHighScore];,.5)
 
         }else if([node.name isEqualToString:@"twitter"]){
+            [self bounceButton:node forever:false sound:true] ;
             [self postToTwitterWithScore:levelHighScore];
         }else if([node.name isEqualToString:@"buygame"]) {
             //PUT BUY GAME CODE HERE
+            [self bounceButton:[self childNodeWithName:@"buygame"] forever:false sound:true ];
             [self userClickedBuyGame];
         }else if([node.name isEqualToString:@"restore"]) {
             //PUT RESTORE GAME CODE HERE
+            [self bounceButton:[self childNodeWithName:@"restore"] forever:false sound:true ];
             [self checkPurchasedItems];
         }else if([node.name isEqualToString:@"help"]) {
             //show help here TODO
-            [self checkPurchasedItems];
+            [self bounceButton:node forever:false sound:true ];
         }else if([node.name isEqualToString:@"instructions"] || [node.name isEqualToString:@"tapFor"] ){
             UIAlertView *alert = [[UIAlertView alloc]initWithTitle:NSLocalizedString(@"How to Play",nil)
                 message: NSLocalizedString(@"how to play instructions",nil)
@@ -785,13 +759,22 @@
             [aTimer invalidate];
             aTimer = nil;
             if (gameStatus == reset || gameStatus == game_Started) {
-                
+                if(gameStatus == reset){
+                    [self bounceButton:[[self childNodeWithName:@"frame"] childNodeWithName:@"play"] forever:false sound:true ];
+                }else{
+                    [self bounceButtonSmall:[self childNodeWithName:@"frame"] forever:false sound:true ];
+                }
+                runAfter(
                 domGameScene *game = [[domGameScene alloc] initWithSize:self.size];
-                [self.view presentScene:game transition:[SKTransition doorsOpenHorizontalWithDuration:.75]];
+                [self.view presentScene:game transition:[SKTransition doorwayWithDuration:.75]];
+                         ,.3)
                 
             }else{
+                [self bounceButtonSmall:[self childNodeWithName:@"frame"] forever:false sound:true ];
+                runAfter(
                 domMenuScene *menu = [[domMenuScene alloc] initWithSize:self.size];
-                [self.view presentScene:menu transition:[SKTransition doorsOpenHorizontalWithDuration:.75]];
+                [self.view presentScene:menu transition:[SKTransition doorwayWithDuration:.75]];
+                         ,.3)
             }
         }
 
@@ -820,6 +803,53 @@
     ]];
 
     [self runAction:a];
+}
+-(void)bounceButton:(SKNode*)button forever:(BOOL)forever sound:(BOOL)snd{
+
+    [self bounceButton2:button amount:.65 forever:forever sound:snd];
+
+}
+-(void)bounceButtonSmall:(SKNode*)button forever:(BOOL)forever sound:(BOOL)snd{
+
+    [self bounceButton2:button amount:.85 forever:forever sound:snd];
+    
+}
+
+-(void)bounceButton2:(SKNode*)button amount:(double)amount forever:(BOOL)forever sound:(BOOL)snd{
+
+    double xScale = button.xScale;
+    double yScale = button.yScale;
+    double yT = .04;  //time
+    double xT = .04;
+    double yS = yScale * amount;  //scale
+    double xS = xScale * amount;
+
+    if (snd) {
+        SKAction* sound = [SKAction playSoundFileNamed:@"bounce.mp3" waitForCompletion:NO];
+        [button runAction:sound];
+    }
+
+    SKAction* a=[SKAction sequence:@[
+                                     [SKAction scaleYTo:yS duration:yT],
+                                     [SKAction scaleXTo:xS duration:xT],
+                                     [SKAction scaleYTo:yScale duration:yT],
+                                     [SKAction scaleXTo:xScale duration:xT]
+                                     ]];
+    SKAction* b=[SKAction sequence:@[
+                                     [SKAction scaleYTo:yS*1.3 duration:yT],
+                                     [SKAction scaleXTo:xS*1.3 duration:xT],
+                                     [SKAction scaleYTo:yScale duration:yT],
+                                     [SKAction scaleXTo:xScale duration:xT]
+                                     ]];
+    
+    
+    if(forever){
+        SKAction* run = [SKAction repeatActionForever:a];
+        [button runAction:run];
+    }else{
+        [button runAction:[SKAction sequence:@[a,b]]];
+    }
+
 }
 
 -(void)productsRequest:(SKProductsRequest *)request didReceiveResponse:(SKProductsResponse *)response{

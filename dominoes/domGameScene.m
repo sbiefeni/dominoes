@@ -93,7 +93,7 @@ CGPoint pointA;
         
             [self initializeGame];
 
-            [self setUpBackgroundFloor];
+            //[self setUpBackgroundFloor];
 
 
 
@@ -222,6 +222,7 @@ CGPoint pointA;
         }
     }
 
+    lives = 1; // TODO remove
 
     level += 1;
 
@@ -561,7 +562,7 @@ CGPoint pointA;
                   [SKAction waitForDuration:_sceneChangeDelay + 1],
                   [SKAction runBlock:^{
                         domMenuScene *menu = [[domMenuScene alloc] initWithSize:self.size];
-                        [self.view presentScene:menu transition:[SKTransition doorsCloseHorizontalWithDuration:1]];
+                        [self.view presentScene:menu transition:[SKTransition doorwayWithDuration:1]];
                     }],
                 ]]];
         } //end if (player2.didExplosion)
@@ -905,7 +906,7 @@ CGPoint pointA;
             [SKAction runBlock:^{
                 //notRunningInIde(
                     domMenuScene *menu = [[domMenuScene alloc] initWithSize:self.size];
-                      [self.view presentScene:menu transition:[SKTransition doorsCloseHorizontalWithDuration:0.5]];
+                      [self.view presentScene:menu transition:[SKTransition doorwayWithDuration:0.5]];
                 //);
                 }],
             ]]];
