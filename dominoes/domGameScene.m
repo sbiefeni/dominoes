@@ -222,7 +222,6 @@ CGPoint pointA;
         }
     }
 
-    lives = 1; // TODO remove
 
     level += 1;
 
@@ -254,7 +253,7 @@ CGPoint pointA;
     )
 
     // flash some stuff on the screen
-    // show level number TODO
+    // show level number 
     // change level parameters
     // start countdown.. direction arrows
     // start the timer that runs the game!
@@ -313,13 +312,16 @@ CGPoint pointA;
         SKLabelNode *lblFaster = [SKLabelNode labelNodeWithFontNamed:@"Komika Axis"];
     if (level == 1){
         lblFaster.text = NSLocalizedString(@"Let's start off slow...",nil);
-        lblFaster.fontSize = 15 * sizeDoubler;
+        lblFaster.fontSize = 18 * sizeDoubler;
     }else{
         lblFaster.text = NSLocalizedString(@"A Little Faster!",nil);
-        lblFaster.fontSize = 15 * sizeDoubler;
+        lblFaster.fontSize = 18 * sizeDoubler;
     }
 
-        lblFaster.alpha = .5;
+    lblFaster.color = [SKColor blackColor];
+    lblFaster.colorBlendFactor = 1;
+    lblFaster.alpha = .7;
+    
     //adjust label position if it's on the arrow
     if (player.curY > 12 && player.curY < 18) {
         lblFaster.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame)+(75 * sizeDoubler) ); //
@@ -342,6 +344,9 @@ CGPoint pointA;
 
     lblLives.fontSize = 25 * sizeDoubler;
     lblLives.alpha = .7;
+    lblLives.color = [SKColor blackColor];
+    lblLives.colorBlendFactor = 1;
+
     int yAdjust = 200;
     if (ceilingOn) {
         yAdjust = 150;
@@ -373,6 +378,9 @@ CGPoint pointA;
 
     achievPrompt.fontSize = 15;
     achievPrompt.alpha = .7;
+    achievPrompt.color = [SKColor redColor];
+    achievPrompt.colorBlendFactor = 1;
+
     achievPrompt.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame)+ (yAdjust * sizeDoubler) - 35 );
     [self addChild:achievPrompt];
 
@@ -475,8 +483,8 @@ CGPoint pointA;
         //temp - highlight when computer is close to a wall
 //        isRunningInIde(
 //            if (Y==0  || Y==rows || X==0 || X==cols) {
-//                domino.color = [SKColor redColor];
-//                domino.colorBlendFactor = 5;
+                domino.color = [SKColor colorWithRed:1 green:.2 blue:0 alpha:1];
+                domino.colorBlendFactor = 1;
 //            }
 //        );
 
@@ -598,6 +606,8 @@ CGPoint pointA;
 
     scoreLabel = [[SKLabelNode alloc] initWithFontNamed:@"Komika Axis"];
     scoreLabel.color = [UIColor whiteColor];
+    scoreLabel.colorBlendFactor = 1;
+
     //scoreLabel.fontSize = 25 * sizeDoubler;;
     scoreLabel.position = CGPointMake(CGRectGetMidX(self.frame),
                                       CGRectGetMidY(self.frame));
@@ -820,8 +830,8 @@ CGPoint pointA;
         //[objectWithOurMethod methodName:int1 withArg2:int2];
         domino.position = [self calcDominoPosition:player.curX withArg2:player.curY];
         domino.direction=player.curDirection;
-//        domino.color = [SKColor greenColor];
-//        domino.colorBlendFactor = .4;
+        domino.color = [SKColor blueColor];
+        domino.colorBlendFactor = 1;
 
 
         [self addChild:domino];
@@ -906,7 +916,7 @@ CGPoint pointA;
             [SKAction runBlock:^{
                 //notRunningInIde(
                     domMenuScene *menu = [[domMenuScene alloc] initWithSize:self.size];
-                      [self.view presentScene:menu transition:[SKTransition doorwayWithDuration:0.5]];
+                      [self.view presentScene:menu transition:[SKTransition doorwayWithDuration:1]];
                 //);
                 }],
             ]]];
@@ -1065,10 +1075,13 @@ CGPoint pointA;
 
     //randomize or otherwise have changing arenas
 
-    int rndBackground = [clsCommon getRanInt:1 maxNumber:7];
+    //int rndBackground = [clsCommon getRanInt:1 maxNumber:7];
 
     //adShowingArenaScaleAmount = 0;
-    backGround = [SKSpriteNode spriteNodeWithImageNamed:[NSString stringWithFormat:@"new-arena%i.png",rndBackground]];
+    backGround = [SKSpriteNode spriteNodeWithImageNamed:@"new-arena5.png"];
+
+    backGround.color = [SKColor redColor];
+    backGround.colorBlendFactor = .8;
 
     //calculate min and max extents, based on original background size
     [self setUpMinMaxExtents:backGround.size];
@@ -1118,15 +1131,15 @@ CGPoint pointA;
     backGround.position = CGPointMake(arenaSize.width/2, backGroundPos);
     backGround.zPosition = 250;
 
-    self.backgroundColor = [SKColor blackColor];
-    //backGround.colorBlendFactor = 1;
 
     //pick a random floor tile...but not the same as last
     int rndTile = [clsCommon getRanInt:1 maxNumber:6 butNot:lastTile];
     lastTile = rndTile;
-    [self makeBackgroundFloorSizeOf:backGround withTile:[NSString stringWithFormat:@"floortile%i.png",rndTile]];
+    //[self makeBackgroundFloorSizeOf:backGround withTile:[NSString stringWithFormat:@"floortile%i.png",rndTile]];
 
     [self addChild:backGround];
+
+    self.backgroundColor = [SKColor lightGrayColor];
 
 }
 
@@ -1146,6 +1159,8 @@ CGPoint pointA;
     backgroundTiles.yScale = -1; //upon closer inspection, I noticed my source tile was flipped vertically, so this just flipped it back.
     backgroundTiles.position = area.position; // CGPointMake(0,0);
     backgroundTiles.zPosition = 0;
+    backgroundTiles.alpha = .5;
+
     [self addChild:backgroundTiles];
 }
 
