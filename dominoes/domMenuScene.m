@@ -23,11 +23,14 @@
 #import "domViewController.h"
 #import "clsGameSettings.h"
 #import "GameCenterManager.h"
+#import "MTPopupWindow.h"
+#import <RevMobAds/RevMobAds.h>
 
-#import "AppFlood.h"
 
-#define appFloodScenesRandomInterval 4
+#define fullAdScenesRandomInterval 4
 #define kRemoveAdsProductIDentifier @"300_NoAds"
+
+
 
 #import "SKEmitterNode+fromFile.h"
 
@@ -99,13 +102,15 @@
         [self addChild:frame];
 
         //make logo
-        SKSpriteNode *logo = [SKSpriteNode spriteNodeWithImageNamed:@"logo.png"];
-        logo.position = CGPointMake(0, 110   );
+        SKSpriteNode *logo = [SKSpriteNode spriteNodeWithImageNamed:@"300_social_logo.png"];
+        logo.position = CGPointMake(0, 100   );
         logo.name = @"logo";
-        logo.xScale = (.28 / frame.xScale) *sizeDoubler;
-        logo.yScale = (.28 / frame.xScale) *sizeDoubler;
+        logo.xScale = (.65 / frame.xScale) *sizeDoubler;
+        logo.yScale = (.65 / frame.xScale) *sizeDoubler;
 
         [frame addChild:logo];
+
+        [self drawBadgesWithPrompt:true];
 
         int highScore = [self getHighScore];
         levelHighScore = [self getLevelHighscore];
@@ -164,7 +169,7 @@
 
             totalScore += levelScore;
 
-            [self showAppFlood:false];
+            [self showFullScreenAd:false];
 
             //if new best level, give a message and store it!
             NSString* hsLabel;
@@ -181,6 +186,19 @@
                 hsLabel = [NSString stringWithFormat:@"Best Level: %i",levelHighScore];
                 color = [SKColor blackColor];
             }
+
+            //make Play Button
+            SKSpriteNode *Play = [SKSpriteNode spriteNodeWithImageNamed:@"play.png"];
+            Play.position = CGPointMake(0,  -47 );
+            Play.name = @"ply";
+            Play.xScale = 1*sizeDoubler  / [self childNodeWithName:@"frame"].xScale;
+            Play.yScale = 1*sizeDoubler  / [self childNodeWithName:@"frame"].xScale;
+            Play.alpha  = .5;
+            //Play.zPosition = -1;
+
+            [[self childNodeWithName:@"frame"] addChild:Play];
+
+
             SKLabelNode* hlscore = [SKLabelNode labelNodeWithFontNamed:@"Komika Axis"];
             [self createLabel:hlscore text:hsLabel fontSize:20 posY:-75 color:color alpha:.7 sizeDoubler:sizeDoubler onObject:frame];
 
@@ -251,7 +269,7 @@
                 [self setMaxLevels:level];
             }
 
-            [self showAppFlood:true];
+            [self showFullScreenAd:true];
 
             logo.alpha = .15;
 
@@ -308,36 +326,216 @@
 
 } //end initwithsize
 
--(void) showAppFlood:(BOOL)gameEnd {
+-(int)getPointLevel{
+
+    int score = [self getLevelHighscore];
+    int pointLevel = 0;
+
+    score = 150; //TODO remove
+
+    if (score >= 275) {
+        pointLevel = 4;
+    }else if (score >=250){
+        pointLevel = 3;
+    }else if (score >= 225){
+        pointLevel = 2;
+    }else if (score >= 150){
+        pointLevel = 1;
+    }
+
+    return pointLevel;
+
+}
+-(void)drawBadgesWithPrompt:(BOOL)prompt{
+
+    CGPoint start = CGPointMake(-300,  250 );
+
+
+
+    double scale = .6*sizeDoubler  / [self childNodeWithName:@"frame"].xScale;
+    double speed = .05;
+    double slideSpeed = .5;
+    NSString* badgeName;
+    int pointLevel = [self getPointLevel];
+
+    //make badge1
+    BOOL cond = (pointLevel >= 1);
+    badgeName = @"b1-%i";
+    SKSpriteNode *badge1 = [SKSpriteNode spriteNodeWithImageNamed:[NSString stringWithFormat:badgeName,@"1"]];
+    badge1.position = start;
+    badge1.name = @"badge";
+    badge1.xScale = scale;
+    badge1.yScale = scale;
+    badge1.alpha  = (cond)?1:.5;
+    [[self childNodeWithName:@"frame"] addChild:badge1];
+    //animate
+    NSArray* badgeFrames = [self loadTextures:badgeName start:1 max:7 startRandom:NO];
+    [self animateTexturesOnObject:badge1 withFrames:badgeFrames withKey:@"badge1" withSpeed:speed forever:!cond];
+    //slide in
+    [self slideObjectIntoFrame:badge1 slideTo:-150 seconds:slideSpeed withDelay:1];
+
+
+    //make badge2
+    BOOL prevCond = cond;
+    cond = (pointLevel >= 2);
+    BOOL it = !cond && prevCond == true;
+    badgeName = (prevCond)?@"b2-%i":@"bm-%i.png";
+    SKSpriteNode *badge2 = [SKSpriteNode spriteNodeWithImageNamed:[NSString stringWithFormat:badgeName,@"1"]];
+    badge2.position = start;
+    badge2.name = @"badge";
+    badge2.xScale = scale;
+    badge2.yScale = scale;
+    badge2.alpha  = (it)?.5:1;
+    [[self childNodeWithName:@"frame"] addChild:badge2];
+
+    badgeFrames = [self loadTextures:badgeName start:1 max:7 startRandom:NO];
+    [self animateTexturesOnObject:badge2 withFrames:badgeFrames withKey:@"badge2" withSpeed:speed forever:it];
+    //slide in
+    [self slideObjectIntoFrame:badge2 slideTo:-50 seconds:slideSpeed withDelay:2];
+
+    //make badge3
+    prevCond = cond;
+    cond = (pointLevel >= 3);
+    it = !cond && prevCond == true;
+    badgeName = (prevCond)?@"b3-%i.png":@"bm-%i.png";
+    SKSpriteNode *badge3 = [SKSpriteNode spriteNodeWithImageNamed:[NSString stringWithFormat:badgeName,@"1"]];
+    badge3.position = start;
+    badge3.name = @"badge";
+    badge3.xScale = scale;
+    badge3.yScale = scale;
+    badge3.alpha  = (it)?.5:1;
+    [[self childNodeWithName:@"frame"] addChild:badge3];
+
+    badgeFrames = [self loadTextures:badgeName start:1 max:7 startRandom:NO];
+    [self animateTexturesOnObject:badge3 withFrames:badgeFrames withKey:@"badge3" withSpeed:speed forever:it];
+    //slide in
+    [self slideObjectIntoFrame:badge3 slideTo:50 seconds:slideSpeed withDelay:3];
+
+
+    //make badge4
+    prevCond = cond;
+    cond = (pointLevel >= 4);
+    it = !cond && prevCond == true;
+    badgeName = (prevCond)?@"b4-%i.png":@"bm-%i.png";
+    SKSpriteNode *badge4 = [SKSpriteNode spriteNodeWithImageNamed:[NSString stringWithFormat:badgeName,@"1"]];
+    badge4.position = start;
+    badge4.name = @"badge";
+    badge4.xScale = scale;
+    badge4.yScale = scale;
+    badge4.alpha  =(it)?.5:1;
+    [[self childNodeWithName:@"frame"] addChild:badge4];
+
+    badgeFrames = [self loadTextures:badgeName start:1 max:7 startRandom:NO];
+    [self animateTexturesOnObject:badge4 withFrames:badgeFrames withKey:@"badge4" withSpeed:speed forever:it];
+    //slide in
+    [self slideObjectIntoFrame:badge4 slideTo:150 seconds:slideSpeed withDelay:4];
+
+
+    if(prompt){
+        [self makeBadgeSliderForPointLevel:pointLevel withDelay:3];
+    }
+}
+-(void)makeBadgeSliderForPointLevel:(int)pointLevel withDelay:(double)delay{
+
+    //draw a prompt bubble description
+    int points = 150;
+    if (pointLevel ==1) {
+        points = 225;
+    }else if (pointLevel == 2){
+        points = 250;
+    }else if (pointLevel == 3){
+        points = 275;
+    }else if (pointLevel == 4){
+        points = 300;
+    }
+    [self makeSlideBubbleWithPrompt:[NSString stringWithFormat:@"Get %i points",points] withPrompt2:@"for your next badge!" withPointAt:pointLevel withDelay:delay forDuration:10];
+}
+
+-(void)makeSlideBubbleWithPrompt:(NSString*)prompt withPrompt2:(NSString*)prompt2 withPointAt:(int)pPos withDelay:(double)delay forDuration:(int)duration{
+
+    double slideSpeed = .5;
+
+    SKSpriteNode* bubble = [SKSpriteNode spriteNodeWithImageNamed:@"bubble"];
+    SKSpriteNode* point = [SKSpriteNode spriteNodeWithImageNamed:@"bubble-point"];
+
+    bubble.position = CGPointMake(-600,  100 );
+
+    //align the point..
+    switch (pPos) {
+        case 0:
+            pPos = -140;
+            break;
+        case 1:
+            pPos = -55;
+            break;
+        case 2:
+            pPos = 55;
+            break;
+        case 3:
+            pPos = 140;
+            break;
+        default:
+            break;
+    }
+    point.position = CGPointMake(pPos, 98);
+    [bubble addChild:point];
+
+    //add the prompt text
+    SKLabelNode *pText = [SKLabelNode labelNodeWithFontNamed:@"Komika Axis"];
+    [self createLabel:pText text:prompt fontSize:25 posY:25 color:[SKColor blackColor] alpha:.7 sizeDoubler:sizeDoubler onObject:bubble];
+
+    SKLabelNode *pText2 = [SKLabelNode labelNodeWithFontNamed:@"Komika Axis"];
+    [self createLabel:pText2 text:prompt2 fontSize:25 posY:-25 color:[SKColor blackColor] alpha:.7 sizeDoubler:sizeDoubler onObject:bubble];
+
+
+
+    [[self childNodeWithName:@"frame"] addChild:bubble];
+    [self slideObjectIntoFrame:bubble slideTo:0 seconds:slideSpeed withDelay:delay];
+
+    SKAction* a = [SKAction sequence:@[
+                   [SKAction waitForDuration:duration + delay],
+                   [SKAction fadeAlphaTo:0 duration:1],
+                   [SKAction removeFromParent]
+                ]];
+
+    [bubble runAction:a];
+
+}
+
+-(void) showFullScreenAd:(BOOL)gameEnd {
 
     if (areAdsRemoved < 1){
 
-        if (!appFloodShowedLastLevel){
+        if (!AdShowedLastLevel){
             //show a timed intersitial for game end
-            if (gameEnd){  //show intersitial 1 out of 3 times
-                if ([clsCommon getRanInt:1 maxNumber:3] == 1 && (appFloodSceneCount > 4)){
-                    [AppFlood showInterstitial];
-                }else{
-                    [AppFlood showFullscreen];
-                }
-                appFloodShowedLastLevel = true;
+            if (gameEnd){  //show Ad
+                [self showRevMobFullScreen];
+                AdShowedLastLevel = true;
             }else{
                 //count number of scene changes to intermittently show Ad
-                if (appFloodSceneCount > 1){
-                    if ([clsCommon getRanInt:1 maxNumber:appFloodScenesRandomInterval] == 1){
-                        [AppFlood showFullscreen];
-                        appFloodShowedLastLevel = true;
+                if (FullAdSceneCount > 1){
+                    if ([clsCommon getRanInt:1 maxNumber:fullAdScenesRandomInterval] == 1){
+                        [self showRevMobFullScreen];
+                        AdShowedLastLevel = true;
                     }
                 }
             }
         }else{
-            appFloodShowedLastLevel = false;
+            AdShowedLastLevel = false;
         }
 
-        appFloodSceneCount += 1;
+        FullAdSceneCount += 1;
 
     }
 }
+
+
+-(void)showRevMobFullScreen{
+    RevMobFullscreen *fs = [[RevMobAds session] fullscreen];
+    fs.delegate = (id<RevMobAdsDelegate>) [self getActiveController];
+    [fs showAd];
+}
+
 
 - (void)dealloc {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
@@ -728,6 +926,16 @@
 
 }
 
+-(void)showHTML:(NSString*)html{
+    __weak UIViewController* tmp = [self getActiveController];
+    MTPopupWindow *popup = [MTPopupWindow new];
+    popup.usesSafari = YES;
+    popup.fileName = html;
+
+    [popup setDelegate: tmp];
+    [popup show];
+}
+
 #pragma mark - touches ended
 -(void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {
@@ -748,6 +956,9 @@
                 //authenticate player -- can't do with game center manager
                 //[[GameCenterManager sharedManager] checkGameCenterAvailability ];
             }
+        }else if ([node.name isEqualToString:@"badge"]){
+            [self bounceButton:node forever:false sound:true];
+            [self makeBadgeSliderForPointLevel:[self getPointLevel] withDelay:0 ];
 
         }else if([node.name isEqualToString:@"facebook"]){
             [self bounceButton:node forever:true sound:true ];
@@ -765,7 +976,8 @@
             [self bounceButton:(SKSpriteNode*)[self childNodeWithName:@"restore"] forever:true sound:true ];
             [self checkPurchasedItems];
         }else if([node.name isEqualToString:@"help"]) {
-            //show help here TODO
+            //show help here
+            [self showHTML:@"New.html"];
             [self bounceButton:node forever:true sound:true ];
         }else if([node.name isEqualToString:@"instructions"] || [node.name isEqualToString:@"tapFor"] ){
             UIAlertView *alert = [[UIAlertView alloc]initWithTitle:NSLocalizedString(@"How to Play",nil)
@@ -777,6 +989,12 @@
             [alert show];
 
         }else if(tapEnabled) {
+            //if there is a play button, it must be what was tapped
+            if([[self childNodeWithName:@"frame"] childNodeWithName:@"play"]){
+                if(![node.name isEqualToString:@"play"]){
+                    return;
+                }
+            }
             [aTimer invalidate];
             aTimer = nil;
             if (gameStatus == reset || gameStatus == game_Started) {
@@ -836,14 +1054,23 @@
     
 }
 
--(void)bounceButton2:(SKSpriteNode*)button amount:(double)amount forever:(BOOL)forever sound:(BOOL)snd{
+-(void)bounceButton2:(SKSpriteNode*)button amount:(double)amount forever:(BOOL)longer sound:(BOOL)snd{
 
+    //store the original scale values
     double xScale = button.xScale;
     double yScale = button.yScale;
+
     double yT = .04;  //time
     double xT = .04;
-    double yS = yScale * amount;  //scale
+
+    double yS = yScale * amount;  //amount to scale to
     double xS = xScale * amount;
+
+    //if object is bouncing already, then exit
+    SKAction* tmp = [button actionForKey:@"bounce"];
+    if ( tmp != nil) {
+        return;
+    }
 
     if (snd) {
         SKAction* sound = [SKAction playSoundFileNamed:@"bounce.mp3" waitForCompletion:NO];
@@ -864,11 +1091,12 @@
                                      ]];
     
     
-    if(forever){
+    if(longer){
         SKAction* run = [SKAction repeatAction:a count:10];
-        [button runAction:run];
+
+        [button runAction:run withKey:@"bounce"];
     }else{
-        [button runAction:[SKAction sequence:@[a,b]]];
+        [button runAction:[SKAction sequence:@[a,b]] withKey:@"bounce"];
     }
 
 
@@ -968,5 +1196,77 @@
     //save the ads removed setting
     [clsCommon storeUserSetting:@"areAdsRemoved" value:[NSString stringWithFormat:@"%i",areAdsRemoved]];
 }
+
+#pragma mark - animate textures
+- (void)animateTexturesOnObject:(SKSpriteNode*)node withFrames:(NSArray*)frames withKey:(NSString*)key withSpeed:(double)speed forever:(BOOL)forever
+{
+
+    //double tmpSpeed = speed;
+
+    //double speedVariation = [common getRanInt:-20 maxNumber:20];
+    //speedVariation /=100;
+    //tmpSpeed += tmpSpeed * speedVariation;
+
+    [node removeActionForKey:key];
+
+    //This is our general runAction method to make our animation.
+
+    if (forever) {
+        [node runAction:
+         [SKAction repeatActionForever:
+          [SKAction animateWithTextures:frames
+                           timePerFrame:speed
+                                 resize:NO
+                                restore:YES
+           ]
+          ]
+
+                withKey:key];
+    }else{
+        [node runAction:
+            [SKAction repeatAction:
+                [SKAction animateWithTextures:frames timePerFrame:speed resize:NO restore:NO]
+                             count:15]
+         ];
+    }
+    
+}
+
+-(NSMutableArray*)loadTextures:(NSString*)fileName start:(int)start max:(int)max startRandom:(BOOL)startRandom{
+
+
+    NSMutableArray *tmpFrames = [NSMutableArray array];
+    int startFrame = start;
+
+
+        for (int i = startFrame; i <= max; i++)
+        {
+            NSString* textureName = nil;
+            textureName = [NSString stringWithFormat:fileName,i];
+            SKTexture* texture = [SKTexture textureWithImageNamed:textureName];
+            [tmpFrames addObject:texture];
+        }
+        for (int i = start; i < startFrame; i++)
+        {
+            NSString* textureName = nil;
+            textureName = [NSString stringWithFormat:fileName,i];
+            SKTexture* texture = [SKTexture textureWithImageNamed:textureName];
+            [tmpFrames addObject:texture];
+        }
+
+
+    return tmpFrames;
+}
+
+-(void) slideObjectIntoFrame:(SKSpriteNode*) object slideTo:(int)to seconds:(double)seconds withDelay:(double)delay {
+
+    runAfter(
+             SKAction* a = [SKAction moveToX:to duration:seconds];
+             [object runAction:a];
+             ,
+             delay)
+
+}
+
 
 @end

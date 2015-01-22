@@ -11,9 +11,10 @@
 #import <iAd/iAd.h>
 #import <GameKit/GameKit.h>
 #import "GameCenterManager.h"
-#import "AppFlood.h"
+#import <RevMobAds/RevMobAds.h>
+#import <RevMobAds/RevMobAdsDelegate.h>
 
-@interface domViewController : UIViewController <GameCenterManagerDelegate>
+@interface domViewController : UIViewController <GameCenterManagerDelegate, RevMobAdsDelegate>
 
 +(void)setAdView:(BOOL)showAd ShowOnTop:(BOOL)onTop ChooseRandom:(BOOL)useRandom;
 

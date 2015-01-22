@@ -93,7 +93,7 @@ CGPoint pointA;
         
             [self initializeGame];
 
-            //[self setUpBackgroundFloor];
+            [self setUpBackgroundFloor];
 
 
 
@@ -294,12 +294,12 @@ CGPoint pointA;
 //flash an arrow for a couple seconds
     SKSpriteNode *arrow = [SKSpriteNode spriteNodeWithImageNamed:[NSString stringWithFormat:@"arrow%i",player.curDirection ]];
     arrow.position = [self calcDominoPosition:player.curX withArg2:player.curY];
-    arrow.alpha = .6;
+    arrow.alpha = .8;
     arrow.xScale = .7;
     arrow.yScale = .7;
 
     if (player.isPlayer) {
-        arrow.color = [SKColor cyanColor];
+        arrow.color = [SKColor blueColor];
     }else{
         arrow.color = [SKColor greenColor];
     }
@@ -569,13 +569,17 @@ CGPoint pointA;
                   [SKAction runBlock:^{ [explosion removeFromParent]; } ],
                   [SKAction waitForDuration:_sceneChangeDelay + 1],
                   [SKAction runBlock:^{
-                        domMenuScene *menu = [[domMenuScene alloc] initWithSize:self.size];
-                        [self.view presentScene:menu transition:[SKTransition doorwayWithDuration:1]];
+                        [self doRoundIsOver];
                     }],
                 ]]];
         } //end if (player2.didExplosion)
     }
 
+}
+
+-(void)doRoundIsOver{
+    domMenuScene *menu = [[domMenuScene alloc] initWithSize:self.size];
+    [self.view presentScene:menu transition:[SKTransition doorwayWithDuration:1]];
 }
 
 //enabling this draws an auto-updating label using 'score' variable
@@ -914,10 +918,7 @@ CGPoint pointA;
             [SKAction runBlock:^{ explosion.particleBirthRate = 0;} ],
             [SKAction waitForDuration:_sceneChangeDelay + 1],
             [SKAction runBlock:^{
-                //notRunningInIde(
-                    domMenuScene *menu = [[domMenuScene alloc] initWithSize:self.size];
-                      [self.view presentScene:menu transition:[SKTransition doorwayWithDuration:1]];
-                //);
+                [self doRoundIsOver];
                 }],
             ]]];
         lives -= 1;  //minus one life
@@ -1046,9 +1047,9 @@ CGPoint pointA;
     //floor.position = backGround.position;
 
     floor.zPosition = -1;
-    float red = [clsCommon getRanFloat:0.0 and:1.0];
-    float green = [clsCommon getRanFloat:0.0 and:1.0];
-    float blue = [clsCommon getRanFloat:0.0 and:1.0];
+    float red = 0;
+    float green = .1;
+    float blue = 1;
 
 
     SKColor* color = [SKColor colorWithRed:red green:green blue:blue alpha:1];

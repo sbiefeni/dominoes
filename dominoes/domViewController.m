@@ -10,10 +10,11 @@
 #import "domMenuScene.h"
 #import "clsPlayer.h"
 #import "clsCommon.h"
-#import "AppFlood.h"
+
 
 #define isRunningInIde(x) if ([[[UIDevice currentDevice].model lowercaseString] rangeOfString:@"simulator"].location != NSNotFound){x;}
 
+#define REVMOB_ID           @"54bdc126adbec59c09b96903"
 
 ADBannerView *adView;
 int iHeight;
@@ -23,6 +24,10 @@ GKLocalPlayer *gcPlayer;
 BOOL showingLeaderboard;
 
 @interface domViewController () <ADBannerViewDelegate>
+
+@property (nonatomic, strong)RevMobFullscreen *fullscreen;
+@property (nonatomic, strong)RevMobBannerView *banner;
+@property (nonatomic, strong)RevMobBanner *bannerWindow;
 
 @end
 
@@ -161,25 +166,12 @@ BOOL showingLeaderboard;
     [self.view addSubview:adView];
 
 
-//initialize AppFlood
-    NSString* AppFloodID = @"EExiDMAjiDU5htiV";  //300 Brickd Keys for AppFlood Account
-    NSString* AppFloodKey = @"VZY5DL7L3eb1L5365589b";
-    //initialize appflood
-    [AppFlood initializeWithId:AppFloodID key:AppFloodKey adType:APPFLOOD_AD_ALL ];
-
-    //for ad exchange?
-   // App Key	Secret Key
-    //6JOMMTGRQUAZCJBE	v4sOW4yW41dfL53825d51
 
     SKView * skView = (SKView*)self.originalContentView;
     skView.showsFPS = NO;
     skView.showsNodeCount = NO;
 
-//isRunningInIde(
-//    // Configure the view.
-//    skView.showsFPS = YES;
-//    skView.showsNodeCount = YES;
-//);
+    [self startRevMobSession];
 
     // Create and configure the scene.
     SKScene * scene = [domMenuScene sceneWithSize:skView.bounds.size];
@@ -212,6 +204,68 @@ BOOL showingLeaderboard;
     [skView presentScene:scene];
 
 }
+
+#pragma mark RevMob Ads
+
+- (void)startRevMobSession {
+    [RevMobAds startSessionWithAppID:REVMOB_ID
+                  withSuccessHandler:^{
+                      NSLog(@"Session started with block");
+                  } andFailHandler:^(NSError *error) {
+                      NSLog(@"Session failed to start with block");
+                  }];
+}
+
+
+
+- (void)revmobSessionNotStartedWithError:(NSError *)error {
+    NSLog(@"[RevMob Sample App] Session failed to start: %@", error);
+}
+
+#pragma mark - RevMobAdsDelegate methods
+
+- (void)revmobSessionIsStarted {
+    NSLog(@"[RevMob Sample App] Session started again.");
+}
+
+- (void)revmobSessionNotStarted:(NSError *)error {
+    NSLog(@"[RevMob Sample App] Session not started again: %@", error);
+}
+
+- (void)revmobAdDidReceive {
+    NSLog(@"[RevMob Sample App] Ad loaded.");
+}
+
+- (void)revmobAdDidFailWithError:(NSError *)error {
+    NSLog(@"[RevMob Sample App] Ad failed: %@", error);
+}
+
+- (void)revmobAdDisplayed {
+    NSLog(@"[RevMob Sample App] Ad displayed.");
+//    if (mainSceneShowing == true) {
+//        [mainScene pausePressed:YES withLabel:YES];
+//    }
+}
+
+- (void)revmobUserClosedTheAd {
+    NSLog(@"[RevMob Sample App] User clicked in the close button.");
+//    if (mainSceneShowing == true) {
+//        [mainScene pausePressed:NO withLabel:NO];
+//    }
+}
+
+- (void)revmobUserClickedInTheAd {
+    NSLog(@"[RevMob Sample App] User clicked in the Ad.");
+}
+
+- (void)installDidReceive {
+    NSLog(@"[RevMob Sample App] Install did receive.");
+}
+
+- (void)installDidFail {
+    NSLog(@"[RevMob Sample App] Install did fail.");
+}
+
 
 //following function called by the iAds if user clicks the ad and ad pops up
 -(void)viewWillDisappear:(BOOL)animated

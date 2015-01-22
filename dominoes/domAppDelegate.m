@@ -10,6 +10,10 @@
 #import <iAd/iAd.h>
 #import "GameCenterManager.h"
 #import "iRate.h"
+#import "Flurry.h"
+#import <RevMobAds/RevMobAds.h>
+
+#define Flurry_ID   @"X8CHJQWK8B3YNRYCXYQB"
 
 @implementation domAppDelegate
 
@@ -24,6 +28,8 @@
 
     [iRate sharedInstance].message = @"Hey You! Help us by rating 300 Brickd, It won’t take more than a minute. Thanks for your support!";
 
+    [Flurry setCrashReportingEnabled:true];
+    [Flurry startSession:Flurry_ID];
 
 //    NSString *str = [NSString stringWithFormat:
 //                     @"itms-apps://ax.itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?type=Purple+Software&id=%i",859320677];
@@ -44,7 +50,29 @@
 - (BOOL)prefersStatusBarHidden {
     return YES;
 }
-							
+
+#pragma mark - revMob
+-(void)revmobSessionIsStarted {
+    NSLog(@"Session is started.");
+}
+
+- (void)revmobSessionNotStartedWithError:(NSError *)error {
+    NSLog(@"Session failed to start: %@", error);
+}
+-(void)revmobAdDisplayed{
+    NSLog(@"RevMob Ad Displayed");
+}
+-(void)revmobUserClosedTheAd{
+    NSLog(@"RevMob Ad Closed");
+}
+-(void)revmobAdDidReceive{
+    NSLog(@"RevMob Ad Received");
+}
+
+- (void)revmobAdDidFailWithError:(NSError *)error {
+}
+
+
 - (void)applicationWillResignActive:(UIApplication *)application
 {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.

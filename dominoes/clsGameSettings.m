@@ -16,8 +16,8 @@ BOOL adsShowing;
 BOOL bannerIsVisible;
 BOOL bannerIsLoaded;
 
-int appFloodSceneCount;
-bool appFloodShowedLastLevel;
+int FullAdSceneCount;
+bool AdShowedLastLevel;
 
 int areAdsRemoved;
 
