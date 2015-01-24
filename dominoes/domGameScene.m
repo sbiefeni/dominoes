@@ -362,8 +362,6 @@ CGPoint pointA;
     //figure out what the next goal level is
     if (levelHighScore < 150) {
         goal = 150;
-    }else if (levelHighScore < 200){
-        goal = 200;
     }else if (levelHighScore < 225){
         goal = 225;
     }else if (levelHighScore < 250){

@@ -25,6 +25,7 @@
 #import "GameCenterManager.h"
 #import "MTPopupWindow.h"
 #import <RevMobAds/RevMobAds.h>
+#import "clsBadge.h"
 
 
 #define fullAdScenesRandomInterval 4
@@ -110,7 +111,6 @@
 
         [frame addChild:logo];
 
-        [self drawBadgesWithPrompt:true];
 
         int highScore = [self getHighScore];
         levelHighScore = [self getLevelHighscore];
@@ -161,6 +161,7 @@
                aTimer = [NSTimer scheduledTimerWithTimeInterval:5 target:self selector:@selector(gameCenterButtonTimer) userInfo:nil repeats:YES];
            }
 
+            [self drawBadgesWithPrompt:true];
 
 
         }else if(gameStatus == game_Started && lives > 0)   { // game started...
@@ -170,6 +171,7 @@
             totalScore += levelScore;
 
             [self showFullScreenAd:false];
+
 
             //if new best level, give a message and store it!
             NSString* hsLabel;
@@ -182,17 +184,19 @@
                 color = [SKColor redColor];
                 [clsCommon playSound:@"bonus.wav" withVolume:.8];
                 flash = true;
+                [self drawBadgesWithPrompt:true];
             }else{
                 hsLabel = [NSString stringWithFormat:@"Best Level: %i",levelHighScore];
                 color = [SKColor blackColor];
+                [self drawBadgesWithPrompt:false];
             }
 
             //make Play Button
             SKSpriteNode *Play = [SKSpriteNode spriteNodeWithImageNamed:@"play.png"];
-            Play.position = CGPointMake(0,  -47 );
+            Play.position = CGPointMake(0,  -37 );
             Play.name = @"ply";
-            Play.xScale = 1*sizeDoubler  / [self childNodeWithName:@"frame"].xScale;
-            Play.yScale = 1*sizeDoubler  / [self childNodeWithName:@"frame"].xScale;
+            Play.xScale = .7*sizeDoubler  / [self childNodeWithName:@"frame"].xScale;
+            Play.yScale = .7*sizeDoubler  / [self childNodeWithName:@"frame"].xScale;
             Play.alpha  = .5;
             //Play.zPosition = -1;
 
@@ -331,7 +335,7 @@
     int score = [self getLevelHighscore];
     int pointLevel = 0;
 
-    score = 150; //TODO remove
+    //score = 150; //TODO remove
 
     if (score >= 275) {
         pointLevel = 4;
@@ -348,25 +352,27 @@
 }
 -(void)drawBadgesWithPrompt:(BOOL)prompt{
 
-    CGPoint start = CGPointMake(-300,  250 );
+    CGPoint start = CGPointMake(-400,  250 );
 
 
 
-    double scale = .6*sizeDoubler  / [self childNodeWithName:@"frame"].xScale;
+    double scale = .5*sizeDoubler  / [self childNodeWithName:@"frame"].xScale;
     double speed = .05;
     double slideSpeed = .5;
+    double alphaLevel = .2;
     NSString* badgeName;
     int pointLevel = [self getPointLevel];
 
     //make badge1
     BOOL cond = (pointLevel >= 1);
     badgeName = @"b1-%i";
-    SKSpriteNode *badge1 = [SKSpriteNode spriteNodeWithImageNamed:[NSString stringWithFormat:badgeName,@"1"]];
+    clsBadge* badge1 = [clsBadge spriteNodeWithImageNamed:[NSString stringWithFormat:badgeName,1]];
+    badge1.badgeNum = 1;
     badge1.position = start;
     badge1.name = @"badge";
     badge1.xScale = scale;
     badge1.yScale = scale;
-    badge1.alpha  = (cond)?1:.5;
+    badge1.alpha  = (cond)?1:alphaLevel;
     [[self childNodeWithName:@"frame"] addChild:badge1];
     //animate
     NSArray* badgeFrames = [self loadTextures:badgeName start:1 max:7 startRandom:NO];
@@ -380,12 +386,13 @@
     cond = (pointLevel >= 2);
     BOOL it = !cond && prevCond == true;
     badgeName = (prevCond)?@"b2-%i":@"bm-%i.png";
-    SKSpriteNode *badge2 = [SKSpriteNode spriteNodeWithImageNamed:[NSString stringWithFormat:badgeName,@"1"]];
+    clsBadge *badge2 = [clsBadge spriteNodeWithImageNamed:[NSString stringWithFormat:badgeName,2]];
+    badge2.badgeNum = 2;
     badge2.position = start;
     badge2.name = @"badge";
     badge2.xScale = scale;
     badge2.yScale = scale;
-    badge2.alpha  = (it)?.5:1;
+    badge2.alpha  = (it)?alphaLevel:1;
     [[self childNodeWithName:@"frame"] addChild:badge2];
 
     badgeFrames = [self loadTextures:badgeName start:1 max:7 startRandom:NO];
@@ -398,12 +405,13 @@
     cond = (pointLevel >= 3);
     it = !cond && prevCond == true;
     badgeName = (prevCond)?@"b3-%i.png":@"bm-%i.png";
-    SKSpriteNode *badge3 = [SKSpriteNode spriteNodeWithImageNamed:[NSString stringWithFormat:badgeName,@"1"]];
+    clsBadge *badge3 = [clsBadge spriteNodeWithImageNamed:[NSString stringWithFormat:badgeName,3]];
+    badge3.badgeNum = 3;
     badge3.position = start;
     badge3.name = @"badge";
     badge3.xScale = scale;
     badge3.yScale = scale;
-    badge3.alpha  = (it)?.5:1;
+    badge3.alpha  = (it)?alphaLevel:1;
     [[self childNodeWithName:@"frame"] addChild:badge3];
 
     badgeFrames = [self loadTextures:badgeName start:1 max:7 startRandom:NO];
@@ -417,12 +425,13 @@
     cond = (pointLevel >= 4);
     it = !cond && prevCond == true;
     badgeName = (prevCond)?@"b4-%i.png":@"bm-%i.png";
-    SKSpriteNode *badge4 = [SKSpriteNode spriteNodeWithImageNamed:[NSString stringWithFormat:badgeName,@"1"]];
+    clsBadge *badge4 = [clsBadge spriteNodeWithImageNamed:[NSString stringWithFormat:badgeName,4]];
+    badge4.badgeNum = 4;
     badge4.position = start;
     badge4.name = @"badge";
     badge4.xScale = scale;
     badge4.yScale = scale;
-    badge4.alpha  =(it)?.5:1;
+    badge4.alpha  =(it)?alphaLevel:1;
     [[self childNodeWithName:@"frame"] addChild:badge4];
 
     badgeFrames = [self loadTextures:badgeName start:1 max:7 startRandom:NO];
@@ -435,10 +444,58 @@
         [self makeBadgeSliderForPointLevel:pointLevel withDelay:3];
     }
 }
+
+-(void)makeRotatingBadgeForBadge:(clsBadge*)badge withScale:(double)scale withSpeed:(double)speed forDuration:(double)duration{
+
+    int level = [self getPointLevel];
+
+    [[[self childNodeWithName:@"frame"] childNodeWithName:@"badgeBig"]removeFromParent];
+
+    NSString* bn = [NSString stringWithFormat:@"b%i-",badge.badgeNum];
+    NSString* badgeName = [bn stringByAppendingString:@"%i.png"];
+    NSString* texture = [NSString stringWithFormat:@"b%i-7.png",badge.badgeNum];
+    clsBadge* badgeBig = [clsBadge spriteNodeWithImageNamed:texture ];
+    badgeBig.name = @"badgeBig";
+    badgeBig.position = CGPointMake(20,0);
+    badgeBig.xScale = 3;
+    badgeBig.yScale = 3;
+    badgeBig.zPosition = 1000;
+
+    [[self childNodeWithName:@"frame"] addChild:badgeBig];
+
+    SKAction* a;
+    if (level < badge.badgeNum){
+        a = [SKAction sequence:@[
+                [SKAction fadeAlphaTo:.3 duration:0],
+                [SKAction waitForDuration:.1],
+                [SKAction fadeAlphaTo:0 duration:.3],
+                [SKAction removeFromParent]
+             ]];
+
+    }else{
+            [clsCommon playSound:@"bonus.wav" withVolume:.8];
+
+            NSArray* badgeFrames = [self loadTextures:badgeName start:1 max:7 startRandom:NO];
+            [self animateTexturesOnObject:badgeBig withFrames:badgeFrames withKey:@"badge4" withSpeed:speed forever:false];
+
+        a = [SKAction sequence:@[
+                   [SKAction waitForDuration:3],
+                   [SKAction fadeAlphaTo:0 duration:1],
+                   [SKAction removeFromParent]
+             ]];
+    }
+
+    [badgeBig runAction:a];
+}
+
 -(void)makeBadgeSliderForPointLevel:(int)pointLevel withDelay:(double)delay{
 
+    if ([[self childNodeWithName:@"frame"] childNodeWithName:@"bubble"]) {
+        return;
+    }
     //draw a prompt bubble description
     int points = 150;
+    NSString* nb = @"next";
     if (pointLevel ==1) {
         points = 225;
     }else if (pointLevel == 2){
@@ -447,8 +504,10 @@
         points = 275;
     }else if (pointLevel == 4){
         points = 300;
+    }else{
+        nb=@"first";
     }
-    [self makeSlideBubbleWithPrompt:[NSString stringWithFormat:@"Get %i points",points] withPrompt2:@"for your next badge!" withPointAt:pointLevel withDelay:delay forDuration:10];
+    [self makeSlideBubbleWithPrompt:[NSString stringWithFormat:@"Get a %i brick round",points] withPrompt2:[NSString stringWithFormat:@"for your %@ badge!",nb] withPointAt:pointLevel withDelay:delay forDuration:10];
 }
 
 -(void)makeSlideBubbleWithPrompt:(NSString*)prompt withPrompt2:(NSString*)prompt2 withPointAt:(int)pPos withDelay:(double)delay forDuration:(int)duration{
@@ -456,6 +515,8 @@
     double slideSpeed = .5;
 
     SKSpriteNode* bubble = [SKSpriteNode spriteNodeWithImageNamed:@"bubble"];
+    bubble.name = @"bubble";
+    bubble.alpha = .9;
     SKSpriteNode* point = [SKSpriteNode spriteNodeWithImageNamed:@"bubble-point"];
 
     bubble.position = CGPointMake(-600,  100 );
@@ -482,10 +543,10 @@
 
     //add the prompt text
     SKLabelNode *pText = [SKLabelNode labelNodeWithFontNamed:@"Komika Axis"];
-    [self createLabel:pText text:prompt fontSize:25 posY:25 color:[SKColor blackColor] alpha:.7 sizeDoubler:sizeDoubler onObject:bubble];
+    [self createLabel:pText text:prompt fontSize:25 posY:25 color:[SKColor blackColor] alpha:.7 sizeDoubler:1 onObject:bubble];
 
     SKLabelNode *pText2 = [SKLabelNode labelNodeWithFontNamed:@"Komika Axis"];
-    [self createLabel:pText2 text:prompt2 fontSize:25 posY:-25 color:[SKColor blackColor] alpha:.7 sizeDoubler:sizeDoubler onObject:bubble];
+    [self createLabel:pText2 text:prompt2 fontSize:25 posY:-25 color:[SKColor blackColor] alpha:.7 sizeDoubler:1 onObject:bubble];
 
 
 
@@ -936,6 +997,17 @@
     [popup show];
 }
 
+-(BOOL)checkString:(NSString*)S1 conatains:(NSString*)S2{
+    if ([S1 rangeOfString:S2].location != NSNotFound)
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+}
+
 #pragma mark - touches ended
 -(void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {
@@ -959,6 +1031,9 @@
         }else if ([node.name isEqualToString:@"badge"]){
             [self bounceButton:node forever:false sound:true];
             [self makeBadgeSliderForPointLevel:[self getPointLevel] withDelay:0 ];
+
+            [self makeRotatingBadgeForBadge:node withScale:2 withSpeed:.1  forDuration:5];
+
 
         }else if([node.name isEqualToString:@"facebook"]){
             [self bounceButton:node forever:true sound:true ];

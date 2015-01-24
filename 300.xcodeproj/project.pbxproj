@@ -64,6 +64,7 @@
 		7B3816BF1A6DFB1300CAF112 /* RevMobAds.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B3816BE1A6DFB1300CAF112 /* RevMobAds.framework */; };
 		7B3816C11A6DFB7A00CAF112 /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B3816C01A6DFB7A00CAF112 /* MediaPlayer.framework */; };
 		7B39DC4C1A6CB0A5006C9C44 /* bonus.wav in Resources */ = {isa = PBXBuildFile; fileRef = 7B39DC4B1A6CB0A5006C9C44 /* bonus.wav */; };
+		7B72C0CC1A723501006FC3FE /* clsBadge.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B72C0CB1A723501006FC3FE /* clsBadge.m */; };
 		7BC2EF4D1A68598E005939D8 /* KOMIKAX.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7BC2EF4C1A68598E005939D8 /* KOMIKAX.ttf */; };
 		7BD3012D1925C2FA00D30836 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7BD3012F1925C2FA00D30836 /* Localizable.strings */; };
 		7BDEBE751A6D828D0094CBFD /* libFlurry_6.0.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BDEBE741A6D828D0094CBFD /* libFlurry_6.0.0.a */; };
@@ -169,6 +170,8 @@
 		7B3816BE1A6DFB1300CAF112 /* RevMobAds.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = RevMobAds.framework; sourceTree = "<group>"; };
 		7B3816C01A6DFB7A00CAF112 /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
 		7B39DC4B1A6CB0A5006C9C44 /* bonus.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = bonus.wav; sourceTree = "<group>"; };
+		7B72C0CA1A723501006FC3FE /* clsBadge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = clsBadge.h; sourceTree = "<group>"; };
+		7B72C0CB1A723501006FC3FE /* clsBadge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = clsBadge.m; sourceTree = "<group>"; };
 		7BB34A641928572C0037D404 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		7BB34A65192868E30037D404 /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/Localizable.strings; sourceTree = "<group>"; };
 		7BC2EF4C1A68598E005939D8 /* KOMIKAX.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = KOMIKAX.ttf; sourceTree = "<group>"; };
@@ -283,6 +286,7 @@
 			children = (
 				38B7A7FA18E4F91F00F51451 /* h_files */,
 				387B05D418E0A6EE005C8D1F /* clsCommon.m */,
+				7B72C0CB1A723501006FC3FE /* clsBadge.m */,
 				389B9CF518CFCDCF004960E5 /* clsDomino.m */,
 				389B9CF818CFD449004960E5 /* clsPlayer.m */,
 				38B7A7F818E4F10D00F51451 /* clsGameSettings.m */,
@@ -330,6 +334,7 @@
 		38B7A7FA18E4F91F00F51451 /* h_files */ = {
 			isa = PBXGroup;
 			children = (
+				7B72C0CA1A723501006FC3FE /* clsBadge.h */,
 				387B05D318E0A6EE005C8D1F /* clsCommon.h */,
 				389B9CF418CFCDCF004960E5 /* clsDomino.h */,
 				389B9CF718CFD449004960E5 /* clsPlayer.h */,
@@ -636,6 +641,7 @@
 				389B9CF918CFD449004960E5 /* clsPlayer.m in Sources */,
 				380B7AC518FE0F6900DF6A09 /* NSDataAES256.m in Sources */,
 				55CB7E3B18CBD181001EFA1C /* domViewController.m in Sources */,
+				7B72C0CC1A723501006FC3FE /* clsBadge.m in Sources */,
 				55CB7E2E18CBD180001EFA1C /* main.m in Sources */,
 				55CB7E3218CBD181001EFA1C /* domAppDelegate.m in Sources */,
 				344B5BC618D3FA9500E43D82 /* domMenuScene.m in Sources */,
