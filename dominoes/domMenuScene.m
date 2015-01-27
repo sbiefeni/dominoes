@@ -178,8 +178,9 @@
             SKColor* color;
             bool flash = false;
             if (levelScore > levelHighScore) {
-                [self setLevelHighScore: levelScore];
-                levelHighScore = levelScore;
+                // check if new best level is also new badge
+                [self checkLevelDisplayBadge];
+
                 hsLabel = [NSString stringWithFormat:@"NEW BEST LEVEL!: %i",levelHighScore];
                 color = [SKColor redColor];
                 [clsCommon playSound:@"bonus.wav" withVolume:.8];
@@ -330,20 +331,20 @@
 
 } //end initwithsize
 
--(int)getPointLevel{
+-(int)getPointLevel:(int)score{
 
-    int score = [self getLevelHighscore];
+    //int score = [self getLevelHighscore];
     int pointLevel = 0;
 
-    //score = 150; //TODO remove
+    //score = 150; // remove
 
     if (score >= 275) {
         pointLevel = 4;
-    }else if (score >=250){
+    }else if (score >=225){
         pointLevel = 3;
-    }else if (score >= 225){
+    }else if (score >= 175){
         pointLevel = 2;
-    }else if (score >= 150){
+    }else if (score >= 125){
         pointLevel = 1;
     }
 
@@ -361,7 +362,7 @@
     double slideSpeed = .5;
     double alphaLevel = .2;
     NSString* badgeName;
-    int pointLevel = [self getPointLevel];
+    int pointLevel = [self getPointLevel:[self getLevelHighscore]];
 
     //make badge1
     BOOL cond = (pointLevel >= 1);
@@ -444,31 +445,42 @@
         [self makeBadgeSliderForPointLevel:pointLevel withDelay:3];
     }
 }
+-(void)checkLevelDisplayBadge{
+    int oldPointLevel = [self getPointLevel:levelHighScore];
+    int newPointLevel = [self getPointLevel:levelScore];
 
--(void)makeRotatingBadgeForBadge:(clsBadge*)badge withScale:(double)scale withSpeed:(double)speed forDuration:(double)duration{
+    [self setLevelHighScore: levelScore];
+    levelHighScore = levelScore;
 
-    int level = [self getPointLevel];
+    if (newPointLevel > oldPointLevel){
+        [self makeRotatingBadgeForBadge:newPointLevel withScale:2 withSpeed:.1 forDuration:5];
+    }
+}
+-(void)makeRotatingBadgeForBadge:(int)badgeNum withScale:(double)scale withSpeed:(double)speed forDuration:(double)duration{
+
+    int level = [self getPointLevel:[self getLevelHighscore]];
 
     [[[self childNodeWithName:@"frame"] childNodeWithName:@"badgeBig"]removeFromParent];
 
-    NSString* bn = [NSString stringWithFormat:@"b%i-",badge.badgeNum];
+    NSString* bn = [NSString stringWithFormat:@"b%i-",badgeNum];
     NSString* badgeName = [bn stringByAppendingString:@"%i.png"];
-    NSString* texture = [NSString stringWithFormat:@"b%i-7.png",badge.badgeNum];
+    NSString* texture = [NSString stringWithFormat:@"b%i-7.png",badgeNum];
     clsBadge* badgeBig = [clsBadge spriteNodeWithImageNamed:texture ];
     badgeBig.name = @"badgeBig";
     badgeBig.position = CGPointMake(20,0);
-    badgeBig.xScale = 3;
-    badgeBig.yScale = 3;
+    badgeBig.xScale = .03;
+    badgeBig.yScale = .03;
     badgeBig.zPosition = 1000;
 
     [[self childNodeWithName:@"frame"] addChild:badgeBig];
 
     SKAction* a;
-    if (level < badge.badgeNum){
+    if (level < badgeNum){
         a = [SKAction sequence:@[
                 [SKAction fadeAlphaTo:.3 duration:0],
-                [SKAction waitForDuration:.1],
-                [SKAction fadeAlphaTo:0 duration:.3],
+                [SKAction scaleTo:3 duration:.1],
+                [SKAction waitForDuration:.05],
+                [SKAction scaleTo:.03 duration:.1],
                 [SKAction removeFromParent]
              ]];
 
@@ -476,9 +488,14 @@
             [clsCommon playSound:@"bonus.wav" withVolume:.8];
 
             NSArray* badgeFrames = [self loadTextures:badgeName start:1 max:7 startRandom:NO];
-            [self animateTexturesOnObject:badgeBig withFrames:badgeFrames withKey:@"badge4" withSpeed:speed forever:false];
+            //[self animateTexturesOnObject:badgeBig withFrames:badgeFrames withKey:@"badge4" withSpeed:speed forever:false];
 
         a = [SKAction sequence:@[
+                    [SKAction scaleTo:5 duration:.25],
+                    [SKAction scaleTo:3 duration:.2],
+                    [SKAction runBlock:^{
+                        [self animateTexturesOnObject:badgeBig withFrames:badgeFrames withKey:@"badge4" withSpeed:speed forever:false];
+                    }],
                    [SKAction waitForDuration:3],
                    [SKAction fadeAlphaTo:0 duration:1],
                    [SKAction removeFromParent]
@@ -494,12 +511,12 @@
         return;
     }
     //draw a prompt bubble description
-    int points = 150;
+    int points = 125;
     NSString* nb = @"next";
     if (pointLevel ==1) {
-        points = 225;
+        points = 175;
     }else if (pointLevel == 2){
-        points = 250;
+        points = 225;
     }else if (pointLevel == 3){
         points = 275;
     }else if (pointLevel == 4){
@@ -594,6 +611,7 @@
 -(void)showRevMobFullScreen{
     RevMobFullscreen *fs = [[RevMobAds session] fullscreen];
     fs.delegate = (id<RevMobAdsDelegate>) [self getActiveController];
+    [fs loadAd];
     [fs showAd];
 }
 
@@ -1014,7 +1032,7 @@
 
         UITouch *touch = [touches anyObject];
         CGPoint location = [touch locationInNode:self];
-        SKSpriteNode *node = (SKSpriteNode*)[self nodeAtPoint:location];
+        clsBadge *node = (clsBadge*)[self nodeAtPoint:location];
 
         // if gamecenter button touched, launch it
         if ([node.name isEqualToString:@"gamecenter"]) {
@@ -1030,9 +1048,9 @@
             }
         }else if ([node.name isEqualToString:@"badge"]){
             [self bounceButton:node forever:false sound:true];
-            [self makeBadgeSliderForPointLevel:[self getPointLevel] withDelay:0 ];
+            [self makeBadgeSliderForPointLevel:[self getPointLevel:[self getLevelHighscore]] withDelay:0 ];
 
-            [self makeRotatingBadgeForBadge:node withScale:2 withSpeed:.1  forDuration:5];
+            [self makeRotatingBadgeForBadge:node.badgeNum withScale:2 withSpeed:.1  forDuration:5];
 
 
         }else if([node.name isEqualToString:@"facebook"]){

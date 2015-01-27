@@ -226,18 +226,18 @@ CGPoint pointA;
     level += 1;
 
     //if won the last round, speed things up a bit
-    BOOL isFaster = false;
-    if (levelScore > 0 && gameSpeed > _maxSpeed) { //define max speed
-        if  (level <=3){
-            gameSpeed -= _gameSpeedIncrement*2;
-            isFaster = true;
-        }else{
-            if (level % 2) {
-                gameSpeed -= _gameSpeedIncrement;
-                isFaster = true;
-            }
-        }
-    }
+//    BOOL isFaster = false;
+//    if (levelScore > 0 && gameSpeed > _maxSpeed) { //define max speed
+//        if  (level <=3){
+//            gameSpeed -= _gameSpeedIncrement*2;
+//            isFaster = true;
+//        }else{
+//            if (level % 2) {
+//                gameSpeed -= _gameSpeedIncrement;
+//                isFaster = true;
+//            }
+//        }
+//    }
 
 
     //reset the level score
@@ -248,27 +248,26 @@ CGPoint pointA;
         maxLevels = level;
     }
 
-    isRunningInIde(
-        //gameSpeed = .02;
-    )
+    //TODO new startup stuff... walls... etc...
+    //instructions if first run...
 
-    // flash some stuff on the screen
-    // show level number 
-    // change level parameters
-    // start countdown.. direction arrows
-    // start the timer that runs the game!
 
+
+    // action that flashes direction arrows
+    SKAction* flashArrows = [SKAction runBlock:^{
+                                [self flashingArrowFor:player showFasterMessage:false];
+                                [self flashingArrowFor:computer showFasterMessage:false];
+                            }];
+    // timer action that runs the game!
+    SKAction* startGame = [SKAction repeatActionForever:[SKAction sequence:@[
+                             [SKAction performSelector:@selector(gameRunner) onTarget:self],
+                             [SKAction waitForDuration:gameSpeed],
+                           ]]];
     [self runAction:
         [SKAction sequence:@[
-            [SKAction runBlock:^{
-                [self flashingArrowFor:player showFasterMessage:isFaster];
-                //[self flashingArrowFor:computer];
-            }],
+            flashArrows,
             [SKAction waitForDuration:2],
-            [SKAction repeatActionForever:[SKAction sequence:@[
-                [SKAction performSelector:@selector(gameRunner) onTarget:self],
-                [SKAction waitForDuration:gameSpeed],
-            ]]]
+            startGame
         ]]
      ];
 
@@ -294,45 +293,45 @@ CGPoint pointA;
 //flash an arrow for a couple seconds
     SKSpriteNode *arrow = [SKSpriteNode spriteNodeWithImageNamed:[NSString stringWithFormat:@"arrow%i",player.curDirection ]];
     arrow.position = [self calcDominoPosition:player.curX withArg2:player.curY];
-    arrow.alpha = .8;
+    arrow.alpha = .1;
     arrow.xScale = .7;
     arrow.yScale = .7;
 
     if (player.isPlayer) {
         arrow.color = [SKColor blueColor];
     }else{
-        arrow.color = [SKColor greenColor];
+        arrow.color = [SKColor redColor];
     }
-    arrow.colorBlendFactor = .7;
+    arrow.colorBlendFactor = .9;
 
     [self addChild:arrow];
 
     ///show "A little bit faster now!" label if
     //faster BOOL is set true
-        SKLabelNode *lblFaster = [SKLabelNode labelNodeWithFontNamed:@"Komika Axis"];
-    if (level == 1){
-        lblFaster.text = NSLocalizedString(@"Let's start off slow...",nil);
-        lblFaster.fontSize = 18 * sizeDoubler;
-    }else{
-        lblFaster.text = NSLocalizedString(@"A Little Faster!",nil);
-        lblFaster.fontSize = 18 * sizeDoubler;
-    }
+       // SKLabelNode *lblFaster = [SKLabelNode labelNodeWithFontNamed:@"Komika Axis"];
+//    if (level == 1){
+//        lblFaster.text = NSLocalizedString(@"Let's start off slow...",nil);
+//        lblFaster.fontSize = 18 * sizeDoubler;
+//    }else{
+//        lblFaster.text = NSLocalizedString(@"A Little Faster!",nil);
+//        lblFaster.fontSize = 18 * sizeDoubler;
+//    }
 
-    lblFaster.color = [SKColor blackColor];
-    lblFaster.colorBlendFactor = 1;
-    lblFaster.alpha = .7;
-    
-    //adjust label position if it's on the arrow
-    if (player.curY > 12 && player.curY < 18) {
-        lblFaster.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame)+(75 * sizeDoubler) ); //
-    }else{
-        lblFaster.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame) );
-    }
-
-    if (faster || level == 1) {
-        [self addChild:lblFaster];
-    }
-
+//    lblFaster.color = [SKColor blackColor];
+//    lblFaster.colorBlendFactor = 1;
+//    lblFaster.alpha = .7;
+//    
+//    //adjust label position if it's on the arrow
+//    if (player.curY > 12 && player.curY < 18) {
+//        lblFaster.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame)+(75 * sizeDoubler) ); //
+//    }else{
+//        lblFaster.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame) );
+//    }
+//
+//    if (faster || level == 1) {
+//        [self addChild:lblFaster];
+//    }
+//
 
     //show lives remaining
     SKLabelNode *lblLives = [SKLabelNode labelNodeWithFontNamed:@"Komika Axis"];
@@ -357,15 +356,15 @@ CGPoint pointA;
     //add a message to prompt user to get next achievement
     int levelHighScore = [self getLevelHighscore];
     SKLabelNode* achievPrompt = [SKLabelNode labelNodeWithFontNamed:@"Komika Axis"];
-    int goal = 100;
+    int goal = 125;
 
     //figure out what the next goal level is
-    if (levelHighScore < 150) {
-        goal = 150;
+    if (levelHighScore < 125) {
+        goal = 125;
+    }else if (levelHighScore < 175){
+        goal = 175;
     }else if (levelHighScore < 225){
         goal = 225;
-    }else if (levelHighScore < 250){
-        goal = 250;
     }else if (levelHighScore < 275){
         goal = 275;
     }else if (levelHighScore < 300){
@@ -398,7 +397,7 @@ CGPoint pointA;
             count:6
           ],
           [SKAction runBlock:^{
-                [lblFaster removeFromParent];
+                //[lblFaster removeFromParent];
                 [lblLives removeFromParent];
                 [achievPrompt removeFromParent];
           }],
@@ -512,7 +511,7 @@ CGPoint pointA;
 
             NSString *burstPath =
             [[NSBundle mainBundle]
-             pathForResource:@"explosion" ofType:@"sks"];
+             pathForResource:@"explosion_red" ofType:@"sks"];
 
             SKEmitterNode *explosion =
             [NSKeyedUnarchiver unarchiveObjectWithFile:burstPath];
@@ -546,11 +545,15 @@ CGPoint pointA;
                   [SKAction runBlock:^{
                     _fallingAnimationDelay = 0;
                     [self enableScore];
+                    bool gotHighLevel = (computerDominos.count>[self getLevelHighscore]);
                     NSLog(@"Dominoes: %i",(int)computerDominos.count);
                     for (clsDomino* dom in [computerDominos reverseObjectEnumerator]) {
                             //code to be executed on the main queue after delay
-                        [dom fallDown:_fallingAnimationDelay isPlayer:false isEnd:false];
-
+                        if(gotHighLevel){
+                            [dom explode:_fallingAnimationDelay];
+                        }else{
+                            [dom fallDown:_fallingAnimationDelay isPlayer:false isEnd:false];
+                        }
                         _fallingAnimationDelay += _fallingAnimationSlowStart;
                         if (_fallingAnimationSlowStart > _fallingAnimationInterval) {
                             _fallingAnimationSlowStart -= .02;
@@ -859,7 +862,7 @@ CGPoint pointA;
     if (!player.didExplosion) {
         NSString *burstPath =
         [[NSBundle mainBundle]
-        pathForResource:@"explosion" ofType:@"sks"];
+        pathForResource:@"explosion2" ofType:@"sks"];
 
         SKEmitterNode *explosion =
         [NSKeyedUnarchiver unarchiveObjectWithFile:burstPath];
@@ -899,6 +902,7 @@ CGPoint pointA;
             for (clsDomino* dom in [playerDominos reverseObjectEnumerator]) {
                     //code to be executed on the main queue after delay
                 [dom fallDown:_fallingAnimationDelay isPlayer:true isEnd:false ];
+                //[dom explode:_fallingAnimationDelay];
 
                 _fallingAnimationDelay += _fallingAnimationSlowStart;
                 if (_fallingAnimationSlowStart > _fallingAnimationInterval) {
@@ -1058,6 +1062,7 @@ CGPoint pointA;
     floor.particleColor = color;
     floor.alpha = .8;
 
+    floor.name = @"floor";
 
 
 

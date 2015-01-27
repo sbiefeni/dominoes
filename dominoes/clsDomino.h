@@ -24,4 +24,6 @@
 
 -(void) fallDown:(NSTimeInterval)delay isPlayer:(BOOL)bPlayer isEnd:(BOOL)bIsEnd;
 
+-(void) explode:(NSTimeInterval)delay;
+
 @end

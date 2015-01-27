@@ -36,6 +36,44 @@ NSMutableArray* dominoFrames;
     }
 }
 
+-(void) explode:(NSTimeInterval)delay {
+
+//explosion.position = CGPointMake(0, 0);
+
+    int rnd = [clsCommon getRanInt:1 maxNumber:5];
+    NSString* which = [@(rnd) stringValue];
+    NSString* sound = [NSString stringWithFormat:@"fireworks%@.mp3", which];
+
+    [self runAction:[SKAction sequence:@[
+                                [SKAction waitForDuration:delay],
+                                [SKAction playSoundFileNamed:sound waitForCompletion:NO],
+                                [SKAction runBlock:^{
+                                    levelScore += 1;
+                                    _CountedScore = true;
+                                    if (levelScore % 3) {
+                                        NSString *burstPath =
+                                        [[NSBundle mainBundle]
+                                         pathForResource:@"explosion_red" ofType:@"sks"];
+                                        SKEmitterNode *explosion =
+                                        [NSKeyedUnarchiver unarchiveObjectWithFile:burstPath];
+                                        explosion.particleBirthRate = 30;
+                                        [self addChild:explosion];
+
+                                        [self runAction:[SKAction sequence:@[
+                                            [SKAction waitForDuration:.50],
+                                            [SKAction runBlock:^{ explosion.particleBirthRate = 0;} ],
+                                            [SKAction waitForDuration:.05],
+                                            [SKAction runBlock:^{[explosion removeFromParent];}],
+                                            [SKAction fadeAlphaTo:.1 duration:0]
+                                        ]]];
+                                    }else{
+                                        self.alpha = .1;
+                                    }
+                                }],
+
+                ]]];
+}
+
 -(void) fallDown:(NSTimeInterval)delay isPlayer:(BOOL)bPlayer isEnd:(BOOL)bIsEnd{
 
     SKTexture* txtr; //= [SKTexture textureWithImageNamed:@"dominoH"];

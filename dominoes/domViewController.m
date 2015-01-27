@@ -23,11 +23,18 @@ BOOL bOnTop;
 GKLocalPlayer *gcPlayer;
 BOOL showingLeaderboard;
 
+
+
 @interface domViewController () <ADBannerViewDelegate>
 
 @property (nonatomic, strong)RevMobFullscreen *fullscreen;
 @property (nonatomic, strong)RevMobBannerView *banner;
 @property (nonatomic, strong)RevMobBanner *bannerWindow;
+
+
+
+
+
 
 @end
 
@@ -215,6 +222,7 @@ BOOL showingLeaderboard;
                       NSLog(@"Session failed to start with block");
                   }];
 }
+
 
 
 
