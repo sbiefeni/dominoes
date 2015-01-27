@@ -1061,7 +1061,7 @@
             [self checkPurchasedItems];
         }else if([node.name isEqualToString:@"help"]) {
             //show help here
-            [self showHTML:@"New.html"];
+            [clsCommon showHTML:@"New.html"];
             [self bounceButton:node forever:true sound:true ];
         }else if([node.name isEqualToString:@"instructions"] || [node.name isEqualToString:@"tapFor"] ){
             UIAlertView *alert = [[UIAlertView alloc]initWithTitle:NSLocalizedString(@"How to Play",nil)

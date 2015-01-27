@@ -188,7 +188,7 @@
     }
     if (fadeOut) {
         b = [SKAction sequence:@[
-                                 [SKAction fadeOutWithDuration:2],
+                                 [SKAction fadeOutWithDuration:1],
                                  [SKAction runBlock:^{
             [[scene childNodeWithName:labelName] removeFromParent];
         }]

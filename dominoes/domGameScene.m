@@ -278,7 +278,7 @@ CGPoint pointA;
         [self addChild:instruct2];
 
         SKAction* show =[SKAction sequence:@[ //3 seconds
-                                             [SKAction scaleTo:1 duration:1],
+                                             [SKAction scaleTo:1 duration:.5],
                                              [SKAction waitForDuration:2],
                                              [SKAction scaleTo:.01 duration:.5],
                                              [SKAction removeFromParent]
@@ -288,9 +288,9 @@ CGPoint pointA;
                                         [SKAction runBlock:^{[instruct1 runAction:show];}],
                                         [SKAction waitForDuration:3],
                                         [SKAction runBlock:^{[instruct2 runAction:show];}],
-                                        [SKAction waitForDuration:2.5],
+                                        [SKAction waitForDuration:3],
                                         [SKAction runBlock:^{
-                                            [clsCommon makeCenterScreenLabelWithText:@"You Are Blue" labelName:@"yrb" withFont:nil withSize:40 withColor:[SKColor blueColor] withAlpha:1 fadeOut:YES flash:YES onScene:self position:2  ];
+                                            [clsCommon makeCenterScreenLabelWithText:@"You Are Blue" labelName:@"yrb" withFont:nil withSize:40 withColor:[SKColor blueColor] withAlpha:1 fadeOut:YES flash:YES onScene:self position:1  ];
                                         }],
                                         [SKAction waitForDuration:3],
                                     ]];

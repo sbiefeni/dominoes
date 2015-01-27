@@ -16,6 +16,4 @@
 
 -(BOOL)enableGameCenterButton;
 
--(void)showHTML:(NSString*)html;
-
 @end
