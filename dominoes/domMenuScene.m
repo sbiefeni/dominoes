@@ -1005,15 +1005,6 @@
 
 }
 
--(void)showHTML:(NSString*)html{
-    __weak UIViewController* tmp = [self getActiveController];
-    MTPopupWindow *popup = [MTPopupWindow new];
-    popup.usesSafari = YES;
-    popup.fileName = html;
-
-    [popup setDelegate: tmp];
-    [popup show];
-}
 
 -(BOOL)checkString:(NSString*)S1 conatains:(NSString*)S2{
     if ([S1 rangeOfString:S2].location != NSNotFound)

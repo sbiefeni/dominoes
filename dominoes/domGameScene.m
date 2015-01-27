@@ -248,26 +248,64 @@ CGPoint pointA;
         maxLevels = level;
     }
 
-    //TODO new startup stuff... walls... etc...
-    //instructions if first run...
-
-
-
-    // action that flashes direction arrows
+// action that flashes direction arrows
     SKAction* flashArrows = [SKAction runBlock:^{
-                                [self flashingArrowFor:player showFasterMessage:false];
-                                [self flashingArrowFor:computer showFasterMessage:false];
-                            }];
-    // timer action that runs the game!
+        [self flashingArrowFor:player showFasterMessage:false];
+        [self flashingArrowFor:computer showFasterMessage:false];
+    }];
+// timer action that runs the game!
     SKAction* startGame = [SKAction repeatActionForever:[SKAction sequence:@[
-                             [SKAction performSelector:@selector(gameRunner) onTarget:self],
-                             [SKAction waitForDuration:gameSpeed],
-                           ]]];
+                                 [SKAction performSelector:@selector(gameRunner) onTarget:self],
+                                 [SKAction waitForDuration:gameSpeed],
+                            ]]];
+
+//TODO new startup stuff
+
+    //instructions if first-ish run...
+    SKAction* instruct = [SKAction new];
+    if([self getLevelHighscore]<30){
+        SKSpriteNode* instruct1 = [SKSpriteNode spriteNodeWithImageNamed:@"directions1.gif"];
+        SKSpriteNode* instruct2 = [SKSpriteNode spriteNodeWithImageNamed:@"directions2.png"];
+        instruct1.xScale = .01; instruct1.yScale = .01;
+        instruct2.xScale = .01; instruct2.yScale = .01;
+        instruct1.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame));
+        instruct2.position = instruct1.position;
+        instruct1.color = [SKColor blueColor];
+        instruct1.colorBlendFactor = 1;
+        instruct2.color = instruct1.color;
+        instruct2.colorBlendFactor = 1;
+        [self addChild:instruct1];
+        [self addChild:instruct2];
+
+        SKAction* show =[SKAction sequence:@[ //3 seconds
+                                             [SKAction scaleTo:1 duration:1],
+                                             [SKAction waitForDuration:2],
+                                             [SKAction scaleTo:.01 duration:.5],
+                                             [SKAction removeFromParent]
+                                             ]];
+
+        instruct = [SKAction sequence:@[ //6 seconds
+                                        [SKAction runBlock:^{[instruct1 runAction:show];}],
+                                        [SKAction waitForDuration:3],
+                                        [SKAction runBlock:^{[instruct2 runAction:show];}],
+                                        [SKAction waitForDuration:2.5],
+                                        [SKAction runBlock:^{
+                                            [clsCommon makeCenterScreenLabelWithText:@"You Are Blue" labelName:@"yrb" withFont:nil withSize:40 withColor:[SKColor blueColor] withAlpha:1 fadeOut:YES flash:YES onScene:self position:2  ];
+                                        }],
+                                        [SKAction waitForDuration:3],
+                                    ]];
+    }
+
+    // build walls based on level
+    SKAction* buildWalls = [SKAction new];
+
     [self runAction:
         [SKAction sequence:@[
-            flashArrows,
-            [SKAction waitForDuration:2],
-            startGame
+              instruct,
+              buildWalls,
+              flashArrows,
+              [SKAction waitForDuration:2],
+              startGame
         ]]
      ];
 

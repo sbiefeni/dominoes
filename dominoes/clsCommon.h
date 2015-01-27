@@ -33,5 +33,10 @@
 
 + (NSString*) getUserSettingForKey:(NSString*)key;
 
++(void)showHTML:(NSString*)html;
+
++(UIViewController*)getActiveController;
+
++(void) makeCenterScreenLabelWithText:(NSString*)text labelName:(NSString*)labelName withFont:(NSString*)font withSize:(int)fontSize withColor:(SKColor*)color withAlpha:(float)alpha fadeOut:(BOOL)fadeOut flash:(BOOL)flash onScene:(SKScene*)scene position:(int)position;
 
 @end
