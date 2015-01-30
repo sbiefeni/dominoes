@@ -16,6 +16,8 @@
 //import Common and Global Variables
 #import "clsCommon.h"
 
+#import "wallSeg.h"
+
 //this is used like the VB isRunningInIde()
 //usage: isRunningInIde( <statement>; <statement>...)
 //apparently NSLog() also stays in the app in production
@@ -42,23 +44,23 @@
     //moved (almost) all variables to domVariables.m
 
     CFTimeInterval startTime;
-    //ADBannerView *adView;
     
     //boolean 2D array, representing our playing grid
     //each value is true if there is a domino placed there
     BOOL grid [cols+1][rows+1];
+    //BOOL wGrid [cols+1][rows+1];
     BOOL testGrid [cols+1][rows+1];  //to record matches during recursive testing
-    
-     //player* player1;
-     //player* computer;
 
-    
+    NSMutableArray* wallGrid;   //to store wall position intersection pairs
+
 }
 
 @property NSTimeInterval fallingAnimationInterval;
 @property NSTimeInterval fallingAnimationDelay;
 @property NSTimeInterval fallingAnimationSlowStart;
 @property int sceneChangeDelay;
+
+@property NSMutableArray* wallSegments;
 
 @end
 
@@ -280,7 +282,7 @@ CGPoint pointA;
         SKAction* show =[SKAction sequence:@[ //3 seconds
                                              [SKAction scaleTo:1 duration:.5],
                                              [SKAction waitForDuration:2],
-                                             [SKAction scaleTo:.01 duration:.5],
+                                             [SKAction scaleTo:.01 duration:.25],
                                              [SKAction removeFromParent]
                                              ]];
 
@@ -297,7 +299,10 @@ CGPoint pointA;
     }
 
     // build walls based on level
-    SKAction* buildWalls = [SKAction new];
+    SKAction* buildWalls = [SKAction runBlock:^{
+        [self buildWallsForLevel:level];
+    }];
+
 
     [self runAction:
         [SKAction sequence:@[
@@ -310,7 +315,59 @@ CGPoint pointA;
      ];
 
 }
+-(void)buildWallsForLevel:(int)level{
 
+
+//X col 10 (20)
+//Y row 14 (28)
+
+    SKSpriteNode* wallimgH = [SKSpriteNode spriteNodeWithImageNamed:@"dom-blue-horizontal"];
+    wallimgH.color = [SKColor purpleColor];
+    wallimgH.colorBlendFactor = 1;
+
+     SKSpriteNode* wallimgV = [SKSpriteNode spriteNodeWithImageNamed:@"dom-blue-vertical"];
+    wallimgV.color = [SKColor purpleColor];
+    wallimgV.colorBlendFactor = 1;
+
+    wallSeg* wallSegment = [wallSeg new];
+//    gridSeg* gridSegment1;
+//    gridSeg* gridSegment2;
+
+///TODO
+    switch (level) {
+        case 1:
+
+            [wallSegment set1X:10 withg1Y:14 withg2X:11 withg2Y:14 withVertical:YES];
+            [wallGrid addObject:wallSegment];
+
+            [wallSegment drawSegmentOnScene:self];
+
+            wallSegment = [wallSeg new];
+            [wallSegment set1X:10 withg1Y:15 withg2X:11 withg2Y:15 withVertical:YES];
+            [wallGrid addObject:wallSegment];
+
+            [wallSegment drawSegmentOnScene:self];
+
+
+
+            break;
+        case 2:
+
+            break;
+        case 3:
+
+            break;
+        case 4:
+
+            break;
+        case 5:
+
+            break;
+
+        default:
+            break;
+    }
+}
 //********* Game Runner - is called on interval time 'gameSpeed' from the repeat action above..
 -(void) gameRunner {
     if(adsShowing)

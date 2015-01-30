@@ -42,4 +42,7 @@ typedef enum {
     game_Over = 2
 } game_Status;
 
+
+- (CGPoint) calcDominoPosition:(int)x withArg2:(int) y;
+
 @end

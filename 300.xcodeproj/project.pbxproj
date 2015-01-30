@@ -59,6 +59,7 @@
 		55CB7E5318CBD181001EFA1C /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 55CB7E5118CBD181001EFA1C /* InfoPlist.strings */; };
 		55CB7E5518CBD181001EFA1C /* dominoesTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 55CB7E5418CBD181001EFA1C /* dominoesTests.m */; };
 		7B031B4F1A7730E50003F60A /* directions2.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B031B4E1A7730E50003F60A /* directions2.png */; };
+		7B215D181A7AB25E008D29F3 /* wallSeg.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B215D171A7AB25E008D29F3 /* wallSeg.m */; };
 		7B3701BE193011B000B284D1 /* iRate.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 7B3701BB193011B000B284D1 /* iRate.bundle */; };
 		7B3701BF193011B000B284D1 /* iRate.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B3701BD193011B000B284D1 /* iRate.m */; };
 		7B3816BF1A6DFB1300CAF112 /* RevMobAds.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B3816BE1A6DFB1300CAF112 /* RevMobAds.framework */; };
@@ -169,6 +170,9 @@
 		7B02047C1925CC530022E947 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		7B02047D1925CD280022E947 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
 		7B031B4E1A7730E50003F60A /* directions2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = directions2.png; sourceTree = "<group>"; };
+		7B215D161A7AB25E008D29F3 /* wallSeg.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = wallSeg.h; sourceTree = "<group>"; };
+		7B215D171A7AB25E008D29F3 /* wallSeg.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = wallSeg.m; sourceTree = "<group>"; };
+		7B215D191A7AB2B9008D29F3 /* gridSeg.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = gridSeg.h; sourceTree = "<group>"; };
 		7B3701BB193011B000B284D1 /* iRate.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = iRate.bundle; sourceTree = "<group>"; };
 		7B3701BC193011B000B284D1 /* iRate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iRate.h; sourceTree = "<group>"; };
 		7B3701BD193011B000B284D1 /* iRate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iRate.m; sourceTree = "<group>"; };
@@ -298,6 +302,7 @@
 			children = (
 				38B7A7FA18E4F91F00F51451 /* h_files */,
 				387B05D418E0A6EE005C8D1F /* clsCommon.m */,
+				7B215D171A7AB25E008D29F3 /* wallSeg.m */,
 				7B72C0CB1A723501006FC3FE /* clsBadge.m */,
 				389B9CF518CFCDCF004960E5 /* clsDomino.m */,
 				389B9CF818CFD449004960E5 /* clsPlayer.m */,
@@ -346,6 +351,8 @@
 		38B7A7FA18E4F91F00F51451 /* h_files */ = {
 			isa = PBXGroup;
 			children = (
+				7B215D161A7AB25E008D29F3 /* wallSeg.h */,
+				7B215D191A7AB2B9008D29F3 /* gridSeg.h */,
 				7B72C0CA1A723501006FC3FE /* clsBadge.h */,
 				387B05D318E0A6EE005C8D1F /* clsCommon.h */,
 				389B9CF418CFCDCF004960E5 /* clsDomino.h */,
@@ -673,6 +680,7 @@
 				55CB7E2E18CBD180001EFA1C /* main.m in Sources */,
 				55CB7E3218CBD181001EFA1C /* domAppDelegate.m in Sources */,
 				344B5BC618D3FA9500E43D82 /* domMenuScene.m in Sources */,
+				7B215D181A7AB25E008D29F3 /* wallSeg.m in Sources */,
 				380B7AC418FE0F6900DF6A09 /* GameCenterManager.m in Sources */,
 				7B3701BF193011B000B284D1 /* iRate.m in Sources */,
 				380B7AC618FE0F6900DF6A09 /* Reachability.m in Sources */,
