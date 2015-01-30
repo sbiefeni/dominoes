@@ -20,12 +20,12 @@
         _Hsegment = [SKSpriteNode spriteNodeWithImageNamed:@"dom-blue-horizontal"];
         _Hsegment.color = [SKColor purpleColor];
         _Hsegment.colorBlendFactor = 1;
-        _Hsegment.yScale = .3;
+        _Hsegment.yScale = .4;
 
         _Vsegment = [SKSpriteNode spriteNodeWithImageNamed:@"dom-blue-vertical"];
         _Vsegment.color = [SKColor purpleColor];
         _Vsegment.colorBlendFactor = 1;
-        _Vsegment.xScale = .3;
+        _Vsegment.xScale = .4;
     }
 
     return self;
@@ -62,10 +62,10 @@
 
     CGPoint wallPoint;
 
-    if(_vertical){
+    if(!_vertical){
         wallPoint = CGPointMake(p1.x, (p1.y+p2.y)/2);
     }else{
-        wallPoint = CGPointMake((p1.x + p2.x), p1.y);
+        wallPoint = CGPointMake((p1.x + p2.x)/2, p1.y);
     }
 
     return wallPoint;

@@ -317,36 +317,24 @@ CGPoint pointA;
 }
 -(void)buildWallsForLevel:(int)level{
 
-
 //X col 10 (20)
 //Y row 14 (28)
 
-    SKSpriteNode* wallimgH = [SKSpriteNode spriteNodeWithImageNamed:@"dom-blue-horizontal"];
-    wallimgH.color = [SKColor purpleColor];
-    wallimgH.colorBlendFactor = 1;
-
-     SKSpriteNode* wallimgV = [SKSpriteNode spriteNodeWithImageNamed:@"dom-blue-vertical"];
-    wallimgV.color = [SKColor purpleColor];
-    wallimgV.colorBlendFactor = 1;
-
-    wallSeg* wallSegment = [wallSeg new];
-//    gridSeg* gridSegment1;
-//    gridSeg* gridSegment2;
-
 ///TODO
+
+    [self addWallSegmentset1X:10 withg1Y:10 withg2X:11 withg2Y:10 withVertical:YES];
+    [self addWallSegmentset1X:10 withg1Y:11 withg2X:11 withg2Y:11 withVertical:YES];
+    [self addWallSegmentset1X:10 withg1Y:12 withg2X:11 withg2Y:12 withVertical:YES];
+    [self addWallSegmentset1X:10 withg1Y:13 withg2X:11 withg2Y:13 withVertical:YES];
+    [self addWallSegmentset1X:10 withg1Y:14 withg2X:11 withg2Y:14 withVertical:YES];
+    [self addWallSegmentset1X:10 withg1Y:15 withg2X:11 withg2Y:15 withVertical:YES];
+    [self addWallSegmentset1X:10 withg1Y:16 withg2X:11 withg2Y:16 withVertical:YES];
+    [self addWallSegmentset1X:10 withg1Y:17 withg2X:11 withg2Y:17 withVertical:YES];
+
+
     switch (level) {
         case 1:
 
-            [wallSegment set1X:10 withg1Y:14 withg2X:11 withg2Y:14 withVertical:YES];
-            [wallGrid addObject:wallSegment];
-
-            [wallSegment drawSegmentOnScene:self];
-
-            wallSegment = [wallSeg new];
-            [wallSegment set1X:10 withg1Y:15 withg2X:11 withg2Y:15 withVertical:YES];
-            [wallGrid addObject:wallSegment];
-
-            [wallSegment drawSegmentOnScene:self];
 
 
 
@@ -368,6 +356,20 @@ CGPoint pointA;
             break;
     }
 }
+-(void)addWallSegmentset1X:(int)g1X withg1Y:(int)g1Y withg2X:(int)g2X withg2Y:(int)g2Y withVertical:(bool)vertical{
+
+    wallSeg* wallSegment = [wallSeg new];
+
+    [wallSegment set1X:g1X withg1Y:g1Y withg2X:g2X withg2Y:g2Y withVertical:vertical];
+
+    [wallGrid addObject:wallSegment];
+    [wallSegment drawSegmentOnScene:self];
+}
+
+
+
+
+
 //********* Game Runner - is called on interval time 'gameSpeed' from the repeat action above..
 -(void) gameRunner {
     if(adsShowing)
