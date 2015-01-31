@@ -25,6 +25,9 @@
 
 #define notRunningInIde(x) if ([[[UIDevice currentDevice].model lowercaseString] rangeOfString:@"simulator"].location == NSNotFound){x;}
 
+#define ARRAY_SIZE( array ) (sizeof( array ) / sizeof( array[0] ))
+
+#define runAfter(X,After)    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, After * NSEC_PER_SEC), dispatch_get_main_queue(), ^{X});
 
 //define z positions for objects
 #define dominoZPos      6
@@ -51,7 +54,7 @@
     //BOOL wGrid [cols+1][rows+1];
     BOOL testGrid [cols+1][rows+1];  //to record matches during recursive testing
 
-    NSMutableArray* wallGrid;   //to store wall position intersection pairs
+    //NSMutableArray* wallGrid;   //to store wall position intersection pairs
 
 }
 
@@ -72,6 +75,8 @@ CGPoint pointA;
 -(id)initWithSize:(CGSize)size {
     if (self = [super initWithSize:size]) {
         /* Setup your scene here */
+
+        _wallSegments = [[NSMutableArray alloc]init];
 
         sizeDoubler = 1;
         if (size.width > 320){ //make fonts and spacing bigger on larger screen
@@ -315,21 +320,49 @@ CGPoint pointA;
      ];
 
 }
+
+
 -(void)buildWallsForLevel:(int)level{
 
 //X col 10 (20)
 //Y row 14 (28)
 
 ///TODO
+      //{X,Y,X1,Y1,Vertical}
+    int array[][5]={
 
-    [self addWallSegmentset1X:10 withg1Y:10 withg2X:11 withg2Y:10 withVertical:YES];
-    [self addWallSegmentset1X:10 withg1Y:11 withg2X:11 withg2Y:11 withVertical:YES];
-    [self addWallSegmentset1X:10 withg1Y:12 withg2X:11 withg2Y:12 withVertical:YES];
-    [self addWallSegmentset1X:10 withg1Y:13 withg2X:11 withg2Y:13 withVertical:YES];
-    [self addWallSegmentset1X:10 withg1Y:14 withg2X:11 withg2Y:14 withVertical:YES];
-    [self addWallSegmentset1X:10 withg1Y:15 withg2X:11 withg2Y:15 withVertical:YES];
-    [self addWallSegmentset1X:10 withg1Y:16 withg2X:11 withg2Y:16 withVertical:YES];
-    [self addWallSegmentset1X:10 withg1Y:17 withg2X:11 withg2Y:17 withVertical:YES];
+        //vertical
+        {10,10,11,10,1},
+        {10,11,11,11,1},
+        {10,12,11,12,1},
+        {10,13,11,13,1},
+        {10,14,11,14,1},
+        {10,15,11,15,1},
+        {10,16,11,16,1},
+        {10,17,11,17,1},
+
+        //bottom bar
+        {9,10,9,9,0},
+        {10,10,10,9,0},
+        {11,10,11,9,0},
+        {12,10,12,9,0},
+
+        //top bar
+        {9,17,9,18,0},
+        {10,17,10,18,0},
+        {11,17,11,18,0},
+        {12,17,12,18,0},
+
+    };
+
+    for (int i=0; i<ARRAY_SIZE(array); i++) {
+        if (array[i][0] > 0 && array[i][0] < 30) {
+            [self addWallSegment:array[i] delay:(double)i/10];
+        }else{
+            break;
+        }
+    }
+
 
 
     switch (level) {
@@ -356,16 +389,33 @@ CGPoint pointA;
             break;
     }
 }
--(void)addWallSegmentset1X:(int)g1X withg1Y:(int)g1Y withg2X:(int)g2X withg2Y:(int)g2Y withVertical:(bool)vertical{
+//-(void)addWallSegmentset1X:(int)g1X withg1Y:(int)g1Y withg2X:(int)g2X withg2Y:(int)g2Y withVertical:(bool)vertical{
+//
+//    wallSeg* wallSegment = [wallSeg new];
+//
+//    [wallSegment set1X:g1X withg1Y:g1Y withg2X:g2X withg2Y:g2Y withVertical:vertical];
+//
+//    [wallGrid addObject:wallSegment];
+//    [wallSegment drawSegmentOnScene:self];
+//}
+
+-(void)addWallSegment:(int[5])array delay:(double)delay{
 
     wallSeg* wallSegment = [wallSeg new];
 
-    [wallSegment set1X:g1X withg1Y:g1Y withg2X:g2X withg2Y:g2Y withVertical:vertical];
+    [wallSegment set1X:array[0] withg1Y:array[1] withg2X:array[2] withg2Y:array[3] withVertical:(array[4]==1)];
 
-    [wallGrid addObject:wallSegment];
-    [wallSegment drawSegmentOnScene:self];
+    [_wallSegments addObject:wallSegment];
+
+    [self runAction:[SKAction sequence:@[
+                                    [SKAction waitForDuration:delay],
+                                    [SKAction runBlock:^{
+                                        [wallSegment drawSegmentOnScene:self];
+                                    }]
+                                ]]];
+
+
 }
-
 
 
 

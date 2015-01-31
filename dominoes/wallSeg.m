@@ -21,6 +21,7 @@
         _Hsegment.color = [SKColor purpleColor];
         _Hsegment.colorBlendFactor = 1;
         _Hsegment.yScale = .4;
+        _Hsegment.xScale = 1.2;
 
         _Vsegment = [SKSpriteNode spriteNodeWithImageNamed:@"dom-blue-vertical"];
         _Vsegment.color = [SKColor purpleColor];
