@@ -57,6 +57,7 @@
 
     //NSMutableArray* wallGrid;   //to store wall position intersection pairs
 
+    double wallDrawSpeed;
 }
 
 @property NSTimeInterval fallingAnimationInterval;
@@ -164,36 +165,36 @@ CGPoint pointA;
 
 -(void) setRandomStartLocation: (clsPlayer*) _player computer:(BOOL)comp{
 
-    int halfX = cols/2;
-    BOOL lowerQuad;
-    BOOL leftQuad;
+    //int halfX = cols/2;
+//    BOOL lowerQuad;
+//    BOOL leftQuad;
 
-    NSMutableArray* directionChoices = [NSMutableArray new];
+    //NSMutableArray* directionChoices = [NSMutableArray new];
 
-    int xPos = [clsCommon getRanInt:1 maxNumber:halfX];
-    int yPos = [clsCommon getRanInt:1 maxNumber:rows];
+    int xPos = (comp) ? 11 : 10 ;
+    int yPos = (comp)? 15 : 14;
 
-    lowerQuad = (yPos < rows/2);
-    leftQuad = (xPos < halfX/2);
+//    lowerQuad = (yPos < rows/2);
+//    leftQuad = (xPos < halfX/2);
 
-    if (lowerQuad) {
-        [directionChoices addObject:[NSNumber numberWithInt:up]];
-    }else{
-        [directionChoices addObject:[NSNumber numberWithInt:down]];
-    }
-    if (leftQuad) {
-        [directionChoices addObject:[NSNumber numberWithInt:right]];
-    }else{
-        [directionChoices addObject:[NSNumber numberWithInt:left]];
-    }
+//    if (lowerQuad) {
+//        [directionChoices addObject:[NSNumber numberWithInt:up]];
+//    }else{
+//        [directionChoices addObject:[NSNumber numberWithInt:down]];
+//    }
+//    if (leftQuad) {
+//        [directionChoices addObject:[NSNumber numberWithInt:right]];
+//    }else{
+//        [directionChoices addObject:[NSNumber numberWithInt:left]];
+//    }
 
-    _player.curX = (comp==TRUE)? xPos + halfX:xPos;
+    _player.curX = xPos;
     _player.curY = yPos;
 
     _player.isPlayer = (comp==false);
 
-    int choice = [clsCommon getRanInt:0 maxNumber:1];
-    _player.curDirection = [[directionChoices objectAtIndex:choice] intValue];
+    //int choice = [clsCommon getRanInt:0 maxNumber:1];
+    _player.curDirection = (comp == true)? right : left;
     _player.lastDirection = _player.curDirection;
 
 
@@ -230,8 +231,10 @@ CGPoint pointA;
         }
     }
 
+    if (levelScore > 0 || level == 0) {
+        level += 1;
+    }
 
-    level += 1;
 
     //if won the last round, speed things up a bit
 //    BOOL isFaster = false;
@@ -329,39 +332,115 @@ CGPoint pointA;
         //Y row 14 (28)
         //{X,Y,X1,Y1,Vertical}
 
-    //todo make wall levels
+    //todo for testing
+    gameSpeed = .05;
+    //level=4;
+
+    wallDrawSpeed = .05;
 
 //define array matrix seperately for each level
-//    switch (level) {
-//        case 1:
-            //    T-Bar
-            //    ___
-            //     |
-            //     |
-            //     |
-            //    ---
-        [self drawWallSectionVfromY:10 ToY:17 X:10 start:true];
-        //bottom bar
-        [self drawWallSectionHfromX:10 ToX:11 Y:9 start:false];
-        //top bar
-        [self drawWallSectionHfromX:10 ToX:11 Y:17 start:false];
+    switch (level) {
+        case 1:
+            //      |   Vertical split
+            //
+            //      |
+            [self drawWallSectionVfromY:8 ToY:12 X:10 start:true];
+            [self drawWallSectionVfromY:16 ToY:20 X:10 start:false];
+            break;
+        case 2:
+            //      |    vertical line
+            //      |
+            //      |
+            //      |
+            [self drawWallSectionVfromY:8 ToY:20 X:10 start:true];
+            break;
+        case 3:
+            //      ___   T-Bar
+            //       |
+            //       |
+            //       |
+            //       |
+            //      ---
+            [self drawWallSectionVfromY:10 ToY:17 X:10 start:true];
+            //bottom bar
+            [self drawWallSectionHfromX:10 ToX:11 Y:9 start:false];
+            //top bar
+            [self drawWallSectionHfromX:10 ToX:11 Y:17 start:false];
+            
 
-//            break;
-//
-//        default:
-//            break;
-//    }
+            break;
+        case 4:
+            //   _     _   four corners
+            //  |       |
+
+            //  |       |
+            //   -     -
+            //top left
+            [self drawWallSectionVfromY:16 ToY:20 X:4 start:true];
+            [self drawWallSectionHfromX:5 ToX:9 Y:20 start:false];
+            //top right
+            [self drawWallSectionHfromX:12 ToX:16 Y:20 start:false];
+            [self drawWallSectionVfromY:20 ToY:16 X:16 start:false];
+            //bottom right
+            [self drawWallSectionVfromY:13 ToY:9 X:16 start:false];
+            [self drawWallSectionHfromX:16 ToX:12 Y:8 start:false];
+            //bottom left
+            [self drawWallSectionHfromX:9 ToX:5 Y:8 start:false];
+            [self drawWallSectionVfromY:9 ToY:13 X:4 start:false];
+            break;
+
+        case 5:
+            // cross to outside walls
+            //left
+            [self drawWallSectionHfromX:0 ToX:4 Y:14 start:true];
+            //top
+            [self drawWallSectionVfromY:28 ToY:24 X:10 start:false];
+            //right
+            [self drawWallSectionHfromX:20 ToX:16 Y:14 start:false];
+            //bottom
+            [self drawWallSectionVfromY:0 ToY:4 X:10 start:false];
+            break;
+
+        default:
+            //large box with top/bottom opening
+            [self drawWallSectionVfromY:3 ToY:25 X:2 start:true]; //left
+            [self drawWallSectionHfromX:3 ToX:8 Y:25 start:false]; //top
+            [self drawWallSectionHfromX:13 ToX:17 Y:25 start:false]; //top
+            [self drawWallSectionVfromY:25 ToY:3 X:17 start:false]; //right
+            [self drawWallSectionHfromX:17 ToX:13 Y:2 start:false]; //bottom
+            [self drawWallSectionHfromX:8 ToX:3 Y:2 start:false]; //bottom
+
+
+
+            break;
+    }
 
 
 }
 -(void)drawWallSectionVfromY:(int)Y ToY:(int)ToY X:(int)X start:(BOOL)start{
-    for (int i=Y; i<=ToY; i++) {
-        [self addWallSegmentg1X:X g1Y:i g2X:X+1 g2Y:i vertical:true start:(i==Y && start)];
+
+    int inc = (Y < ToY)?1:-1;
+    if (inc == 1) {
+        for (int i=Y; i<=ToY; i++) {
+            [self addWallSegmentg1X:X g1Y:i g2X:X+1 g2Y:i vertical:true start:(i==Y && start)];
+        }
+    }else{
+        for (int i=Y; i>=ToY; i--) {
+            [self addWallSegmentg1X:X g1Y:i g2X:X+1 g2Y:i vertical:true start:(i==Y && start)];
+        }
     }
 }
 -(void)drawWallSectionHfromX:(int)X ToX:(int)ToX Y:(int)Y start:(BOOL)start{
-    for (int i=X; i<=ToX; i++) {
-        [self addWallSegmentg1X:i g1Y:Y g2X:i g2Y:Y+1 vertical:false start:(i==X && start)];
+
+    int inc = (X < ToX)?1:-1;
+    if (inc == 1) {
+        for (int i=X; i<=ToX; i++) {
+            [self addWallSegmentg1X:i g1Y:Y g2X:i g2Y:Y+1 vertical:false start:(i==X && start)];
+        }
+    }else{
+        for (int i=X; i>=ToX; i--) {
+            [self addWallSegmentg1X:i g1Y:Y g2X:i g2Y:Y+1 vertical:false start:(i==X && start)];
+        }
     }
 }
 
@@ -371,7 +450,7 @@ CGPoint pointA;
     if (start) {
         delay = 0;
     }
-    delay += .1;
+    delay += wallDrawSpeed;
 
     wallSeg* wallSegment = [wallSeg new];
 
@@ -565,9 +644,11 @@ CGPoint pointA;
 
     //Computer direction should already be set.. default:down
 
+    BOOL crossingWall = [self checkIfCrossingWallWithDirection:computer.curDirection curX:X curY:Y];
+
     switch (computer.curDirection) {
         case left:
-            if (X > 0 && grid[X-1][Y]==false) {
+            if (X > 0 && grid[X-1][Y]==false && !crossingWall) {
                 computer.curX --;
             }else{
                 //NSLog(@"CRASH!!!");
@@ -575,7 +656,7 @@ CGPoint pointA;
             }
             break;
         case right:
-            if (X < cols && grid[X+1][Y]==false){
+            if (X < cols && grid[X+1][Y]==false && !crossingWall){
                 computer.curX ++;
             }else{
                 //NSLog(@"CRASH!!!");
@@ -583,7 +664,7 @@ CGPoint pointA;
             }
             break;
         case up:
-            if (Y < rows && grid[X][Y+1]==false){
+            if (Y < rows && grid[X][Y+1]==false && !crossingWall){
                 computer.curY ++;
             }else{
                 //NSLog(@"CRASH!!!");
@@ -591,7 +672,7 @@ CGPoint pointA;
             }
             break;
         case down:
-            if (Y > 0 && grid[X][Y-1]==false){
+            if (Y > 0 && grid[X][Y-1]==false && !crossingWall){
                 computer.curY --;
             }else{
                 //NSLog(@"CRASH!!!");
@@ -957,7 +1038,7 @@ CGPoint pointA;
 
 -(void) handlePlayerMove{
 
-    if (roundOver) {
+    if (roundOver) { //todo
         return;
     }
 
@@ -1425,19 +1506,19 @@ int countSquares;
     BOOL e = !grid[X-1][Y] && X > 0  ? true : false;
     BOOL w = !grid[X+1][Y] && X < cols ? true : false;
 
-    if(n  && !testGrid[X][Y+1])
+    if(n  && !testGrid[X][Y+1] && ![self checkIfCrossingWallWithDirection:up curX:X curY:Y])
     {
         [self parse_quad_tree:X originY:Y+1];
     }
-    if(s && !testGrid[X][Y-1])
+    if(s && !testGrid[X][Y-1] && ![self checkIfCrossingWallWithDirection:down curX:X curY:Y])
     {
         [self parse_quad_tree:X originY:Y-1 ];
     }
-    if(e && !testGrid[X-1][Y])
+    if(e && !testGrid[X-1][Y] && ![self checkIfCrossingWallWithDirection:left curX:X curY:Y])
     {
         [self parse_quad_tree:X-1 originY: Y];
     }
-    if(w && !testGrid[X+1][Y])
+    if(w && !testGrid[X+1][Y] && ![self checkIfCrossingWallWithDirection:right curX:X curY:Y])
     {
         [self parse_quad_tree:X+1 originY:Y];
     }
