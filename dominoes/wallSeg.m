@@ -8,6 +8,9 @@
 
 #import "wallSeg.h"
 #import "domGameScene.h"
+#import "clsGameSettings.h"
+
+#define wallZpos        7
 
 @implementation wallSeg{
 
@@ -20,13 +23,15 @@
         _Hsegment = [SKSpriteNode spriteNodeWithImageNamed:@"dom-blue-horizontal"];
         _Hsegment.color = [SKColor purpleColor];
         _Hsegment.colorBlendFactor = 1;
-        _Hsegment.yScale = .4;
-        _Hsegment.xScale = 1.2;
+        _Hsegment.size = CGSizeMake(dominoSize.width * 1.1,  dominoSize.height * .5 );
+       // _Hsegment.xScale = dominoScaleFactorX;
 
         _Vsegment = [SKSpriteNode spriteNodeWithImageNamed:@"dom-blue-vertical"];
         _Vsegment.color = [SKColor purpleColor];
         _Vsegment.colorBlendFactor = 1;
-        _Vsegment.xScale = .4;
+        //_Vsegment.xScale = .4;
+       // _Vsegment.yScale = dominoSize.height;
+        _Vsegment.size = CGSizeMake(dominoSize.width * .5, dominoSize.height * 1.30);
     }
 
     return self;
@@ -48,9 +53,11 @@
 
     if(_vertical){
         _Vsegment.position = [self calcSegmentPositionOnScene:scene];
+        _Vsegment.zPosition = wallZpos;
         [scene addChild:_Vsegment];
     }else{
         _Hsegment.position = [self calcSegmentPositionOnScene:scene];
+        _Hsegment.zPosition = wallZpos;
         [scene addChild:_Hsegment];
     }
     

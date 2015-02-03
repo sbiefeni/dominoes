@@ -31,6 +31,7 @@
 
 //define z positions for objects
 #define dominoZPos      6
+#define wallZpos        7
 
 //define rows and cols
 #define rows        28
@@ -324,98 +325,93 @@ CGPoint pointA;
 
 -(void)buildWallsForLevel:(int)level{
 
-//X col 10 (20)
-//Y row 14 (28)
+        //X col 10 (20)
+        //Y row 14 (28)
+        //{X,Y,X1,Y1,Vertical}
 
-///TODO
-      //{X,Y,X1,Y1,Vertical}
-    int array[][5]={
+    //todo make wall levels
 
-        //vertical
-        {10,10,11,10,1},
-        {10,11,11,11,1},
-        {10,12,11,12,1},
-        {10,13,11,13,1},
-        {10,14,11,14,1},
-        {10,15,11,15,1},
-        {10,16,11,16,1},
-        {10,17,11,17,1},
-
+//define array matrix seperately for each level
+//    switch (level) {
+//        case 1:
+            //    T-Bar
+            //    ___
+            //     |
+            //     |
+            //     |
+            //    ---
+        [self drawWallSectionVfromY:10 ToY:17 X:10 start:true];
         //bottom bar
-        {9,10,9,9,0},
-        {10,10,10,9,0},
-        {11,10,11,9,0},
-        {12,10,12,9,0},
-
+        [self drawWallSectionHfromX:10 ToX:11 Y:9 start:false];
         //top bar
-        {9,17,9,18,0},
-        {10,17,10,18,0},
-        {11,17,11,18,0},
-        {12,17,12,18,0},
+        [self drawWallSectionHfromX:10 ToX:11 Y:17 start:false];
 
-    };
-
-    for (int i=0; i<ARRAY_SIZE(array); i++) {
-        if (array[i][0] > 0 && array[i][0] < 30) {
-            [self addWallSegment:array[i] delay:(double)i/10];
-        }else{
-            break;
-        }
-    }
+//            break;
+//
+//        default:
+//            break;
+//    }
 
 
-
-    switch (level) {
-        case 1:
-
-
-
-
-            break;
-        case 2:
-
-            break;
-        case 3:
-
-            break;
-        case 4:
-
-            break;
-        case 5:
-
-            break;
-
-        default:
-            break;
+}
+-(void)drawWallSectionVfromY:(int)Y ToY:(int)ToY X:(int)X start:(BOOL)start{
+    for (int i=Y; i<=ToY; i++) {
+        [self addWallSegmentg1X:X g1Y:i g2X:X+1 g2Y:i vertical:true start:(i==Y && start)];
     }
 }
-//-(void)addWallSegmentset1X:(int)g1X withg1Y:(int)g1Y withg2X:(int)g2X withg2Y:(int)g2Y withVertical:(bool)vertical{
-//
-//    wallSeg* wallSegment = [wallSeg new];
-//
-//    [wallSegment set1X:g1X withg1Y:g1Y withg2X:g2X withg2Y:g2Y withVertical:vertical];
-//
-//    [wallGrid addObject:wallSegment];
-//    [wallSegment drawSegmentOnScene:self];
-//}
+-(void)drawWallSectionHfromX:(int)X ToX:(int)ToX Y:(int)Y start:(BOOL)start{
+    for (int i=X; i<=ToX; i++) {
+        [self addWallSegmentg1X:i g1Y:Y g2X:i g2Y:Y+1 vertical:false start:(i==X && start)];
+    }
+}
 
--(void)addWallSegment:(int[5])array delay:(double)delay{
+-(void)addWallSegmentg1X:(int)g1X g1Y:(int)g1Y g2X:(int)g2X g2Y:(int)g2Y vertical:(BOOL)vertical start:(BOOL)start{
+
+    static double delay;
+    if (start) {
+        delay = 0;
+    }
+    delay += .1;
 
     wallSeg* wallSegment = [wallSeg new];
 
-    [wallSegment set1X:array[0] withg1Y:array[1] withg2X:array[2] withg2Y:array[3] withVertical:(array[4]==1)];
-
+    [wallSegment set1X:g1X withg1Y:g1Y withg2X:g2X withg2Y:g2Y withVertical:vertical];
     [_wallSegments addObject:wallSegment];
-
     [self runAction:[SKAction sequence:@[
-                                    [SKAction waitForDuration:delay],
-                                    [SKAction runBlock:^{
-                                        [wallSegment drawSegmentOnScene:self];
-                                    }]
-                                ]]];
-
-
+                         [SKAction waitForDuration:delay],
+                         [SKAction runBlock:^{
+                            [wallSegment drawSegmentOnScene:self];
+                         }]
+                    ]]];
 }
+//-(void) doWallSegments:(int[12][5])array{
+//
+//    for (int i=0; i<ARRAY_SIZE(array); i++) {
+//        if (array[i][0] > 0 && array[i][0] < 30) {
+//            [self addWallSegment:array[i] delay:(double)i/10];
+//        }else{
+//            break;
+//        }
+//    }
+//
+//}
+//-(void)addWallSegment:(int[5])array delay:(double)delay{
+//
+//    wallSeg* wallSegment = [wallSeg new];
+//
+//    [wallSegment set1X:array[0] withg1Y:array[1] withg2X:array[2] withg2Y:array[3] withVertical:(array[4]==1)];
+//
+//    [_wallSegments addObject:wallSegment];
+//
+//    [self runAction:[SKAction sequence:@[
+//                                    [SKAction waitForDuration:delay],
+//                                    [SKAction runBlock:^{
+//                                        [wallSegment drawSegmentOnScene:self];
+//                                    }]
+//                                ]]];
+//
+//
+//}
 
 
 
@@ -808,6 +804,60 @@ CGPoint pointA;
 
 }
 
+-(BOOL)checkIfCrossingWallWithDirection:(int)D curX:(int)X curY:(int)Y{
+
+    int nX;
+    int nY;
+    BOOL posMatch1stSeg;
+    BOOL posMatch2ndSeg;
+    BOOL fposMatch1stSeg;
+    BOOL fposMatch2ndSeg;
+
+    nX = X;
+    nY = Y;
+
+    switch (D) {
+        case up:
+            nY = Y + 1;
+            break;
+        case right:
+            nX = X + 1;
+            break;
+        case down:
+            nY = Y - 1;
+            break;
+        case left:
+            nX = X - 1;
+            break;
+        default:
+            break;
+    }
+
+
+
+    for (wallSeg* wallseg in _wallSegments) {
+
+        posMatch1stSeg = (X == wallseg.g1X && Y == wallseg.g1Y);
+        posMatch2ndSeg = (X == wallseg.g2X && Y == wallseg.g2Y);
+        fposMatch1stSeg = (nX == wallseg.g1X && nY == wallseg.g1Y);
+        fposMatch2ndSeg = (nX == wallseg.g2X && nY == wallseg.g2Y);
+
+
+        if (posMatch1stSeg) { //position matches first wall seg grid
+            if (fposMatch2ndSeg){  // and future position matches second wall seggrid
+                return true;
+            }
+        }else{
+            if (posMatch2ndSeg) {  //position matches second wall seg grid
+                if (fposMatch1stSeg) {//and future position matches first wall seg grid
+                    return true;
+                }
+            }
+        }
+    }
+
+    return false;
+}
 -(void) testNextComputerMove{
 
     //checks if the next move will cause the computer to crash
@@ -820,6 +870,8 @@ CGPoint pointA;
     int D = computer.curDirection;
     //don't change path if choices are equal on a unforced 2 choice evaluation
     //BOOL noChange = false;
+
+    //BOOL crossingWall = [self checkIfCrossingWallWithDirection:D curX:X curY:Y];
 
     //1 in n chance of a random direction change at any time
     int rndChance = 25;
@@ -835,22 +887,22 @@ CGPoint pointA;
 
 //evaluate all possible directions, for the best one
     if (D != right) {
-        if (X > 0 && grid[X-1][Y]==false) {
+        if (X > 0 && grid[X-1][Y]==false && ![self checkIfCrossingWallWithDirection:left curX:X curY:Y]) {
             [directionChoices addObject:[NSNumber numberWithInt:left]];
         }
     }
     if (D != down) {
-        if (Y < rows && grid[X][Y+1]==false) {
+        if (Y < rows && grid[X][Y+1]==false && ![self checkIfCrossingWallWithDirection:up curX:X curY:Y]) {
             [directionChoices addObject:[NSNumber numberWithInt:up]];
         }
     }
     if (D != left) {
-        if (X < cols && grid[X+1][Y]==false) {
+        if (X < cols && grid[X+1][Y]==false && ![self checkIfCrossingWallWithDirection:right curX:X curY:Y]) {
             [directionChoices addObject:[NSNumber numberWithInt:right]];
         }
     }
     if (D != up) {
-        if (Y > 0 && grid[X][Y-1]==false) {
+        if (Y > 0 && grid[X][Y-1]==false && ![self checkIfCrossingWallWithDirection:down curX:X curY:Y]) {
             [directionChoices addObject:[NSNumber numberWithInt:down]];
         }
     }
@@ -905,7 +957,6 @@ CGPoint pointA;
 
 -(void) handlePlayerMove{
 
-
     if (roundOver) {
         return;
     }
@@ -916,12 +967,7 @@ CGPoint pointA;
     BOOL crashed = false;
     
 //        //get player direction
-//    NSUserDefaults *standardUserDefaults = [NSUserDefaults standardUserDefaults];
-//    NSNumber *tmpValue;
-//    if (standardUserDefaults) {
-//        tmpValue = [standardUserDefaults objectForKey:@"playerDirection"];
-//    }
-//    player.curDirection = [tmpValue intValue];
+
 
     //change the direction if a uTurn was executed
     switch (player.uTurnStep) {
@@ -1080,10 +1126,11 @@ CGPoint pointA;
 -(BOOL)doNextPlayerMove {
 
     BOOL crashed = false;
+    BOOL aboutToCrossWall = [self checkIfCrossingWallWithDirection:player.curDirection curX:player.curX curY:player.curY];
 
     switch (player.curDirection) {
         case left:
-            if (player.curX > 0 && grid[player.curX-1][player.curY]==false) {
+            if (player.curX > 0 && grid[player.curX-1][player.curY]==false && !aboutToCrossWall) {
                 player.curX --;
                 player.lastDirection = player.curDirection;
             }else{
@@ -1101,7 +1148,7 @@ CGPoint pointA;
             }
             break;
         case right:
-            if (player.curX < cols && grid[player.curX+1][player.curY]==false){
+            if (player.curX < cols && grid[player.curX+1][player.curY]==false && !aboutToCrossWall){
                 player.curX ++;
                 player.lastDirection = player.curDirection;
             }else{
@@ -1119,7 +1166,7 @@ CGPoint pointA;
             }
             break;
         case up:
-            if (player.curY < rows && grid[player.curX][player.curY+1]==false){
+            if (player.curY < rows && grid[player.curX][player.curY+1]==false && !aboutToCrossWall){
                 player.curY ++;
                 player.lastDirection = player.curDirection;
             }else{
@@ -1138,7 +1185,7 @@ CGPoint pointA;
 
             break;
         case down:
-            if (player.curY > 0 && grid[player.curX][player.curY-1]==false){
+            if (player.curY > 0 && grid[player.curX][player.curY-1]==false && !aboutToCrossWall){
                 player.curY --;
                 player.lastDirection = player.curDirection;
             }else{
