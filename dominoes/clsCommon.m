@@ -91,7 +91,7 @@
     
 }
 
-+ (int)getRanInt:(int)min maxNumber:(int)max butNot:(int)notNum
++ (int)getRanIntWithMin:(int)min withMax:(int)max butNot:(int)notNum
 {
     int num;
     do

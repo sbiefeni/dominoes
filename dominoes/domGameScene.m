@@ -74,6 +74,8 @@
 
 CGPoint pointA;
 
+#pragma mark Setup
+
 -(id)initWithSize:(CGSize)size {
     if (self = [super initWithSize:size]) {
         /* Setup your scene here */
@@ -270,7 +272,7 @@ CGPoint pointA;
                                  [SKAction waitForDuration:gameSpeed],
                             ]]];
 
-//TODO new startup stuff
+// startup stuff
 
     //instructions if first-ish run...
     SKAction* instruct = [SKAction new];
@@ -325,21 +327,159 @@ CGPoint pointA;
 
 }
 
+-(void) setUpBackgroundFloor{
+    NSString *floorPath =
+    [[NSBundle mainBundle]
+     pathForResource:@"floor1" ofType:@"sks"];
 
--(void)buildWallsForLevel:(int)level{
+    SKEmitterNode *floor =
+    [NSKeyedUnarchiver unarchiveObjectWithFile:floorPath];
+
+
+    //floor.position = backGround.position;
+
+    floor.zPosition = -1;
+    float red = 0;
+    float green = .1;
+    float blue = 1;
+
+
+    SKColor* color = [SKColor colorWithRed:red green:green blue:blue alpha:1];
+
+    floor.particleColorSequence = nil;
+    floor.particleColorBlendFactor = 1.0;
+
+    floor.particleColor = color;
+    floor.alpha = .8;
+
+    floor.name = @"floor";
+
+
+
+    [backGround addChild:floor];
+}
+
+-(void) getBannerHeight{
+    bannerSizeY = (arenaSize.width == 320) ? 50 : 56;
+}
+
+-(void) setUpBackGround{
+
+    int bannerCount =0;
+
+    //randomize or otherwise have changing arenas
+
+    //int rndBackground = [clsCommon getRanInt:1 maxNumber:7];
+
+    //adShowingArenaScaleAmount = 0;
+    backGround = [SKSpriteNode spriteNodeWithImageNamed:@"new-arena5.png"];
+
+    backGround.color = [SKColor redColor];
+    backGround.colorBlendFactor = .8;
+
+    //calculate min and max extents, based on original background size
+    [self setUpMinMaxExtents:backGround.size];
+
+    //determine the banner size (according to iAD)
+    [self getBannerHeight];  //bannerSizeY = (arenaSize.width == 320)?50:56;
+
+    bannerHeightAdjuster = 0;
+
+    //if only one of the banners is on, then we need an adjuster to center things
+    if (ceilingOn + floorOn ==1){
+        bannerHeightAdjuster = (ceilingOn) ? -(bannerSizeY/2): +(bannerSizeY/2);
+    }
+
+    if (floorOn){
+        bannerCount +=1;
+    }
+    if (ceilingOn){
+        bannerCount +=1;
+    }
+
+
+    //get the scale factors, so we know how much to scale any other images
+    scaleX = backGround.size.width  / arenaSize.width;
+    scaleY = backGround.size.height / (arenaSize.height -(bannerSizeY * bannerCount) );
+
+    backGround.size = CGSizeMake(arenaSize.width, arenaSize.height );
+
+    //fine tune the scale of the background
+    if (arenaSize.width == 320){
+        if (scaleY > 4.5) {
+            adShowingArenaScaleAmount = .895; //for 3.5" iphone
+        }else{
+            adShowingArenaScaleAmount = .915;  //for 4.0" iphone
+        }
+    }else{
+        adShowingArenaScaleAmount = .955;  //for ipad
+    }
+
+    if (bannerCount > 0){
+        [backGround setYScale:adShowingArenaScaleAmount];
+    }
+
+    float backGroundPos = arenaSize.height/2 + bannerHeightAdjuster ;
+
+
+    backGround.position = CGPointMake(arenaSize.width/2, backGroundPos);
+    backGround.zPosition = 250;
+
+
+    //pick a random floor tile...but not the same as last
+    int rndTile = [clsCommon getRanIntWithMin:1 withMax:6 butNot:lastTile];
+    lastTile = rndTile;
+    //[self makeBackgroundFloorSizeOf:backGround withTile:[NSString stringWithFormat:@"floortile%i.png",rndTile]];
+
+    [self addChild:backGround];
+
+    self.backgroundColor = [SKColor lightGrayColor];
+
+}
+
+#pragma mark - Floor Tiles
+-(void)makeBackgroundFloorSizeOf:(SKSpriteNode*)area withTile:(NSString*)tileName {
+    CGSize coverageSize = area.size; //the size of the entire image you want tiled
+    SKSpriteNode* tile = [SKSpriteNode spriteNodeWithImageNamed:tileName];
+    CGRect textureSize = tile.frame; //the size of the tile.
+    CGImageRef backgroundCGImage = [UIImage imageNamed:tileName].CGImage; //change the string to your image name
+    UIGraphicsBeginImageContext(CGSizeMake(coverageSize.width, coverageSize.height));
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    CGContextDrawTiledImage(context, textureSize, backgroundCGImage);
+    UIImage *tiledBackground = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    SKTexture *backgroundTexture = [SKTexture textureWithCGImage:tiledBackground.CGImage];
+    SKSpriteNode *backgroundTiles = [SKSpriteNode spriteNodeWithTexture:backgroundTexture];
+    backgroundTiles.yScale = -1; //upon closer inspection, I noticed my source tile was flipped vertically, so this just flipped it back.
+    backgroundTiles.position = area.position; // CGPointMake(0,0);
+    backgroundTiles.zPosition = 0;
+    backgroundTiles.alpha = .5;
+    
+    [self addChild:backgroundTiles];
+}
+
+#pragma mark walls
+-(void)buildWallsForLevel:(int)lev{
 
         //X col 10 (20)
         //Y row 14 (28)
         //{X,Y,X1,Y1,Vertical}
 
     //todo for testing
-    gameSpeed = .05;
-    //level=4;
+    //gameSpeed = .05;
+    //lev=3;
 
     wallDrawSpeed = .05;
 
+    static int lastLevel = 0;
+    if (lev > 7){
+        lev = [clsCommon getRanIntWithMin:1 withMax:7 butNot:lastLevel];
+        lastLevel = lev;
+    }
+
+
 //define array matrix seperately for each level
-    switch (level) {
+    switch (lev) {
         case 1:
             //      |   Vertical split
             //
@@ -361,11 +501,11 @@ CGPoint pointA;
             //       |
             //       |
             //      ---
-            [self drawWallSectionVfromY:10 ToY:17 X:10 start:true];
+            [self drawWallSectionVfromY:8 ToY:19 X:10 start:true];
             //bottom bar
-            [self drawWallSectionHfromX:10 ToX:11 Y:9 start:false];
+            [self drawWallSectionHfromX:10 ToX:11 Y:7 start:false];
             //top bar
-            [self drawWallSectionHfromX:10 ToX:11 Y:17 start:false];
+            [self drawWallSectionHfromX:10 ToX:11 Y:19 start:false];
             
 
             break;
@@ -401,7 +541,14 @@ CGPoint pointA;
             [self drawWallSectionVfromY:0 ToY:4 X:10 start:false];
             break;
 
-        default:
+        case 6:
+            [self drawWallSectionHfromX:4 ToX:16 Y:21 start:true];
+            [self drawWallSectionHfromX:4 ToX:16 Y:6 start:true];
+            [self drawWallSectionHfromX:4 ToX:16 Y:19 start:true];
+            [self drawWallSectionHfromX:4 ToX:16 Y:8 start:true];
+
+            break;
+        case 7:
             //large box with top/bottom opening
             [self drawWallSectionVfromY:3 ToY:25 X:2 start:true]; //left
             [self drawWallSectionHfromX:3 ToX:8 Y:25 start:false]; //top
@@ -411,7 +558,7 @@ CGPoint pointA;
             [self drawWallSectionHfromX:8 ToX:3 Y:2 start:false]; //bottom
 
 
-
+        default:
             break;
     }
 
@@ -494,7 +641,7 @@ CGPoint pointA;
 
 
 
-
+#pragma mark Game Run
 //********* Game Runner - is called on interval time 'gameSpeed' from the repeat action above..
 -(void) gameRunner {
     if(adsShowing)
@@ -1312,136 +1459,6 @@ CGPoint pointA;
     return CGPointMake(xPos, yPos);
 }
 
--(void) setUpBackgroundFloor{
-    NSString *floorPath =
-    [[NSBundle mainBundle]
-     pathForResource:@"floor1" ofType:@"sks"];
-
-    SKEmitterNode *floor =
-    [NSKeyedUnarchiver unarchiveObjectWithFile:floorPath];
-
-
-    //floor.position = backGround.position;
-
-    floor.zPosition = -1;
-    float red = 0;
-    float green = .1;
-    float blue = 1;
-
-
-    SKColor* color = [SKColor colorWithRed:red green:green blue:blue alpha:1];
-
-    floor.particleColorSequence = nil;
-    floor.particleColorBlendFactor = 1.0;
-
-    floor.particleColor = color;
-    floor.alpha = .8;
-
-    floor.name = @"floor";
-
-
-
-    [backGround addChild:floor];
-}
-
--(void) getBannerHeight{
-    bannerSizeY = (arenaSize.width == 320) ? 50 : 56;
-}
-
--(void) setUpBackGround{
-
-    int bannerCount =0;
-
-    //randomize or otherwise have changing arenas
-
-    //int rndBackground = [clsCommon getRanInt:1 maxNumber:7];
-
-    //adShowingArenaScaleAmount = 0;
-    backGround = [SKSpriteNode spriteNodeWithImageNamed:@"new-arena5.png"];
-
-    backGround.color = [SKColor redColor];
-    backGround.colorBlendFactor = .8;
-
-    //calculate min and max extents, based on original background size
-    [self setUpMinMaxExtents:backGround.size];
-
-    //determine the banner size (according to iAD)
-    [self getBannerHeight];  //bannerSizeY = (arenaSize.width == 320)?50:56;
-
-    bannerHeightAdjuster = 0;
-
-    //if only one of the banners is on, then we need an adjuster to center things
-    if (ceilingOn + floorOn ==1){
-        bannerHeightAdjuster = (ceilingOn) ? -(bannerSizeY/2): +(bannerSizeY/2);
-    }
-
-    if (floorOn){
-        bannerCount +=1;
-    }
-    if (ceilingOn){
-        bannerCount +=1;
-    }
-
-
-    //get the scale factors, so we know how much to scale any other images
-    scaleX = backGround.size.width  / arenaSize.width;
-    scaleY = backGround.size.height / (arenaSize.height -(bannerSizeY * bannerCount) );
-
-    backGround.size = CGSizeMake(arenaSize.width, arenaSize.height );
-
-    //fine tune the scale of the background
-    if (arenaSize.width == 320){
-        if (scaleY > 4.5) {
-            adShowingArenaScaleAmount = .895; //for 3.5" iphone
-        }else{
-        adShowingArenaScaleAmount = .915;  //for 4.0" iphone
-        }
-    }else{
-        adShowingArenaScaleAmount = .955;  //for ipad
-    }
-
-    if (bannerCount > 0){
-        [backGround setYScale:adShowingArenaScaleAmount];
-    }
-
-    float backGroundPos = arenaSize.height/2 + bannerHeightAdjuster ;
-
-
-    backGround.position = CGPointMake(arenaSize.width/2, backGroundPos);
-    backGround.zPosition = 250;
-
-
-    //pick a random floor tile...but not the same as last
-    int rndTile = [clsCommon getRanInt:1 maxNumber:6 butNot:lastTile];
-    lastTile = rndTile;
-    //[self makeBackgroundFloorSizeOf:backGround withTile:[NSString stringWithFormat:@"floortile%i.png",rndTile]];
-
-    [self addChild:backGround];
-
-    self.backgroundColor = [SKColor lightGrayColor];
-
-}
-
-#pragma mark - Floor Tiles
--(void)makeBackgroundFloorSizeOf:(SKSpriteNode*)area withTile:(NSString*)tileName {
-    CGSize coverageSize = area.size; //the size of the entire image you want tiled
-    SKSpriteNode* tile = [SKSpriteNode spriteNodeWithImageNamed:tileName];
-    CGRect textureSize = tile.frame; //the size of the tile.
-    CGImageRef backgroundCGImage = [UIImage imageNamed:tileName].CGImage; //change the string to your image name
-    UIGraphicsBeginImageContext(CGSizeMake(coverageSize.width, coverageSize.height));
-    CGContextRef context = UIGraphicsGetCurrentContext();
-    CGContextDrawTiledImage(context, textureSize, backgroundCGImage);
-    UIImage *tiledBackground = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
-    SKTexture *backgroundTexture = [SKTexture textureWithCGImage:tiledBackground.CGImage];
-    SKSpriteNode *backgroundTiles = [SKSpriteNode spriteNodeWithTexture:backgroundTexture];
-    backgroundTiles.yScale = -1; //upon closer inspection, I noticed my source tile was flipped vertically, so this just flipped it back.
-    backgroundTiles.position = area.position; // CGPointMake(0,0);
-    backgroundTiles.zPosition = 0;
-    backgroundTiles.alpha = .5;
-
-    [self addChild:backgroundTiles];
-}
 
 //-(void) setUpDoors:(CGSize) size{
 //    
