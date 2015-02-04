@@ -461,31 +461,48 @@ CGPoint pointA;
 #pragma mark walls
 -(void)buildWallsForLevel:(int)lev{
 
-        //X col 10 (20)
-        //Y row 14 (28)
-        //{X,Y,X1,Y1,Vertical}
+    //X col 10 (20)
+    //Y row 14 (28)
 
     //todo for testing
     //gameSpeed = .05;
-    //lev=3;
+    //lev=11;
 
     wallDrawSpeed = .05;
 
     static int lastLevel = 0;
-    if (lev > 7){
-        lev = [clsCommon getRanIntWithMin:1 withMax:7 butNot:lastLevel];
+    if (lev > 10){
+        lev = [clsCommon getRanIntWithMin:1 withMax:10 butNot:lastLevel];
         lastLevel = lev;
     }
 
 
+
 //define array matrix seperately for each level
+    switch (lev) {
+        case 9:
+            [self drawWallsForLevel:1];
+            [self drawWallsForLevel:8];
+            break;
+        case 10:
+            [self drawWallsForLevel:7];
+            [self drawWallsForLevel:4];
+            break;
+        default:
+            [self drawWallsForLevel:lev];
+    }
+
+
+}
+-(void)drawWallsForLevel:(int)lev{
+
     switch (lev) {
         case 1:
             //      |   Vertical split
             //
             //      |
             [self drawWallSectionVfromY:8 ToY:12 X:10 start:true];
-            [self drawWallSectionVfromY:16 ToY:20 X:10 start:false];
+            [self drawWallSectionVfromY:17 ToY:21 X:10 start:false];
             break;
         case 2:
             //      |    vertical line
@@ -501,12 +518,12 @@ CGPoint pointA;
             //       |
             //       |
             //      ---
-            [self drawWallSectionVfromY:8 ToY:19 X:10 start:true];
+            [self drawWallSectionVfromY:9 ToY:20 X:10 start:true];
             //bottom bar
-            [self drawWallSectionHfromX:10 ToX:11 Y:7 start:false];
+            [self drawWallSectionHfromX:10 ToX:11 Y:8 start:false];
             //top bar
-            [self drawWallSectionHfromX:10 ToX:11 Y:19 start:false];
-            
+            [self drawWallSectionHfromX:10 ToX:11 Y:20 start:false];
+
 
             break;
         case 4:
@@ -516,17 +533,17 @@ CGPoint pointA;
             //  |       |
             //   -     -
             //top left
-            [self drawWallSectionVfromY:16 ToY:20 X:4 start:true];
-            [self drawWallSectionHfromX:5 ToX:9 Y:20 start:false];
+            [self drawWallSectionVfromY:16 ToY:21 X:4 start:true];
+            [self drawWallSectionHfromX:5 ToX:9 Y:21 start:false];
             //top right
-            [self drawWallSectionHfromX:12 ToX:16 Y:20 start:false];
-            [self drawWallSectionVfromY:20 ToY:16 X:16 start:false];
+            [self drawWallSectionHfromX:12 ToX:16 Y:21 start:false];
+            [self drawWallSectionVfromY:21 ToY:16 X:16 start:false];
             //bottom right
-            [self drawWallSectionVfromY:13 ToY:9 X:16 start:false];
-            [self drawWallSectionHfromX:16 ToX:12 Y:8 start:false];
+            [self drawWallSectionVfromY:13 ToY:8 X:16 start:false];
+            [self drawWallSectionHfromX:16 ToX:12 Y:7 start:false];
             //bottom left
-            [self drawWallSectionHfromX:9 ToX:5 Y:8 start:false];
-            [self drawWallSectionVfromY:9 ToY:13 X:4 start:false];
+            [self drawWallSectionHfromX:9 ToX:5 Y:7 start:false];
+            [self drawWallSectionVfromY:8 ToY:13 X:4 start:false];
             break;
 
         case 5:
@@ -556,12 +573,24 @@ CGPoint pointA;
             [self drawWallSectionVfromY:25 ToY:3 X:17 start:false]; //right
             [self drawWallSectionHfromX:17 ToX:13 Y:2 start:false]; //bottom
             [self drawWallSectionHfromX:8 ToX:3 Y:2 start:false]; //bottom
+            break;
+        case 8:
+            //maze start
+            [self drawWallSectionHfromX:4 ToX:16 Y:16 start:true];
+            [self drawWallSectionHfromX:15 ToX:10 Y:15 start:true];
+            [self drawWallSectionHfromX:4 ToX:16 Y:14 start:true];
+            [self drawWallSectionHfromX:11 ToX:5 Y:13 start:true];
+            [self drawWallSectionHfromX:4 ToX:16 Y:12 start:true];
 
+            [self drawWallSectionVfromY:16 ToY:15 X:16 start:false];
+            [self drawWallSectionVfromY:14 ToY:13 X:3 start:false];
 
+            break;
+            
+        case 9:
         default:
             break;
     }
-
 
 }
 -(void)drawWallSectionVfromY:(int)Y ToY:(int)ToY X:(int)X start:(BOOL)start{
