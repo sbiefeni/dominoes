@@ -175,6 +175,10 @@
 
     SKAction* a = [SKAction runBlock:^{}];
     SKAction* b = [SKAction runBlock:^{}];
+    SKAction* z = [SKAction sequence:@[
+                                       [SKAction scaleTo:.001 duration:0],
+                                       [SKAction scaleTo:1 duration:(.5  )]
+                                       ]];
 
     if (flash) {
         a = [SKAction repeatAction:
@@ -194,10 +198,10 @@
         }]
                                  ]];
     }
-    if(flash || fadeOut){
-        SKAction* c = [SKAction sequence:@[a,b]];
+    //if(flash || fadeOut){
+        SKAction* c = [SKAction sequence:@[z,a,b]];
         [label runAction:c ];
-    }
+    //}
 }
 
 +(void) makeLabel:(SKLabelNode*)label text:(NSString*)text fontSize:(int)fontSize posX:(int)posX posY:(int)posY color:(SKColor*)color alpha:(float)alpha onScene:(SKScene*)scene{

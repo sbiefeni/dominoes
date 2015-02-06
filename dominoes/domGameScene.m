@@ -909,6 +909,12 @@ CGPoint pointA;
                 return;
             }
 
+            bool gotHighLevel = (computerDominos.count>[self getLevelHighscore]);
+
+            if(!gotHighLevel){
+                [self doBeatComputer];
+            }
+
             NSString *burstPath =
             [[NSBundle mainBundle]
              pathForResource:@"explosion_red" ofType:@"sks"];
@@ -945,7 +951,7 @@ CGPoint pointA;
                   [SKAction runBlock:^{
                     _fallingAnimationDelay = 0;
                     [self enableScore];
-                    bool gotHighLevel = (computerDominos.count>[self getLevelHighscore]);
+
                     NSLog(@"Dominoes: %i",(int)computerDominos.count);
                     for (clsDomino* dom in [computerDominos reverseObjectEnumerator]) {
                             //code to be executed on the main queue after delay
@@ -976,6 +982,11 @@ CGPoint pointA;
         } //end if (player2.didExplosion)
     }
 
+}
+
+-(void)doBeatComputer{
+    [clsCommon makeCenterScreenLabelWithText:@"You Win!!" labelName:@"youwin" withFont:@"Arial Bold" withSize:60 withColor:[SKColor whiteColor] withAlpha:1 fadeOut:true flash:true onScene:self position:2];
+    [self runAction:[SKAction playSoundFileNamed:@"bonus_percussion.mp3" waitForCompletion:NO]];
 }
 
 -(void)doRoundIsOver{

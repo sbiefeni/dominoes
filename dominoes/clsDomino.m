@@ -134,6 +134,9 @@ NSMutableArray* dominoFrames;
         [SKAction waitForDuration:delay],
         [SKAction runBlock:^{
             [self setTexture: txtr];
+            if (bPlayer) {
+                [self runAction:[SKAction playSoundFileNamed:sound waitForCompletion:NO]];
+            }
             self.zRotation = rotation;
             if ( !(bPlayer || bIsEnd) ) {
                 if (bPlayer !=true && _CountedScore != true) {
@@ -142,7 +145,6 @@ NSMutableArray* dominoFrames;
                 }
             }
         }],
-        [SKAction playSoundFileNamed:sound waitForCompletion:NO],
         [SKAction waitForDuration:.1],
         moveAction,
     ]]];

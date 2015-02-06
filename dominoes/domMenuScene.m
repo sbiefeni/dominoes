@@ -28,7 +28,7 @@
 #import "clsBadge.h"
 
 
-#define fullAdScenesRandomInterval 4
+#define fullAdScenesRandomInterval 3
 #define kRemoveAdsProductIDentifier @"300_NoAds"
 
 
@@ -68,10 +68,6 @@
 
         //self.scaleMode = SKSceneScaleMode.ResizeFill;
         //self.scaleMode = SKSceneScaleModeAspectFill;
-
-
-        //timer to disable tap for a few seconds, to wait for game center
-        tapTimer = [NSTimer scheduledTimerWithTimeInterval:.5 target:self selector:@selector(enableTapTimer) userInfo:nil repeats:YES];
 
 //        [self createBuyGameButton:false];
 //        if (!areAdsRemoved) {
@@ -163,6 +159,9 @@
 
             [self drawBadgesWithPrompt:true];
 
+            //timer to disable tap for a half second, to wait for game center
+            tapTimer = [NSTimer scheduledTimerWithTimeInterval:.5 target:self selector:@selector(enableTapTimer) userInfo:nil repeats:YES];
+
 
         }else if(gameStatus == game_Started && lives > 0)   { // game started...
 #pragma mark - In Between Rounds Screen
@@ -170,6 +169,8 @@
 
             totalScore += levelScore;
 
+#pragma mark - Show Ad Randomly
+            //this is going to possibly show a full screen ad
             [self showFullScreenAd:false];
 
 
@@ -323,6 +324,9 @@
 
                 //reset score to 0 now, for next round
                 levelScore = 0;
+
+            //timer to disable tap for a half second, to wait for game center
+            tapTimer = [NSTimer scheduledTimerWithTimeInterval:.5 target:self selector:@selector(enableTapTimer) userInfo:nil repeats:YES];
         
         } // end if gamestatus
 
@@ -589,12 +593,18 @@
             if (gameEnd){  //show Ad
                 [self showRevMobFullScreen];
                 AdShowedLastLevel = true;
+                tapEnabled = false;
+                tapTimer = [NSTimer scheduledTimerWithTimeInterval:3 target:self selector:@selector(enableTapTimer) userInfo:nil repeats:YES];
+                return;
             }else{
                 //count number of scene changes to intermittently show Ad
                 if (FullAdSceneCount > 1){
                     if ([clsCommon getRanInt:1 maxNumber:fullAdScenesRandomInterval] == 1){
                         [self showRevMobFullScreen];
                         AdShowedLastLevel = true;
+                        tapEnabled = false;
+                        tapTimer = [NSTimer scheduledTimerWithTimeInterval:3 target:self selector:@selector(enableTapTimer) userInfo:nil repeats:YES];
+                        return;
                     }
                 }
             }
@@ -603,8 +613,9 @@
         }
 
         FullAdSceneCount += 1;
-
     }
+    //timer to disable tap for half second, to wait for game center
+    tapTimer = [NSTimer scheduledTimerWithTimeInterval:.5 target:self selector:@selector(enableTapTimer) userInfo:nil repeats:YES];
 }
 
 

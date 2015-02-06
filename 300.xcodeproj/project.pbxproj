@@ -71,6 +71,7 @@
 		7B4C40AA1A7604730026A4CA /* fireworks4.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 7B4C40A51A7604730026A4CA /* fireworks4.mp3 */; };
 		7B4C40AB1A7604730026A4CA /* fireworks5.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 7B4C40A61A7604730026A4CA /* fireworks5.mp3 */; };
 		7B4C40AD1A7641D40026A4CA /* spark1.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B4C40AC1A7641D40026A4CA /* spark1.png */; };
+		7B5638BD1A842DDE004B4C12 /* bonus_percussion.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 7B5638BC1A842DDE004B4C12 /* bonus_percussion.mp3 */; };
 		7B6C04D61A76CB9500032B16 /* explosion2.sks in Resources */ = {isa = PBXBuildFile; fileRef = 7B6C04D51A76CB9500032B16 /* explosion2.sks */; };
 		7B6C04D81A76D0BA00032B16 /* explosion_red.sks in Resources */ = {isa = PBXBuildFile; fileRef = 7B6C04D71A76D0BA00032B16 /* explosion_red.sks */; };
 		7B72C0CC1A723501006FC3FE /* clsBadge.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B72C0CB1A723501006FC3FE /* clsBadge.m */; };
@@ -185,6 +186,7 @@
 		7B4C40A51A7604730026A4CA /* fireworks4.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = fireworks4.mp3; sourceTree = "<group>"; };
 		7B4C40A61A7604730026A4CA /* fireworks5.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = fireworks5.mp3; sourceTree = "<group>"; };
 		7B4C40AC1A7641D40026A4CA /* spark1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = spark1.png; sourceTree = "<group>"; };
+		7B5638BC1A842DDE004B4C12 /* bonus_percussion.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = bonus_percussion.mp3; sourceTree = "<group>"; };
 		7B6C04D51A76CB9500032B16 /* explosion2.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = explosion2.sks; sourceTree = "<group>"; };
 		7B6C04D71A76D0BA00032B16 /* explosion_red.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = explosion_red.sks; sourceTree = "<group>"; };
 		7B72C0CA1A723501006FC3FE /* clsBadge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = clsBadge.h; sourceTree = "<group>"; };
@@ -484,6 +486,7 @@
 		7B4C40A11A7604310026A4CA /* New Sounds */ = {
 			isa = PBXGroup;
 			children = (
+				7B5638BC1A842DDE004B4C12 /* bonus_percussion.mp3 */,
 				7B4C40A21A7604730026A4CA /* fireworks1.mp3 */,
 				7B4C40A31A7604730026A4CA /* fireworks2.mp3 */,
 				7B4C40A41A7604730026A4CA /* fireworks3.mp3 */,
@@ -623,6 +626,7 @@
 				38530AA018F0B4A400FA19CC /* new-arena6.png in Resources */,
 				38FA7D3618E77F5E00820901 /* floor1.sks in Resources */,
 				7BEC9D3A1A6DA9B200A528B6 /* screen1.gif in Resources */,
+				7B5638BD1A842DDE004B4C12 /* bonus_percussion.mp3 in Resources */,
 				7BEC9D3E1A6DB42000A528B6 /* directions1a.gif in Resources */,
 				389AA04C18DE3EC70089CA98 /* domino-green.atlasc in Resources */,
 				7B4C40A71A7604730026A4CA /* fireworks1.mp3 in Resources */,
