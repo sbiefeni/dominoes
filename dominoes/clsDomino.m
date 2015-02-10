@@ -132,7 +132,7 @@ NSMutableArray* dominoFrames;
 
     float rotation = [clsCommon getRanFloat:-.1 and:.1];
 
-    NSString* sound = [NSString stringWithFormat:@"sounds/dom%@.wav", which];
+    NSString* sound = [NSString stringWithFormat:@"dom%@.wav", which];
 
     [self runAction:[SKAction sequence:@[
         [SKAction waitForDuration:delay],

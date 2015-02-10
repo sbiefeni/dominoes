@@ -43,7 +43,7 @@
 #define SceneChangeDelay     3
 
 //TODO turn off!
-#define devMode     YES
+#define devMode     NO
 
 
 @interface domGameScene (){
@@ -953,7 +953,7 @@ CGPoint pointA;
 
                   [SKAction runBlock:^{
                         if(soundEnabled){
-                            [SKAction playSoundFileNamed:@"long_ding3.wav" waitForCompletion:NO];
+                            [self runAction:[SKAction playSoundFileNamed:@"long_ding3.wav" waitForCompletion:NO]];
                         }
                         AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
                    }],
@@ -1406,9 +1406,9 @@ CGPoint pointA;
                 [self doRoundIsOver];
                 }],
             ]]];
-        //if(!devMode){
+        if(!devMode){
             lives -= 1;  //minus one life
-        //}
+        }
     } //end if (player1.crashed)
     
 }  //end if (!crashed)
