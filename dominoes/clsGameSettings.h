@@ -28,6 +28,8 @@ extern int areAdsRemoved;
 
 extern BOOL gcEnabled;
 
+extern BOOL soundEnabled;
+
 //to get the scale factor for the current screen (orig size / new size)
 extern float scaleX;
 extern float scaleY;

@@ -25,6 +25,8 @@ int areAdsRemoved;
 //gamecenter settings
 BOOL gcEnabled;
 
+BOOL soundEnabled;
+
 //to get the scale factor for the current screen (orig size / new size)
 float scaleX;
 float scaleY;

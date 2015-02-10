@@ -54,6 +54,8 @@
 
     areAdsRemoved = [[clsCommon getUserSettingForKey: @"areAdsRemoved"] intValue];
 
+    
+
     //this will load wether or not they bought the in-app purchase
     
     if(self = [super initWithSize:size]) {
@@ -116,6 +118,7 @@
             [self createBuyGameButton:true];
         }
 
+
 #pragma mark - Opening Screen
         if (gameStatus != game_Started ) {  //game hasn't started.. show initial screen
 
@@ -143,9 +146,10 @@
             //[self drawSocialButtonsWithfbX:-100 withfbY:100 withtwX:100 withtwY:100 withAlpha:.5];
 
             int sY = -160;
-            [self drawSocialButtonsWithfbX:150 withfbY: sY
+            [self drawButtonsWithfbX:150 withfbY: sY
                                    withtwX:150 withtwY: sY-90
-                                    withHX:-150 withHY: sY-60
+                                    withHX:-150 withHY: sY-90
+                                    withSX:-150 withSY: sY
                               HwithAlpha:.5 withScale: .85];
 
             gameStatus = reset;
@@ -280,8 +284,7 @@
             logo.alpha = .15;
 
                 //draw facebook and twitter buttons
-                //[self drawSocialButtonsWithfbX:-40 withfbY:10 withtwX:40 withtwY:10 withAlpha:1];
-            [self drawSocialButtonsWithfbX:-110 withfbY:20 withtwX:110 withtwY:20 withHX:-500 withHY:40 HwithAlpha:1 withScale:.85];
+            [self drawButtonsWithfbX:-110 withfbY:20 withtwX:110 withtwY:20 withHX:-500 withHY:40 withSX:-500 withSY: 110 HwithAlpha:1 withScale:.85];
 
 
 
@@ -789,16 +792,25 @@
 
 }
 
--(void)drawSocialButtonsWithfbX:(int)fbX withfbY:(int)fbY withtwX:(int)twX withtwY:(int)twY withHX:(int)HX withHY:(int)HY HwithAlpha:(float)alpha withScale:(double)scale{
+-(void)drawButtonsWithfbX:(int)fbX withfbY:(int)fbY withtwX:(int)twX withtwY:(int)twY withHX:(int)HX withHY:(int)HY withSX:(int)SX withSY:(int)SY HwithAlpha:(float)alpha withScale:(double)scale{
 
     scale = scale *sizeDoubler;
+
+    NSString* bName = (soundEnabled)?@"sound_on":@"sound_off";
+    SKSpriteNode *SButton = [SKSpriteNode spriteNodeWithImageNamed:bName];
+        SButton.position = CGPointMake( SX ,   SY  );
+        SButton.alpha = alpha;
+        SButton.name = @"sound";
+        SButton.xScale = scale  / [self childNodeWithName:@"frame"].xScale;
+        SButton.yScale = scale  / [self childNodeWithName:@"frame"].xScale;
+        [[self childNodeWithName:@"frame"] addChild:SButton];
 
     SKSpriteNode *hButton = [SKSpriteNode spriteNodeWithImageNamed:@"help.png"];
         hButton.position = CGPointMake( HX ,   HY  );
         hButton.alpha = alpha;
         hButton.name = @"help";
-        hButton.xScale = scale*1.15  / [self childNodeWithName:@"frame"].xScale;
-        hButton.yScale = scale*1.15  / [self childNodeWithName:@"frame"].xScale;
+        hButton.xScale = scale  / [self childNodeWithName:@"frame"].xScale;
+        hButton.yScale = scale  / [self childNodeWithName:@"frame"].xScale;
         [[self childNodeWithName:@"frame"] addChild:hButton];
 
     SKSpriteNode *fbButton = [SKSpriteNode spriteNodeWithImageNamed:@"facebook.png"];
@@ -1039,7 +1051,7 @@
         // if gamecenter button touched, launch it
         if ([node.name isEqualToString:@"gamecenter"]) {
             NSLog(@"GameCenter Button pressed");
-            [self bounceButton:(SKSpriteNode*)[self childNodeWithName:@"gamecenter"] forever:false sound:true ];
+            [self bounceButton:(SKSpriteNode*)[self childNodeWithName:@"gamecenter"] forever:false sound:soundEnabled];
             if([GKLocalPlayer localPlayer].isAuthenticated){
                 //show leaderboard
                 [[GameCenterManager sharedManager] presentLeaderboardsOnViewController:[self getActiveController]];
@@ -1049,31 +1061,35 @@
                 //[[GameCenterManager sharedManager] checkGameCenterAvailability ];
             }
         }else if ([node.name isEqualToString:@"badge"]){
-            [self bounceButton:node forever:false sound:true];
+            [self bounceButton:node forever:false sound:soundEnabled];
             [self makeBadgeSliderForPointLevel:[self getPointLevel:[self getLevelHighscore]] withDelay:0 ];
 
             [self makeRotatingBadgeForBadge:node.badgeNum withScale:2 withSpeed:.1  forDuration:5];
 
 
         }else if([node.name isEqualToString:@"facebook"]){
-            [self bounceButton:node forever:true sound:true ];
+            [self bounceButton:node forever:true sound:soundEnabled ];
             runAfter([self postToFacebookWithScore:levelHighScore];,.5)
 
         }else if([node.name isEqualToString:@"twitter"]){
-            [self bounceButton:node forever:true sound:true] ;
+            [self bounceButton:node forever:true sound:soundEnabled] ;
             [self postToTwitterWithScore:levelHighScore];
+        }else if([node.name isEqualToString:@"sound"]){
+            [self bounceButton:node forever:false sound:!soundEnabled] ;
+            [self toggleSound:soundEnabled];
+
         }else if([node.name isEqualToString:@"buygame"]) {
             //PUT BUY GAME CODE HERE
-            [self bounceButton:(SKSpriteNode*)[self childNodeWithName:@"buygame"] forever:true sound:true ];
+            [self bounceButton:(SKSpriteNode*)[self childNodeWithName:@"buygame"] forever:true sound:soundEnabled ];
             [self userClickedBuyGame];
         }else if([node.name isEqualToString:@"restore"]) {
             //PUT RESTORE GAME CODE HERE
-            [self bounceButton:(SKSpriteNode*)[self childNodeWithName:@"restore"] forever:true sound:true ];
+            [self bounceButton:(SKSpriteNode*)[self childNodeWithName:@"restore"] forever:true sound:soundEnabled ];
             [self checkPurchasedItems];
         }else if([node.name isEqualToString:@"help"]) {
             //show help here
             [clsCommon showHTML:@"New.html"];
-            [self bounceButton:node forever:true sound:true ];
+            [self bounceButton:node forever:true sound:soundEnabled ];
         }else if([node.name isEqualToString:@"instructions"] || [node.name isEqualToString:@"tapFor"] ){
             UIAlertView *alert = [[UIAlertView alloc]initWithTitle:NSLocalizedString(@"How to Play",nil)
                 message: NSLocalizedString(@"how to play instructions",nil)
@@ -1094,9 +1110,9 @@
             aTimer = nil;
             if (gameStatus == reset || gameStatus == game_Started) {
                 if(gameStatus == reset){
-                    [self bounceButton:(SKSpriteNode*)[[self childNodeWithName:@"frame"] childNodeWithName:@"play"] forever:false sound:true ];
+                    [self bounceButton:(SKSpriteNode*)[[self childNodeWithName:@"frame"] childNodeWithName:@"play"] forever:false sound:soundEnabled ];
                 }else{
-                    [self bounceButtonSmall:(SKSpriteNode*)[self childNodeWithName:@"frame"] forever:false sound:true ];
+                    [self bounceButtonSmall:(SKSpriteNode*)[self childNodeWithName:@"frame"] forever:false sound:soundEnabled ];
                 }
                 runAfter(
                 domGameScene *game = [[domGameScene alloc] initWithSize:self.size];
@@ -1104,7 +1120,7 @@
                          ,.3)
                 
             }else{
-                [self bounceButtonSmall:(SKSpriteNode*)[self childNodeWithName:@"frame"] forever:false sound:true ];
+                [self bounceButtonSmall:(SKSpriteNode*)[self childNodeWithName:@"frame"] forever:false sound:soundEnabled ];
                 runAfter(
                 domMenuScene *menu = [[domMenuScene alloc] initWithSize:self.size];
                 [self.view presentScene:menu transition:[SKTransition doorwayWithDuration:1]];
@@ -1114,6 +1130,18 @@
 
 }
 
+-(void)toggleSound:(BOOL)disable{
+
+    soundEnabled = !disable;
+    [backgroundMusic stop];
+
+    if (soundEnabled) {
+        [(SKSpriteNode*)[[self childNodeWithName:@"frame"] childNodeWithName:@"sound"]  setTexture:[SKTexture textureWithImageNamed:@"sound_on"]];
+    }else{
+        [(SKSpriteNode*)[[self childNodeWithName:@"frame"] childNodeWithName:@"sound"]  setTexture:[SKTexture textureWithImageNamed:@"sound_off"]];
+    }
+
+}
 -(void)userClickedBuyGame{
     if([SKPaymentQueue canMakePayments]){
         [self changeButtonColor:(SKSpriteNode*)[self childNodeWithName:@"buygamebutton"]];

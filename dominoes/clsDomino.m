@@ -21,16 +21,16 @@ NSMutableArray* dominoFrames;
         //this is (confirmed) pre-loading all the sounds.. this only runs once in the game
         //during class initialization. the actions die right after this, but the sounds
         //are loaded and there is no delay the first time a sound plays
-        SKAction* S1 = [SKAction playSoundFileNamed:@"/sounds/dom1.wav" waitForCompletion:NO];
-        SKAction* S2 = [SKAction playSoundFileNamed:@"/sounds/dom2.wav" waitForCompletion:NO];
-        SKAction* S3 = [SKAction playSoundFileNamed:@"/sounds/dom3.wav" waitForCompletion:NO];
-        SKAction* S4 = [SKAction playSoundFileNamed:@"/sounds/dom4.wav" waitForCompletion:NO];
-        SKAction* S5 = [SKAction playSoundFileNamed:@"/sounds/dom5.wav" waitForCompletion:NO];
-        SKAction* S6 = [SKAction playSoundFileNamed:@"/sounds/dom6.wav" waitForCompletion:NO];
-        SKAction* S7 = [SKAction playSoundFileNamed:@"/sounds/dom7.wav" waitForCompletion:NO];
-        SKAction* S8 = [SKAction playSoundFileNamed:@"/sounds/dom8.wav" waitForCompletion:NO];
-        SKAction* S9 = [SKAction playSoundFileNamed:@"/sounds/dom9.wav" waitForCompletion:NO];
-        SKAction* SEnd = [SKAction playSoundFileNamed:@"/sounds/dom-end3.wav" waitForCompletion:NO];
+        SKAction* S1 = [SKAction playSoundFileNamed:@"dom1.wav" waitForCompletion:NO];
+        SKAction* S2 = [SKAction playSoundFileNamed:@"dom2.wav" waitForCompletion:NO];
+        SKAction* S3 = [SKAction playSoundFileNamed:@"dom3.wav" waitForCompletion:NO];
+        SKAction* S4 = [SKAction playSoundFileNamed:@"dom4.wav" waitForCompletion:NO];
+        SKAction* S5 = [SKAction playSoundFileNamed:@"dom5.wav" waitForCompletion:NO];
+        SKAction* S6 = [SKAction playSoundFileNamed:@"dom6.wav" waitForCompletion:NO];
+        SKAction* S7 = [SKAction playSoundFileNamed:@"dom7.wav" waitForCompletion:NO];
+        SKAction* S8 = [SKAction playSoundFileNamed:@"dom8.wav" waitForCompletion:NO];
+        SKAction* S9 = [SKAction playSoundFileNamed:@"dom9.wav" waitForCompletion:NO];
+        SKAction* SEnd = [SKAction playSoundFileNamed:@"dom-end3.wav" waitForCompletion:NO];
 
 
     }
@@ -46,7 +46,11 @@ NSMutableArray* dominoFrames;
 
     [self runAction:[SKAction sequence:@[
                                 [SKAction waitForDuration:delay],
-                                [SKAction playSoundFileNamed:sound waitForCompletion:NO],
+                                [SKAction runBlock:^{
+                                    if (soundEnabled){
+                                        [self runAction:[SKAction playSoundFileNamed:sound waitForCompletion:NO]];
+                                    }
+                                }],
                                 [SKAction runBlock:^{
                                     levelScore += 1;
                                     _CountedScore = true;
@@ -134,7 +138,7 @@ NSMutableArray* dominoFrames;
         [SKAction waitForDuration:delay],
         [SKAction runBlock:^{
             [self setTexture: txtr];
-            if (bPlayer) {
+            if (bPlayer && soundEnabled) {
                 [self runAction:[SKAction playSoundFileNamed:sound waitForCompletion:NO]];
             }
             self.zRotation = rotation;

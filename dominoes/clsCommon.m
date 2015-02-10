@@ -43,25 +43,29 @@
 }
 
 +(void) playBackgroundMusicWithVolume:(double)volume{
-    NSString *path = [NSString stringWithFormat:@"%@/%@",
-                      [[NSBundle mainBundle] resourcePath],
-                      @"sounds/tick_tock_jingle2.mp3"];
-    NSURL *filePath = [NSURL fileURLWithPath:path isDirectory:NO];
-    backgroundMusic = [[AVAudioPlayer alloc] initWithContentsOfURL:filePath error:nil];
-    [backgroundMusic prepareToPlay];
-    [backgroundMusic play];
-    backgroundMusic.volume = volume;
+    if (soundEnabled) {
+        NSString *path = [NSString stringWithFormat:@"%@/%@",
+                          [[NSBundle mainBundle] resourcePath],
+                          @"tick_tock_jingle2.mp3"];
+        NSURL *filePath = [NSURL fileURLWithPath:path isDirectory:NO];
+        backgroundMusic = [[AVAudioPlayer alloc] initWithContentsOfURL:filePath error:nil];
+        [backgroundMusic prepareToPlay];
+        [backgroundMusic play];
+        backgroundMusic.volume = volume;
+    }
 }
 
 +(void) playSound:(NSString*)sound withVolume:(double)volume{
-    NSString *path = [NSString stringWithFormat:@"%@/%@",
-                      [[NSBundle mainBundle] resourcePath],
-                      sound];
-    NSURL *filePath = [NSURL fileURLWithPath:path isDirectory:NO];
-    soundFile = [[AVAudioPlayer alloc] initWithContentsOfURL:filePath error:nil];
-    //[soundFile prepareToPlay];
-    [soundFile play];
-    soundFile.volume = volume;
+    if (soundEnabled) {
+        NSString *path = [NSString stringWithFormat:@"%@/%@",
+                          [[NSBundle mainBundle] resourcePath],
+                          sound];
+        NSURL *filePath = [NSURL fileURLWithPath:path isDirectory:NO];
+        soundFile = [[AVAudioPlayer alloc] initWithContentsOfURL:filePath error:nil];
+        //[soundFile prepareToPlay];
+        [soundFile play];
+        soundFile.volume = volume;
+    }
 }
 
 + (void) doBackgroundMusicFadeToQuiet {
@@ -75,7 +79,7 @@
 
 //not working
 //+ (void) playSound:(NSString*)file {
-//    NSString* sound = [NSString stringWithFormat:@"sounds/%@", file];
+//    NSString* sound = [NSString stringWithFormat:@"%@", file];
 //    [SKAction playSoundFileNamed:sound waitForCompletion:NO];
 //    //
 //}

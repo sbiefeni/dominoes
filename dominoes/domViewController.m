@@ -164,6 +164,7 @@ BOOL showingLeaderboard;
     //CGFloat width =
     //CGFloat height = CGRectGetHeight(self.view.bounds);
 
+    soundEnabled = YES;
     
     CGRect aRect=CGRectMake(0, CGRectGetHeight(self.view.bounds)-iWidth==320? 50:66, iWidth, iWidth==320? 50:66);
     
@@ -356,7 +357,7 @@ BOOL showingLeaderboard;
         player.curDirection = tmpDirection;
         tmpDirection = 10;
 
-    [clsCommon playSound:@"sounds/swipe.mp3" withVolume:.3];
+    [clsCommon playSound:@"swipe.mp3" withVolume:.3];
  
 }
 

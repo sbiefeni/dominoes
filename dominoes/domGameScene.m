@@ -42,6 +42,9 @@
 #define _gameSpeedIncrement  .01
 #define SceneChangeDelay     3
 
+//TODO turn off!
+#define devMode     YES
+
 
 @interface domGameScene (){
 
@@ -89,7 +92,10 @@ CGPoint pointA;
 
         arenaSize = size;
 
-        [domViewController setAdView:YES ShowOnTop:YES ChooseRandom:YES];
+        if(!devMode){
+            //draw banner ad
+            [domViewController setAdView:YES ShowOnTop:YES ChooseRandom:YES];
+        }
 
         //NSOperationQueue mainQueue] addOperationWithBlock:^{
             // Insert code from doTaskWithContextData: here
@@ -464,9 +470,12 @@ CGPoint pointA;
     //X col 10 (20)
     //Y row 14 (28)
 
-    //todo for testing
-    //gameSpeed = .05;
-    //lev=11;
+    if(devMode){
+        // for testing
+        gameSpeed = .05;
+        //lev=4;
+    }
+
 
     wallDrawSpeed = .05;
 
@@ -899,7 +908,7 @@ CGPoint pointA;
          //add logic to test the next move, and change direction if
         //required, or calculated. Also should make some random function to
         //change direction periodically for no reason
-        [self testNextComputerMove];
+        [self testNextComputerMove:computer];
 
     }else{
         if (!computer.didExplosion) {
@@ -912,7 +921,7 @@ CGPoint pointA;
             bool gotHighLevel = (computerDominos.count>[self getLevelHighscore]);
 
             if(!gotHighLevel){
-                [self doBeatComputer];
+                [self doYouWinLabel];
             }
 
             NSString *burstPath =
@@ -941,8 +950,11 @@ CGPoint pointA;
 
             //crashed = false;
             [self runAction:[SKAction sequence:@[
-                  [SKAction playSoundFileNamed:@"sounds/long_ding3.wav" waitForCompletion:NO],
+
                   [SKAction runBlock:^{
+                        if(soundEnabled){
+                            [SKAction playSoundFileNamed:@"long_ding3.wav" waitForCompletion:NO];
+                        }
                         AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
                    }],
                   [SKAction waitForDuration:.6],
@@ -984,9 +996,11 @@ CGPoint pointA;
 
 }
 
--(void)doBeatComputer{
+-(void)doYouWinLabel{
     [clsCommon makeCenterScreenLabelWithText:@"You Win!!" labelName:@"youwin" withFont:@"Arial Bold" withSize:60 withColor:[SKColor whiteColor] withAlpha:1 fadeOut:true flash:true onScene:self position:2];
-    [self runAction:[SKAction playSoundFileNamed:@"bonus_percussion.mp3" waitForCompletion:NO]];
+    if(soundEnabled){
+        [self runAction:[SKAction playSoundFileNamed:@"bonus_percussion.mp3" waitForCompletion:NO]];
+    }
 }
 
 -(void)doRoundIsOver{
@@ -1126,16 +1140,16 @@ CGPoint pointA;
 
     return false;
 }
--(void) testNextComputerMove{
+-(void) testNextComputerMove:(clsPlayer*)whichPlayer{
 
     //checks if the next move will cause the computer to crash
     //avoid crash if possible
     //also random/or/intelligent course changes to add personality
 
     NSMutableArray* directionChoices = [NSMutableArray new];
-    int X = computer.curX;
-    int Y = computer.curY;
-    int D = computer.curDirection;
+    int X = whichPlayer.curX;
+    int Y = whichPlayer.curY;
+    int D = whichPlayer.curDirection;
     //don't change path if choices are equal on a unforced 2 choice evaluation
     //BOOL noChange = false;
 
@@ -1204,7 +1218,7 @@ CGPoint pointA;
         return;
     }
     if (directionChoices.count == 1) {
-        computer.curDirection = [[directionChoices objectAtIndex:0] intValue];
+        whichPlayer.curDirection = [[directionChoices objectAtIndex:0] intValue];
         return;
     }
     //ignore if we are already on a best direction, unless randChange is TRUE
@@ -1217,7 +1231,7 @@ CGPoint pointA;
     }
     //multiple equal choices, choice is needed, now choose 1
     int choice = [clsCommon getRanInt:0 maxNumber:(int)directionChoices.count-1];
-    computer.curDirection = [[directionChoices objectAtIndex:choice] intValue];
+    whichPlayer.curDirection = [[directionChoices objectAtIndex:choice] intValue];
 
 
 }
@@ -1236,6 +1250,9 @@ CGPoint pointA;
     
 //        //get player direction
 
+    if(devMode){
+        [self testNextComputerMove:player];
+    }
 
     //change the direction if a uTurn was executed
     switch (player.uTurnStep) {
@@ -1315,7 +1332,9 @@ CGPoint pointA;
         grid[player.curX][player.curY]=true;
         
     //play a sound
-        [self runAction: [SKAction playSoundFileNamed:@"sounds/woosh_2.wav" waitForCompletion:NO]];
+        if(soundEnabled){
+            [self runAction: [SKAction playSoundFileNamed:@"woosh_2.wav" waitForCompletion:NO]];
+        }
 
         
         
@@ -1349,8 +1368,11 @@ CGPoint pointA;
         [self youLoseMessage];
 
         [self runAction:[SKAction sequence:@[
-            [SKAction playSoundFileNamed:@"sounds/long_ding3.wav" waitForCompletion:NO],
+
             [SKAction runBlock:^{
+                if(soundEnabled){
+                    [self runAction:[SKAction playSoundFileNamed:@"long_ding3.wav" waitForCompletion:NO]];
+                }
                 AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
             }],
             [SKAction waitForDuration:.6],
@@ -1384,7 +1406,9 @@ CGPoint pointA;
                 [self doRoundIsOver];
                 }],
             ]]];
-        lives -= 1;  //minus one life
+        //if(!devMode){
+            lives -= 1;  //minus one life
+        //}
     } //end if (player1.crashed)
     
 }  //end if (!crashed)
@@ -1682,13 +1706,13 @@ int countSquares;
         //counterClockwise
         player.uTurnDirection = cclockWise;
         player.uTurnStep = step1;
-        [clsCommon playSound:@"sounds/uturn.mp3" withVolume:.3];
+        [clsCommon playSound:@"uturn.mp3" withVolume:.3];
     }
     if (Xpos > arenaSize.width/2) {
         //clockwise
         player.uTurnDirection = clockWise;
         player.uTurnStep = step1;
-        [clsCommon playSound:@"sounds/uturn.mp3" withVolume:.3];
+        [clsCommon playSound:@"uturn.mp3" withVolume:.3];
     }
 }
 
