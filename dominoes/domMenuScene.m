@@ -929,7 +929,7 @@
 
     SKLabelNode* tapFor=[SKLabelNode labelNodeWithFontNamed:@"Arial"];
     tapFor.name=@"tapFor";
-    [self createLabel:tapFor text:@"Tap here for Instructions" fontSize:10 posY:posY+instruct.frame.size.height/(2.62*sizeDoubler) color:[SKColor whiteColor] alpha:1 sizeDoubler:sizeDoubler onObject:self];
+    [self createLabel:tapFor text:@"Tap here for Instructions" fontSize:10 posY:posY+instruct.frame.size.height/(2.62*sizeDoubler) color:[SKColor darkGrayColor] alpha:1 sizeDoubler:sizeDoubler onObject:self];
 
     return instruct;
 }

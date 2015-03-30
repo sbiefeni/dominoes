@@ -439,7 +439,7 @@ CGPoint pointA;
 
     [self addChild:backGround];
 
-    self.backgroundColor = [SKColor lightGrayColor];
+    self.backgroundColor = [SKColor whiteColor];
 
 }
 
@@ -997,7 +997,7 @@ CGPoint pointA;
 }
 
 -(void)doYouWinLabel{
-    [clsCommon makeCenterScreenLabelWithText:@"You Win!!" labelName:@"youwin" withFont:@"Arial Bold" withSize:60 withColor:[SKColor whiteColor] withAlpha:1 fadeOut:true flash:true onScene:self position:2];
+    [clsCommon makeCenterScreenLabelWithText:@"You Win!!" labelName:@"youwin" withFont:@"Arial Bold" withSize:60 withColor:[SKColor darkGrayColor] withAlpha:1 fadeOut:true flash:true onScene:self position:2];
     if(soundEnabled){
         [self runAction:[SKAction playSoundFileNamed:@"bonus_percussion.mp3" waitForCompletion:NO]];
     }
@@ -1014,7 +1014,7 @@ CGPoint pointA;
     levelScore = 0;//temp for debugging
 
     scoreLabel = [[SKLabelNode alloc] initWithFontNamed:@"Komika Axis"];
-    scoreLabel.color = [UIColor whiteColor];
+    scoreLabel.fontColor = [UIColor darkGrayColor];
     scoreLabel.fontSize = 120 * sizeDoubler;;
     scoreLabel.position = CGPointMake(CGRectGetMidX(self.frame),
                                  CGRectGetMidY(self.frame));
@@ -1035,7 +1035,7 @@ CGPoint pointA;
 
 
     scoreLabel = [[SKLabelNode alloc] initWithFontNamed:@"Komika Axis"];
-    scoreLabel.color = [UIColor whiteColor];
+    scoreLabel.color = [UIColor darkGrayColor];
     scoreLabel.colorBlendFactor = 1;
 
     //scoreLabel.fontSize = 25 * sizeDoubler;;

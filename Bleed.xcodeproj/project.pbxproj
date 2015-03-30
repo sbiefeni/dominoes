@@ -165,15 +165,15 @@
 		38E7383018EB4E9400EE0C6E /* GameKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameKit.framework; path = System/Library/Frameworks/GameKit.framework; sourceTree = SDKROOT; };
 		38FA7D3518E77F5E00820901 /* floor1.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = floor1.sks; sourceTree = "<group>"; };
 		38FD20531900529700C8461B /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
-		55CB7E1C18CBD180001EFA1C /* 300.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = 300.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		55CB7E1C18CBD180001EFA1C /* Bleed.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Bleed.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		55CB7E1F18CBD180001EFA1C /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		55CB7E2118CBD180001EFA1C /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		55CB7E2318CBD180001EFA1C /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		55CB7E2518CBD180001EFA1C /* SpriteKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SpriteKit.framework; path = System/Library/Frameworks/SpriteKit.framework; sourceTree = SDKROOT; };
-		55CB7E2918CBD180001EFA1C /* 300-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "300-Info.plist"; sourceTree = "<group>"; };
+		55CB7E2918CBD180001EFA1C /* Bleed-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Bleed-Info.plist"; sourceTree = "<group>"; };
 		55CB7E2B18CBD180001EFA1C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		55CB7E2D18CBD180001EFA1C /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		55CB7E2F18CBD180001EFA1C /* 300-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "300-Prefix.pch"; sourceTree = "<group>"; };
+		55CB7E2F18CBD180001EFA1C /* Bleed-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Bleed-Prefix.pch"; sourceTree = "<group>"; };
 		55CB7E3018CBD180001EFA1C /* domAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = domAppDelegate.h; sourceTree = "<group>"; };
 		55CB7E3118CBD181001EFA1C /* domAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = domAppDelegate.m; sourceTree = "<group>"; };
 		55CB7E3418CBD181001EFA1C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPhone.storyboard; sourceTree = "<group>"; };
@@ -183,9 +183,9 @@
 		55CB7E3C18CBD181001EFA1C /* domGameScene.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = domGameScene.h; sourceTree = "<group>"; };
 		55CB7E3D18CBD181001EFA1C /* domGameScene.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = domGameScene.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		55CB7E4118CBD181001EFA1C /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		55CB7E4718CBD181001EFA1C /* 300Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = 300Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		55CB7E4718CBD181001EFA1C /* BleedTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BleedTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		55CB7E4818CBD181001EFA1C /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
-		55CB7E5018CBD181001EFA1C /* 300Tests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "300Tests-Info.plist"; sourceTree = "<group>"; };
+		55CB7E5018CBD181001EFA1C /* BleedTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "BleedTests-Info.plist"; sourceTree = "<group>"; };
 		55CB7E5218CBD181001EFA1C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		55CB7E5418CBD181001EFA1C /* dominoesTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = dominoesTests.m; sourceTree = "<group>"; };
 		7B0204781925CC530022E947 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -425,8 +425,8 @@
 			isa = PBXGroup;
 			children = (
 				7BDF133F1A70671100A3CA15 /* badge1.gif */,
-				55CB7E2718CBD180001EFA1C /* 300 Bricks */,
-				55CB7E4E18CBD181001EFA1C /* dominoesTests */,
+				55CB7E2718CBD180001EFA1C /* Bleed */,
+				55CB7E4E18CBD181001EFA1C /* BleedTests */,
 				55CB7E1E18CBD180001EFA1C /* Frameworks */,
 				55CB7E1D18CBD180001EFA1C /* Products */,
 			);
@@ -435,8 +435,8 @@
 		55CB7E1D18CBD180001EFA1C /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				55CB7E1C18CBD180001EFA1C /* 300.app */,
-				55CB7E4718CBD181001EFA1C /* 300Tests.xctest */,
+				55CB7E1C18CBD180001EFA1C /* Bleed.app */,
+				55CB7E4718CBD181001EFA1C /* BleedTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -466,7 +466,7 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		55CB7E2718CBD180001EFA1C /* 300 Bricks */ = {
+		55CB7E2718CBD180001EFA1C /* Bleed */ = {
 			isa = PBXGroup;
 			children = (
 				7B4C40A11A7604310026A4CA /* New Sounds */,
@@ -488,7 +488,7 @@
 				55CB7E2818CBD180001EFA1C /* Supporting Files */,
 				7BD3012F1925C2FA00D30836 /* Localizable.strings */,
 			);
-			name = "300 Bricks";
+			name = Bleed;
 			path = dominoes;
 			sourceTree = "<group>";
 		};
@@ -496,27 +496,28 @@
 			isa = PBXGroup;
 			children = (
 				7BC2EF4C1A68598E005939D8 /* KOMIKAX.ttf */,
-				55CB7E2918CBD180001EFA1C /* 300-Info.plist */,
+				55CB7E2918CBD180001EFA1C /* Bleed-Info.plist */,
 				55CB7E2A18CBD180001EFA1C /* InfoPlist.strings */,
 				55CB7E2D18CBD180001EFA1C /* main.m */,
-				55CB7E2F18CBD180001EFA1C /* 300-Prefix.pch */,
+				55CB7E2F18CBD180001EFA1C /* Bleed-Prefix.pch */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		55CB7E4E18CBD181001EFA1C /* dominoesTests */ = {
+		55CB7E4E18CBD181001EFA1C /* BleedTests */ = {
 			isa = PBXGroup;
 			children = (
 				55CB7E5418CBD181001EFA1C /* dominoesTests.m */,
 				55CB7E4F18CBD181001EFA1C /* Supporting Files */,
 			);
+			name = BleedTests;
 			path = dominoesTests;
 			sourceTree = "<group>";
 		};
 		55CB7E4F18CBD181001EFA1C /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				55CB7E5018CBD181001EFA1C /* 300Tests-Info.plist */,
+				55CB7E5018CBD181001EFA1C /* BleedTests-Info.plist */,
 				55CB7E5118CBD181001EFA1C /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
@@ -607,9 +608,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		55CB7E1B18CBD180001EFA1C /* 300 */ = {
+		55CB7E1B18CBD180001EFA1C /* Bleed */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 55CB7E5818CBD181001EFA1C /* Build configuration list for PBXNativeTarget "300" */;
+			buildConfigurationList = 55CB7E5818CBD181001EFA1C /* Build configuration list for PBXNativeTarget "Bleed" */;
 			buildPhases = (
 				55CB7E1818CBD180001EFA1C /* Sources */,
 				55CB7E1918CBD180001EFA1C /* Frameworks */,
@@ -620,14 +621,14 @@
 			);
 			dependencies = (
 			);
-			name = 300;
+			name = Bleed;
 			productName = dominoes;
-			productReference = 55CB7E1C18CBD180001EFA1C /* 300.app */;
+			productReference = 55CB7E1C18CBD180001EFA1C /* Bleed.app */;
 			productType = "com.apple.product-type.application";
 		};
-		55CB7E4618CBD181001EFA1C /* 300Tests */ = {
+		55CB7E4618CBD181001EFA1C /* BleedTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 55CB7E5B18CBD181001EFA1C /* Build configuration list for PBXNativeTarget "300Tests" */;
+			buildConfigurationList = 55CB7E5B18CBD181001EFA1C /* Build configuration list for PBXNativeTarget "BleedTests" */;
 			buildPhases = (
 				55CB7E4318CBD181001EFA1C /* Sources */,
 				55CB7E4418CBD181001EFA1C /* Frameworks */,
@@ -638,9 +639,9 @@
 			dependencies = (
 				55CB7E4D18CBD181001EFA1C /* PBXTargetDependency */,
 			);
-			name = 300Tests;
+			name = BleedTests;
 			productName = dominoesTests;
-			productReference = 55CB7E4718CBD181001EFA1C /* 300Tests.xctest */;
+			productReference = 55CB7E4718CBD181001EFA1C /* BleedTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -669,7 +670,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 55CB7E1718CBD180001EFA1C /* Build configuration list for PBXProject "300" */;
+			buildConfigurationList = 55CB7E1718CBD180001EFA1C /* Build configuration list for PBXProject "Bleed" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -685,8 +686,8 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				55CB7E1B18CBD180001EFA1C /* 300 */,
-				55CB7E4618CBD181001EFA1C /* 300Tests */,
+				55CB7E1B18CBD180001EFA1C /* Bleed */,
+				55CB7E4618CBD181001EFA1C /* BleedTests */,
 			);
 		};
 /* End PBXProject section */
@@ -826,7 +827,7 @@
 /* Begin PBXTargetDependency section */
 		55CB7E4D18CBD181001EFA1C /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 55CB7E1B18CBD180001EFA1C /* 300 */;
+			target = 55CB7E1B18CBD180001EFA1C /* Bleed */;
 			targetProxy = 55CB7E4C18CBD181001EFA1C /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -972,15 +973,15 @@
 					"$(PROJECT_DIR)",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "dominoes/300-Prefix.pch";
-				INFOPLIST_FILE = "dominoes/300-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				GCC_PREFIX_HEADER = "dominoes/Bleed-Prefix.pch";
+				INFOPLIST_FILE = "dominoes/Bleed-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/dominoes/Flurry",
 				);
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_NAME = 300;
+				PRODUCT_NAME = Bleed;
 				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos7.1;
 				SPRITEKIT_TEXTURE_ATLAS_OUTPUT = YES;
@@ -1002,15 +1003,15 @@
 					"$(PROJECT_DIR)",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "dominoes/300-Prefix.pch";
-				INFOPLIST_FILE = "dominoes/300-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				GCC_PREFIX_HEADER = "dominoes/Bleed-Prefix.pch";
+				INFOPLIST_FILE = "dominoes/Bleed-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/dominoes/Flurry",
 				);
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_NAME = 300;
+				PRODUCT_NAME = Bleed;
 				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos7.1;
 				SPRITEKIT_TEXTURE_ATLAS_OUTPUT = YES;
@@ -1034,8 +1035,8 @@
 					"DEBUG=1",
 					"$(inherited)",
 				);
-				INFOPLIST_FILE = "dominoesTests/300Tests-Info.plist";
-				PRODUCT_NAME = 300Tests;
+				INFOPLIST_FILE = "dominoesTests/BleedTests-Info.plist";
+				PRODUCT_NAME = BleedTests;
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = xctest;
 			};
@@ -1052,8 +1053,8 @@
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "dominoes/dominoes-Prefix.pch";
-				INFOPLIST_FILE = "dominoesTests/300Tests-Info.plist";
-				PRODUCT_NAME = 300Tests;
+				INFOPLIST_FILE = "dominoesTests/BleedTests-Info.plist";
+				PRODUCT_NAME = BleedTests;
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = xctest;
 			};
@@ -1062,7 +1063,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		55CB7E1718CBD180001EFA1C /* Build configuration list for PBXProject "300" */ = {
+		55CB7E1718CBD180001EFA1C /* Build configuration list for PBXProject "Bleed" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				55CB7E5618CBD181001EFA1C /* Debug */,
@@ -1071,7 +1072,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		55CB7E5818CBD181001EFA1C /* Build configuration list for PBXNativeTarget "300" */ = {
+		55CB7E5818CBD181001EFA1C /* Build configuration list for PBXNativeTarget "Bleed" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				55CB7E5918CBD181001EFA1C /* Debug */,
@@ -1080,7 +1081,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		55CB7E5B18CBD181001EFA1C /* Build configuration list for PBXNativeTarget "300Tests" */ = {
+		55CB7E5B18CBD181001EFA1C /* Build configuration list for PBXNativeTarget "BleedTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				55CB7E5C18CBD181001EFA1C /* Debug */,
