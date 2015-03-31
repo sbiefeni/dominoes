@@ -11,6 +11,9 @@
 
 @interface clsDomino : SKSpriteNode
 
+//store the trail image
+@property UIImage* tImage;
+
 //store the x and y which correspond to grid
 @property int direction;
 
@@ -21,6 +24,8 @@
 @property BOOL CountedScore;
 
 //@property NSMutableArray* dominos;
+
++(void) animate:(double)time;
 
 -(void) fallDown:(NSTimeInterval)delay isPlayer:(BOOL)bPlayer isEnd:(BOOL)bIsEnd;
 

@@ -25,7 +25,7 @@
     [popup show];
 }
 
-+(UIViewController*)getActiveController{
++ (UIViewController*)getActiveController{
 
     //get the active view controller
     UIViewController *activeController = [UIApplication sharedApplication].keyWindow.rootViewController;
@@ -38,7 +38,7 @@
         activeController = activeController.presentedViewController;
     }
 
-    return activeController;
+    return  activeController;
     
 }
 

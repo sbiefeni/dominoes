@@ -21,20 +21,60 @@ NSMutableArray* dominoFrames;
         //this is (confirmed) pre-loading all the sounds.. this only runs once in the game
         //during class initialization. the actions die right after this, but the sounds
         //are loaded and there is no delay the first time a sound plays
-        SKAction* S1 = [SKAction playSoundFileNamed:@"dom1.wav" waitForCompletion:NO];
-        SKAction* S2 = [SKAction playSoundFileNamed:@"dom2.wav" waitForCompletion:NO];
-        SKAction* S3 = [SKAction playSoundFileNamed:@"dom3.wav" waitForCompletion:NO];
-        SKAction* S4 = [SKAction playSoundFileNamed:@"dom4.wav" waitForCompletion:NO];
-        SKAction* S5 = [SKAction playSoundFileNamed:@"dom5.wav" waitForCompletion:NO];
-        SKAction* S6 = [SKAction playSoundFileNamed:@"dom6.wav" waitForCompletion:NO];
-        SKAction* S7 = [SKAction playSoundFileNamed:@"dom7.wav" waitForCompletion:NO];
-        SKAction* S8 = [SKAction playSoundFileNamed:@"dom8.wav" waitForCompletion:NO];
-        SKAction* S9 = [SKAction playSoundFileNamed:@"dom9.wav" waitForCompletion:NO];
-        SKAction* SEnd = [SKAction playSoundFileNamed:@"dom-end3.wav" waitForCompletion:NO];
+//        SKAction* S1 = [SKAction playSoundFileNamed:@"dom1.wav" waitForCompletion:NO];
+//        SKAction* S2 = [SKAction playSoundFileNamed:@"dom2.wav" waitForCompletion:NO];
+//        SKAction* S3 = [SKAction playSoundFileNamed:@"dom3.wav" waitForCompletion:NO];
+//        SKAction* S4 = [SKAction playSoundFileNamed:@"dom4.wav" waitForCompletion:NO];
+//        SKAction* S5 = [SKAction playSoundFileNamed:@"dom5.wav" waitForCompletion:NO];
+//        SKAction* S6 = [SKAction playSoundFileNamed:@"dom6.wav" waitForCompletion:NO];
+//        SKAction* S7 = [SKAction playSoundFileNamed:@"dom7.wav" waitForCompletion:NO];
+//        SKAction* S8 = [SKAction playSoundFileNamed:@"dom8.wav" waitForCompletion:NO];
+//        SKAction* S9 = [SKAction playSoundFileNamed:@"dom9.wav" waitForCompletion:NO];
+//        SKAction* SEnd = [SKAction playSoundFileNamed:@"dom-end3.wav" waitForCompletion:NO];
 
-
+        [self animate:1];
     }
 }
+
+-(void) animate:(double)time{
+
+    int segments = 10;
+    double delay = time/segments;
+
+    for (int i = 1; i <=segments; i++) {
+        UIImage* image = [self cropImageFromFullImage:self.tImage  withPercent:i/10];
+        [self runAction:[SKAction sequence:@[
+                     [SKAction waitForDuration:delay],
+                     [SKAction runBlock:^{
+                        [self setTexture: [SKTexture textureWithImage:image]];
+                      }]
+                     ]]];
+    }
+}
+
+//show image from top down, crop at "percent"
+//takes fractional percent - .1= one tenth, 1 = full image
+- (UIImage*) cropImageFromFullImage:(UIImage*)image withPercent:(double)percent
+{
+    // Get size of current image
+    CGSize size = [image size];
+
+    int myWidth= size.width;
+    int myHeight = size.height * percent;
+
+    CGRect newRect;
+
+    newRect= CGRectMake(0, size.width/2, myWidth, myHeight);
+
+    // Create bitmap image from original image data,
+    // using rectangle to specify desired crop area
+    CGImageRef imageRef = CGImageCreateWithImageInRect([image CGImage], newRect);
+    UIImage *img = [UIImage imageWithCGImage:imageRef];
+    CGImageRelease(imageRef);
+
+    return img;
+}
+
 
 -(void) explode:(NSTimeInterval)delay {
 
@@ -158,6 +198,9 @@ NSMutableArray* dominoFrames;
     //[clsCommon playSound:@"dom1.wav"];
 
 }
+
+
+
 
 @end
 

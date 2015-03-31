@@ -46,10 +46,10 @@ BOOL showingLeaderboard;
      [gameCenterViewController dismissViewControllerAnimated:YES completion:nil];
 }
 
--(void)viewDidAppear:(BOOL)animated {
-    //[super viewDidAppear:animated];
-
-}
+//-(void)viewDidAppear:(BOOL)animated {
+//    //[super viewDidAppear:animated];
+//
+//}
 
 
 //------------------------------------------------------------------------------------------------------------//
@@ -279,6 +279,9 @@ BOOL showingLeaderboard;
 //following function called by the iAds if user clicks the ad and ad pops up
 -(void)viewWillDisappear:(BOOL)animated
 {
+
+    [super viewWillDisappear:animated];
+
     //pause the game
     adsShowing=YES;
     
@@ -286,6 +289,8 @@ BOOL showingLeaderboard;
 
 -(void)viewWillAppear:(BOOL)animated
 {
+    [super viewWillAppear:animated];
+
     // Advert has been dismissed. Resume paused activities
     adsShowing=NO;
 }
