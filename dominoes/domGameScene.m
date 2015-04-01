@@ -140,17 +140,17 @@ CGPoint pointA;
     gridWidth = maxX - minX;
     gridHeight = maxY - minY;
 
-    dominoScaleFactorX = 1;   // - 1.25
-    dominoScaleFactorY = 1;
+    dominoScaleFactorX = 1.5;   // - 1.25
+    dominoScaleFactorY = 1.1;
 
     if (scaleY < 4) {  //stretched screen
-        dominoScaleFactorY = .9;
+        dominoScaleFactorY = 1.1;
     }
     
 //set the size of the grid and domino
     //pre-scaled should be 64 x 68
     gridSize = CGSizeMake(gridWidth/cols/scaleX, gridHeight/rows/scaleY);
-    dominoSize = gridSize; // CGSizeMake((gridWidth/cols)/scaleX*dominoScaleFactorX, (gridHeight/rows)/scaleY*dominoScaleFactorY);
+    dominoSize = CGSizeMake((gridWidth/cols)/scaleX*dominoScaleFactorX, (gridHeight/rows)/scaleY*dominoScaleFactorY);
 
 //initialize the grid BOOL to false
     for (int i=0; i<cols+1; i++) {
