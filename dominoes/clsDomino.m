@@ -22,17 +22,8 @@ NSMutableArray* dominoFrames;
         //during class initialization. the actions die right after this, but the sounds
         //are loaded and there is no delay the first time a sound plays
 //        SKAction* S1 = [SKAction playSoundFileNamed:@"dom1.wav" waitForCompletion:NO];
-//        SKAction* S2 = [SKAction playSoundFileNamed:@"dom2.wav" waitForCompletion:NO];
-//        SKAction* S3 = [SKAction playSoundFileNamed:@"dom3.wav" waitForCompletion:NO];
-//        SKAction* S4 = [SKAction playSoundFileNamed:@"dom4.wav" waitForCompletion:NO];
-//        SKAction* S5 = [SKAction playSoundFileNamed:@"dom5.wav" waitForCompletion:NO];
-//        SKAction* S6 = [SKAction playSoundFileNamed:@"dom6.wav" waitForCompletion:NO];
-//        SKAction* S7 = [SKAction playSoundFileNamed:@"dom7.wav" waitForCompletion:NO];
-//        SKAction* S8 = [SKAction playSoundFileNamed:@"dom8.wav" waitForCompletion:NO];
-//        SKAction* S9 = [SKAction playSoundFileNamed:@"dom9.wav" waitForCompletion:NO];
-//        SKAction* SEnd = [SKAction playSoundFileNamed:@"dom-end3.wav" waitForCompletion:NO];
 
-        [self animate:1];
+        //[self animate:1];
     }
 }
 
@@ -41,30 +32,59 @@ NSMutableArray* dominoFrames;
     int segments = 10;
     double delay = time/segments;
 
-    for (int i = 1; i <=segments; i++) {
-        UIImage* image = [self cropImageFromFullImage:self.tImage  withPercent:i/10];
-        [self runAction:[SKAction sequence:@[
-                     [SKAction waitForDuration:delay],
-                     [SKAction runBlock:^{
-                        [self setTexture: [SKTexture textureWithImage:image]];
-                      }]
-                     ]]];
+    int texNum = [clsCommon getRanInt:1 maxNumber:5];
+    NSString* texName = [NSString stringWithFormat:@"Trail_%i_4",texNum];
+
+    [self setTImage:[SKTexture textureWithImageNamed: texName]];
+
+
+    for (double i = 1; i <=segments; i++) {
+        [self runAction:
+            [SKAction sequence:@[
+                 [SKAction waitForDuration:i*delay],
+                 [SKAction runBlock:^{
+                    [self cropImagewithPercent:i/10];
+                  }]
+             ]]
+         ];
     }
 }
 
-//show image from top down, crop at "percent"
-//takes fractional percent - .1= one tenth, 1 = full image
+-(void)cropImagewithPercent:(double)percent{
+
+    [self removeAllChildren];
+
+    SKSpriteNode *pictureToMask = [SKSpriteNode spriteNodeWithTexture: self.tImage];
+    pictureToMask.name = @"pm";
+    pictureToMask.color = [SKColor blueColor];
+    pictureToMask.colorBlendFactor = 1;
+    
+    pictureToMask.size = dominoSize;
+    SKSpriteNode *mask = [SKSpriteNode spriteNodeWithColor:[SKColor blackColor] size: CGSizeMake(dominoSize.width, dominoSize.height*percent)];
+    SKCropNode *cropNode = [SKCropNode node];
+    [cropNode addChild: pictureToMask];
+    [cropNode setMaskNode: mask];
+    cropNode.name=@"cn";
+    [self addChild: cropNode];
+    cropNode.position = CGPointMake( 0,self.size.height - mask.size.height/2);
+
+
+}
+
+
+//show image from top down, return image cropped at "percent"
+//takes fractional percent - .1= one tenth, .5 = half way down, 1 = full image
 - (UIImage*) cropImageFromFullImage:(UIImage*)image withPercent:(double)percent
 {
     // Get size of current image
-    CGSize size = [image size];
+    CGSize size = image.size;
 
     int myWidth= size.width;
     int myHeight = size.height * percent;
 
     CGRect newRect;
 
-    newRect= CGRectMake(0, size.width/2, myWidth, myHeight);
+    newRect= CGRectMake(0, 0, myWidth, myHeight);
 
     // Create bitmap image from original image data,
     // using rectangle to specify desired crop area
@@ -74,7 +94,6 @@ NSMutableArray* dominoFrames;
 
     return img;
 }
-
 
 -(void) explode:(NSTimeInterval)delay {
 

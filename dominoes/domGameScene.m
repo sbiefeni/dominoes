@@ -6,6 +6,10 @@
 //  Copyright (c) 2014 Abstractions. All rights reserved.
 //
 
+#define RADIANS_TO_DEGREES(radians) ((radians) * (180.0 / M_PI))
+#define DEGREES_TO_RADIANS(angle) ((angle) / 180.0 * M_PI)
+
+
 #import "domGameScene.h"
 #import "clsPlayer.h"
 #import "clsDomino.h"
@@ -37,7 +41,7 @@
 #define rows        28
 #define cols        20
 
-#define _gameSpeed  .25
+#define _gameSpeed  1
 #define _maxSpeed   .05
 #define _gameSpeedIncrement  .01
 #define SceneChangeDelay     3
@@ -146,7 +150,7 @@ CGPoint pointA;
 //set the size of the grid and domino
     //pre-scaled should be 64 x 68
     gridSize = CGSizeMake(gridWidth/cols/scaleX, gridHeight/rows/scaleY);
-    dominoSize = CGSizeMake((gridWidth/cols)/scaleX*dominoScaleFactorX, (gridHeight/rows)/scaleY*dominoScaleFactorY);
+    dominoSize = gridSize; // CGSizeMake((gridWidth/cols)/scaleX*dominoScaleFactorX, (gridHeight/rows)/scaleY*dominoScaleFactorY);
 
 //initialize the grid BOOL to false
     for (int i=0; i<cols+1; i++) {
@@ -282,38 +286,41 @@ CGPoint pointA;
 
     //instructions if first-ish run...
     SKAction* instruct = [SKAction new];
-    if([self getLevelHighscore]<30){
-        SKSpriteNode* instruct1 = [SKSpriteNode spriteNodeWithImageNamed:@"directions1.gif"];
-        SKSpriteNode* instruct2 = [SKSpriteNode spriteNodeWithImageNamed:@"directions2.png"];
-        instruct1.xScale = .01; instruct1.yScale = .01;
-        instruct2.xScale = .01; instruct2.yScale = .01;
-        instruct1.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame));
-        instruct2.position = instruct1.position;
-        instruct1.color = [SKColor blueColor];
-        instruct1.colorBlendFactor = 1;
-        instruct2.color = instruct1.color;
-        instruct2.colorBlendFactor = 1;
-        [self addChild:instruct1];
-        [self addChild:instruct2];
+    BOOL rid;
+    isRunningInIde(rid=true)
 
-        SKAction* show =[SKAction sequence:@[ //3 seconds
-                                             [SKAction scaleTo:1 duration:.5],
-                                             [SKAction waitForDuration:2],
-                                             [SKAction scaleTo:.01 duration:.25],
-                                             [SKAction removeFromParent]
-                                             ]];
+        if([self getLevelHighscore]<30 && !rid){
+            SKSpriteNode* instruct1 = [SKSpriteNode spriteNodeWithImageNamed:@"directions1.gif"];
+            SKSpriteNode* instruct2 = [SKSpriteNode spriteNodeWithImageNamed:@"directions2.png"];
+            instruct1.xScale = .01; instruct1.yScale = .01;
+            instruct2.xScale = .01; instruct2.yScale = .01;
+            instruct1.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame));
+            instruct2.position = instruct1.position;
+            instruct1.color = [SKColor blueColor];
+            instruct1.colorBlendFactor = 1;
+            instruct2.color = instruct1.color;
+            instruct2.colorBlendFactor = 1;
+            [self addChild:instruct1];
+            [self addChild:instruct2];
 
-        instruct = [SKAction sequence:@[ //6 seconds
-                                        [SKAction runBlock:^{[instruct1 runAction:show];}],
-                                        [SKAction waitForDuration:3],
-                                        [SKAction runBlock:^{[instruct2 runAction:show];}],
-                                        [SKAction waitForDuration:3],
-                                        [SKAction runBlock:^{
-                                            [clsCommon makeCenterScreenLabelWithText:@"You Are Blue" labelName:@"yrb" withFont:nil withSize:40 withColor:[SKColor blueColor] withAlpha:1 fadeOut:YES flash:YES onScene:self position:1  ];
-                                        }],
-                                        [SKAction waitForDuration:3],
-                                    ]];
-    }
+            SKAction* show =[SKAction sequence:@[ //3 seconds
+                                                 [SKAction scaleTo:1 duration:.5],
+                                                 [SKAction waitForDuration:2],
+                                                 [SKAction scaleTo:.01 duration:.25],
+                                                 [SKAction removeFromParent]
+                                                 ]];
+
+            instruct = [SKAction sequence:@[ //6 seconds
+                                            [SKAction runBlock:^{[instruct1 runAction:show];}],
+                                            [SKAction waitForDuration:3],
+                                            [SKAction runBlock:^{[instruct2 runAction:show];}],
+                                            [SKAction waitForDuration:3],
+                                            [SKAction runBlock:^{
+                                                [clsCommon makeCenterScreenLabelWithText:@"You Are Blue" labelName:@"yrb" withFont:nil withSize:40 withColor:[SKColor blueColor] withAlpha:1 fadeOut:YES flash:YES onScene:self position:1  ];
+                                            }],
+                                            [SKAction waitForDuration:3],
+                                        ]];
+        }
 
     // build walls based on level
     SKAction* buildWalls = [SKAction runBlock:^{
@@ -1299,13 +1306,15 @@ CGPoint pointA;
 
     if (!crashed) {
         //draw a domino
-        if (player.curDirection == up || player.curDirection == down) {
-            [domino setTexture:[SKTexture textureWithImageNamed:@"dom-blue-horizontal"]];
-            //domino = [clsDomino spriteNodeWithImageNamed:@"dominoH1"];
-        }else {
-            [domino setTexture:[SKTexture textureWithImageNamed:@"dom-blue-vertical"]];
-            //domino = [clsDomino spriteNodeWithImageNamed:@"dominoV1"];
-        }
+//        if (player.curDirection == up || player.curDirection == down) {
+//            [domino setTexture:[SKTexture textureWithImageNamed:@"dom-blue-horizontal"]];
+//            //domino = [clsDomino spriteNodeWithImageNamed:@"dominoH1"];
+//        }else {
+//            [domino setTexture:[SKTexture textureWithImageNamed:@"dom-blue-vertical"]];
+//            //domino = [clsDomino spriteNodeWithImageNamed:@"dominoV1"];
+//        }
+        domino.zRotation = DEGREES_TO_RADIANS([self getRotationAngleFromDirection:player.curDirection]);
+        [domino animate:1];
 
         domino.size = dominoSize;
         domino.zPosition = dominoZPos;
@@ -1313,8 +1322,10 @@ CGPoint pointA;
         //[objectWithOurMethod methodName:int1 withArg2:int2];
         domino.position = [self calcDominoPosition:player.curX withArg2:player.curY];
         domino.direction=player.curDirection;
-        domino.color = [SKColor blueColor];
-        domino.colorBlendFactor = 1;
+//        SKSpriteNode* tmp = (SKSpriteNode*)[[domino childNodeWithName:@"cn"] childNodeWithName:@"pm"];
+//        tmp.color = [SKColor blueColor];
+//        tmp.colorBlendFactor = 1;
+
 
 
         [self addChild:domino];
@@ -1415,6 +1426,29 @@ CGPoint pointA;
 
 }
 
+-(int)getRotationAngleFromDirection: (int)direction{
+
+    switch (direction) {
+        case 1:
+            return 270;
+            break;
+        case 2:
+            return 180;
+            break;
+        case 3:
+            return 90;
+            break;
+        case 4:
+            return 0;
+            break;
+        default:
+            break;
+    }
+
+    return 0;
+
+
+}
 -(BOOL)doNextPlayerMove {
 
     BOOL crashed = false;
