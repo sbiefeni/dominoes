@@ -37,20 +37,24 @@ NSMutableArray* dominoFrames;
 
     [self setTImage:[SKTexture textureWithImageNamed: texName]];
 
+    double percent = 0;
 
     for (double i = 1; i <=segments; i++) {
-        [self runAction:
-            [SKAction sequence:@[
-                 [SKAction waitForDuration:i*delay],
-                 [SKAction runBlock:^{
-                    [self cropImagewithPercent:i/10];
-                  }]
-             ]]
-         ];
+
+            percent = i/10;
+            [self runAction:
+                [SKAction sequence:@[
+                     [SKAction waitForDuration:i*delay],
+                     [SKAction runBlock:^{
+                        [self cropImagewithPercent:percent delay:delay];
+                      }]
+                 ]]
+             ];
+
     }
 }
 
--(void)cropImagewithPercent:(double)percent{
+-(void)cropImagewithPercent:(double)percent delay:(double)delay{
 
     [self removeAllChildren];
 
@@ -67,6 +71,30 @@ NSMutableArray* dominoFrames;
     cropNode.name=@"cn";
     [self addChild: cropNode];
     cropNode.position = CGPointMake( 0,self.size.height - mask.size.height/2);
+
+    SKSpriteNode* head = (SKSpriteNode*)[[self parent]childNodeWithName:@"head"];
+
+    switch (player.curDirection) {
+        case down:
+            head.position = CGPointMake(self.position.x , self.position.y - mask.size.height + head.size.height/2);
+            break;
+        case up:
+            head.position = CGPointMake(self.position.x , self.position.y - self.size.height + mask.size.height + head.size.height/2);
+            break;
+        case left:
+            head.position = CGPointMake(self.position.x + self.size.width - mask.size.height - head.size.width/2 , self.position.y);
+            break;
+        case right:
+            head.position = CGPointMake(self.position.x  - self.size.width + mask.size.height + head.size.width/2 , self.position.y);
+        default:
+            break;
+    }
+
+    if (head.zRotation != self.zRotation) {
+        [head runAction:[SKAction rotateToAngle:self.zRotation duration:delay shortestUnitArc:true]];
+
+
+    }
 
 
 }

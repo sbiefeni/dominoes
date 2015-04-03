@@ -41,7 +41,7 @@
 #define rows        28
 #define cols        20
 
-#define _gameSpeed  1
+#define _gameSpeed  .5
 #define _maxSpeed   .05
 #define _gameSpeedIncrement  .01
 #define SceneChangeDelay     3
@@ -1313,8 +1313,22 @@ CGPoint pointA;
 //            [domino setTexture:[SKTexture textureWithImageNamed:@"dom-blue-vertical"]];
 //            //domino = [clsDomino spriteNodeWithImageNamed:@"dominoV1"];
 //        }
+
+        //check for head, and make if it doesn't exist
+        SKSpriteNode* head;
+        if (![self childNodeWithName:@"head"]) {
+            head = [SKSpriteNode spriteNodeWithImageNamed:@"Trail_Head"];
+            head.zRotation = DEGREES_TO_RADIANS([self getRotationAngleFromDirection:player.curDirection]);
+            head.size = dominoSize;
+            head.name = @"head";
+            [self addChild:head];
+        }else{
+            head = (SKSpriteNode*)[self childNodeWithName:@"head"];
+        }
+
         domino.zRotation = DEGREES_TO_RADIANS([self getRotationAngleFromDirection:player.curDirection]);
-        [domino animate:1];
+        
+        [domino animate:gameSpeed];
 
         domino.size = dominoSize;
         domino.zPosition = dominoZPos;
@@ -1325,6 +1339,7 @@ CGPoint pointA;
 //        SKSpriteNode* tmp = (SKSpriteNode*)[[domino childNodeWithName:@"cn"] childNodeWithName:@"pm"];
 //        tmp.color = [SKColor blueColor];
 //        tmp.colorBlendFactor = 1;
+
 
 
 

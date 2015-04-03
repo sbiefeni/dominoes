@@ -14,6 +14,8 @@
 //store the trail image
 @property SKTexture* tImage;
 
+//@property SKSpriteNode* head; //ref to the trail head
+
 //store the x and y which correspond to grid
 @property int direction;
 
