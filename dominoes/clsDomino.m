@@ -82,18 +82,16 @@ NSMutableArray* dominoFrames;
             head.position = CGPointMake(self.position.x , self.position.y - self.size.height + mask.size.height + head.size.height/2);
             break;
         case left:
-            head.position = CGPointMake(self.position.x + self.size.width - mask.size.height - head.size.width/2 , self.position.y);
+            head.position = CGPointMake(self.position.x + self.size.width - mask.size.height - head.size.height/2 , self.position.y);
             break;
         case right:
-            head.position = CGPointMake(self.position.x  - self.size.width + mask.size.height + head.size.width/2 , self.position.y);
+            head.position = CGPointMake(self.position.x  - self.size.width + mask.size.height + head.size.height/2 , self.position.y);
         default:
             break;
     }
 
     if (head.zRotation != self.zRotation) {
-        [head runAction:[SKAction rotateToAngle:self.zRotation duration:delay shortestUnitArc:true]];
-
-
+        [head runAction:[SKAction rotateToAngle:self.zRotation duration:0]];
     }
 
 
